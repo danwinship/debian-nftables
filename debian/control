@@ -3,7 +3,7 @@ Section: net
 Priority: important
 Maintainer: Debian Netfilter Packaging Team <team+pkg-netfilter-team@tracker.debian.org>
 Uploaders: Arturo Borrero Gonzalez <arturo@debian.org>,
-           Jeremy Sowden <jeremy@azazel.net>
+           Jeremy Sowden <azazel@debian.org>
 Build-Depends: automake,
                debhelper-compat (= 13),
                dh-python,
