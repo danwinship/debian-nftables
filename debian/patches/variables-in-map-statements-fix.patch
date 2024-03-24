@@ -1,0 +1,97 @@
+Description: add support for variables in map expressions
+ It is possible to use a variable to initialize a map, which is then used
+ in a map statement:
+   .
+   define dst_map = { ::1234 : 5678 }
+   .
+   table ip6 nat {
+     map dst_map {
+       typeof ip6 daddr : tcp dport;
+       elements = $dst_map
+     }
+     chain prerouting {
+       ip6 nexthdr tcp redirect to ip6 daddr map @dst_map
+     }
+   }
+   .
+ However, if one tries to use the variable directly in the statement:
+   .
+   define dst_map = { ::1234 : 5678 }
+   .
+   table ip6 nat {
+     chain prerouting {
+       ip6 nexthdr tcp redirect to ip6 daddr map $dst_map
+     }
+   }
+   .
+ nft rejects it:
+   .
+   /space/azazel/tmp/ruleset.1067161.nft:5:47-54: Error: invalid mapping expression variable
+       ip6 nexthdr tcp redirect to ip6 daddr map $dst_map
+                                   ~~~~~~~~~     ^^^^^^^^
+   .
+ It also rejects variables in stateful object statements:
+   .
+   define quota_map = { 192.168.10.123 : "user123", 192.168.10.124 : "user124" }
+   .
+   table ip nat {
+     quota user123 { over 20 mbytes }
+     quota user124 { over 20 mbytes }
+     chain prerouting {
+       quota name ip saddr map $quota_map
+     }
+   }
+   .
+ thus:
+   .
+   /space/azazel/tmp/ruleset.1067161.nft:15:29-38: Error: invalid mapping expression variable
+       quota name ip saddr map $quota_map
+                  ~~~~~~~~     ^^^^^^^^^^
+Author: Jeremy Sowden <azazel@debian.org>
+Last-Update: 2024-05-23
+Bug-Debian: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1067161
+Forwarded: https://lore.kernel.org/netfilter-devel/20240429192756.1347369-3-jeremy@azazel.net/
+Applied-Upstream: commit:c6127ff0c4480ccefc5c29548409898fb315a2ca
+
+--- a/src/evaluate.c
++++ b/src/evaluate.c
+@@ -1923,6 +1923,7 @@
+ 	mappings->set_flags |= NFT_SET_MAP;
+ 
+ 	switch (map->mappings->etype) {
++	case EXPR_VARIABLE:
+ 	case EXPR_SET:
+ 		if (ctx->ectx.key && ctx->ectx.key->etype == EXPR_CONCAT) {
+ 			key = expr_clone(ctx->ectx.key);
+@@ -1957,6 +1958,11 @@
+ 		if (expr_evaluate(ctx, &map->mappings->set->init) < 0)
+ 			return -1;
+ 
++		if (map->mappings->set->init->etype != EXPR_SET) {
++			return expr_error(ctx->msgs, map->mappings->set->init,
++					  "Expression is not a map");
++		}
++
+ 		if (set_is_interval(map->mappings->set->init->set_flags) &&
+ 		    !(map->mappings->set->init->set_flags & NFT_SET_CONCAT) &&
+ 		    interval_set_eval(ctx, ctx->set, map->mappings->set->init) < 0)
+@@ -4352,6 +4358,7 @@
+ 	mappings->set_flags |= NFT_SET_OBJECT;
+ 
+ 	switch (map->mappings->etype) {
++	case EXPR_VARIABLE:
+ 	case EXPR_SET:
+ 		key = constant_expr_alloc(&stmt->location,
+ 					  ctx->ectx.dtype,
+@@ -4368,6 +4375,11 @@
+ 		if (expr_evaluate(ctx, &map->mappings->set->init) < 0)
+ 			return -1;
+ 
++		if (map->mappings->set->init->etype != EXPR_SET) {
++			return expr_error(ctx->msgs, map->mappings->set->init,
++					  "Expression is not a map");
++		}
++
+ 		if (set_is_interval(map->mappings->set->init->set_flags) &&
+ 		    !(map->mappings->set->init->set_flags & NFT_SET_CONCAT) &&
+ 		    interval_set_eval(ctx, ctx->set, map->mappings->set->init) < 0)
