@@ -1,83 +1,202 @@
-# meta mark set ip dscp
+# ip saddr . ether saddr . meta l4proto { 1.2.3.4 . aa:bb:cc:dd:ee:ff . 6}
 [
     {
-        "mangle": {
-            "key": {
-                "meta": {
-                    "key": "mark"
-                }
-            },
-            "value": {
-                "payload": {
-                    "field": "dscp",
-                    "protocol": "ip"
-                }
-            }
-        }
-    }
-]
-
-# meta mark set ip dscp | 0x40
-[
-    {
-        "mangle": {
-            "key": {
-                "meta": {
-                    "key": "mark"
-                }
-            },
-            "value": {
-                "|": [
+        "match": {
+            "left": {
+                "concat": [
                     {
                         "payload": {
-                            "field": "dscp",
+                            "field": "saddr",
                             "protocol": "ip"
                         }
                     },
-                    64
+                    {
+                        "payload": {
+                            "field": "saddr",
+                            "protocol": "ether"
+                        }
+                    },
+                    {
+                        "meta": {
+                            "key": "l4proto"
+                        }
+                    }
+                ]
+            },
+            "op": "==",
+            "right": {
+                "set": [
+                    {
+                        "concat": [
+                            "1.2.3.4",
+                            "aa:bb:cc:dd:ee:ff",
+                            "tcp"
+                        ]
+                    }
                 ]
             }
         }
     }
 ]
 
-# meta mark set ip6 dscp
+# ip saddr . ether saddr . meta l4proto { 1.2.3.4 . aa:bb:cc:dd:ee:ff . 6}
 [
     {
-        "mangle": {
-            "key": {
-                "meta": {
-                    "key": "mark"
-                }
+        "match": {
+            "left": {
+                "concat": [
+                    {
+                        "payload": {
+                            "field": "saddr",
+                            "protocol": "ip"
+                        }
+                    },
+                    {
+                        "payload": {
+                            "field": "saddr",
+                            "protocol": "ether"
+                        }
+                    },
+                    {
+                        "meta": {
+                            "key": "l4proto"
+                        }
+                    }
+                ]
             },
-            "value": {
-                "payload": {
-                    "field": "dscp",
-                    "protocol": "ip6"
-                }
+            "op": "==",
+            "right": {
+                "set": [
+                    {
+                        "concat": [
+                            "1.2.3.4",
+                            "aa:bb:cc:dd:ee:ff",
+                            "tcp"
+                        ]
+                    }
+                ]
             }
         }
     }
 ]
 
-# meta mark set ip6 dscp | 0x40
+# ip saddr . ether saddr . meta l4proto { 1.2.3.4 . aa:bb:cc:dd:ee:ff . 6}
 [
     {
-        "mangle": {
-            "key": {
-                "meta": {
-                    "key": "mark"
-                }
-            },
-            "value": {
-                "|": [
+        "match": {
+            "left": {
+                "concat": [
                     {
                         "payload": {
-                            "field": "dscp",
-                            "protocol": "ip6"
+                            "field": "saddr",
+                            "protocol": "ip"
                         }
                     },
-                    64
+                    {
+                        "payload": {
+                            "field": "saddr",
+                            "protocol": "ether"
+                        }
+                    },
+                    {
+                        "meta": {
+                            "key": "l4proto"
+                        }
+                    }
+                ]
+            },
+            "op": "==",
+            "right": {
+                "set": [
+                    {
+                        "concat": [
+                            "1.2.3.4",
+                            "aa:bb:cc:dd:ee:ff",
+                            "tcp"
+                        ]
+                    }
+                ]
+            }
+        }
+    }
+]
+
+# ip saddr . ether saddr . meta l4proto { 1.2.3.4 . aa:bb:cc:dd:ee:ff . 6}
+[
+    {
+        "match": {
+            "left": {
+                "concat": [
+                    {
+                        "payload": {
+                            "field": "saddr",
+                            "protocol": "ip"
+                        }
+                    },
+                    {
+                        "payload": {
+                            "field": "saddr",
+                            "protocol": "ether"
+                        }
+                    },
+                    {
+                        "meta": {
+                            "key": "l4proto"
+                        }
+                    }
+                ]
+            },
+            "op": "==",
+            "right": {
+                "set": [
+                    {
+                        "concat": [
+                            "1.2.3.4",
+                            "aa:bb:cc:dd:ee:ff",
+                            "tcp"
+                        ]
+                    }
+                ]
+            }
+        }
+    }
+]
+
+# ip saddr . ether saddr . meta l4proto { 1.2.3.4 . aa:bb:cc:dd:ee:ff . 6}
+[
+    {
+        "match": {
+            "left": {
+                "concat": [
+                    {
+                        "payload": {
+                            "field": "saddr",
+                            "protocol": "ip"
+                        }
+                    },
+                    {
+                        "payload": {
+                            "field": "saddr",
+                            "protocol": "ether"
+                        }
+                    },
+                    {
+                        "meta": {
+                            "key": "l4proto"
+                        }
+                    }
+                ]
+            },
+            "op": "==",
+            "right": {
+                "set": [
+                    {
+                        "concat": [
+                            "1.2.3.4",
+                            "aa:bb:cc:dd:ee:ff",
+                            "tcp"
+                        ]
+                    }
                 ]
             }
         }

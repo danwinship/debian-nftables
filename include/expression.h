@@ -11,6 +11,10 @@
 #include <json.h>
 #include <libnftnl/udata.h>
 
+#define NFT_MAX_EXPR_LEN_BYTES (NFT_REG32_COUNT * sizeof(uint32_t))
+#define NFT_MAX_EXPR_LEN_BITS  (NFT_MAX_EXPR_LEN_BYTES * BITS_PER_BYTE)
+#define NFT_MAX_EXPR_RECURSION 16
+
 /**
  * enum expr_types
  *
@@ -411,8 +415,6 @@ extern const struct datatype *expr_basetype(const struct expr *expr);
 extern void expr_set_type(struct expr *expr, const struct datatype *dtype,
 			  enum byteorder byteorder);
 
-void expr_to_string(const struct expr *expr, char *string);
-
 struct eval_ctx;
 extern int expr_binary_error(struct list_head *msgs,
 			     const struct expr *e1, const struct expr *e2,
@@ -526,5 +528,6 @@ struct expr *flagcmp_expr_alloc(const struct location *loc, enum ops op,
 
 extern void range_expr_value_low(mpz_t rop, const struct expr *expr);
 extern void range_expr_value_high(mpz_t rop, const struct expr *expr);
+void range_expr_swap_values(struct expr *range);
 
 #endif /* NFTABLES_EXPRESSION_H */

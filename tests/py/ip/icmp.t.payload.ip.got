@@ -1,0 +1,10 @@
+# icmp code != { 2, 4, 33, 54, 56}
+__set%d test-ip4 3 size 5
+__set%d test-ip4 0
+	element 00000002  : 0 [end]	element 00000004  : 0 [end]	element 00000021  : 0 [end]	element 00000036  : 0 [end]	element 00000038  : 0 [end]
+ip test-ip4 input
+  [ meta load l4proto => reg 1 ]
+  [ cmp eq reg 1 0x00000001 ]
+  [ payload load 1b @ transport header + 1 => reg 1 ]
+  [ lookup reg 1 set __set%d 0x1 ]
+

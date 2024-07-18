@@ -61,6 +61,7 @@ struct rule_pp_ctx {
 	struct dl_proto_ctx	*dl;
 	struct stmt		*stmt;
 	unsigned int		flags;
+	struct set		*set;
 };
 
 extern const struct input_descriptor indesc_netlink;
@@ -100,7 +101,7 @@ extern struct nftnl_rule *netlink_rule_alloc(const struct nlmsghdr *nlh);
 
 struct nft_data_linearize {
 	uint32_t	len;
-	uint32_t	value[4];
+	uint32_t	value[NFT_REG32_COUNT];
 	char		chain[NFT_CHAIN_MAXNAMELEN];
 	uint32_t	chain_id;
 	int		verdict;

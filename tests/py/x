@@ -1,0 +1,13 @@
+diff --git a/tests/py/ip6/icmpv6.t.json.output b/tests/py/ip6/icmpv6.t.json.output
+index 7b8f5c1909db..c0de038ae0d5 100644
+--- a/tests/py/ip6/icmpv6.t.json.output
++++ b/tests/py/ip6/icmpv6.t.json.output
+@@ -104,7 +104,7 @@
+                 }
+             },
+             "op": "==",
+-            "right": "port-unreachable"
++            "right": 4
+         }
+     }
+ ]

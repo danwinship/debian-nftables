@@ -1090,11 +1090,7 @@ static void netlink_parse_log(struct netlink_parse_ctx *ctx,
 	stmt = log_stmt_alloc(loc);
 	prefix = nftnl_expr_get_str(nle, NFTNL_EXPR_LOG_PREFIX);
 	if (nftnl_expr_is_set(nle, NFTNL_EXPR_LOG_PREFIX)) {
-		stmt->log.prefix = constant_expr_alloc(&internal_location,
-						       &string_type,
-						       BYTEORDER_HOST_ENDIAN,
-						       (strlen(prefix) + 1) * BITS_PER_BYTE,
-						       prefix);
+		stmt->log.prefix = xstrdup(prefix);
 		stmt->log.flags |= STMT_LOG_PREFIX;
 	}
 	if (nftnl_expr_is_set(nle, NFTNL_EXPR_LOG_GROUP)) {
@@ -2517,56 +2513,29 @@ static void relational_binop_postprocess(struct rule_pp_ctx *ctx,
 
 	if (binop->op == OP_AND && (expr->op == OP_NEQ || expr->op == OP_EQ) &&
 	    right->dtype->basetype &&
-	    right->dtype->basetype->type == TYPE_BITMASK) {
-		switch (right->etype) {
-		case EXPR_VALUE:
-			if (!mpz_cmp_ui(right->value, 0)) {
-				/* Flag comparison: data & flags != 0
-				 *
-				 * Split the flags into a list of flag values and convert the
-				 * op to OP_EQ.
-				 */
-				expr_free(right);
+	    right->dtype->basetype->type == TYPE_BITMASK &&
+	    right->etype == EXPR_VALUE &&
+	    !mpz_cmp_ui(right->value, 0)) {
+		/* Flag comparison: data & flags != 0
+		 *
+		 * Split the flags into a list of flag values and convert the
+		 * op to OP_EQ.
+		 */
+		expr_free(right);
 
-				expr->left  = expr_get(binop->left);
-				expr->right = binop_tree_to_list(NULL, binop->right);
-				switch (expr->op) {
-				case OP_NEQ:
-					expr->op = OP_IMPLICIT;
-					break;
-				case OP_EQ:
-					expr->op = OP_NEG;
-					break;
-				default:
-					BUG("unknown operation type %d\n", expr->op);
-				}
-				expr_free(binop);
-			} else if (binop->right->etype == EXPR_VALUE &&
-				   right->etype == EXPR_VALUE &&
-				   !mpz_cmp(right->value, binop->right->value)) {
-				/* Skip flag / flag representation for:
-				 * data & flag == flag
-				 * data & flag != flag
-				 */
-				;
-			} else {
-				*exprp = flagcmp_expr_alloc(&expr->location, expr->op,
-							    expr_get(binop->left),
-							    binop_tree_to_list(NULL, binop->right),
-							    expr_get(right));
-				expr_free(expr);
-			}
+		expr->left  = expr_get(binop->left);
+		expr->right = binop_tree_to_list(NULL, binop->right);
+		switch (expr->op) {
+		case OP_NEQ:
+			expr->op = OP_IMPLICIT;
 			break;
-		case EXPR_BINOP:
-			*exprp = flagcmp_expr_alloc(&expr->location, expr->op,
-						    expr_get(binop->left),
-						    binop_tree_to_list(NULL, binop->right),
-						    binop_tree_to_list(NULL, right));
-			expr_free(expr);
+		case OP_EQ:
+			expr->op = OP_NEG;
 			break;
 		default:
-			break;
+			BUG("unknown operation type %d\n", expr->op);
 		}
+		expr_free(binop);
 	} else if (binop->left->dtype->flags & DTYPE_F_PREFIX &&
 		   binop->op == OP_AND && expr->right->etype == EXPR_VALUE &&
 		   expr_mask_is_prefix(binop->right)) {
@@ -2720,6 +2689,51 @@ static struct expr *expr_postprocess_string(struct expr *expr)
 	return out;
 }
 
+static void expr_postprocess_value(struct rule_pp_ctx *ctx, struct expr **exprp)
+{
+	bool interval = (ctx->set && ctx->set->flags & NFT_SET_INTERVAL);
+	struct expr *expr = *exprp;
+
+	// FIXME
+	if (expr->byteorder == BYTEORDER_HOST_ENDIAN && !interval)
+		mpz_switch_byteorder(expr->value, expr->len / BITS_PER_BYTE);
+
+	if (expr_basetype(expr)->type == TYPE_STRING)
+		*exprp = expr_postprocess_string(expr);
+
+	expr = *exprp;
+	if (expr->dtype->basetype != NULL &&
+	    expr->dtype->basetype->type == TYPE_BITMASK)
+		*exprp = bitmask_expr_to_binops(expr);
+}
+
+static void expr_postprocess_concat(struct rule_pp_ctx *ctx, struct expr **exprp)
+{
+	struct expr *i, *n, *expr = *exprp;
+	unsigned int type = expr->dtype->type, ntype = 0;
+	int off = expr->dtype->subtypes;
+	const struct datatype *dtype;
+	LIST_HEAD(tmp);
+
+	assert(expr->etype == EXPR_CONCAT);
+
+	ctx->flags |= RULE_PP_IN_CONCATENATION;
+	list_for_each_entry_safe(i, n, &expr->expressions, list) {
+		if (type) {
+			dtype = concat_subtype_lookup(type, --off);
+			expr_set_type(i, dtype, dtype->byteorder);
+		}
+		list_del(&i->list);
+		expr_postprocess(ctx, &i);
+		list_add_tail(&i->list, &tmp);
+
+		ntype = concat_subtype_add(ntype, i->dtype->type);
+	}
+	ctx->flags &= ~RULE_PP_IN_CONCATENATION;
+	list_splice(&tmp, &expr->expressions);
+	__datatype_set(expr, concat_type_alloc(ntype));
+}
+
 static void expr_postprocess(struct rule_pp_ctx *ctx, struct expr **exprp)
 {
 	struct dl_proto_ctx *dl = dl_proto_ctx(ctx);
@@ -2746,30 +2760,9 @@ static void expr_postprocess(struct rule_pp_ctx *ctx, struct expr **exprp)
 		list_for_each_entry(i, &expr->expressions, list)
 			expr_postprocess(ctx, &i);
 		break;
-	case EXPR_CONCAT: {
-		unsigned int type = expr->dtype->type, ntype = 0;
-		int off = expr->dtype->subtypes;
-		const struct datatype *dtype;
-		LIST_HEAD(tmp);
-		struct expr *n;
-
-		ctx->flags |= RULE_PP_IN_CONCATENATION;
-		list_for_each_entry_safe(i, n, &expr->expressions, list) {
-			if (type) {
-				dtype = concat_subtype_lookup(type, --off);
-				expr_set_type(i, dtype, dtype->byteorder);
-			}
-			list_del(&i->list);
-			expr_postprocess(ctx, &i);
-			list_add_tail(&i->list, &tmp);
-
-			ntype = concat_subtype_add(ntype, i->dtype->type);
-		}
-		ctx->flags &= ~RULE_PP_IN_CONCATENATION;
-		list_splice(&tmp, &expr->expressions);
-		__datatype_set(expr, concat_type_alloc(ntype));
+	case EXPR_CONCAT:
+		expr_postprocess_concat(ctx, exprp);
 		break;
-	}
 	case EXPR_UNARY:
 		expr_postprocess(ctx, &expr->arg);
 		expr_set_type(expr, expr->arg->dtype, !expr->arg->byteorder);
@@ -2846,8 +2839,28 @@ static void expr_postprocess(struct rule_pp_ctx *ctx, struct expr **exprp)
 
 				datatype_set(expr->left, expr->right->dtype);
 			}
+			ctx->set = expr->right->set;
 			expr_postprocess(ctx, &expr->left);
+			ctx->set = NULL;
 			break;
+		case EXPR_UNARY:
+			if (lhs_is_meta_hour(expr->left->arg) &&
+			    expr->right->etype == EXPR_RANGE) {
+				struct expr *range = expr->right;
+
+				/* Cross-day range needs to be reversed.
+				 * Kernel handles time in UTC. Therefore,
+				 * 03:00-14:00 AEDT (Sidney, Australia) time
+				 * is a cross-day range.
+				 */
+				if (mpz_cmp(range->left->value,
+					    range->right->value) <= 0 &&
+				    expr->op == OP_NEQ) {
+					range_expr_swap_values(range);
+					expr->op = OP_IMPLICIT;
+				}
+			}
+			/* fallthrough */
 		default:
 			expr_postprocess(ctx, &expr->left);
 			break;
@@ -2882,18 +2895,7 @@ static void expr_postprocess(struct rule_pp_ctx *ctx, struct expr **exprp)
 		payload_dependency_kill(&dl->pdctx, expr, dl->pctx.family);
 		break;
 	case EXPR_VALUE:
-		// FIXME
-		if (expr->byteorder == BYTEORDER_HOST_ENDIAN)
-			mpz_switch_byteorder(expr->value, expr->len / BITS_PER_BYTE);
-
-		if (expr_basetype(expr)->type == TYPE_STRING)
-			*exprp = expr_postprocess_string(expr);
-
-		expr = *exprp;
-		if (expr->dtype->basetype != NULL &&
-		    expr->dtype->basetype->type == TYPE_BITMASK)
-			*exprp = bitmask_expr_to_binops(expr);
-
+		expr_postprocess_value(ctx, exprp);
 		break;
 	case EXPR_RANGE:
 		expr_postprocess(ctx, &expr->left);
@@ -2942,7 +2944,7 @@ static void stmt_reject_postprocess(struct rule_pp_ctx *rctx)
 	switch (dl->pctx.family) {
 	case NFPROTO_IPV4:
 		stmt->reject.family = dl->pctx.family;
-		datatype_set(stmt->reject.expr, &icmp_code_type);
+		datatype_set(stmt->reject.expr, &reject_icmp_code_type);
 		if (stmt->reject.type == NFT_REJECT_TCP_RST &&
 		    payload_dependency_exists(&dl->pdctx,
 					      PROTO_BASE_TRANSPORT_HDR))
@@ -2951,7 +2953,7 @@ static void stmt_reject_postprocess(struct rule_pp_ctx *rctx)
 		break;
 	case NFPROTO_IPV6:
 		stmt->reject.family = dl->pctx.family;
-		datatype_set(stmt->reject.expr, &icmpv6_code_type);
+		datatype_set(stmt->reject.expr, &reject_icmpv6_code_type);
 		if (stmt->reject.type == NFT_REJECT_TCP_RST &&
 		    payload_dependency_exists(&dl->pdctx,
 					      PROTO_BASE_TRANSPORT_HDR))
@@ -2962,7 +2964,7 @@ static void stmt_reject_postprocess(struct rule_pp_ctx *rctx)
 	case NFPROTO_BRIDGE:
 	case NFPROTO_NETDEV:
 		if (stmt->reject.type == NFT_REJECT_ICMPX_UNREACH) {
-			datatype_set(stmt->reject.expr, &icmpx_code_type);
+			datatype_set(stmt->reject.expr, &reject_icmpx_code_type);
 			break;
 		}
 
@@ -2978,12 +2980,12 @@ static void stmt_reject_postprocess(struct rule_pp_ctx *rctx)
 		case NFPROTO_IPV4:			/* INET */
 		case __constant_htons(ETH_P_IP):	/* BRIDGE, NETDEV */
 			stmt->reject.family = NFPROTO_IPV4;
-			datatype_set(stmt->reject.expr, &icmp_code_type);
+			datatype_set(stmt->reject.expr, &reject_icmp_code_type);
 			break;
 		case NFPROTO_IPV6:			/* INET */
 		case __constant_htons(ETH_P_IPV6):	/* BRIDGE, NETDEV */
 			stmt->reject.family = NFPROTO_IPV6;
-			datatype_set(stmt->reject.expr, &icmpv6_code_type);
+			datatype_set(stmt->reject.expr, &reject_icmpv6_code_type);
 			break;
 		default:
 			break;

@@ -130,10 +130,12 @@ struct symbol *symbol_get(const struct scope *scope, const char *identifier);
 enum table_flags {
 	TABLE_F_DORMANT		= (1 << 0),
 	TABLE_F_OWNER		= (1 << 1),
+	TABLE_F_PERSIST		= (1 << 2),
 };
-#define TABLE_FLAGS_MAX		2
+#define TABLE_FLAGS_MAX		3
 
 const char *table_flag_name(uint32_t flag);
+unsigned int parse_table_flag(const char *name);
 
 /**
  * struct table - nftables table
@@ -329,6 +331,7 @@ void rule_stmt_insert_at(struct rule *rule, struct stmt *nstmt,
  * @policy:	set mechanism policy
  * @automerge:	merge adjacents and overlapping elements, if possible
  * @comment:	comment
+ * @errors:	expr evaluation errors seen
  * @desc.size:		count of set elements
  * @desc.field_len:	length of single concatenated fields, bytes
  * @desc.field_count:	count of concatenated fields
@@ -353,6 +356,7 @@ struct set {
 	bool			root;
 	bool			automerge;
 	bool			key_typeof_valid;
+	bool			errors;
 	const char		*comment;
 	struct {
 		uint32_t	size;
@@ -407,6 +411,11 @@ static inline bool map_is_literal(uint32_t set_flags)
 static inline bool set_is_meter(uint32_t set_flags)
 {
 	return set_is_anonymous(set_flags) && (set_flags & NFT_SET_EVAL);
+}
+
+static inline bool set_is_meter_compat(uint32_t set_flags)
+{
+	return set_flags & NFT_SET_EVAL;
 }
 
 static inline bool set_is_interval(uint32_t set_flags)
@@ -753,10 +762,13 @@ extern void cmd_free(struct cmd *cmd);
  * @rule:	current rule
  * @set:	current set
  * @stmt:	current statement
+ * @stmt_len:	current statement template length
+ * @recursion:  expr evaluation recursion counter
  * @cache:	cache context
  * @debug_mask: debugging bitmask
  * @ectx:	expression context
- * @pctx:	payload context
+ * @_pctx:	payload contexts
+ * @inner_desc: inner header description
  */
 struct eval_ctx {
 	struct nft_ctx		*nft;
@@ -767,6 +779,7 @@ struct eval_ctx {
 	struct set		*set;
 	struct stmt		*stmt;
 	uint32_t		stmt_len;
+	uint32_t		recursion;
 	struct expr_ctx		ectx;
 	struct proto_ctx	_pctx[2];
 	const struct proto_desc	*inner_desc;

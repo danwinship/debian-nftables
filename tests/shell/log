@@ -1,6 +1,7 @@
 I: conf: NFT=./../../src/nft
 I: conf: NFT_REAL=./../../src/nft
 I: conf: VERBOSE=n
+I: conf: NFT_TEST_VERBOSE_TEST=n
 I: conf: DUMPGEN=n
 I: conf: VALGRIND=n
 I: conf: KMEMLEAK=n
@@ -12,7 +13,7 @@ I: conf: NFT_TEST_HAS_UNSHARED_MOUNT=y
 I: conf: NFT_TEST_KEEP_LOGS=n
 I: conf: NFT_TEST_JOBS=12
 I: conf: NFT_TEST_FAIL_ON_SKIP=n
-I: conf: NFT_TEST_RANDOM_SEED=975674303
+I: conf: NFT_TEST_RANDOM_SEED=74136557
 I: conf: NFT_TEST_SHUFFLE_TESTS=y
 I: conf: TMPDIR=/tmp
 
@@ -20,22 +21,454 @@ I: conf: NFT_TEST_SKIP_slow=n
 I: conf: NFT_TEST_HAVE_bitshift=y
 I: conf: NFT_TEST_HAVE_catchall_element=y
 I: conf: NFT_TEST_HAVE_chain_binding=y
+I: conf: NFT_TEST_HAVE_comment=y
 I: conf: NFT_TEST_HAVE_ctexpect=y
 I: conf: NFT_TEST_HAVE_cttimeout=y
 I: conf: NFT_TEST_HAVE_destroy=y
+I: conf: NFT_TEST_HAVE_dynset_op_delete=y
+I: conf: NFT_TEST_HAVE_flowtable_counter=y
+I: conf: NFT_TEST_HAVE_flowtable_no_devices=y
 I: conf: NFT_TEST_HAVE_inet_ingress=y
+I: conf: NFT_TEST_HAVE_inet_nat=y
 I: conf: NFT_TEST_HAVE_inner_matching=y
 I: conf: NFT_TEST_HAVE_json=y
 I: conf: NFT_TEST_HAVE_map_lookup=y
+I: conf: NFT_TEST_HAVE_meta_time=y
+I: conf: NFT_TEST_HAVE_netdev_chain_multidevice=y
 I: conf: NFT_TEST_HAVE_netdev_chain_without_device=y
 I: conf: NFT_TEST_HAVE_netdev_egress=y
+I: conf: NFT_TEST_HAVE_netmap=y
 I: conf: NFT_TEST_HAVE_osf=y
+I: conf: NFT_TEST_HAVE_pipapo=y
+I: conf: NFT_TEST_HAVE_prerouting_reject=y
 I: conf: NFT_TEST_HAVE_reset_rule=y
 I: conf: NFT_TEST_HAVE_reset_set=y
+I: conf: NFT_TEST_HAVE_reset_tcp_options=y
 I: conf: NFT_TEST_HAVE_sctp_chunks=y
+I: conf: NFT_TEST_HAVE_secmark=y
+I: conf: NFT_TEST_HAVE_set_expr=y
 I: conf: NFT_TEST_HAVE_set_with_two_expressions=y
+I: conf: NFT_TEST_HAVE_setelem_expiration=y
+I: conf: NFT_TEST_HAVE_stateful_object_update=y
+I: conf: NFT_TEST_HAVE_synproxy=y
 I: conf: NFT_TEST_HAVE_table_flag_owner=y
+I: conf: NFT_TEST_HAVE_table_flag_persist=y
 
 I: info: NFT_TEST_BASEDIR=.
-I: info: NFT_TEST_TMPDIR=/tmp/nft-test.20231013-172649.494.0MPMPC
+I: info: NFT_TEST_TMPDIR=/tmp/nft-test.20240424-220846.616.m75dvc
 
+I: [OK]           1/410 testcases/nft-f/0030variable_reuse_0
+I: [OK]           2/410 testcases/sets/typeof_raw_0
+I: [OK]           3/410 testcases/transactions/0021rule_0
+I: [OK]           4/410 testcases/chains/0031priority_variable_0
+I: [OK]           5/410 testcases/nft-f/0022variables_0
+I: [OK]           6/410 testcases/flowtable/0004delete_after_add_0
+I: [OK]           7/410 testcases/include/0017glob_more_than_maxdepth_1
+I: [OK]           8/410 testcases/listing/0015dynamic_0
+I: [OK]           9/410 testcases/cache/0010_implicit_chain_0
+I: [OK]          10/410 testcases/rule_management/0008delete_1
+I: [OK]          11/410 testcases/listing/0020flowtable_0
+W: [CHK DUMP]    12/410 testcases/bitwise/0040mark_binop_5
+I: [OK]          13/410 testcases/nft-f/0016redefines_1
+I: [OK]          14/410 testcases/transactions/0002table_0
+W: [CHK DUMP]    15/410 testcases/nft-f/0012different_defines_0
+I: [OK]          16/410 testcases/maps/0012map_0
+I: [OK]          17/410 testcases/parsing/log
+I: [OK]          18/410 testcases/chains/netdev_chain_multidev_gone
+I: [OK]          19/410 testcases/nft-f/0020jump_variable_1
+I: [OK]          20/410 testcases/sets/0017add_after_flush_0
+I: [OK]          21/410 testcases/chains/0033priority_variable_1
+I: [OK]          22/410 testcases/chains/0016delete_handle_0
+I: [OK]          23/410 testcases/transactions/0034set_0
+I: [OK]          24/410 testcases/sets/0041interval_0
+I: [OK]          25/410 testcases/include/0013glob_dotfile_0
+I: [OK]          26/410 testcases/include/0007glob_double_0
+I: [OK]          27/410 testcases/listing/0010sets_0
+I: [OK]          28/410 testcases/maps/named_ct_objects
+I: [OK]          29/410 testcases/sets/typeof_sets_1
+I: [OK]          30/410 testcases/transactions/0043set_1
+I: [OK]          31/410 testcases/sets/0071unclosed_prefix_interval_0
+I: [OK]          32/410 testcases/cache/0009_delete_by_handle_incorrect_0
+I: [OK]          33/410 testcases/optimizations/merge_vmaps
+I: [OK]          34/410 testcases/transactions/bad_expression
+I: [OK]          35/410 testcases/packetpath/policy
+I: [OK]          36/410 testcases/transactions/0032set_0
+I: [OK]          37/410 testcases/chains/0007masquerade_1
+I: [OK]          38/410 testcases/json/0006obj_comment_0
+I: [OK]          39/410 testcases/sets/0010comments_0
+I: [OK]          40/410 testcases/nft-f/0017ct_timeout_obj_0
+I: [OK]          41/410 testcases/nft-f/0003rollback_jump_0
+I: [OK]          42/410 testcases/maps/0006interval_map_overlap_0
+W: [CHK DUMP]    43/410 testcases/bitwise/0040mark_binop_9
+I: [OK]          44/410 testcases/transactions/0047set_0
+I: [OK]          45/410 testcases/transactions/0011chain_0
+I: [OK]          46/410 testcases/json/0001set_statements_0
+I: [OK]          47/410 testcases/sets/0008comments_interval_0
+I: [OK]          48/410 testcases/chains/0026prio_netdev_1
+I: [OK]          49/410 testcases/sets/0026named_limit_0
+I: [OK]          50/410 testcases/transactions/0012chain_0
+I: [OK]          51/410 testcases/transactions/0014chain_1
+I: [OK]          52/410 testcases/optionals/comments_0
+I: [OK]          53/410 testcases/nft-f/0018ct_expectation_obj_0
+I: [OK]          54/410 testcases/parsing/octal
+I: [OK]          55/410 testcases/listing/0011sets_0
+I: [OK]          56/410 testcases/transactions/0030set_0
+W: [CHK DUMP]    57/410 testcases/bitwise/0040mark_binop_7
+I: [OK]          58/410 testcases/chains/0004busy_1
+I: [OK]          59/410 testcases/sets/0046netmap_0
+I: [OK]          60/410 testcases/packetpath/vlan_8021ad_tag
+I: [OK]          61/410 testcases/sets/0019set_check_size_0
+I: [OK]          62/410 testcases/sets/0053echo_0
+I: [OK]          63/410 testcases/listing/0008ruleset_arp_0
+I: [OK]          64/410 testcases/rule_management/0012destroy_0
+I: [OK]          65/410 testcases/rule_management/0009delete_1
+I: [OK]          66/410 testcases/rule_management/0011reset_0
+I: [OK]          67/410 testcases/transactions/0023rule_1
+I: [OK]          68/410 testcases/maps/0009vmap_0
+W: [CHK DUMP]    69/410 testcases/bitwise/0040mark_binop_1
+I: [OK]          70/410 testcases/optimizations/single_anon_set
+I: [OK]          71/410 testcases/flowtable/0013addafterdelete_0
+I: [OK]          72/410 testcases/nft-f/0006action_object_0
+I: [OK]          73/410 testcases/chains/0019masquerade_jump_1
+I: [OK]          74/410 testcases/include/0004endlessloop_1
+I: [OK]          75/410 testcases/transactions/0051map_0
+I: [OK]          76/410 testcases/optionals/log_prefix_0
+I: [OK]          77/410 testcases/chains/0035policy_variable_0
+I: [OK]          78/410 testcases/sets/typeof_sets_0
+I: [OK]          79/410 testcases/netns/0003many_0
+I: [OK]          80/410 testcases/chains/0001jumps_0
+I: [OK]          81/410 testcases/flowtable/0008prio_1
+I: [OK]          82/410 testcases/sets/0032restore_set_simple_0
+I: [OK]          83/410 testcases/sets/0005named_interval_shadow_0
+I: [OK]          84/410 testcases/rule_management/0003insert_0
+I: [OK]          85/410 testcases/sets/inner_0
+I: [OK]          86/410 testcases/chains/0044chain_destroy_0
+I: [OK]          87/410 testcases/sets/0004named_interval_shadow_0
+I: [OK]          88/410 testcases/listing/0003table_0
+I: [OK]          89/410 testcases/nft-f/0023check_1
+I: [OK]          90/410 testcases/include/0019include_error_0
+I: [OK]          91/410 testcases/maps/pipapo_double_flush
+I: [OK]          92/410 testcases/include/0008glob_nofile_wildcard_0
+I: [OK]          93/410 testcases/flowtable/0005delete_in_use_1
+I: [OK]          94/410 testcases/sets/dynset_missing
+I: [OK]          95/410 testcases/sets/sets_with_ifnames
+I: [OK]          96/410 testcases/maps/0011vmap_0
+I: [OK]          97/410 testcases/maps/vmap_unary
+I: [OK]          98/410 testcases/nft-f/0008split_tables_0
+I: [OK]          99/410 testcases/maps/0014destroy_0
+I: [OK]         100/410 testcases/transactions/0036set_1
+I: [OK]         101/410 testcases/listing/meta_time
+I: [OK]         102/410 testcases/transactions/0049huge_0
+I: [OK]         103/410 testcases/sets/0028delete_handle_0
+I: [OK]         104/410 testcases/sets/0023incomplete_add_set_command_0
+I: [OK]         105/410 testcases/sets/0029named_ifname_dtype_0
+I: [OK]         106/410 testcases/chains/0014rename_0
+I: [OK]         107/410 testcases/sets/0007create_element_0
+I: [OK]         108/410 testcases/sets/reset_command_0
+I: [OK]         109/410 testcases/listing/0001ruleset_0
+I: [OK]         110/410 testcases/include/0010glob_broken_file_1
+I: [OK]         111/410 testcases/include/0016maxdepth_0
+I: [OK]         112/410 testcases/sets/0018set_check_size_1
+I: [OK]         113/410 testcases/sets/0048set_counters_0
+I: [OK]         114/410 testcases/optionals/comments_table_0
+I: [OK]         115/410 testcases/optimizations/merge_nat_concat
+I: [OK]         116/410 testcases/sets/0002named_interval_automerging_0
+I: [OK]         117/410 testcases/sets/elem_opts_compat_0
+I: [OK]         118/410 testcases/nft-f/0010variable_0
+I: [OK]         119/410 testcases/maps/nat_addr_port
+W: [CHK DUMP]   120/410 testcases/bitwise/0040mark_binop_4
+I: [OK]         121/410 testcases/sets/type_set_symbol
+I: [OK]         122/410 testcases/nft-f/0024priority_0
+I: [OK]         123/410 testcases/nft-f/0026listing_0
+I: [OK]         124/410 testcases/optionals/handles_0
+I: [OK]         125/410 testcases/optimizations/merge_stmts_concat
+I: [OK]         126/410 testcases/transactions/0010chain_0
+I: [OK]         127/410 testcases/nft-f/0005rollback_map_0
+I: [OK]         128/410 testcases/transactions/0041nat_restore_0
+I: [OK]         129/410 testcases/chains/0042chain_variable_0
+I: [OK]         130/410 testcases/flowtable/0010delete_handle_0
+I: [OK]         131/410 testcases/listing/0007ruleset_inet_0
+I: [OK]         132/410 testcases/sets/0003named_interval_missing_flag_0
+I: [OK]         133/410 testcases/chains/0015check_jump_loop_1
+I: [OK]         134/410 testcases/chains/0009masquerade_jump_1
+I: [OK]         135/410 testcases/sets/0063set_catchall_0
+I: [OK]         136/410 testcases/optimizations/merge_vmap_raw
+I: [OK]         137/410 testcases/sets/0008create_verdict_map_0
+I: [OK]         138/410 testcases/sets/0020comments_0
+I: [OK]         139/410 testcases/nft-f/0001define_slash_0
+I: [OK]         140/410 testcases/sets/0037_set_with_inet_service_0
+W: [CHK DUMP]   141/410 testcases/nft-f/sample-ruleset
+I: [OK]         142/410 testcases/optimizations/merge_reject
+I: [OK]         143/410 testcases/chains/netdev_chain_0
+I: [OK]         144/410 testcases/include/0002relative_0
+I: [OK]         145/410 testcases/maps/map_with_flags_0
+I: [OK]         146/410 testcases/optimizations/merge_stmts_vmap
+I: [OK]         147/410 testcases/transactions/anon_chain_loop
+I: [OK]         148/410 testcases/sets/0027ipv6_maps_ipv4_0
+I: [OK]         149/410 testcases/transactions/0050rule_1
+I: [OK]         150/410 testcases/nft-f/0027split_chains_0
+I: [OK]         151/410 testcases/flowtable/0014addafterdelete_0
+I: [OK]         152/410 testcases/include/0011glob_dependency_0
+I: [OK]         153/410 testcases/transactions/0048helpers_0
+I: [OK]         154/410 testcases/maps/0016map_leak_0
+I: [OK]         155/410 testcases/include/0020include_chain_0
+I: [OK]         156/410 testcases/chains/netdev_multidev_netns_gone
+I: [OK]         157/410 testcases/sets/meter_0
+I: [OK]         158/410 testcases/json/0002table_map_0
+I: [OK]         159/410 testcases/chains/0020depth_1
+W: [CHK DUMP]   160/410 testcases/bitwise/0040mark_binop_2
+I: [OK]         161/410 testcases/sets/0011add_many_elements_0
+I: [OK]         162/410 testcases/transactions/0038set_0
+I: [OK]         163/410 testcases/sets/0022type_selective_flush_0
+I: [OK]         164/410 testcases/sets/set_eval_0
+I: [OK]         165/410 testcases/chains/0010endless_jump_loop_1
+I: [OK]         166/410 testcases/sets/0064map_catchall_0
+I: [OK]         167/410 testcases/netns/0002loosecommands_0
+I: [OK]         168/410 testcases/sets/0070stacked_l2_headers
+I: [OK]         169/410 testcases/sets/0073flat_interval_set
+I: [OK]         170/410 testcases/chains/0036policy_variable_0
+I: [OK]         171/410 testcases/cache/0006_cache_table_flush
+I: [OK]         172/410 testcases/include/0012glob_dependency_1
+I: [OK]         173/410 testcases/sets/0009comments_timeout_0
+I: [OK]         174/410 testcases/include/0006glob_single_0
+I: [OK]         175/410 testcases/sets/0006create_set_0
+I: [OK]         176/410 testcases/optimizations/ruleset
+I: [OK]         177/410 testcases/optimizations/merge_stmts
+I: [OK]         178/410 testcases/rule_management/0002addinsertlocation_1
+I: [OK]         179/410 testcases/json/netdev
+I: [OK]         180/410 testcases/listing/0021ruleset_json_terse_0
+I: [OK]         181/410 testcases/maps/different_map_types_1
+I: [OK]         182/410 testcases/transactions/0044rule_0
+I: [OK]         183/410 testcases/chains/netdev_chain_dev_gone
+I: [OK]         184/410 testcases/chains/0025prio_arp_1
+I: [OK]         185/410 testcases/optimizations/merge_nat_inet
+I: [OK]         186/410 testcases/cache/0001_cache_handling_0
+I: [OK]         187/410 testcases/nft-f/0028variable_cmdline_0
+I: [OK]         188/410 testcases/include/0009glob_nofile_1
+I: [OK]         189/410 testcases/optionals/update_object_handles_0
+I: [OK]         190/410 testcases/sets/0049set_define_0
+I: [OK]         191/410 testcases/cache/0004_cache_update_0
+I: [OK]         192/410 testcases/sets/0061anonymous_automerge_0
+I: [OK]         193/410 testcases/sets/0025anonymous_set_0
+I: [OK]         194/410 testcases/rule_management/0004replace_0
+I: [OK]         195/410 testcases/sets/0030add_many_elements_interval_0
+W: [CHK DUMP]   196/410 testcases/bitwise/0040mark_binop_6
+I: [OK]         197/410 testcases/maps/map_catchall_double_free_2
+I: [OK]         198/410 testcases/sets/0045concat_ipv4_service
+I: [OK]         199/410 testcases/listing/0022terse_0
+I: [OK]         200/410 testcases/transactions/0001table_0
+I: [OK]         201/410 testcases/chains/0027prio_bridge_dstnat_1
+I: [OK]         202/410 testcases/include/0014glob_directory_0
+I: [OK]         203/410 testcases/sets/0034get_element_0
+W: [CHK DUMP]   204/410 testcases/packetpath/tcp_options
+I: [OK]         205/410 testcases/nft-f/0029split_file_0
+I: [OK]         206/410 testcases/owner/0002-persist
+W: [CHK DUMP]   207/410 testcases/bitwise/0040mark_binop_3
+I: [OK]         208/410 testcases/sets/concat_interval_0
+I: [OK]         209/410 testcases/chains/0041chain_binding_0
+I: [OK]         210/410 testcases/sets/0051set_interval_counter_0
+I: [OK]         211/410 testcases/listing/0004table_0
+I: [OK]         212/410 testcases/maps/0013map_0
+I: [OK]         213/410 testcases/transactions/0031set_0
+I: [OK]         214/410 testcases/transactions/0037set_0
+I: [OK]         215/410 testcases/json/0004json_schema_version_1
+I: [OK]         216/410 testcases/comments/comments_0
+I: [OK]         217/410 testcases/sets/0074nested_interval_set
+I: [OK]         218/410 testcases/chains/0029prio_bridge_srcnat_1
+I: [OK]         219/410 testcases/flowtable/0001flowtable_0
+I: [OK]         220/410 testcases/sets/0067nat_interval_0
+I: [OK]         221/410 testcases/maps/typeof_maps_0
+I: [OK]         222/410 testcases/transactions/doubled-set
+I: [OK]         223/410 testcases/sets/0033add_set_simple_flat_0
+I: [OK]         224/410 testcases/chains/0030create_0
+I: [OK]         225/410 testcases/sets/typeof_sets_concat
+I: [OK]         226/410 testcases/transactions/table_onoff
+I: [OK]         227/410 testcases/bogons/assert_failures
+I: [OK]         228/410 testcases/optimizations/variables
+W: [CHK DUMP]   229/410 testcases/bitwise/0040mark_binop_8
+W: [FAILED]     230/410 testcases/maps/anonymous_snat_map_1
+I: [OK]         231/410 testcases/rule_management/0006replace_1
+I: [OK]         232/410 testcases/include/0003includepath_0
+I: [OK]         233/410 testcases/nft-f/0014defines_1
+I: [OK]         234/410 testcases/transactions/0022rule_1
+I: [OK]         235/410 testcases/rule_management/0010replace_0
+I: [OK]         236/410 testcases/sets/0016element_leak_0
+I: [OK]         237/410 testcases/nft-f/0018jump_variable_0
+I: [OK]         238/410 testcases/maps/0024named_objects_0
+I: [OK]         239/410 testcases/transactions/0039set_0
+W: [CHK DUMP]   240/410 testcases/maps/vmap_mark_bitwise_0
+I: [OK]         241/410 testcases/chains/0043chain_ingress_0
+I: [OK]         242/410 testcases/maps/0004interval_map_create_once_0
+I: [OK]         243/410 testcases/chains/0017masquerade_jump_1
+I: [OK]         244/410 testcases/maps/0007named_ifname_dtype_0
+I: [OK]         245/410 testcases/nft-f/0021list_ruleset_0
+I: [OK]         246/410 testcases/flowtable/0003add_after_flush_0
+I: [OK]         247/410 testcases/sets/0042update_set_0
+I: [OK]         248/410 testcases/maps/map_catchall_double_free
+I: [OK]         249/410 testcases/listing/0006ruleset_ip6_0
+I: [OK]         250/410 testcases/sets/0036add_set_element_expiration_0
+I: [OK]         251/410 testcases/maps/named_snat_map_0
+I: [OK]         252/410 testcases/chains/0039negative_priority_0
+I: [OK]         253/410 testcases/transactions/0020rule_0
+I: [OK]         254/410 testcases/chains/netdev_chain_autoremove
+I: [OK]         255/410 testcases/sets/0028autoselect_0
+I: [OK]         256/410 testcases/sets/0024synproxy_0
+I: [OK]         257/410 testcases/maps/0005interval_map_add_many_elements_0
+I: [OK]         258/410 testcases/include/0013input_descriptors_included_files_0
+I: [OK]         259/410 testcases/sets/0047nat_0
+I: [OK]         260/410 testcases/chains/0002jumps_1
+I: [OK]         261/410 testcases/rule_management/0001addinsertposition_0
+I: [OK]         262/410 testcases/optionals/comments_objects_0
+I: [OK]         263/410 testcases/sets/0040get_host_endian_elements_0
+I: [OK]         264/410 testcases/maps/typeof_maps_concat
+I: [OK]         265/410 testcases/sets/0031set_timeout_size_0
+I: [OK]         266/410 testcases/transactions/0042_stateful_expr_0
+I: [OK]         267/410 testcases/transactions/0045anon-unbind_0
+I: [OK]         268/410 testcases/nft-f/0002rollback_rule_0
+I: [OK]         269/410 testcases/sets/0060set_multistmt_0
+I: [OK]         270/410 testcases/sets/0072destroy_0
+I: [OK]         271/410 testcases/sets/0012add_delete_many_elements_0
+I: [OK]         272/410 testcases/chains/0003jump_loop_1
+I: [OK]         273/410 testcases/maps/0008interval_map_delete_0
+I: [OK]         274/410 testcases/optimizations/skip_merge
+I: [OK]         275/410 testcases/sets/0065_icmp_postprocessing
+I: [OK]         276/410 testcases/sets/0060set_multistmt_1
+I: [OK]         277/410 testcases/optionals/comments_objects_dup_0
+I: [OK]         278/410 testcases/sets/0001named_interval_0
+I: [OK]         279/410 testcases/nft-f/0032pknock_0
+I: [OK]         280/410 testcases/rule_management/0005replace_1
+I: [OK]         281/410 testcases/sets/0013add_delete_many_elements_0
+I: [OK]         282/410 testcases/json/0005secmark_objref_0
+I: [OK]         283/410 testcases/nft-f/0007action_object_set_segfault_1
+I: [OK]         284/410 testcases/maps/anonymous_snat_map_0
+I: [OK]         285/410 testcases/chains/0011endless_jump_loop_1
+I: [OK]         286/410 testcases/chains/netdev_chain_dormant_autoremove
+I: [OK]         287/410 testcases/chains/0008masquerade_jump_1
+I: [OK]         288/410 testcases/maps/typeof_integer_0
+I: [OK]         289/410 testcases/parsing/large_rule_pipe
+I: [OK]         290/410 testcases/optionals/delete_object_handles_0
+I: [OK]         291/410 testcases/transactions/0003table_0
+I: [OK]         292/410 testcases/sets/0052overlap_0
+I: [OK]         293/410 testcases/include/0001absolute_0
+I: [OK]         294/410 testcases/listing/0012sets_0
+I: [OK]         295/410 testcases/maps/map_catchall_double_deactivate
+I: [OK]         296/410 testcases/optionals/comments_chain_0
+I: [OK]         297/410 testcases/sets/errors_0
+I: [OK]         298/410 testcases/flowtable/0011deleteafterflush_0
+I: [OK]         299/410 testcases/maps/typeof_maps_update_0
+I: [OK]         300/410 testcases/optimizations/single_anon_set_expr
+I: [OK]         301/410 testcases/chains/0024prio_inet_dstnat_1
+I: [OK]         302/410 testcases/sets/0067nat_concat_interval_0
+I: [OK]         303/410 testcases/include/0005glob_empty_0
+I: [OK]         304/410 testcases/maps/0012map_concat_0
+I: [OK]         305/410 testcases/nft-f/0004rollback_set_0
+I: [OK]         306/410 testcases/sets/automerge_0
+I: [OK]         307/410 testcases/transactions/30s-stress
+I: [OK]         308/410 testcases/sets/0038meter_list_0
+I: [OK]         309/410 testcases/rule_management/0007delete_0
+I: [OK]         310/410 testcases/flowtable/0007prio_0
+I: [OK]         311/410 testcases/maps/named_limits
+I: [OK]         312/410 testcases/transactions/0033set_0
+I: [OK]         313/410 testcases/packetpath/payload
+I: [OK]         314/410 testcases/optimizations/dependency_kill
+I: [OK]         315/410 testcases/sets/0058_setupdate_timeout_0
+I: [OK]         316/410 testcases/chains/0038policy_variable_1
+I: [OK]         317/410 testcases/optimizations/not_mergeable
+I: [OK]         318/410 testcases/sets/0035add_set_elements_flat_0
+I: [OK]         319/410 testcases/cache/0011_index_0
+I: [OK]         320/410 testcases/nft-i/0001define_0
+I: [OK]         321/410 testcases/flowtable/0015destroy_0
+I: [OK]         322/410 testcases/listing/0019set_0
+I: [OK]         323/410 testcases/sets/0039delete_interval_0
+I: [OK]         324/410 testcases/listing/0009ruleset_bridge_0
+I: [OK]         325/410 testcases/flowtable/0009deleteafterflush_0
+I: [OK]         326/410 testcases/listing/0005ruleset_ip_0
+I: [OK]         327/410 testcases/maps/anon_objmap_concat
+I: [OK]         328/410 testcases/cache/0005_cache_chain_flush
+I: [OK]         329/410 testcases/sets/0068interval_stack_overflow_0
+I: [OK]         330/410 testcases/packetpath/set_lookups
+I: [OK]         331/410 testcases/cache/0008_delete_by_handle_0
+I: [OK]         332/410 testcases/transactions/0040set_0
+I: [OK]         333/410 testcases/json/0003json_schema_version_0
+I: [OK]         334/410 testcases/listing/0014objects_0
+I: [OK]         335/410 testcases/transactions/0024rule_0
+I: [OK]         336/410 testcases/sets/0062set_connlimit_0
+I: [OK]         337/410 testcases/maps/typeof_maps_add_delete
+I: [OK]         338/410 testcases/chains/0037policy_variable_1
+I: [OK]         339/410 testcases/maps/0010concat_map_0
+I: [OK]         340/410 testcases/cache/0002_interval_0
+I: [OK]         341/410 testcases/transactions/concat_range_abort
+I: [OK]         342/410 testcases/flowtable/0012flowtable_variable_0
+I: [OK]         343/410 testcases/chains/0013rename_0
+I: [OK]         344/410 testcases/optimizations/skip_non_eq
+I: [OK]         345/410 testcases/nft-f/0031vmap_string_0
+I: [OK]         346/410 testcases/sets/0059set_update_multistmt_0
+I: [OK]         347/410 testcases/cache/0007_echo_cache_init_0
+I: [OK]         348/410 testcases/sets/0050set_define_1
+I: [OK]         349/410 testcases/sets/0014malformed_set_is_not_defined_0
+I: [OK]         350/410 testcases/sets/0043concatenated_ranges_1
+I: [OK]         351/410 testcases/maps/0017_map_variable_0
+I: [OK]         352/410 testcases/owner/0001-flowtable-uaf
+I: [OK]         353/410 testcases/sets/0056dynamic_limit_0
+I: [OK]         354/410 testcases/chains/0028prio_bridge_out_1
+I: [OK]         355/410 testcases/nft-f/0013defines_1
+I: [OK]         356/410 testcases/sets/0054comments_set_0
+I: [OK]         357/410 testcases/sets/exact_overlap_0
+I: [OK]         358/410 testcases/sets/0057set_create_fails_0
+I: [OK]         359/410 testcases/parsing/describe
+I: [OK]         360/410 testcases/optimizations/merge_stmts_concat_vmap
+I: [OK]         361/410 testcases/listing/0017objects_0
+I: [OK]         362/410 testcases/maps/typeof_raw_0
+I: [OK]         363/410 testcases/chains/0006masquerade_0
+I: [OK]         364/410 testcases/listing/0002ruleset_0
+I: [OK]         365/410 testcases/maps/typeof_maps_concat_update_0
+I: [OK]         366/410 testcases/listing/0013objects_0
+I: [OK]         367/410 testcases/maps/0018map_leak_timeout_0
+I: [OK]         368/410 testcases/nft-f/0025empty_dynset_0
+I: [OK]         369/410 testcases/transactions/0025rule_0
+I: [OK]         370/410 testcases/netns/0001nft-f_0
+I: [OK]         371/410 testcases/chains/0021prio_0
+I: [OK]         372/410 testcases/optimizations/merge_nat
+I: [OK]         373/410 testcases/chains/0005busy_map_1
+I: [OK]         374/410 testcases/optionals/handles_1
+I: [OK]         375/410 testcases/sets/0069interval_merge_0
+I: [OK]         376/410 testcases/listing/0018data_0
+I: [OK]         377/410 testcases/transactions/0035set_0
+I: [OK]         378/410 testcases/transactions/0015chain_0
+I: [OK]         379/410 testcases/sets/0015rulesetflush_0
+I: [OK]         380/410 testcases/optionals/comments_handles_0
+I: [OK]         381/410 testcases/chains/0034priority_variable_1
+I: [OK]         382/410 testcases/chains/0018check_jump_loop_1
+I: [OK]         383/410 testcases/transactions/0013chain_0
+I: [OK]         384/410 testcases/maps/vmap_timeout
+I: [OK]         385/410 testcases/chains/0022prio_dummy_1
+I: [OK]         386/410 testcases/flowtable/0006segfault_0
+I: [OK]         387/410 testcases/chains/0032priority_variable_0
+I: [OK]         388/410 testcases/sets/0021nesting_0
+I: [OK]         389/410 testcases/include/0018include_error_0
+I: [OK]         390/410 testcases/nft-f/0015defines_1
+I: [OK]         391/410 testcases/nft-f/0019jump_variable_1
+W: [CHK DUMP]   392/410 testcases/bitwise/0040mark_binop_0
+I: [OK]         393/410 testcases/chains/0023prio_inet_srcnat_1
+I: [OK]         394/410 testcases/sets/collapse_elem_0
+W: [FAILED]     395/410 testcases/maps/0024named_objects_1
+I: [OK]         396/410 testcases/listing/0016anonymous_0
+I: [OK]         397/410 testcases/nft-f/0009variable_0
+W: [CHK DUMP]   398/410 testcases/sets/0055tcpflags_0
+I: [OK]         399/410 testcases/transactions/0046set_0
+I: [OK]         400/410 testcases/include/0015doubleincludepath_0
+I: [OK]         401/410 testcases/chains/netdev_netns_gone
+I: [OK]         402/410 testcases/optimizations/skip_unsupported
+I: [OK]         403/410 testcases/cache/0003_cache_update_0
+I: [OK]         404/410 testcases/flowtable/0002create_flowtable_0
+I: [OK]         405/410 testcases/maps/0003map_add_many_elements_0
+I: [OK]         406/410 testcases/packetpath/flowtables
+I: [OK]         407/410 testcases/nft-f/0011manydefines_0
+I: [OK]         408/410 testcases/sets/0044interval_overlap_0
+I: [OK]         409/410 testcases/sets/0044interval_overlap_1
+I: [OK]         410/410 testcases/sets/0043concatenated_ranges_0
+
+I: results: [OK] 393 [SKIPPED] 0 [FAILED] 17 [TOTAL] 410
+I: check the temp directory "/tmp/nft-test.20240424-220846.616.m75dvc" ("/tmp/nft-test.latest.root")
+I:    ls -lad "/tmp/nft-test.latest.root"/*/*
+I:    grep -R ^ "/tmp/nft-test.latest.root"/

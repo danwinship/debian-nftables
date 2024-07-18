@@ -216,10 +216,17 @@ static struct error_record *ct_label_type_parse(struct parse_ctx *ctx,
 	return NULL;
 }
 
+static void ct_label_type_describe(struct output_ctx *octx)
+{
+	rt_symbol_table_describe(octx, CONNLABEL_CONF,
+				 octx->tbl.ct_label, &ct_label_type);
+}
+
 const struct datatype ct_label_type = {
 	.type		= TYPE_CT_LABEL,
 	.name		= "ct_label",
 	.desc		= "conntrack label",
+	.describe	= ct_label_type_describe,
 	.byteorder	= BYTEORDER_HOST_ENDIAN,
 	.size		= CT_LABEL_BIT_SIZE,
 	.basetype	= &bitmask_type,
@@ -570,7 +577,7 @@ static void flow_offload_stmt_print(const struct stmt *stmt,
 
 static void flow_offload_stmt_destroy(struct stmt *stmt)
 {
-	xfree(stmt->flow.table_name);
+	free_const(stmt->flow.table_name);
 }
 
 static const struct stmt_ops flow_offload_stmt_ops = {

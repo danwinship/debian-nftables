@@ -1,0 +1,13 @@
+diff --git a/tests/shell/testcases/optimizations/dumps/merge_stmts.nft b/tests/shell/testcases/optimizations/dumps/merge_stmts.nft
+index b56ea3ed4115..4e0a5a3088aa 100644
+--- a/tests/shell/testcases/optimizations/dumps/merge_stmts.nft
++++ b/tests/shell/testcases/optimizations/dumps/merge_stmts.nft
+@@ -1,5 +1,7 @@
+ table ip x {
+ 	chain y {
+-		ip daddr { 192.168.0.1, 192.168.0.2, 192.168.0.3 } counter packets 0 bytes 0 accept
++		type filter hook input priority filter; policy drop;
++		ct state vmap { invalid counter packets 0 bytes 0 : drop, established counter packets 0 bytes 0 : accept, related counter packets 0 bytes 0 : accept }
++		tcp dport { 80, 123 } counter packets 0 bytes 0 accept
+ 	}
+ }

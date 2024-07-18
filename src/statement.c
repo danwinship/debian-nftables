@@ -51,7 +51,7 @@ void stmt_free(struct stmt *stmt)
 		return;
 	if (stmt->ops->destroy)
 		stmt->ops->destroy(stmt);
-	xfree(stmt);
+	free(stmt);
 }
 
 void stmt_list_free(struct list_head *list)
@@ -183,7 +183,7 @@ static void meter_stmt_destroy(struct stmt *stmt)
 	expr_free(stmt->meter.key);
 	expr_free(stmt->meter.set);
 	stmt_free(stmt->meter.stmt);
-	xfree(stmt->meter.name);
+	free_const(stmt->meter.name);
 }
 
 static const struct stmt_ops meter_stmt_ops = {
@@ -377,12 +377,8 @@ int log_level_parse(const char *level)
 static void log_stmt_print(const struct stmt *stmt, struct output_ctx *octx)
 {
 	nft_print(octx, "log");
-	if (stmt->log.flags & STMT_LOG_PREFIX) {
-		char prefix[NF_LOG_PREFIXLEN] = {};
-
-		expr_to_string(stmt->log.prefix, prefix);
-		nft_print(octx, " prefix \"%s\"", prefix);
-	}
+	if (stmt->log.flags & STMT_LOG_PREFIX)
+		nft_print(octx, " prefix \"%s\"", stmt->log.prefix);
 	if (stmt->log.flags & STMT_LOG_GROUP)
 		nft_print(octx, " group %u", stmt->log.group);
 	if (stmt->log.flags & STMT_LOG_SNAPLEN)
@@ -419,7 +415,7 @@ static void log_stmt_print(const struct stmt *stmt, struct output_ctx *octx)
 
 static void log_stmt_destroy(struct stmt *stmt)
 {
-	expr_free(stmt->log.prefix);
+	free_const(stmt->log.prefix);
 }
 
 static const struct stmt_ops log_stmt_ops = {
@@ -989,7 +985,7 @@ static void tproxy_stmt_print(const struct stmt *stmt, struct output_ctx *octx)
 			expr_print(stmt->tproxy.addr, octx);
 		}
 	}
-	if (stmt->tproxy.port && stmt->tproxy.port->etype == EXPR_VALUE) {
+	if (stmt->tproxy.port) {
 		if (!stmt->tproxy.addr)
 			nft_print(octx, " ");
 		nft_print(octx, ":");

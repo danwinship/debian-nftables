@@ -4,6 +4,8 @@
 # without typeof, this is 'type string' and 'type integer',
 # but neither could be used because it lacks size information.
 
+# NFT_TEST_REQUIRES(NFT_TEST_HAVE_ipsec)
+
 set -e
 
 die() {

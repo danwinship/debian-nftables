@@ -94,7 +94,7 @@ void expr_free(struct expr *expr)
 	 */
 	if (expr->etype != EXPR_INVALID)
 		expr_destroy(expr);
-	xfree(expr);
+	free(expr);
 }
 
 void expr_print(const struct expr *expr, struct output_ctx *octx)
@@ -140,8 +140,10 @@ void expr_describe(const struct expr *expr, struct output_ctx *octx)
 		nft_print(octx, "%s expression, datatype %s (%s)",
 			  expr_name(expr), dtype->name, dtype->desc);
 
-		if (dtype == &invalid_type)
+		if (dtype == &invalid_type) {
+			nft_print(octx, "\n");
 			return;
+		}
 	}
 
 	if (dtype->basetype != NULL) {
@@ -179,15 +181,6 @@ void expr_describe(const struct expr *expr, struct output_ctx *octx)
 	} else if (edtype->describe) {
 		edtype->describe(octx);
 	}
-}
-
-void expr_to_string(const struct expr *expr, char *string)
-{
-	int len = expr->len / BITS_PER_BYTE;
-
-	assert(expr->dtype == &string_type);
-
-	mpz_export_data(string, expr->value, BYTEORDER_HOST_ENDIAN, len);
 }
 
 void expr_set_type(struct expr *expr, const struct datatype *dtype,
@@ -314,7 +307,7 @@ static void symbol_expr_clone(struct expr *new, const struct expr *expr)
 
 static void symbol_expr_destroy(struct expr *expr)
 {
-	xfree(expr->identifier);
+	free_const(expr->identifier);
 }
 
 static const struct expr_ops symbol_expr_ops = {
@@ -1335,7 +1328,7 @@ static void set_elem_expr_destroy(struct expr *expr)
 {
 	struct stmt *stmt, *next;
 
-	xfree(expr->comment);
+	free_const(expr->comment);
 	expr_free(expr->key);
 	list_for_each_entry_safe(stmt, next, &expr->stmt_list, list)
 		stmt_free(stmt);

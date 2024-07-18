@@ -43,6 +43,8 @@ understanding of their meaning. You can get information about options by running
 *-f*::
 *--file 'filename'*::
 	Read input from 'filename'. If 'filename' is -, read from stdin.
+	The directory path to this file is inserted at the beginning the list of
+	directories to be searched for included files (see *-I/--includepath*).
 
 *-D*::
 *--define 'name=value'*::
@@ -321,7 +323,7 @@ Effectively, this is the nft-equivalent of *iptables-save* and
 TABLES
 ------
 [verse]
-{*add* | *create*} *table* ['family'] 'table' [ {*comment* 'comment' *;*'} *{ flags* 'flags' *; }*]
+{*add* | *create*} *table* ['family'] 'table' [*{* [*comment* 'comment' *;*] [*flags* 'flags' *;*] *}*]
 {*delete* | *destroy* | *list* | *flush*} *table* ['family'] 'table'
 *list tables* ['family']
 *delete table* ['family'] *handle* 'handle'
@@ -343,7 +345,16 @@ return an error.
 |Flag | Description
 |dormant |
 table is not evaluated any more (base chains are unregistered).
+|owner |
+table is owned by the creating process.
+|persist |
+table shall outlive the owning process.
 |=================
+
+Creating a table with flag *owner* excludes other processes from manipulating
+it or its contents. By default, it will be removed when the process exits.
+Setting flag *persist* will prevent this and the resulting orphaned table will
+accept a new owner, e.g. a restarting daemon maintaining the table.
 
 .*Add, change, delete a table*
 ---------------------------------------
@@ -376,7 +387,7 @@ add table inet mytable
 CHAINS
 ------
 [verse]
-{*add* | *create*} *chain* ['family'] 'table' 'chain' [*{ type* 'type' *hook* 'hook' [*device* 'device'] *priority* 'priority' *;* [*policy* 'policy' *;*] [*comment* 'comment' *;*'] *}*]
+{*add* | *create*} *chain* ['family'] 'table' 'chain' [*{ type* 'type' *hook* 'hook' [*device* 'device'] *priority* 'priority' *;* [*policy* 'policy' *;*] [*comment* 'comment' *;*] *}*]
 {*delete* | *destroy* | *list* | *flush*} *chain* ['family'] 'table' 'chain'
 *list chains* ['family']
 *delete chain* ['family'] 'table' *handle* 'handle'
@@ -738,8 +749,8 @@ protocols. Each entry also caches the destination interface and the gateway
 address - to update the destination link-layer address - to forward packets.
 The ttl and hoplimit fields are also decremented. Hence, flowtables provides an
 alternative path that allow packets to bypass the classic forwarding path.
-Flowtables reside in the ingress hook that is located before the prerouting
-hook. You can select which flows you want to offload through the flow
+Flowtables reside in the ingress *hook* that is located before the prerouting
+*hook*. You can select which flows you want to offload through the flow
 expression from the forward chain. Flowtables are identified by their address
 family and their name. The address family must be one of ip, ip6, or inet. The inet
 address family is a dummy family which is used to create hybrid IPv4/IPv6

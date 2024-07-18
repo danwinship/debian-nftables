@@ -126,9 +126,9 @@ void nft_cache_filter_fini(struct nft_cache_filter *filter)
 		struct nft_filter_obj *obj, *next;
 
 		list_for_each_entry_safe(obj, next, &filter->obj[i].head, list)
-			xfree(obj);
+			free(obj);
 	}
-	xfree(filter);
+	free(filter);
 }
 
 static void cache_filter_add(struct nft_cache_filter *filter,
@@ -203,8 +203,12 @@ static unsigned int evaluate_cache_list(struct nft_ctx *nft, struct cmd *cmd,
 {
 	switch (cmd->obj) {
 	case CMD_OBJ_TABLE:
-		if (filter && cmd->handle.table.name) {
+		if (filter)
 			filter->list.family = cmd->handle.family;
+		if (!cmd->handle.table.name) {
+			flags |= NFT_CACHE_TABLE;
+			break;
+		} else if (filter) {
 			filter->list.table = cmd->handle.table.name;
 		}
 		flags |= NFT_CACHE_FULL;
@@ -230,8 +234,6 @@ static unsigned int evaluate_cache_list(struct nft_ctx *nft, struct cmd *cmd,
 		}
 		if (filter->list.table && filter->list.set)
 			flags |= NFT_CACHE_TABLE | NFT_CACHE_SET | NFT_CACHE_SETELEM;
-		else if (nft_output_terse(&nft->output))
-			flags |= NFT_CACHE_FULL | NFT_CACHE_TERSE;
 		else
 			flags |= NFT_CACHE_FULL;
 		break;
@@ -257,16 +259,14 @@ static unsigned int evaluate_cache_list(struct nft_ctx *nft, struct cmd *cmd,
 		flags |= NFT_CACHE_TABLE | NFT_CACHE_FLOWTABLE;
 		break;
 	case CMD_OBJ_RULESET:
-		if (nft_output_terse(&nft->output))
-			flags |= NFT_CACHE_FULL | NFT_CACHE_TERSE;
-		else
-			flags |= NFT_CACHE_FULL;
-		break;
 	default:
 		flags |= NFT_CACHE_FULL;
 		break;
 	}
 	flags |= NFT_CACHE_REFRESH;
+
+	if (nft_output_terse(&nft->output))
+		flags |= NFT_CACHE_TERSE;
 
 	return flags;
 }
@@ -297,6 +297,7 @@ static unsigned int evaluate_cache_reset(struct cmd *cmd, unsigned int flags,
 		flags |= NFT_CACHE_TABLE;
 		break;
 	}
+	flags |= NFT_CACHE_REFRESH;
 
 	return flags;
 }
@@ -1177,14 +1178,27 @@ static bool nft_cache_is_complete(struct nft_cache *cache, unsigned int flags)
 	return (cache->flags & flags) == flags;
 }
 
-static bool nft_cache_needs_refresh(struct nft_cache *cache)
+static bool nft_cache_needs_refresh(struct nft_cache *cache, unsigned int flags)
 {
-	return cache->flags & NFT_CACHE_REFRESH;
+	return (cache->flags & NFT_CACHE_REFRESH) ||
+	       (flags & NFT_CACHE_REFRESH);
 }
 
-static bool nft_cache_is_updated(struct nft_cache *cache, uint16_t genid)
+static bool nft_cache_is_updated(struct nft_cache *cache, unsigned int flags,
+				 uint16_t genid)
 {
-	return genid && genid == cache->genid;
+	if (!genid)
+		return false;
+
+	if (genid == cache->genid)
+		return true;
+
+	if (genid == cache->genid + 1) {
+		cache->genid++;
+		return true;
+	}
+
+	return false;
 }
 
 bool nft_cache_needs_update(struct nft_cache *cache)
@@ -1207,9 +1221,9 @@ int nft_cache_update(struct nft_ctx *nft, unsigned int flags,
 replay:
 	ctx.seqnum = cache->seqnum++;
 	genid = mnl_genid_get(&ctx);
-	if (!nft_cache_needs_refresh(cache) &&
+	if (!nft_cache_needs_refresh(cache, flags) &&
 	    nft_cache_is_complete(cache, flags) &&
-	    nft_cache_is_updated(cache, genid))
+	    nft_cache_is_updated(cache, flags, genid))
 		return 0;
 
 	if (cache->genid)
@@ -1279,7 +1293,7 @@ void cache_init(struct cache *cache)
 
 void cache_free(struct cache *cache)
 {
-	xfree(cache->ht);
+	free(cache->ht);
 }
 
 void cache_add(struct cache_item *item, struct cache *cache, uint32_t hash)
