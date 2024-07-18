@@ -1,3 +1,12 @@
+nftables (1.1.0-1) unstable; urgency=medium
+
+  * [e4c4fed] New upstream version 1.1.0
+  * [a7d90ec] d/control: bump build-dep on libnftnl to >= 1.2.7
+  * [6e32a9e] src:nftables: bump std-version to 4.7.0
+  * [081d8ff] d/patches: drop variables-in-map-statements-fix.patch
+
+ -- Arturo Borrero Gonzalez <arturo@debian.org>  Thu, 18 Jul 2024 09:56:32 +0200
+
 nftables (1.0.9-2) unstable; urgency=medium
 
   [ Jeremy Sowden ]
