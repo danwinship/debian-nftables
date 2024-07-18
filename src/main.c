@@ -325,6 +325,7 @@ static bool nft_options_check(int argc, char * const argv[])
 {
 	bool skip = false, nonoption = false;
 	int pos = 0, i;
+	size_t j;
 
 	for (i = 1; i < argc; i++) {
 		pos += strlen(argv[i - 1]) + 1;
@@ -333,23 +334,22 @@ static bool nft_options_check(int argc, char * const argv[])
 		} else if (skip) {
 			skip = false;
 			continue;
-		} else if (argv[i][0] == '-') {
-			if (nonoption) {
-				nft_options_error(argc, argv, pos);
-				return false;
-			} else if (argv[i][1] == 'd' ||
-				   argv[i][1] == 'I' ||
-				   argv[i][1] == 'f' ||
-				   argv[i][1] == 'D' ||
-				   !strcmp(argv[i], "--debug") ||
-				   !strcmp(argv[i], "--includepath") ||
-				   !strcmp(argv[i], "--define") ||
-				   !strcmp(argv[i], "--file")) {
-				skip = true;
-				continue;
-			}
 		} else if (argv[i][0] != '-') {
 			nonoption = true;
+			continue;
+		}
+		if (nonoption) {
+			nft_options_error(argc, argv, pos);
+			return false;
+		}
+		for (j = 0; j < NR_NFT_OPTIONS; j++) {
+			if (nft_options[j].arg &&
+			    (argv[i][1] == (char)nft_options[j].val ||
+			     (argv[i][1] == '-' &&
+			      !strcmp(argv[i] + 2, nft_options[j].name)))) {
+				skip = true;
+				break;
+			}
 		}
 	}
 

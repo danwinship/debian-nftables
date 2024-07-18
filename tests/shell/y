@@ -1,0 +1,33 @@
+commit 9eeb94cc746d9de156946339d08a3303d84b1e24
+Author: Pablo Neira Ayuso <pablo@netfilter.org>
+Date:   Thu Nov 9 13:27:02 2023 +0100
+
+    x
+
+diff --git a/tests/shell/features/set_expr.sh b/tests/shell/features/set_expr.sh
+index e9159d8b1bbd..c323d59e8920 100755
+--- a/tests/shell/features/set_expr.sh
++++ b/tests/shell/features/set_expr.sh
+@@ -1,4 +1,4 @@
+-#!/bin/sh
++#!/bin/bash
+ 
+ # 65038428b2c6 ("netfilter: nf_tables: allow to specify stateful expression in set definition")
+ # v5.6-rc5-1736-g65038428b2c6
+diff --git a/tests/shell/run-tests.sh b/tests/shell/run-tests.sh
+index 27a0ec43042a..ea1f6aabf089 100755
+--- a/tests/shell/run-tests.sh
++++ b/tests/shell/run-tests.sh
+@@ -565,8 +565,11 @@ feature_probe()
+ 	fi
+ 
+ 	if [ -x "$with_path.sh" ] ; then
++		echo $with_path
+ 		NFT="$NFT_REAL" $NFT_TEST_UNSHARE_CMD "$with_path.sh" &>/dev/null
+-		return $?
++		RET=$?
++		echo $?
++		return $RET
+ 	fi
+ 
+ 	return 1

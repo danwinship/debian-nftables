@@ -17,6 +17,7 @@
 #include <cmd.h>
 #include <errno.h>
 #include <sys/stat.h>
+#include <libgen.h>
 
 static int nft_netlink(struct nft_ctx *nft,
 		       struct list_head *cmds, struct list_head *msgs)
@@ -154,11 +155,11 @@ void nft_ctx_clear_vars(struct nft_ctx *ctx)
 	unsigned int i;
 
 	for (i = 0; i < ctx->num_vars; i++) {
-		xfree(ctx->vars[i].key);
-		xfree(ctx->vars[i].value);
+		free_const(ctx->vars[i].key);
+		free_const(ctx->vars[i].value);
 	}
 	ctx->num_vars = 0;
-	xfree(ctx->vars);
+	free(ctx->vars);
 }
 
 EXPORT_SYMBOL(nft_ctx_add_include_path);
@@ -182,9 +183,9 @@ EXPORT_SYMBOL(nft_ctx_clear_include_paths);
 void nft_ctx_clear_include_paths(struct nft_ctx *ctx)
 {
 	while (ctx->num_include_paths)
-		xfree(ctx->include_paths[--ctx->num_include_paths]);
+		free(ctx->include_paths[--ctx->num_include_paths]);
 
-	xfree(ctx->include_paths);
+	free(ctx->include_paths);
 	ctx->include_paths = NULL;
 }
 
@@ -201,7 +202,6 @@ struct nft_ctx *nft_ctx_new(uint32_t flags)
 	nft_init(ctx);
 
 	ctx->state = xzalloc(sizeof(struct parser_state));
-	nft_ctx_add_include_path(ctx, DEFAULT_INCLUDE_PATH);
 	ctx->parser_max_errors	= 10;
 	cache_init(&ctx->cache.table_cache);
 	ctx->top_scope = scope_alloc();
@@ -343,9 +343,9 @@ void nft_ctx_free(struct nft_ctx *ctx)
 	nft_ctx_clear_vars(ctx);
 	nft_ctx_clear_include_paths(ctx);
 	scope_free(ctx->top_scope);
-	xfree(ctx->state);
+	free(ctx->state);
 	nft_exit(ctx);
-	xfree(ctx);
+	free(ctx);
 }
 
 EXPORT_SYMBOL(nft_ctx_set_output);
@@ -532,7 +532,8 @@ static int nft_evaluate(struct nft_ctx *nft, struct list_head *msgs,
 		collapsed = true;
 
 	list_for_each_entry(cmd, cmds, list) {
-		if (cmd->op != CMD_ADD)
+		if (cmd->op != CMD_ADD &&
+		    cmd->op != CMD_CREATE)
 			continue;
 
 		nft_cmd_expand(cmd);
@@ -663,12 +664,16 @@ retry:
 
 /* need to use stat() to, fopen() will block for named fifos and
  * libjansson makes no checks before or after open either.
+ * /dev/stdin is *never* used, read() from STDIN_FILENO is used instead.
  */
 static struct error_record *filename_is_useable(struct nft_ctx *nft, const char *name)
 {
 	unsigned int type;
 	struct stat sb;
 	int err;
+
+	if (!strcmp(name, "/dev/stdin"))
+		return NULL;
 
 	err = stat(name, &sb);
 	if (err)
@@ -678,9 +683,6 @@ static struct error_record *filename_is_useable(struct nft_ctx *nft, const char 
 	type = sb.st_mode & S_IFMT;
 
 	if (type == S_IFREG || type == S_IFIFO)
-		return NULL;
-
-	if (type == S_IFCHR && 0 == strcmp(name, "/dev/stdin"))
 		return NULL;
 
 	return error(&internal_location, "Not a regular file: \"%s\"\n", name);
@@ -743,12 +745,12 @@ err:
 
 		list_for_each_entry_safe(indesc, next, &nft->vars_ctx.indesc_list, list) {
 			if (indesc->name)
-				xfree(indesc->name);
+				free_const(indesc->name);
 
-			xfree(indesc);
+			free(indesc);
 		}
 	}
-	xfree(nft->vars_ctx.buf);
+	free_const(nft->vars_ctx.buf);
 
 	if (!rc &&
 	    nft_output_json(&nft->output) &&
@@ -785,6 +787,19 @@ static int nft_run_optimized_file(struct nft_ctx *nft, const char *filename)
 	return __nft_run_cmd_from_filename(nft, filename);
 }
 
+static int nft_ctx_add_basedir_include_path(struct nft_ctx *nft,
+					    const char *filename)
+{
+	char *basedir = xstrdup(filename);
+	int ret;
+
+	ret = nft_ctx_add_include_path(nft, dirname(basedir));
+
+	free(basedir);
+
+	return ret;
+}
+
 EXPORT_SYMBOL(nft_run_cmd_from_filename);
 int nft_run_cmd_from_filename(struct nft_ctx *nft, const char *filename)
 {
@@ -793,18 +808,21 @@ int nft_run_cmd_from_filename(struct nft_ctx *nft, const char *filename)
 	if (!strcmp(filename, "-"))
 		filename = "/dev/stdin";
 
-	if (!strcmp(filename, "/dev/stdin") &&
-	    !nft_output_json(&nft->output))
+	if (!strcmp(filename, "/dev/stdin"))
 		nft->stdin_buf = stdin_to_buffer();
+
+	if (!nft->stdin_buf &&
+	    nft_ctx_add_basedir_include_path(nft, filename) < 0)
+		return -1;
 
 	if (nft->optimize_flags) {
 		ret = nft_run_optimized_file(nft, filename);
-		xfree(nft->stdin_buf);
+		free_const(nft->stdin_buf);
 		return ret;
 	}
 
 	ret = __nft_run_cmd_from_filename(nft, filename);
-	xfree(nft->stdin_buf);
+	free_const(nft->stdin_buf);
 
 	return ret;
 }

@@ -629,9 +629,11 @@ void interval_map_decompose(struct expr *set)
 	expr_free(i);
 
 out:
-	if (catchall)
+	if (catchall) {
+		catchall->flags |= EXPR_F_KERNEL;
 		compound_expr_add(set, catchall);
+	}
 
-	xfree(ranges);
-	xfree(elements);
+	free(ranges);
+	free(elements);
 }

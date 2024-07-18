@@ -242,7 +242,7 @@ static void mnl_err_list_node_add(struct list_head *err_list, int error,
 void mnl_err_list_free(struct mnl_err *err)
 {
 	list_del(&err->head);
-	xfree(err);
+	free(err);
 }
 
 static void mnl_set_sndbuffer(struct netlink_ctx *ctx)
@@ -776,9 +776,9 @@ static void nft_dev_array_free(const struct nft_dev *dev_array)
 	int i = 0;
 
 	while (dev_array[i].ifname != NULL)
-		xfree(dev_array[i++].ifname);
+		free_const(dev_array[i++].ifname);
 
-	xfree(dev_array);
+	free_const(dev_array);
 }
 
 static void mnl_nft_chain_devs_build(struct nlmsghdr *nlh, struct cmd *cmd)
@@ -2175,11 +2175,11 @@ static struct basehook *basehook_alloc(void)
 static void basehook_free(struct basehook *b)
 {
 	list_del(&b->list);
-	xfree(b->module_name);
-	xfree(b->hookfn);
-	xfree(b->chain);
-	xfree(b->table);
-	xfree(b);
+	free_const(b->module_name);
+	free_const(b->hookfn);
+	free_const(b->chain);
+	free_const(b->table);
+	free(b);
 }
 
 static void basehook_list_add_tail(struct basehook *b, struct list_head *head)

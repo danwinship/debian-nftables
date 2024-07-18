@@ -1,4 +1,4 @@
-/* A Bison parser, made by GNU Bison 3.7.5.  */
+/* A Bison parser, made by GNU Bison 3.8.2.  */
 
 /* Bison interface for Yacc-like parsers in C
 
@@ -16,7 +16,7 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
+   along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
 
 /* As a special exception, you may create a larger work that contains
    part or all of the Bison parser skeleton and distribute that work
@@ -35,8 +35,8 @@
    especially those whose name start with YY_ or yy_.  They are
    private implementation details that can be changed or removed.  */
 
-#ifndef YY_NFT_PARSER_BISON_H_INCLUDED
-# define YY_NFT_PARSER_BISON_H_INCLUDED
+#ifndef YY_NFT_SRC_PARSER_BISON_H_INCLUDED
+# define YY_NFT_SRC_PARSER_BISON_H_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 1
@@ -787,7 +787,7 @@ extern int nft_debug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 205 "parser_bison.y"
+#line 224 "src/parser_bison.y"
 
 	uint64_t		val;
 	uint32_t		val32;
@@ -815,8 +815,9 @@ union YYSTYPE
 		uint16_t kind; /* must allow > 255 for SACK1, 2.. hack */
 		uint8_t field;
 	} tcp_kind_field;
+	struct timeout_state	*timeout_state;
 
-#line 820 "parser_bison.h"
+#line 821 "src/parser_bison.h"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -840,6 +841,8 @@ struct YYLTYPE
 
 
 
+
 int nft_parse (struct nft_ctx *nft, void *scanner, struct parser_state *state);
 
-#endif /* !YY_NFT_PARSER_BISON_H_INCLUDED  */
+
+#endif /* !YY_NFT_SRC_PARSER_BISON_H_INCLUDED  */

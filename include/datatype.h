@@ -252,6 +252,9 @@ extern void symbol_table_print(const struct symbol_table *tbl,
 
 extern struct symbol_table *rt_symbol_table_init(const char *filename);
 extern void rt_symbol_table_free(const struct symbol_table *tbl);
+extern void rt_symbol_table_describe(struct output_ctx *octx, const char *name,
+				     const struct symbol_table *tbl,
+				     const struct datatype *type);
 
 extern const struct datatype invalid_type;
 extern const struct datatype verdict_type;
@@ -279,6 +282,11 @@ extern const struct datatype boolean_type;
 extern const struct datatype priority_type;
 extern const struct datatype policy_type;
 extern const struct datatype cgroupv2_type;
+
+/* private datatypes for reject statement. */
+extern const struct datatype reject_icmp_code_type;
+extern const struct datatype reject_icmpv6_code_type;
+extern const struct datatype reject_icmpx_code_type;
 
 void inet_service_type_print(const struct expr *expr, struct output_ctx *octx);
 

@@ -1,0 +1,136 @@
+# icmp code != { prot-unreachable, frag-needed, 33, 54, 56}
+[
+    {
+        "match": {
+            "left": {
+                "payload": {
+                    "field": "code",
+                    "protocol": "icmp"
+                }
+            },
+            "op": "!=",
+            "right": {
+                "set": [
+                    2,
+                    4,
+                    33,
+                    54,
+                    56
+                ]
+            }
+        }
+    }
+]
+
+# icmp code 1 icmp type 2
+[
+    {
+        "match": {
+            "left": {
+                "payload": {
+                    "field": "type",
+                    "protocol": "icmp"
+                }
+            },
+            "op": "==",
+            "right": 2
+        }
+    },
+    {
+        "match": {
+            "left": {
+                "payload": {
+                    "field": "code",
+                    "protocol": "icmp"
+                }
+            },
+            "op": "==",
+            "right": 1
+        }
+    }
+]
+
+# icmp code 1 icmp type 2
+[
+    {
+        "match": {
+            "left": {
+                "payload": {
+                    "field": "type",
+                    "protocol": "icmp"
+                }
+            },
+            "op": "==",
+            "right": 2
+        }
+    },
+    {
+        "match": {
+            "left": {
+                "payload": {
+                    "field": "code",
+                    "protocol": "icmp"
+                }
+            },
+            "op": "==",
+            "right": 1
+        }
+    }
+]
+
+# icmp code 1 icmp type 2
+[
+    {
+        "match": {
+            "left": {
+                "payload": {
+                    "field": "type",
+                    "protocol": "icmp"
+                }
+            },
+            "op": "==",
+            "right": 2
+        }
+    },
+    {
+        "match": {
+            "left": {
+                "payload": {
+                    "field": "code",
+                    "protocol": "icmp"
+                }
+            },
+            "op": "==",
+            "right": 1
+        }
+    }
+]
+
+# icmp code 1 icmp type 2
+[
+    {
+        "match": {
+            "left": {
+                "payload": {
+                    "field": "type",
+                    "protocol": "icmp"
+                }
+            },
+            "op": "==",
+            "right": 2
+        }
+    },
+    {
+        "match": {
+            "left": {
+                "payload": {
+                    "field": "code",
+                    "protocol": "icmp"
+                }
+            },
+            "op": "==",
+            "right": 1
+        }
+    }
+]
+

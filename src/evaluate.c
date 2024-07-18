@@ -74,6 +74,33 @@ static int __fmtstring(3, 4) set_error(struct eval_ctx *ctx,
 	return -1;
 }
 
+static const char *stmt_name(const struct stmt *stmt)
+{
+	switch (stmt->ops->type) {
+	case STMT_NAT:
+		switch (stmt->nat.type) {
+		case NFT_NAT_SNAT:
+			return "snat";
+		case NFT_NAT_DNAT:
+			return "dnat";
+		case NFT_NAT_REDIR:
+			return "redirect";
+		case NFT_NAT_MASQ:
+			return "masquerade";
+		}
+		break;
+	default:
+		break;
+	}
+
+	return stmt->ops->name;
+}
+
+static int stmt_error_range(struct eval_ctx *ctx, const struct stmt *stmt, const struct expr *e)
+{
+	return expr_error(ctx->msgs, e, "%s: range argument not supported", stmt_name(stmt));
+}
+
 static void key_fix_dtype_byteorder(struct expr *key)
 {
 	const struct datatype *dtype = key->dtype;
@@ -89,7 +116,8 @@ static struct expr *implicit_set_declaration(struct eval_ctx *ctx,
 					     const char *name,
 					     struct expr *key,
 					     struct expr *data,
-					     struct expr *expr)
+					     struct expr *expr,
+					     uint32_t flags)
 {
 	struct cmd *cmd;
 	struct set *set;
@@ -99,17 +127,25 @@ static struct expr *implicit_set_declaration(struct eval_ctx *ctx,
 		key_fix_dtype_byteorder(key);
 
 	set = set_alloc(&expr->location);
-	set->flags	= NFT_SET_ANONYMOUS | expr->set_flags;
+	set->flags	= expr->set_flags | flags;
 	set->handle.set.name = xstrdup(name);
 	set->key	= key;
 	set->data	= data;
 	set->init	= expr;
 	set->automerge	= set->flags & NFT_SET_INTERVAL;
 
+	handle_merge(&set->handle, &ctx->cmd->handle);
+
+	if (set_evaluate(ctx, set) < 0) {
+		if (set->flags & NFT_SET_MAP)
+			set->init = NULL;
+		set_free(set);
+		return NULL;
+	}
+
 	if (ctx->table != NULL)
 		list_add_tail(&set->list, &ctx->table->sets);
 	else {
-		handle_merge(&set->handle, &ctx->cmd->handle);
 		memset(&h, 0, sizeof(h));
 		handle_merge(&h, &set->handle);
 		h.set.location = expr->location;
@@ -117,8 +153,6 @@ static struct expr *implicit_set_declaration(struct eval_ctx *ctx,
 		cmd->location = set->location;
 		list_add_tail(&cmd->list, &ctx->cmd->list);
 	}
-
-	set_evaluate(ctx, set);
 
 	return set_ref_expr_alloc(&expr->location, set);
 }
@@ -167,12 +201,21 @@ static int byteorder_conversion(struct eval_ctx *ctx, struct expr **expr,
 
 			assert(basetype == TYPE_INTEGER);
 
-			op = byteorder_conversion_op(i, byteorder);
-			unary = unary_expr_alloc(&i->location, op, i);
-			if (expr_evaluate(ctx, &unary) < 0)
-				return -1;
+			switch (i->etype) {
+			case EXPR_VALUE:
+				if (i->byteorder == BYTEORDER_HOST_ENDIAN)
+					mpz_switch_byteorder(i->value, div_round_up(i->len, BITS_PER_BYTE));
+				break;
+			default:
+				if (div_round_up(i->len, BITS_PER_BYTE) >= 2) {
+					op = byteorder_conversion_op(i, byteorder);
+					unary = unary_expr_alloc(&i->location, op, i);
+					if (expr_evaluate(ctx, &unary) < 0)
+						return -1;
 
-			list_replace(&i->list, &unary->list);
+					list_replace(&i->list, &unary->list);
+				}
+			}
 		}
 
 		return 0;
@@ -213,7 +256,7 @@ static int table_not_found(struct eval_ctx *ctx)
 				 "%s", strerror(ENOENT));
 
 	return cmd_error(ctx, &ctx->cmd->handle.table.location,
-			 "%s; did you mean table ‘%s’ in family %s?",
+			 "%s; did you mean table '%s' in family %s?",
 			 strerror(ENOENT), table->handle.table.name,
 			 family2str(table->handle.family));
 }
@@ -229,7 +272,7 @@ static int chain_not_found(struct eval_ctx *ctx)
 				 "%s", strerror(ENOENT));
 
 	return cmd_error(ctx, &ctx->cmd->handle.chain.location,
-			 "%s; did you mean chain ‘%s’ in table %s ‘%s’?",
+			 "%s; did you mean chain '%s' in table %s '%s'?",
 			 strerror(ENOENT), chain->handle.chain.name,
 			 family2str(chain->handle.family),
 			 table->handle.table.name);
@@ -246,7 +289,7 @@ static int set_not_found(struct eval_ctx *ctx, const struct location *loc,
 		return cmd_error(ctx, loc, "%s", strerror(ENOENT));
 
 	return cmd_error(ctx, loc,
-			 "%s; did you mean %s ‘%s’ in table %s ‘%s’?",
+			 "%s; did you mean %s '%s' in table %s '%s'?",
 			 strerror(ENOENT),
 			 set_is_map(set->flags) ? "map" : "set",
 			 set->handle.set.name,
@@ -265,7 +308,7 @@ static int flowtable_not_found(struct eval_ctx *ctx, const struct location *loc,
 		return cmd_error(ctx, loc, "%s", strerror(ENOENT));
 
 	return cmd_error(ctx, loc,
-			"%s; did you mean flowtable ‘%s’ in table %s ‘%s’?",
+			"%s; did you mean flowtable '%s' in table %s '%s'?",
 			strerror(ENOENT), ft->handle.flowtable.name,
 			family2str(ft->handle.family),
 			table->handle.table.name);
@@ -400,7 +443,7 @@ static int expr_evaluate_integer(struct eval_ctx *ctx, struct expr **exprp)
 		expr_error(ctx->msgs, expr,
 			   "Value %s exceeds valid range 0-%u",
 			   valstr, ctx->ectx.maxval);
-		free(valstr);
+		nft_gmp_free(valstr);
 		return -1;
 	}
 
@@ -416,8 +459,8 @@ static int expr_evaluate_integer(struct eval_ctx *ctx, struct expr **exprp)
 		expr_error(ctx->msgs, expr,
 			   "Value %s exceeds valid range 0-%s",
 			   valstr, rangestr);
-		free(valstr);
-		free(rangestr);
+		nft_gmp_free(valstr);
+		nft_gmp_free(rangestr);
 		mpz_clear(mask);
 		return -1;
 	}
@@ -454,10 +497,22 @@ static int expr_evaluate_primary(struct eval_ctx *ctx, struct expr **expr)
 	return 0;
 }
 
+int stmt_dependency_evaluate(struct eval_ctx *ctx, struct stmt *stmt)
+{
+	uint32_t stmt_len = ctx->stmt_len;
+
+	if (stmt_evaluate(ctx, stmt) < 0)
+		return stmt_error(ctx, stmt, "dependency statement is invalid");
+
+	ctx->stmt_len = stmt_len;
+
+	return 0;
+}
+
 static int
-conflict_resolution_gen_dependency(struct eval_ctx *ctx, int protocol,
-				   const struct expr *expr,
-				   struct stmt **res)
+ll_conflict_resolution_gen_dependency(struct eval_ctx *ctx, int protocol,
+				      const struct expr *expr,
+				      struct stmt **res)
 {
 	enum proto_bases base = expr->payload.base;
 	const struct proto_hdr_template *tmpl;
@@ -479,7 +534,7 @@ conflict_resolution_gen_dependency(struct eval_ctx *ctx, int protocol,
 
 	dep = relational_expr_alloc(&expr->location, OP_EQ, left, right);
 	stmt = expr_stmt_alloc(&dep->location, dep);
-	if (stmt_evaluate(ctx, stmt) < 0)
+	if (stmt_dependency_evaluate(ctx, stmt) < 0)
 		return expr_error(ctx->msgs, expr,
 					  "dependency statement is invalid");
 
@@ -506,7 +561,7 @@ static uint8_t expr_offset_shift(const struct expr *expr, unsigned int offset,
 	return shift;
 }
 
-static void expr_evaluate_bits(struct eval_ctx *ctx, struct expr **exprp)
+static int expr_evaluate_bits(struct eval_ctx *ctx, struct expr **exprp)
 {
 	struct expr *expr = *exprp, *and, *mask, *rshift, *off;
 	unsigned masklen, len = expr->len, extra_len = 0;
@@ -528,7 +583,10 @@ static void expr_evaluate_bits(struct eval_ctx *ctx, struct expr **exprp)
 	}
 
 	masklen = len + shift;
-	assert(masklen <= NFT_REG_SIZE * BITS_PER_BYTE);
+
+	if (masklen > NFT_REG_SIZE * BITS_PER_BYTE)
+		return expr_error(ctx->msgs, expr, "mask length %u exceeds allowed maximum of %u\n",
+				  masklen, NFT_REG_SIZE * BITS_PER_BYTE);
 
 	mpz_init2(bitmask, masklen);
 	mpz_bitmask(bitmask, len);
@@ -545,7 +603,8 @@ static void expr_evaluate_bits(struct eval_ctx *ctx, struct expr **exprp)
 	and->len	= masklen;
 
 	if (shift) {
-		if (ctx->stmt_len > 0 && div_round_up(masklen, BITS_PER_BYTE) > 1) {
+		if ((ctx->ectx.key || ctx->stmt_len > 0) &&
+		    div_round_up(masklen, BITS_PER_BYTE) > 1) {
 			int op = byteorder_conversion_op(expr, BYTEORDER_HOST_ENDIAN);
 			and = unary_expr_alloc(&expr->location, op, and);
 			and->len = masklen;
@@ -570,10 +629,13 @@ static void expr_evaluate_bits(struct eval_ctx *ctx, struct expr **exprp)
 
 	if (extra_len)
 		expr->len += extra_len;
+
+	return 0;
 }
 
 static int __expr_evaluate_exthdr(struct eval_ctx *ctx, struct expr **exprp)
 {
+	const struct expr *key = ctx->ectx.key;
 	struct expr *expr = *exprp;
 
 	if (expr->exthdr.flags & NFT_EXTHDR_F_PRESENT)
@@ -582,9 +644,15 @@ static int __expr_evaluate_exthdr(struct eval_ctx *ctx, struct expr **exprp)
 	if (expr_evaluate_primary(ctx, exprp) < 0)
 		return -1;
 
+	ctx->ectx.key = key;
+
 	if (expr->exthdr.offset % BITS_PER_BYTE != 0 ||
-	    expr->len % BITS_PER_BYTE != 0)
-		expr_evaluate_bits(ctx, exprp);
+	    expr->len % BITS_PER_BYTE != 0) {
+		int err = expr_evaluate_bits(ctx, exprp);
+
+		if (err)
+			return err;
+	}
 
 	switch (expr->exthdr.op) {
 	case NFT_EXTHDR_OP_TCPOPT: {
@@ -692,9 +760,8 @@ static int meta_iiftype_gen_dependency(struct eval_ctx *ctx,
 				  "for this family");
 
 	nstmt = meta_stmt_meta_iiftype(&payload->location, type);
-	if (stmt_evaluate(ctx, nstmt) < 0)
-		return expr_error(ctx->msgs, payload,
-				  "dependency statement is invalid");
+	if (stmt_dependency_evaluate(ctx, nstmt) < 0)
+		return -1;
 
 	if (ctx->inner_desc)
 		nstmt->expr->left->meta.inner_desc = ctx->inner_desc;
@@ -708,58 +775,92 @@ static bool proto_is_dummy(const struct proto_desc *desc)
 	return desc == &proto_inet || desc == &proto_netdev;
 }
 
-static int resolve_protocol_conflict(struct eval_ctx *ctx,
-				     const struct proto_desc *desc,
-				     struct expr *payload)
+static int stmt_dep_conflict(struct eval_ctx *ctx, const struct stmt *nstmt)
+{
+	struct stmt *stmt;
+
+	list_for_each_entry(stmt, &ctx->rule->stmts, list) {
+		if (stmt == nstmt)
+			break;
+
+		if (stmt->ops->type != STMT_EXPRESSION ||
+		    stmt->expr->etype != EXPR_RELATIONAL ||
+		    stmt->expr->right->etype != EXPR_VALUE ||
+		    stmt->expr->left->etype != EXPR_PAYLOAD ||
+		    stmt->expr->left->etype != nstmt->expr->left->etype ||
+		    stmt->expr->left->len != nstmt->expr->left->len)
+			continue;
+
+		if (stmt->expr->left->payload.desc != nstmt->expr->left->payload.desc ||
+		    stmt->expr->left->payload.inner_desc != nstmt->expr->left->payload.inner_desc ||
+		    stmt->expr->left->payload.base != nstmt->expr->left->payload.base ||
+		    stmt->expr->left->payload.offset != nstmt->expr->left->payload.offset)
+			continue;
+
+		return stmt_binary_error(ctx, stmt, nstmt,
+					 "conflicting statements");
+	}
+
+	return 0;
+}
+
+static int rule_stmt_dep_add(struct eval_ctx *ctx,
+			     struct stmt *nstmt, struct stmt *stmt)
+{
+	rule_stmt_insert_at(ctx->rule, nstmt, ctx->stmt);
+
+	if (stmt_dep_conflict(ctx, nstmt) < 0)
+		return -1;
+
+	return 0;
+}
+
+static int resolve_ll_protocol_conflict(struct eval_ctx *ctx,
+				        const struct proto_desc *desc,
+					struct expr *payload)
 {
 	enum proto_bases base = payload->payload.base;
 	struct stmt *nstmt = NULL;
 	struct proto_ctx *pctx;
+	unsigned int i;
 	int link, err;
+
+	assert(base == PROTO_BASE_LL_HDR);
 
 	pctx = eval_proto_ctx(ctx);
 
-	if (payload->payload.base == PROTO_BASE_LL_HDR) {
-		if (proto_is_dummy(desc)) {
-			if (ctx->inner_desc) {
-		                proto_ctx_update(pctx, PROTO_BASE_LL_HDR, &payload->location, &proto_eth);
-			} else {
-				err = meta_iiftype_gen_dependency(ctx, payload, &nstmt);
-				if (err < 0)
-					return err;
-
-				desc = payload->payload.desc;
-				rule_stmt_insert_at(ctx->rule, nstmt, ctx->stmt);
-			}
+	if (proto_is_dummy(desc)) {
+		if (ctx->inner_desc) {
+	                proto_ctx_update(pctx, PROTO_BASE_LL_HDR, &payload->location, &proto_eth);
 		} else {
-			unsigned int i;
+			err = meta_iiftype_gen_dependency(ctx, payload, &nstmt);
+			if (err < 0)
+				return err;
 
-			/* payload desc stored in the L2 header stack? No conflict. */
-			for (i = 0; i < pctx->stacked_ll_count; i++) {
-				if (pctx->stacked_ll[i] == payload->payload.desc)
-					return 0;
-			}
+			desc = payload->payload.desc;
+			if (rule_stmt_dep_add(ctx, nstmt, ctx->stmt) < 0)
+				return -1;
+		}
+	} else {
+		unsigned int i;
+
+		/* payload desc stored in the L2 header stack? No conflict. */
+		for (i = 0; i < pctx->stacked_ll_count; i++) {
+			if (pctx->stacked_ll[i] == payload->payload.desc)
+				return 0;
 		}
 	}
 
-	assert(base <= PROTO_BASE_MAX);
-	/* This payload and the existing context don't match, conflict. */
-	if (pctx->protocol[base + 1].desc != NULL)
-		return 1;
-
 	link = proto_find_num(desc, payload->payload.desc);
 	if (link < 0 ||
-	    conflict_resolution_gen_dependency(ctx, link, payload, &nstmt) < 0)
+	    ll_conflict_resolution_gen_dependency(ctx, link, payload, &nstmt) < 0)
 		return 1;
 
-	if (base == PROTO_BASE_LL_HDR) {
-		unsigned int i;
+	for (i = 0; i < pctx->stacked_ll_count; i++)
+		payload->payload.offset += pctx->stacked_ll[i]->length;
 
-		for (i = 0; i < pctx->stacked_ll_count; i++)
-			payload->payload.offset += pctx->stacked_ll[i]->length;
-	}
-
-	rule_stmt_insert_at(ctx->rule, nstmt, ctx->stmt);
+	if (rule_stmt_dep_add(ctx, nstmt, ctx->stmt) < 0)
+		return -1;
 
 	return 0;
 }
@@ -787,7 +888,8 @@ static int __expr_evaluate_payload(struct eval_ctx *ctx, struct expr *expr)
 		if (payload_gen_dependency(ctx, payload, &nstmt) < 0)
 			return -1;
 
-		rule_stmt_insert_at(ctx->rule, nstmt, ctx->stmt);
+		if (rule_stmt_dep_add(ctx, nstmt, ctx->stmt) < 0)
+			return -1;
 
 		desc = pctx->protocol[base].desc;
 
@@ -799,14 +901,18 @@ static int __expr_evaluate_payload(struct eval_ctx *ctx, struct expr *expr)
 
 			link = proto_find_num(desc, payload->payload.desc);
 			if (link < 0 ||
-			    conflict_resolution_gen_dependency(ctx, link, payload, &nstmt) < 0)
+			    ll_conflict_resolution_gen_dependency(ctx, link, payload, &nstmt) < 0)
 				return expr_error(ctx->msgs, payload,
 						  "conflicting protocols specified: %s vs. %s",
 						  desc->name,
 						  payload->payload.desc->name);
 
+			assert(pctx->stacked_ll_count);
 			payload->payload.offset += pctx->stacked_ll[0]->length;
-			rule_stmt_insert_at(ctx->rule, nstmt, ctx->stmt);
+
+			if (rule_stmt_dep_add(ctx, nstmt, ctx->stmt) < 0)
+				return -1;
+
 			return 1;
 		}
 		goto check_icmp;
@@ -847,16 +953,16 @@ check_icmp:
 		if (payload_gen_icmp_dependency(ctx, expr, &nstmt) < 0)
 			return -1;
 
-		if (nstmt)
-			rule_stmt_insert_at(ctx->rule, nstmt, ctx->stmt);
+		if (nstmt && rule_stmt_dep_add(ctx, nstmt, ctx->stmt) < 0)
+			return -1;
 
 		return 0;
 	}
 	/* If we already have context and this payload is on the same
 	 * base, try to resolve the protocol conflict.
 	 */
-	if (payload->payload.base == desc->base) {
-		err = resolve_protocol_conflict(ctx, desc, payload);
+	if (base == PROTO_BASE_LL_HDR) {
+		err = resolve_ll_protocol_conflict(ctx, desc, payload);
 		if (err <= 0)
 			return err;
 
@@ -865,7 +971,8 @@ check_icmp:
 			return 0;
 	}
 	return expr_error(ctx->msgs, payload,
-			  "conflicting protocols specified: %s vs. %s",
+			  "conflicting %s protocols specified: %s vs. %s",
+			  proto_base_names[base],
 			  pctx->protocol[base].desc->name,
 			  payload->payload.desc->name);
 }
@@ -878,6 +985,7 @@ static bool payload_needs_adjustment(const struct expr *expr)
 
 static int expr_evaluate_payload(struct eval_ctx *ctx, struct expr **exprp)
 {
+	const struct expr *key = ctx->ectx.key;
 	struct expr *expr = *exprp;
 
 	if (expr->payload.evaluated)
@@ -889,8 +997,14 @@ static int expr_evaluate_payload(struct eval_ctx *ctx, struct expr **exprp)
 	if (expr_evaluate_primary(ctx, exprp) < 0)
 		return -1;
 
-	if (payload_needs_adjustment(expr))
-		expr_evaluate_bits(ctx, exprp);
+	ctx->ectx.key = key;
+
+	if (payload_needs_adjustment(expr)) {
+		int err = expr_evaluate_bits(ctx, exprp);
+
+		if (err)
+			return err;
+	}
 
 	expr->payload.evaluated = true;
 
@@ -916,7 +1030,8 @@ static int expr_evaluate_inner(struct eval_ctx *ctx, struct expr **exprp)
 		if (payload_gen_inner_dependency(ctx, expr, &nstmt) < 0)
 			return -1;
 
-		rule_stmt_insert_at(ctx->rule, nstmt, ctx->stmt);
+		if (rule_stmt_dep_add(ctx, nstmt, ctx->stmt) < 0)
+			return -1;
 
 		proto_ctx_update(pctx, PROTO_BASE_TRANSPORT_HDR, &expr->location, expr->payload.inner_desc);
 	}
@@ -1011,7 +1126,7 @@ static int ct_gen_nh_dependency(struct eval_ctx *ctx, struct expr *ct)
 		base = pctx->protocol[PROTO_BASE_NETWORK_HDR].desc;
 		if (base == &proto_ip)
 			ct->ct.nfproto = NFPROTO_IPV4;
-		else if (base == &proto_ip)
+		else if (base == &proto_ip6)
 			ct->ct.nfproto = NFPROTO_IPV6;
 
 		if (base)
@@ -1047,7 +1162,9 @@ static int ct_gen_nh_dependency(struct eval_ctx *ctx, struct expr *ct)
 	relational_expr_pctx_update(pctx, dep);
 
 	nstmt = expr_stmt_alloc(&dep->location, dep);
-	rule_stmt_insert_at(ctx->rule, nstmt, ctx->stmt);
+
+	if (rule_stmt_dep_add(ctx, nstmt, ctx->stmt) < 0)
+		return -1;
 
 	return 0;
 }
@@ -1151,7 +1268,7 @@ static int expr_evaluate_prefix(struct eval_ctx *ctx, struct expr **expr)
 	base = prefix->prefix;
 	assert(expr_is_constant(base));
 
-	prefix->dtype	  = base->dtype;
+	prefix->dtype	  = datatype_get(base->dtype);
 	prefix->byteorder = base->byteorder;
 	prefix->len	  = base->len;
 	prefix->flags	 |= EXPR_F_CONSTANT;
@@ -1203,8 +1320,8 @@ static int expr_evaluate_range(struct eval_ctx *ctx, struct expr **expr)
 	right = range->right;
 
 	if (mpz_cmp(left->value, right->value) > 0)
-		return expr_error(ctx->msgs, range,
-				  "Range has zero or negative size");
+		return expr_error(ctx->msgs, range, "Range negative size");
+
 	datatype_set(range, left->dtype);
 	range->flags |= EXPR_F_CONSTANT;
 	return 0;
@@ -1238,7 +1355,7 @@ static int expr_evaluate_unary(struct eval_ctx *ctx, struct expr **expr)
 		BUG("invalid unary operation %u\n", unary->op);
 	}
 
-	unary->dtype	 = arg->dtype;
+	unary->dtype	 = datatype_clone(arg->dtype);
 	unary->byteorder = byteorder;
 	unary->len	 = arg->len;
 	return 0;
@@ -1305,9 +1422,14 @@ static int constant_binop_simplify(struct eval_ctx *ctx, struct expr **expr)
 static int expr_evaluate_shift(struct eval_ctx *ctx, struct expr **expr)
 {
 	struct expr *op = *expr, *left = op->left, *right = op->right;
-	unsigned int shift = mpz_get_uint32(right->value);
-	unsigned int max_shift_len;
+	unsigned int shift, max_shift_len;
 
+	/* mpz_get_uint32 has assert() for huge values */
+	if (mpz_cmp_ui(right->value, UINT_MAX) > 0)
+		return expr_binary_error(ctx->msgs, right, left,
+					 "shifts exceeding %u bits are not supported", UINT_MAX);
+
+	shift = mpz_get_uint32(right->value);
 	if (ctx->stmt_len > left->len)
 		max_shift_len = ctx->stmt_len;
 	else
@@ -1381,6 +1503,13 @@ static int expr_evaluate_binop(struct eval_ctx *ctx, struct expr **expr)
 	struct expr *op = *expr, *left, *right;
 	const char *sym = expr_op_symbols[op->op];
 	unsigned int max_shift_len = ctx->ectx.len;
+	int ret = -1;
+
+	if (ctx->recursion >= USHRT_MAX)
+		return expr_binary_error(ctx->msgs, op, NULL,
+					 "Binary operation limit %u reached ",
+					 ctx->recursion);
+	ctx->recursion++;
 
 	if (expr_evaluate(ctx, &op->left) < 0)
 		return -1;
@@ -1426,20 +1555,51 @@ static int expr_evaluate_binop(struct eval_ctx *ctx, struct expr **expr)
 					 "for %s expressions",
 					 sym, expr_name(right));
 
-	/* The grammar guarantees this */
-	assert(datatype_equal(expr_basetype(left), expr_basetype(right)));
+	if (!datatype_equal(expr_basetype(left), expr_basetype(right)))
+		return expr_binary_error(ctx->msgs, left, op,
+					 "Binary operation (%s) with different base types "
+					 "(%s vs %s) is not supported",
+					 sym, expr_basetype(left)->name, expr_basetype(right)->name);
 
 	switch (op->op) {
 	case OP_LSHIFT:
 	case OP_RSHIFT:
-		return expr_evaluate_shift(ctx, expr);
+		ret = expr_evaluate_shift(ctx, expr);
+		break;
 	case OP_AND:
 	case OP_XOR:
 	case OP_OR:
-		return expr_evaluate_bitwise(ctx, expr);
+		ret = expr_evaluate_bitwise(ctx, expr);
+		break;
 	default:
 		BUG("invalid binary operation %u\n", op->op);
 	}
+
+
+	if (ctx->recursion == 0)
+		BUG("recursion counter underflow");
+
+	/* can't check earlier: evaluate functions might do constant-merging + expr_free.
+	 *
+	 * So once we've evaluate everything check for remaining length of the
+	 * binop chain.
+	 */
+	if (--ctx->recursion == 0) {
+		unsigned int to_linearize = 0;
+
+		op = *expr;
+	        while (op && op->etype == EXPR_BINOP && op->left != NULL) {
+			to_linearize++;
+			op = op->left;
+
+			if (to_linearize >= NFT_MAX_EXPR_RECURSION)
+				return expr_binary_error(ctx->msgs, op, NULL,
+							 "Binary operation limit %u reached ",
+							 NFT_MAX_EXPR_RECURSION);
+		}
+	}
+
+	return ret;
 }
 
 static int list_member_evaluate(struct eval_ctx *ctx, struct expr **expr)
@@ -1508,9 +1668,21 @@ static int expr_evaluate_concat(struct eval_ctx *ctx, struct expr **expr)
 		}
 
 		__expr_set_context(&ctx->ectx, tmp, bo, dsize, 0);
+		ctx->ectx.key = i;
 
 		if (list_member_evaluate(ctx, &i) < 0)
 			return -1;
+
+		if (i->etype == EXPR_SET)
+			return expr_error(ctx->msgs, i,
+					  "cannot use %s in concatenation",
+					  expr_name(i));
+
+		if (!i->dtype)
+			return expr_error(ctx->msgs, i,
+					  "cannot use %s in concatenation, lacks datatype",
+					  expr_name(i));
+
 		flags &= i->flags;
 
 		if (!key && i->dtype->type == TYPE_INTEGER) {
@@ -1539,11 +1711,15 @@ static int expr_evaluate_concat(struct eval_ctx *ctx, struct expr **expr)
 		if (key && expressions) {
 			if (list_is_last(&key->list, expressions))
 				runaway = true;
-
-			key = list_next_entry(key, list);
+			else
+				key = list_next_entry(key, list);
 		}
 
 		ctx->inner_desc = NULL;
+
+		if (size > NFT_MAX_EXPR_LEN_BITS)
+			return expr_error(ctx->msgs, i, "Concatenation of size %u exceeds maximum size of %u",
+					  size, NFT_MAX_EXPR_LEN_BITS);
 	}
 
 	(*expr)->flags |= flags;
@@ -1572,16 +1748,22 @@ static int expr_evaluate_list(struct eval_ctx *ctx, struct expr **expr)
 
 	mpz_init_set_ui(val, 0);
 	list_for_each_entry_safe(i, next, &list->expressions, list) {
-		if (list_member_evaluate(ctx, &i) < 0)
+		if (list_member_evaluate(ctx, &i) < 0) {
+			mpz_clear(val);
 			return -1;
-		if (i->etype != EXPR_VALUE)
+		}
+		if (i->etype != EXPR_VALUE) {
+			mpz_clear(val);
 			return expr_error(ctx->msgs, i,
 					  "List member must be a constant "
 					  "value");
-		if (i->dtype->basetype->type != TYPE_BITMASK)
+		}
+		if (datatype_basetype(i->dtype)->type != TYPE_BITMASK) {
+			mpz_clear(val);
 			return expr_error(ctx->msgs, i,
 					  "Basetype of type %s is not bitmask",
 					  i->dtype->desc);
+		}
 		mpz_ior(val, val, i->value);
 	}
 
@@ -1695,6 +1877,16 @@ err_missing_flag:
 			  set_is_map(ctx->set->flags) ? "map" : "set", expr_name(key));
 }
 
+static int expr_evaluate_set_elem_catchall(struct eval_ctx *ctx, struct expr **expr)
+{
+	struct expr *elem = *expr;
+
+	if (ctx->set)
+		elem->len = ctx->set->key->len;
+
+	return 0;
+}
+
 static const struct expr *expr_set_elem(const struct expr *expr)
 {
 	if (expr->etype == EXPR_MAPPING)
@@ -1715,6 +1907,7 @@ static int interval_set_eval(struct eval_ctx *ctx, struct set *set,
 	switch (ctx->cmd->op) {
 	case CMD_CREATE:
 	case CMD_ADD:
+	case CMD_REPLACE:
 	case CMD_INSERT:
 		if (set->automerge) {
 			ret = set_automerge(ctx->msgs, ctx->cmd, set, init,
@@ -1912,17 +2105,18 @@ static int expr_evaluate_map(struct eval_ctx *ctx, struct expr **expr)
 	}
 
 	expr_set_context(&ctx->ectx, NULL, 0);
-	ctx->stmt_len = 0;
 	if (expr_evaluate(ctx, &map->map) < 0)
 		return -1;
 	if (expr_is_constant(map->map))
 		return expr_error(ctx->msgs, map->map,
 				  "Map expression can not be constant");
 
+	ctx->stmt_len = 0;
 	mappings = map->mappings;
 	mappings->set_flags |= NFT_SET_MAP;
 
 	switch (map->mappings->etype) {
+	case EXPR_VARIABLE:
 	case EXPR_SET:
 		if (ctx->ectx.key && ctx->ectx.key->etype == EXPR_CONCAT) {
 			key = expr_clone(ctx->ectx.key);
@@ -1931,6 +2125,12 @@ static int expr_evaluate_map(struct eval_ctx *ctx, struct expr **expr)
 						  ctx->ectx.dtype,
 						  ctx->ectx.byteorder,
 						  ctx->ectx.len, NULL);
+		}
+
+		if (!ectx.dtype) {
+			expr_free(key);
+			return expr_error(ctx->msgs, map,
+					  "Implicit map expression without known datatype");
 		}
 
 		if (ectx.dtype->type == TYPE_VERDICT) {
@@ -1946,7 +2146,10 @@ static int expr_evaluate_map(struct eval_ctx *ctx, struct expr **expr)
 
 		mappings = implicit_set_declaration(ctx, "__map%d",
 						    key, data,
-						    mappings);
+						    mappings,
+						    NFT_SET_ANONYMOUS);
+		if (!mappings)
+			return -1;
 
 		if (ectx.len && mappings->set->data->len != ectx.len)
 			BUG("%d vs %d\n", mappings->set->data->len, ectx.len);
@@ -1956,6 +2159,11 @@ static int expr_evaluate_map(struct eval_ctx *ctx, struct expr **expr)
 		ctx->set = mappings->set;
 		if (expr_evaluate(ctx, &map->mappings->set->init) < 0)
 			return -1;
+
+		if (map->mappings->set->init->etype != EXPR_SET) {
+			return expr_error(ctx->msgs, map->mappings->set->init,
+					  "Expression is not a map");
+		}
 
 		if (set_is_interval(map->mappings->set->init->set_flags) &&
 		    !(map->mappings->set->init->set_flags & NFT_SET_CONCAT) &&
@@ -1989,10 +2197,13 @@ static int expr_evaluate_map(struct eval_ctx *ctx, struct expr **expr)
 		break;
 	case EXPR_SET_REF:
 		/* symbol has been already evaluated to set reference */
+		if (!set_is_map(mappings->set->flags))
+			return expr_error(ctx->msgs, map->mappings,
+					  "Expression is not a map");
 		break;
 	default:
-		BUG("invalid mapping expression %s\n",
-		    expr_name(map->mappings));
+		return expr_binary_error(ctx->msgs, map->mappings, map->map,
+					 "invalid mapping expression %s", expr_name(map->mappings));
 	}
 
 	if (!datatype_compatible(map->mappings->set->key->dtype, map->map->dtype))
@@ -2080,6 +2291,11 @@ static int expr_evaluate_mapping(struct eval_ctx *ctx, struct expr **expr)
 	    !expr_is_singleton(mapping->right))
 		return expr_error(ctx->msgs, mapping->right,
 				  "Value must be a singleton");
+
+	if (set_is_objmap(set->flags) && mapping->right->etype != EXPR_VALUE)
+		return expr_error(ctx->msgs, mapping->right,
+				  "Object mapping data should be a value, not %s",
+				  expr_name(mapping->right));
 
 	mapping->flags |= EXPR_F_CONSTANT;
 	return 0;
@@ -2315,7 +2531,7 @@ static int binop_transfer(struct eval_ctx *ctx, struct expr **expr)
 	return 0;
 }
 
-static bool lhs_is_meta_hour(const struct expr *meta)
+bool lhs_is_meta_hour(const struct expr *meta)
 {
 	if (meta->etype != EXPR_META)
 		return false;
@@ -2324,7 +2540,7 @@ static bool lhs_is_meta_hour(const struct expr *meta)
 	       meta->meta.key == NFT_META_TIME_DAY;
 }
 
-static void swap_values(struct expr *range)
+void range_expr_swap_values(struct expr *range)
 {
 	struct expr *left_tmp;
 
@@ -2406,10 +2622,10 @@ static int expr_evaluate_relational(struct eval_ctx *ctx, struct expr **expr)
 					  "Inverting range values for cross-day hour matching\n\n");
 
 			if (rel->op == OP_EQ || rel->op == OP_IMPLICIT) {
-				swap_values(range);
+				range_expr_swap_values(range);
 				rel->op = OP_NEQ;
 			} else if (rel->op == OP_NEQ) {
-				swap_values(range);
+				range_expr_swap_values(range);
 				rel->op = OP_EQ;
 			}
 		}
@@ -2449,15 +2665,17 @@ static int expr_evaluate_relational(struct eval_ctx *ctx, struct expr **expr)
 		return expr_binary_error(ctx->msgs, right, left,
 					 "Cannot be used with right hand side constant value");
 
-	switch (rel->op) {
-	case OP_EQ:
-	case OP_IMPLICIT:
-	case OP_NEQ:
-		if (right->etype == EXPR_SET && right->size == 1)
-			optimize_singleton_set(rel, &right);
-		break;
-	default:
-		break;
+	if (left->etype != EXPR_CONCAT) {
+		switch (rel->op) {
+		case OP_EQ:
+		case OP_IMPLICIT:
+		case OP_NEQ:
+			if (right->etype == EXPR_SET && right->size == 1)
+				optimize_singleton_set(rel, &right);
+			break;
+		default:
+			break;
+		}
 	}
 
 	switch (rel->op) {
@@ -2507,7 +2725,11 @@ static int expr_evaluate_relational(struct eval_ctx *ctx, struct expr **expr)
 			right = rel->right =
 				implicit_set_declaration(ctx, "__set%d",
 							 expr_get(left), NULL,
-							 right);
+							 right,
+							 NFT_SET_ANONYMOUS);
+			if (!right)
+				return -1;
+
 			/* fall through */
 		case EXPR_SET_REF:
 			if (rel->left->etype == EXPR_CT &&
@@ -2686,6 +2908,35 @@ static int expr_evaluate_flagcmp(struct eval_ctx *ctx, struct expr **exprp)
 	return expr_evaluate(ctx, exprp);
 }
 
+static int verdict_validate_chainlen(struct eval_ctx *ctx,
+				     struct expr *chain)
+{
+	if (chain->len > NFT_CHAIN_MAXNAMELEN * BITS_PER_BYTE)
+		return expr_error(ctx->msgs, chain,
+				  "chain name too long (%u, max %u)",
+				  chain->len / BITS_PER_BYTE,
+				  NFT_CHAIN_MAXNAMELEN);
+
+	return 0;
+}
+
+static int expr_evaluate_verdict(struct eval_ctx *ctx, struct expr **exprp)
+{
+	struct expr *expr = *exprp;
+
+	switch (expr->verdict) {
+	case NFT_GOTO:
+	case NFT_JUMP:
+		if (expr->chain->etype == EXPR_VALUE &&
+		    verdict_validate_chainlen(ctx, expr->chain))
+			return -1;
+
+		break;
+	}
+
+	return expr_evaluate_primary(ctx, exprp);
+}
+
 static int expr_evaluate(struct eval_ctx *ctx, struct expr **expr)
 {
 	if (ctx->nft->debug_mask & NFT_DEBUG_EVALUATION) {
@@ -2711,7 +2962,7 @@ static int expr_evaluate(struct eval_ctx *ctx, struct expr **expr)
 	case EXPR_EXTHDR:
 		return expr_evaluate_exthdr(ctx, expr);
 	case EXPR_VERDICT:
-		return expr_evaluate_primary(ctx, expr);
+		return expr_evaluate_verdict(ctx, expr);
 	case EXPR_META:
 		return expr_evaluate_meta(ctx, expr);
 	case EXPR_SOCKET:
@@ -2755,7 +3006,7 @@ static int expr_evaluate(struct eval_ctx *ctx, struct expr **expr)
 	case EXPR_XFRM:
 		return expr_evaluate_xfrm(ctx, expr);
 	case EXPR_SET_ELEM_CATCHALL:
-		return 0;
+		return expr_evaluate_set_elem_catchall(ctx, expr);
 	case EXPR_FLAGCMP:
 		return expr_evaluate_flagcmp(ctx, expr);
 	default:
@@ -2912,6 +3163,9 @@ static int stmt_evaluate_verdict(struct eval_ctx *ctx, struct stmt *stmt)
 				return expr_error(ctx->msgs, stmt->expr->chain,
 						  "not a value expression");
 			}
+
+			if (verdict_validate_chainlen(ctx, stmt->expr->chain))
+				return -1;
 		}
 		break;
 	case EXPR_MAP:
@@ -2937,14 +3191,22 @@ static bool stmt_evaluate_payload_need_csum(const struct expr *payload)
 static int stmt_evaluate_exthdr(struct eval_ctx *ctx, struct stmt *stmt)
 {
 	struct expr *exthdr;
+	int ret;
 
 	if (__expr_evaluate_exthdr(ctx, &stmt->exthdr.expr) < 0)
 		return -1;
 
 	exthdr = stmt->exthdr.expr;
-	return stmt_evaluate_arg(ctx, stmt, exthdr->dtype, exthdr->len,
-				 BYTEORDER_BIG_ENDIAN,
-				 &stmt->exthdr.val);
+	ret = stmt_evaluate_arg(ctx, stmt, exthdr->dtype, exthdr->len,
+				BYTEORDER_BIG_ENDIAN,
+				&stmt->exthdr.val);
+	if (ret < 0)
+		return ret;
+
+	if (stmt->exthdr.val->etype == EXPR_RANGE)
+		return stmt_error_range(ctx, stmt, stmt->exthdr.val);
+
+	return 0;
 }
 
 static int stmt_evaluate_payload(struct eval_ctx *ctx, struct stmt *stmt)
@@ -2975,6 +3237,9 @@ static int stmt_evaluate_payload(struct eval_ctx *ctx, struct stmt *stmt)
 				 payload->byteorder) < 0)
 		return -1;
 
+	if (stmt->payload.val->etype == EXPR_RANGE)
+		return stmt_error_range(ctx, stmt, stmt->payload.val);
+
 	need_csum = stmt_evaluate_payload_need_csum(payload);
 
 	if (!payload_needs_adjustment(payload)) {
@@ -2993,6 +3258,11 @@ static int stmt_evaluate_payload(struct eval_ctx *ctx, struct stmt *stmt)
 				      &extra_len);
 	payload_byte_size = div_round_up(payload->len + extra_len,
 					 BITS_PER_BYTE);
+
+	if (payload_byte_size > sizeof(data))
+		return expr_error(ctx->msgs, stmt->payload.expr,
+				  "uneven load cannot span more than %u bytes, got %u",
+				  sizeof(data), payload_byte_size);
 
 	if (need_csum && payload_byte_size & 1) {
 		payload_byte_size++;
@@ -3081,7 +3351,7 @@ static int stmt_evaluate_meter(struct eval_ctx *ctx, struct stmt *stmt)
 	existing_set = set_cache_find(table, stmt->meter.name);
 	if (existing_set)
 		return cmd_error(ctx, &stmt->location,
-				 "%s; meter ‘%s’ overlaps an existing %s ‘%s’ in family %s",
+				 "%s; meter '%s' overlaps an existing %s '%s' in family %s",
 				 strerror(EEXIST),
 				 stmt->meter.name,
 				 set_is_map(existing_set->flags) ? "map" : "set",
@@ -3106,7 +3376,9 @@ static int stmt_evaluate_meter(struct eval_ctx *ctx, struct stmt *stmt)
 		set->set_flags |= NFT_SET_TIMEOUT;
 
 	setref = implicit_set_declaration(ctx, stmt->meter.name,
-					  expr_get(key), NULL, set);
+					  expr_get(key), NULL, set, 0);
+	if (!setref)
+		return -1;
 
 	setref->set->desc.size = stmt->meter.size;
 	stmt->meter.set = setref;
@@ -3131,7 +3403,11 @@ static int stmt_evaluate_meta(struct eval_ctx *ctx, struct stmt *stmt)
 				stmt->meta.tmpl->len,
 				stmt->meta.tmpl->byteorder,
 				&stmt->meta.expr);
-	ctx->stmt_len = 0;
+	if (ret < 0)
+		return ret;
+
+	if (stmt->meta.expr->etype == EXPR_RANGE)
+		return stmt_error_range(ctx, stmt, stmt->meta.expr);
 
 	return ret;
 }
@@ -3147,14 +3423,15 @@ static int stmt_evaluate_ct(struct eval_ctx *ctx, struct stmt *stmt)
 				stmt->ct.tmpl->len,
 				stmt->ct.tmpl->byteorder,
 				&stmt->ct.expr);
-	ctx->stmt_len = 0;
-
 	if (ret < 0)
 		return -1;
 
 	if (stmt->ct.key == NFT_CT_SECMARK && expr_is_constant(stmt->ct.expr))
 		return stmt_error(ctx, stmt,
 				  "ct secmark must not be set to constant value");
+
+	if (stmt->ct.expr->etype == EXPR_RANGE)
+		return stmt_error_range(ctx, stmt, stmt->ct.expr);
 
 	return 0;
 }
@@ -3240,7 +3517,7 @@ static int stmt_reject_gen_dependency(struct eval_ctx *ctx, struct stmt *stmt,
 	 */
 	list_add(&nstmt->list, &ctx->rule->stmts);
 out:
-	xfree(payload);
+	free(payload);
 	return ret;
 }
 
@@ -3494,6 +3771,13 @@ static int stmt_evaluate_reject_icmp(struct eval_ctx *ctx, struct stmt *stmt)
 		erec_queue(erec, ctx->msgs);
 		return -1;
 	}
+
+	if (mpz_cmp_ui(code->value, UINT8_MAX) > 0) {
+		expr_free(code);
+		return expr_error(ctx->msgs, stmt->reject.expr,
+				  "reject code must be integer in range 0-255");
+	}
+
 	stmt->reject.icmp_code = mpz_get_uint8(code->value);
 	expr_free(code);
 
@@ -3664,28 +3948,6 @@ static int nat_evaluate_transport(struct eval_ctx *ctx, struct stmt *stmt,
 					 "valid after transport protocol match");
 
 	return 0;
-}
-
-static const char *stmt_name(const struct stmt *stmt)
-{
-	switch (stmt->ops->type) {
-	case STMT_NAT:
-		switch (stmt->nat.type) {
-		case NFT_NAT_SNAT:
-			return "snat";
-		case NFT_NAT_DNAT:
-			return "dnat";
-		case NFT_NAT_REDIR:
-			return "redirect";
-		case NFT_NAT_MASQ:
-			return "masquerade";
-		}
-		break;
-	default:
-		break;
-	}
-
-	return stmt->ops->name;
 }
 
 static int stmt_evaluate_l3proto(struct eval_ctx *ctx,
@@ -3876,6 +4138,12 @@ static bool nat_concat_map(struct eval_ctx *ctx, struct stmt *stmt)
 		if (expr_evaluate(ctx, &stmt->nat.addr->mappings))
 			return false;
 
+		if (!set_is_datamap(stmt->nat.addr->mappings->set->flags)) {
+			expr_error(ctx->msgs, stmt->nat.addr->mappings,
+					  "Expression is not a map");
+			return false;
+		}
+
 		if (stmt->nat.addr->mappings->set->data->etype == EXPR_CONCAT ||
 		    stmt->nat.addr->mappings->set->data->dtype->subtypes) {
 			stmt->nat.type_flags |= STMT_NAT_F_CONCAT;
@@ -3961,22 +4229,22 @@ static int stmt_evaluate_tproxy(struct eval_ctx *ctx, struct stmt *stmt)
 		return err;
 
 	if (stmt->tproxy.addr != NULL) {
-		if (stmt->tproxy.addr->etype == EXPR_RANGE)
-			return stmt_error(ctx, stmt, "Address ranges are not supported for tproxy.");
-
 		err = stmt_evaluate_addr(ctx, stmt, &stmt->tproxy.family,
 					 &stmt->tproxy.addr);
-
 		if (err < 0)
 			return err;
+
+		if (stmt->tproxy.addr->etype == EXPR_RANGE)
+			return stmt_error(ctx, stmt, "Address ranges are not supported for tproxy.");
 	}
 
 	if (stmt->tproxy.port != NULL) {
-		if (stmt->tproxy.port->etype == EXPR_RANGE)
-			return stmt_error(ctx, stmt, "Port ranges are not supported for tproxy.");
 		err = nat_evaluate_transport(ctx, stmt, &stmt->tproxy.port);
 		if (err < 0)
 			return err;
+
+		if (stmt->tproxy.port->etype == EXPR_RANGE)
+			return stmt_error(ctx, stmt, "Port ranges are not supported for tproxy.");
 	}
 
 	return 0;
@@ -4013,7 +4281,7 @@ static int stmt_evaluate_chain(struct eval_ctx *ctx, struct stmt *stmt)
 		memset(&h, 0, sizeof(h));
 		handle_merge(&h, &chain->handle);
 		h.family = ctx->rule->handle.family;
-		xfree(h.table.name);
+		free_const(h.table.name);
 		h.table.name = xstrdup(ctx->rule->handle.table.name);
 		h.chain.location = stmt->location;
 		h.chain_id = chain->handle.chain_id;
@@ -4033,9 +4301,9 @@ static int stmt_evaluate_chain(struct eval_ctx *ctx, struct stmt *stmt)
 			struct handle h2 = {};
 
 			handle_merge(&rule->handle, &ctx->rule->handle);
-			xfree(rule->handle.table.name);
+			free_const(rule->handle.table.name);
 			rule->handle.table.name = xstrdup(ctx->rule->handle.table.name);
-			xfree(rule->handle.chain.name);
+			free_const(rule->handle.chain.name);
 			rule->handle.chain.name = NULL;
 			rule->handle.chain_id = chain->handle.chain_id;
 			if (rule_evaluate(&rule_ctx, rule, CMD_INVALID) < 0)
@@ -4079,6 +4347,9 @@ static int stmt_evaluate_dup(struct eval_ctx *ctx, struct stmt *stmt)
 						&stmt->dup.dev);
 			if (err < 0)
 				return err;
+
+			if (stmt->dup.dev->etype == EXPR_RANGE)
+				return stmt_error_range(ctx, stmt, stmt->dup.dev);
 		}
 		break;
 	case NFPROTO_NETDEV:
@@ -4097,6 +4368,10 @@ static int stmt_evaluate_dup(struct eval_ctx *ctx, struct stmt *stmt)
 	default:
 		return stmt_error(ctx, stmt, "unsupported family");
 	}
+
+	if (stmt->dup.to->etype == EXPR_RANGE)
+		return stmt_error_range(ctx, stmt, stmt->dup.to);
+
 	return 0;
 }
 
@@ -4118,6 +4393,9 @@ static int stmt_evaluate_fwd(struct eval_ctx *ctx, struct stmt *stmt)
 		if (err < 0)
 			return err;
 
+		if (stmt->fwd.dev->etype == EXPR_RANGE)
+			return stmt_error_range(ctx, stmt, stmt->fwd.dev);
+
 		if (stmt->fwd.addr != NULL) {
 			switch (stmt->fwd.family) {
 			case NFPROTO_IPV4:
@@ -4136,6 +4414,9 @@ static int stmt_evaluate_fwd(struct eval_ctx *ctx, struct stmt *stmt)
 						&stmt->fwd.addr);
 			if (err < 0)
 				return err;
+
+			if (stmt->fwd.addr->etype == EXPR_RANGE)
+				return stmt_error_range(ctx, stmt, stmt->fwd.addr);
 		}
 		break;
 	default:
@@ -4169,49 +4450,12 @@ static int stmt_evaluate_queue(struct eval_ctx *ctx, struct stmt *stmt)
 
 static int stmt_evaluate_log_prefix(struct eval_ctx *ctx, struct stmt *stmt)
 {
-	char tmp[NF_LOG_PREFIXLEN] = {};
-	char prefix[NF_LOG_PREFIXLEN];
-	size_t len = sizeof(prefix);
-	size_t offset = 0;
-	struct expr *expr;
+	unsigned int len = strlen(stmt->log.prefix);
 
-	if (stmt->log.prefix->etype != EXPR_LIST) {
-		if (stmt->log.prefix &&
-		    div_round_up(stmt->log.prefix->len, BITS_PER_BYTE) >= NF_LOG_PREFIXLEN)
-			return expr_error(ctx->msgs, stmt->log.prefix, "log prefix is too long");
-
-		return 0;
-	}
-
-	prefix[0] = '\0';
-
-	list_for_each_entry(expr, &stmt->log.prefix->expressions, list) {
-		int ret;
-
-		switch (expr->etype) {
-		case EXPR_VALUE:
-			expr_to_string(expr, tmp);
-			ret = snprintf(prefix + offset, len, "%s", tmp);
-			break;
-		case EXPR_VARIABLE:
-			ret = snprintf(prefix + offset, len, "%s",
-				       expr->sym->expr->identifier);
-			break;
-		default:
-			BUG("unknown expression type %s\n", expr_name(expr));
-			break;
-		}
-		SNPRINTF_BUFFER_SIZE(ret, &len, &offset);
-	}
-
-	if (len == 0)
+	if (len >= NF_LOG_PREFIXLEN)
 		return stmt_error(ctx, stmt, "log prefix is too long");
-
-	expr = constant_expr_alloc(&stmt->log.prefix->location, &string_type,
-				   BYTEORDER_HOST_ENDIAN,
-				   strlen(prefix) * BITS_PER_BYTE, prefix);
-	expr_free(stmt->log.prefix);
-	stmt->log.prefix = expr;
+	else if (len == 0)
+		return stmt_error(ctx, stmt, "log prefix must have a minimum length of 1 character");
 
 	return 0;
 }
@@ -4295,6 +4539,10 @@ static int stmt_evaluate_map(struct eval_ctx *ctx, struct stmt *stmt)
 		return expr_error(ctx->msgs, stmt->map.set,
 				  "Expression does not refer to a set");
 
+	if (!set_is_map(stmt->map.set->set->flags))
+		return expr_error(ctx->msgs, stmt->map.set,
+				  "%s is not a map", stmt->map.set->set->handle.set.name);
+
 	if (stmt_evaluate_key(ctx, stmt,
 			      stmt->map.set->set->key->dtype,
 			      stmt->map.set->set->key->len,
@@ -4352,6 +4600,7 @@ static int stmt_evaluate_objref_map(struct eval_ctx *ctx, struct stmt *stmt)
 	mappings->set_flags |= NFT_SET_OBJECT;
 
 	switch (map->mappings->etype) {
+	case EXPR_VARIABLE:
 	case EXPR_SET:
 		key = constant_expr_alloc(&stmt->location,
 					  ctx->ectx.dtype,
@@ -4359,7 +4608,10 @@ static int stmt_evaluate_objref_map(struct eval_ctx *ctx, struct stmt *stmt)
 					  ctx->ectx.len, NULL);
 
 		mappings = implicit_set_declaration(ctx, "__objmap%d",
-						    key, NULL, mappings);
+						    key, NULL, mappings,
+						    NFT_SET_ANONYMOUS);
+		if (!mappings)
+			return -1;
 		mappings->set->objtype  = stmt->objref.type;
 
 		map->mappings = mappings;
@@ -4367,6 +4619,11 @@ static int stmt_evaluate_objref_map(struct eval_ctx *ctx, struct stmt *stmt)
 		ctx->set = mappings->set;
 		if (expr_evaluate(ctx, &map->mappings->set->init) < 0)
 			return -1;
+
+		if (map->mappings->set->init->etype != EXPR_SET) {
+			return expr_error(ctx->msgs, map->mappings->set->init,
+					  "Expression is not a map");
+		}
 
 		if (set_is_interval(map->mappings->set->init->set_flags) &&
 		    !(map->mappings->set->init->set_flags & NFT_SET_CONCAT) &&
@@ -4388,8 +4645,9 @@ static int stmt_evaluate_objref_map(struct eval_ctx *ctx, struct stmt *stmt)
 					  "Expression is not a map with objects");
 		break;
 	default:
-		BUG("invalid mapping expression %s\n",
-		    expr_name(map->mappings));
+		return expr_binary_error(ctx->msgs, map->mappings, map->map,
+					 "invalid mapping expression %s",
+					 expr_name(map->mappings));
 	}
 
 	if (!datatype_compatible(map->mappings->set->key->dtype, map->map->dtype))
@@ -4439,6 +4697,8 @@ int stmt_evaluate(struct eval_ctx *ctx, struct stmt *stmt)
 		nft_print(&ctx->nft->output, "\n\n");
 		erec_destroy(erec);
 	}
+
+	ctx->stmt_len = 0;
 
 	switch (stmt->ops->type) {
 	case STMT_CONNLIMIT:
@@ -4580,16 +4840,21 @@ static int set_expr_evaluate_concat(struct eval_ctx *ctx, struct expr **expr)
 						 "expressions",
 						 i->dtype->name);
 
-		if (i->dtype->size)
-			assert(i->len == i->dtype->size);
-
 		flags &= i->flags;
 
 		ntype = concat_subtype_add(ntype, i->dtype->type);
 
 		dsize_bytes = div_round_up(i->len, BITS_PER_BYTE);
+
+		if (i->dtype->size)
+			assert(dsize_bytes == div_round_up(i->dtype->size, BITS_PER_BYTE));
+
 		(*expr)->field_len[(*expr)->field_count++] = dsize_bytes;
 		size += netlink_padded_len(i->len);
+
+		if (size > NFT_MAX_EXPR_LEN_BITS)
+			return expr_error(ctx->msgs, i, "Concatenation of size %u exceeds maximum size of %u",
+					  size, NFT_MAX_EXPR_LEN_BITS);
 	}
 
 	(*expr)->flags |= flags;
@@ -4606,10 +4871,15 @@ static int elems_evaluate(struct eval_ctx *ctx, struct set *set)
 {
 	ctx->set = set;
 	if (set->init != NULL) {
+		if (set->key == NULL)
+			return set_error(ctx, set, "set definition does not specify key");
+
 		__expr_set_context(&ctx->ectx, set->key->dtype,
 				   set->key->byteorder, set->key->len, 0);
-		if (expr_evaluate(ctx, &set->init) < 0)
+		if (expr_evaluate(ctx, &set->init) < 0) {
+			set->errors = true;
 			return -1;
+		}
 		if (set->init->etype != EXPR_SET)
 			return expr_error(ctx->msgs, set->init, "Set %s: Unexpected initial type %s, missing { }?",
 					  set->handle.set.name, expr_name(set->init));
@@ -4632,6 +4902,12 @@ static int set_evaluate(struct eval_ctx *ctx, struct set *set)
 	struct table *table;
 	struct stmt *stmt;
 	const char *type;
+
+	type = set_is_map(set->flags) ? "map" : "set";
+
+	if (set->key == NULL)
+		return set_error(ctx, set, "%s definition does not specify key",
+				 type);
 
 	if (!set_is_anonymous(set->flags)) {
 		table = table_cache_find(&ctx->nft->cache.table_cache,
@@ -4656,8 +4932,6 @@ static int set_evaluate(struct eval_ctx *ctx, struct set *set)
 	if (!(set->flags & NFT_SET_INTERVAL) && set->automerge)
 		return set_error(ctx, set, "auto-merge only works with interval sets");
 
-	type = set_is_map(set->flags) ? "map" : "set";
-
 	if (set->key == NULL)
 		return set_error(ctx, set, "%s definition does not specify key",
 				 type);
@@ -4677,6 +4951,21 @@ static int set_evaluate(struct eval_ctx *ctx, struct set *set)
 		       sizeof(set->desc.field_len));
 		set->desc.field_count = set->key->field_count;
 		set->flags |= NFT_SET_CONCAT;
+	}
+
+	if (set_is_anonymous(set->flags) && set->key->etype == EXPR_CONCAT) {
+		struct expr *i;
+
+		list_for_each_entry(i, &set->init->expressions, list) {
+			if ((i->etype == EXPR_SET_ELEM &&
+			     i->key->etype != EXPR_CONCAT &&
+			     i->key->etype != EXPR_SET_ELEM_CATCHALL) ||
+			    (i->etype == EXPR_MAPPING &&
+			     i->left->etype == EXPR_SET_ELEM &&
+			     i->left->key->etype != EXPR_CONCAT &&
+			     i->left->key->etype != EXPR_SET_ELEM_CATCHALL))
+				return expr_error(ctx->msgs, i, "expression is not a concatenation");
+		}
 	}
 
 	if (set_is_datamap(set->flags)) {
@@ -4753,7 +5042,7 @@ static bool evaluate_priority(struct eval_ctx *ctx, struct prio_spec *prio,
 			NFT_NAME_MAXLEN);
 	loc = prio->expr->location;
 
-	if (sscanf(prio_str, "%s %c %d", prio_fst, &op, &prio_snd) < 3) {
+	if (sscanf(prio_str, "%255s %c %d", prio_fst, &op, &prio_snd) < 3) {
 		priority = std_prio_lookup(prio_str, family, hook);
 		if (priority == NF_IP_PRI_LAST)
 			return false;
@@ -4852,7 +5141,7 @@ static int flowtable_evaluate(struct eval_ctx *ctx, struct flowtable *ft)
 		return table_not_found(ctx);
 
 	if (!ft_cache_find(table, ft->handle.flowtable.name)) {
-		if (!ft->hook.name)
+		if (!ft->hook.name && !ft->dev_expr)
 			return chain_error(ctx, ft, "missing hook and priority in flowtable declaration");
 
 		ft_cache_add(flowtable_get(ft), table);
@@ -5138,8 +5427,8 @@ static int ct_timeout_evaluate(struct eval_ctx *ctx, struct obj *obj)
 
 		ct->timeout[ts->timeout_index] = ts->timeout_value;
 		list_del(&ts->head);
-		xfree(ts->timeout_str);
-		xfree(ts);
+		free_const(ts->timeout_str);
+		free(ts);
 	}
 
 	return 0;
@@ -5396,7 +5685,7 @@ static int obj_not_found(struct eval_ctx *ctx, const struct location *loc,
 		return cmd_error(ctx, loc, "%s", strerror(ENOENT));
 
 	return cmd_error(ctx, loc,
-			 "%s; did you mean obj ‘%s’ in table %s ‘%s’?",
+			 "%s; did you mean obj '%s' in table %s '%s'?",
 			 strerror(ENOENT), obj->handle.obj.name,
 				 family2str(obj->handle.family),
 				 table->handle.table.name);
@@ -5456,7 +5745,7 @@ static int cmd_evaluate_list(struct eval_ctx *ctx, struct cmd *cmd)
 					     ctx->cmd->handle.set.name);
 		if ((cmd->obj == CMD_OBJ_SET && !set_is_literal(set->flags)) ||
 		    (cmd->obj == CMD_OBJ_MAP && !map_is_literal(set->flags)) ||
-		    (cmd->obj == CMD_OBJ_METER && !set_is_meter(set->flags)))
+		    (cmd->obj == CMD_OBJ_METER && !set_is_meter_compat(set->flags)))
 			return cmd_error(ctx, &ctx->cmd->handle.set.location,
 					 "%s", strerror(ENOENT));
 
@@ -5635,7 +5924,7 @@ static int cmd_evaluate_flush(struct eval_ctx *ctx, struct cmd *cmd)
 		if (set == NULL)
 			return set_not_found(ctx, &ctx->cmd->handle.set.location,
 					     ctx->cmd->handle.set.name);
-		else if (!set_is_meter(set->flags))
+		else if (!set_is_meter_compat(set->flags))
 			return cmd_error(ctx, &ctx->cmd->handle.set.location,
 					 "%s", strerror(ENOENT));
 
@@ -5803,7 +6092,7 @@ static const char * const cmd_op_name[] = {
 
 static const char *cmd_op_to_name(enum cmd_ops op)
 {
-	if (op > CMD_DESCRIBE)
+	if (op >= array_size(cmd_op_name))
 		return "unknown";
 
 	return cmd_op_name[op];

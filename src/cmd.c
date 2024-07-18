@@ -41,7 +41,7 @@ static int nft_cmd_enoent_table(struct netlink_ctx *ctx, const struct cmd *cmd,
 	if (!table)
 		return 0;
 
-	netlink_io_error(ctx, loc, "%s; did you mean table ‘%s’ in family %s?",
+	netlink_io_error(ctx, loc, "%s; did you mean table '%s' in family %s?",
 			 strerror(ENOENT), table->handle.table.name,
 			 family2str(table->handle.family));
 	return 1;
@@ -57,7 +57,7 @@ static int table_fuzzy_check(struct netlink_ctx *ctx, const struct cmd *cmd,
 	if (strcmp(cmd->handle.table.name, table->handle.table.name) ||
 	    cmd->handle.family != table->handle.family) {
 		netlink_io_error(ctx, &cmd->handle.table.location,
-				 "%s; did you mean table ‘%s’ in family %s?",
+				 "%s; did you mean table '%s' in family %s?",
 				 strerror(ENOENT), table->handle.table.name,
 				 family2str(table->handle.family));
 		return 1;
@@ -86,7 +86,7 @@ static int nft_cmd_enoent_chain(struct netlink_ctx *ctx, const struct cmd *cmd,
 	if (!chain)
 		return 0;
 
-	netlink_io_error(ctx, loc, "%s; did you mean chain ‘%s’ in table %s ‘%s’?",
+	netlink_io_error(ctx, loc, "%s; did you mean chain '%s' in table %s '%s'?",
 			 strerror(ENOENT), chain->handle.chain.name,
 			 family2str(table->handle.family),
 			 table->handle.table.name);
@@ -116,7 +116,7 @@ static int nft_cmd_enoent_rule(struct netlink_ctx *ctx, const struct cmd *cmd,
 		return 0;
 
 	if (strcmp(cmd->handle.chain.name, chain->handle.chain.name)) {
-		netlink_io_error(ctx, loc, "%s; did you mean chain ‘%s’ in table %s ‘%s’?",
+		netlink_io_error(ctx, loc, "%s; did you mean chain '%s' in table %s '%s'?",
 				 strerror(ENOENT),
 				 chain->handle.chain.name,
 				 family2str(table->handle.family),
@@ -147,7 +147,7 @@ static int nft_cmd_enoent_set(struct netlink_ctx *ctx, const struct cmd *cmd,
 	if (!set)
 		return 0;
 
-	netlink_io_error(ctx, loc, "%s; did you mean %s ‘%s’ in table %s ‘%s’?",
+	netlink_io_error(ctx, loc, "%s; did you mean %s '%s' in table %s '%s'?",
 			 strerror(ENOENT),
 			 set_is_map(set->flags) ? "map" : "set",
 			 set->handle.set.name,
@@ -176,7 +176,7 @@ static int nft_cmd_enoent_obj(struct netlink_ctx *ctx, const struct cmd *cmd,
 	if (!obj)
 		return 0;
 
-	netlink_io_error(ctx, loc, "%s; did you mean obj ‘%s’ in table %s ‘%s’?",
+	netlink_io_error(ctx, loc, "%s; did you mean obj '%s' in table %s '%s'?",
 			 strerror(ENOENT), obj->handle.obj.name,
 			 family2str(obj->handle.family),
 			 table->handle.table.name);
@@ -205,7 +205,7 @@ static int nft_cmd_enoent_flowtable(struct netlink_ctx *ctx,
 	if (!ft)
 		return 0;
 
-	netlink_io_error(ctx, loc, "%s; did you mean flowtable ‘%s’ in table %s ‘%s’?",
+	netlink_io_error(ctx, loc, "%s; did you mean flowtable '%s' in table %s '%s'?",
 			 strerror(ENOENT), ft->handle.flowtable.name,
 			 family2str(ft->handle.family),
 			 table->handle.table.name);
@@ -256,7 +256,8 @@ static void nft_cmd_enoent(struct netlink_ctx *ctx, const struct cmd *cmd,
 static int nft_cmd_chain_error(struct netlink_ctx *ctx, struct cmd *cmd,
 			       struct mnl_err *err)
 {
-	struct chain *chain = cmd->chain;
+	struct chain *chain = cmd->chain, *existing_chain;
+	const struct table *table;
 	int priority;
 
 	switch (err->err) {
@@ -269,6 +270,18 @@ static int nft_cmd_chain_error(struct netlink_ctx *ctx, struct cmd *cmd,
 		if (priority <= -200 && !strcmp(chain->type.str, "nat"))
 			return netlink_io_error(ctx, &chain->priority.loc,
 						"Chains of type \"nat\" must have a priority value above -200");
+
+		table = table_cache_find(&ctx->nft->cache.table_cache,
+					 cmd->handle.table.name, cmd->handle.family);
+		if (table) {
+			existing_chain = chain_cache_find(table, cmd->handle.chain.name);
+			if (existing_chain && existing_chain != chain &&
+			    !strcmp(existing_chain->handle.chain.name, chain->handle.chain.name))
+				return netlink_io_error(ctx, &chain->loc,
+							"Chain \"%s\" already exists in table %s '%s' with different declaration",
+							chain->handle.chain.name,
+							family2str(table->handle.family), table->handle.table.name);
+		}
 
 		return netlink_io_error(ctx, &chain->loc,
 					"Chain of type \"%s\" is not supported, perhaps kernel support is missing?",
@@ -309,6 +322,12 @@ void nft_cmd_error(struct netlink_ctx *ctx, struct cmd *cmd,
 		break;
 	default:
 		break;
+	}
+
+	if (cmd->op == CMD_DESTROY && err->err == EINVAL) {
+		netlink_io_error(ctx, loc,
+				 "\"destroy\" command is not supported, perhaps kernel support is missing?");
+		return;
 	}
 
 	netlink_io_error(ctx, loc, "Could not process rule: %s",
@@ -435,6 +454,9 @@ bool nft_cmd_collapse(struct list_head *cmds)
 			elems = NULL;
 			continue;
 		}
+
+		if (cmd->expr->etype == EXPR_VARIABLE)
+			continue;
 
 		if (!elems) {
 			elems = cmd;
