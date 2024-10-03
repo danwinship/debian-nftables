@@ -1,7 +1,7 @@
 nftables (1.1.0-2) unstable; urgency=medium
 
   * [029b2fe] nftables: add 000-upstream-cache-fix-revert.patch
-    This fixes a problem in the nfables cache by reverting an earlier change,
+    This fixes a problem in the nftables cache by reverting an earlier change,
     which was affecting firewalld, and maybe others.
 
  -- Arturo Borrero Gonzalez <arturo@debian.org>  Wed, 24 Jul 2024 10:52:33 +0200
