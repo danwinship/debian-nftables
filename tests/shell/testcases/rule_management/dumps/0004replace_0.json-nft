@@ -23,6 +23,27 @@
       }
     },
     {
+      "set": {
+        "family": "ip",
+        "name": "s1",
+        "table": "t",
+        "type": "ipv4_addr",
+        "handle": 0
+      }
+    },
+    {
+      "set": {
+        "family": "ip",
+        "name": "s2",
+        "table": "t",
+        "type": "ipv4_addr",
+        "handle": 0,
+        "flags": [
+          "interval"
+        ]
+      }
+    },
+    {
       "rule": {
         "family": "ip",
         "table": "t",
@@ -30,7 +51,33 @@
         "handle": 0,
         "expr": [
           {
-            "drop": null
+            "match": {
+              "op": "==",
+              "left": {
+                "payload": {
+                  "protocol": "ip",
+                  "field": "saddr"
+                }
+              },
+              "right": "@s2"
+            }
+          },
+          {
+            "match": {
+              "op": "==",
+              "left": {
+                "payload": {
+                  "protocol": "ip",
+                  "field": "daddr"
+                }
+              },
+              "right": {
+                "set": [
+                  "3.3.3.3",
+                  "4.4.4.4"
+                ]
+              }
+            }
           }
         ]
       }

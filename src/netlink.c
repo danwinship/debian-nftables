@@ -155,9 +155,14 @@ struct nftnl_set_elem *alloc_nftnl_setelem(const struct expr *set,
 		break;
 	}
 
-	if (elem->timeout)
-		nftnl_set_elem_set_u64(nlse, NFTNL_SET_ELEM_TIMEOUT,
-				       elem->timeout);
+	if (elem->timeout) {
+		uint64_t timeout = elem->timeout;
+
+		if (elem->timeout == NFT_NEVER_TIMEOUT)
+			timeout = 0;
+
+		nftnl_set_elem_set_u64(nlse, NFTNL_SET_ELEM_TIMEOUT, timeout);
+	}
 	if (elem->expiration)
 		nftnl_set_elem_set_u64(nlse, NFTNL_SET_ELEM_EXPIRATION,
 				       elem->expiration);
@@ -1417,8 +1422,12 @@ key_end:
 	expr = set_elem_expr_alloc(&netlink_location, key);
 	expr->flags |= EXPR_F_KERNEL;
 
-	if (nftnl_set_elem_is_set(nlse, NFTNL_SET_ELEM_TIMEOUT))
+	if (nftnl_set_elem_is_set(nlse, NFTNL_SET_ELEM_TIMEOUT)) {
 		expr->timeout	 = nftnl_set_elem_get_u64(nlse, NFTNL_SET_ELEM_TIMEOUT);
+		if (expr->timeout == 0)
+			expr->timeout	 = NFT_NEVER_TIMEOUT;
+	}
+
 	if (nftnl_set_elem_is_set(nlse, NFTNL_SET_ELEM_EXPIRATION))
 		expr->expiration = nftnl_set_elem_get_u64(nlse, NFTNL_SET_ELEM_EXPIRATION);
 	if (nftnl_set_elem_is_set(nlse, NFTNL_SET_ELEM_USERDATA))
@@ -1767,84 +1776,6 @@ void netlink_dump_flowtable(struct nftnl_flowtable *flo,
 
 	nftnl_flowtable_fprintf(fp, flo, 0, 0);
 	fprintf(fp, "\n");
-}
-
-static int list_obj_cb(struct nftnl_obj *nls, void *arg)
-{
-	struct netlink_ctx *ctx = arg;
-	struct obj *obj;
-
-	obj = netlink_delinearize_obj(ctx, nls);
-	if (obj == NULL)
-		return -1;
-	list_add_tail(&obj->list, &ctx->list);
-	return 0;
-}
-
-int netlink_reset_objs(struct netlink_ctx *ctx, const struct cmd *cmd,
-		       uint32_t type, bool dump)
-{
-	const struct handle *h = &cmd->handle;
-	struct nftnl_obj_list *obj_cache;
-	int err;
-
-	obj_cache = mnl_nft_obj_dump(ctx, h->family,
-				     h->table.name, h->obj.name, type, dump, true);
-	if (obj_cache == NULL)
-		return -1;
-
-	err = nftnl_obj_list_foreach(obj_cache, list_obj_cb, ctx);
-	nftnl_obj_list_free(obj_cache);
-	return err;
-}
-
-int netlink_reset_rules(struct netlink_ctx *ctx, const struct cmd *cmd,
-		        bool dump)
-{
-	const struct handle *h = &cmd->handle;
-	struct nft_cache_filter f = {
-		.list.table		= h->table.name,
-		.list.chain		= h->chain.name,
-		.list.rule_handle	= h->handle.id,
-	};
-	struct rule *rule, *next, *crule, *cnext;
-	struct table *table;
-	struct chain *chain;
-	int ret;
-
-	ret = rule_cache_dump(ctx, h, &f, dump, true);
-
-	list_for_each_entry_safe(rule, next, &ctx->list, list) {
-		table = table_cache_find(&ctx->nft->cache.table_cache,
-					 rule->handle.table.name,
-					 rule->handle.family);
-		if (!table)
-			continue;
-
-		chain = chain_cache_find(table, rule->handle.chain.name);
-		if (!chain)
-			continue;
-
-		list_del(&rule->list);
-		list_for_each_entry_safe(crule, cnext, &chain->rules, list) {
-			if (crule->handle.handle.id != rule->handle.handle.id)
-				continue;
-
-			list_replace(&crule->list, &rule->list);
-			rule_free(crule);
-			rule = NULL;
-			break;
-		}
-		if (rule) {
-			list_add_tail(&rule->list, &chain->rules);
-		}
-	}
-	list_for_each_entry_safe(rule, next, &ctx->list, list) {
-		list_del(&rule->list);
-		rule_free(rule);
-	}
-
-	return ret;
 }
 
 struct flowtable *

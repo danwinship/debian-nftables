@@ -1,4 +1,3 @@
-reset rules
 table inet filter {
 	flowtable f {
 		devices = { lo }

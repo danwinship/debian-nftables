@@ -695,7 +695,7 @@ int nft_lex(void *, void *, void *);
 %type <string>			identifier type_identifier string comment_spec
 %destructor { free_const($$); }	identifier type_identifier string comment_spec
 
-%type <val>			time_spec time_spec_or_num_s quota_used
+%type <val>			time_spec time_spec_or_num_s set_elem_time_spec quota_used
 
 %type <expr>			data_type_expr data_type_atom_expr
 %destructor { expr_free($$); }  data_type_expr data_type_atom_expr
@@ -1757,21 +1757,21 @@ reset_cmd		:	COUNTERS	ruleset_spec
 			}
 			|	RULES		table_spec
 			{
-				$$ = cmd_alloc(CMD_RESET, CMD_OBJ_RULES, &$2, &@$, NULL);
+				$$ = cmd_alloc(CMD_RESET, CMD_OBJ_TABLE, &$2, &@$, NULL);
 			}
 			|	RULES		TABLE	table_spec
 			{
 				/* alias of previous rule. */
-				$$ = cmd_alloc(CMD_RESET, CMD_OBJ_RULES, &$3, &@$, NULL);
+				$$ = cmd_alloc(CMD_RESET, CMD_OBJ_TABLE, &$3, &@$, NULL);
 			}
 			|	RULES		chain_spec
 			{
-				$$ = cmd_alloc(CMD_RESET, CMD_OBJ_RULES, &$2, &@$, NULL);
+				$$ = cmd_alloc(CMD_RESET, CMD_OBJ_CHAIN, &$2, &@$, NULL);
 			}
 			|	RULES		CHAIN	chain_spec
 			{
 				/* alias of previous rule. */
-				$$ = cmd_alloc(CMD_RESET, CMD_OBJ_RULES, &$3, &@$, NULL);
+				$$ = cmd_alloc(CMD_RESET, CMD_OBJ_CHAIN, &$3, &@$, NULL);
 			}
 			|	RULE		ruleid_spec
 			{
@@ -4545,7 +4545,28 @@ set_elem_options	:	set_elem_option
 			|	set_elem_options	set_elem_option
 			;
 
-set_elem_option		:	TIMEOUT			time_spec
+set_elem_time_spec	:	STRING
+			{
+				struct error_record *erec;
+				uint64_t res;
+
+				if (!strcmp("never", $1)) {
+					free_const($1);
+					$$ = NFT_NEVER_TIMEOUT;
+					break;
+				}
+
+				erec = time_parse(&@1, $1, &res);
+				free_const($1);
+				if (erec != NULL) {
+					erec_queue(erec, state->msgs);
+					YYERROR;
+				}
+				$$ = res;
+			}
+			;
+
+set_elem_option		:	TIMEOUT		time_spec
 			{
 				$<expr>0->timeout = $2;
 			}
@@ -4609,11 +4630,6 @@ set_elem_stmt		:	COUNTER	close_scope_counter
 			}
 			|       LIMIT   RATE    limit_mode      limit_rate_bytes  limit_burst_bytes	close_scope_limit
 			{
-				if ($5 == 0) {
-					erec_queue(error(&@6, "limit burst must be > 0"),
-						   state->msgs);
-					YYERROR;
-				}
 				$$ = limit_stmt_alloc(&@$);
 				$$->limit.rate  = $4.rate;
 				$$->limit.unit  = $4.unit;
@@ -4660,7 +4676,7 @@ set_elem_stmt		:	COUNTER	close_scope_counter
 			}
 			;
 
-set_elem_expr_option	:	TIMEOUT			time_spec
+set_elem_expr_option	:	TIMEOUT		set_elem_time_spec
 			{
 				$<expr>0->timeout = $2;
 			}

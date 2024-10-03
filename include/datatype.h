@@ -120,17 +120,6 @@ enum byteorder {
 
 struct expr;
 
-/**
- * enum datatype_flags
- *
- * @DTYPE_F_ALLOC:		datatype is dynamically allocated
- * @DTYPE_F_PREFIX:		preferred representation for ranges is a prefix
- */
-enum datatype_flags {
-	DTYPE_F_ALLOC		= (1 << 0),
-	DTYPE_F_PREFIX		= (1 << 1),
-};
-
 struct parse_ctx;
 /**
  * struct datatype
@@ -147,11 +136,12 @@ struct parse_ctx;
  * @print:	function to print a constant of this type
  * @parse:	function to parse a symbol and return an expression
  * @sym_tbl:	symbol table for this type
- * @refcnt:	reference counter (only for DTYPE_F_ALLOC)
+ * @refcnt:	reference counter (only for dynamically allocated, see .alloc)
  */
 struct datatype {
 	uint32_t			type;
-	enum byteorder			byteorder;
+	enum byteorder			byteorder:8;
+	uint32_t			alloc:1;
 	unsigned int			flags;
 	unsigned int			size;
 	unsigned int			subtypes;
@@ -179,6 +169,7 @@ extern void datatype_set(struct expr *expr, const struct datatype *dtype);
 extern void __datatype_set(struct expr *expr, const struct datatype *dtype);
 extern void datatype_free(const struct datatype *dtype);
 struct datatype *datatype_clone(const struct datatype *orig_dtype);
+bool datatype_prefix_notation(const struct datatype *dtype);
 
 struct parse_ctx {
 	struct symbol_tables	*tbl;

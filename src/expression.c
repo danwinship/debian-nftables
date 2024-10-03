@@ -1314,9 +1314,14 @@ static void set_elem_expr_print(const struct expr *expr,
 	}
 	if (expr->timeout) {
 		nft_print(octx, " timeout ");
-		time_print(expr->timeout, octx);
+		if (expr->timeout == NFT_NEVER_TIMEOUT)
+			nft_print(octx, "never");
+		else
+			time_print(expr->timeout, octx);
 	}
-	if (!nft_output_stateless(octx) && expr->expiration) {
+	if (!nft_output_stateless(octx) &&
+	    expr->timeout != NFT_NEVER_TIMEOUT &&
+	    expr->expiration) {
 		nft_print(octx, " expires ");
 		time_print(expr->expiration, octx);
 	}

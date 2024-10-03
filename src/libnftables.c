@@ -160,6 +160,7 @@ void nft_ctx_clear_vars(struct nft_ctx *ctx)
 	}
 	ctx->num_vars = 0;
 	free(ctx->vars);
+	ctx->vars = NULL;
 }
 
 EXPORT_SYMBOL(nft_ctx_add_include_path);

@@ -63,6 +63,8 @@ static bool __expr_cmp(const struct expr *expr_a, const struct expr *expr_b)
 			return false;
 		if (expr_a->meta.base != expr_b->meta.base)
 			return false;
+		if (expr_a->meta.inner_desc != expr_b->meta.inner_desc)
+			return false;
 		break;
 	case EXPR_CT:
 		if (expr_a->ct.key != expr_b->ct.key)
@@ -408,9 +410,11 @@ static int rule_collect_stmts(struct optimize_ctx *ctx, struct rule *rule)
 			break;
 		case STMT_NAT:
 			if ((stmt->nat.addr &&
-			     stmt->nat.addr->etype == EXPR_MAP) ||
+			     (stmt->nat.addr->etype == EXPR_MAP ||
+			      stmt->nat.addr->etype == EXPR_VARIABLE)) ||
 			    (stmt->nat.proto &&
-			     stmt->nat.proto->etype == EXPR_MAP)) {
+			     (stmt->nat.proto->etype == EXPR_MAP ||
+			      stmt->nat.proto->etype == EXPR_VARIABLE))) {
 				clone->ops = &unsupported_stmt_ops;
 				break;
 			}

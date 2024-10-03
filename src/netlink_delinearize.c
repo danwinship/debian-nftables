@@ -2536,7 +2536,7 @@ static void relational_binop_postprocess(struct rule_pp_ctx *ctx,
 			BUG("unknown operation type %d\n", expr->op);
 		}
 		expr_free(binop);
-	} else if (binop->left->dtype->flags & DTYPE_F_PREFIX &&
+	} else if (datatype_prefix_notation(binop->left->dtype) &&
 		   binop->op == OP_AND && expr->right->etype == EXPR_VALUE &&
 		   expr_mask_is_prefix(binop->right)) {
 		expr->left = expr_get(binop->left);
