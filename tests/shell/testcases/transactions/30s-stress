@@ -290,8 +290,34 @@ available_flags()
 	fi
 }
 
-random_element_string=""
+random_timeout()
+{
+	local timeout=""
+	local expires
+	local r=$((RANDOM%3))
 
+	case "$r" in
+	0)
+		timeout=$((RANDOM%60000))
+		timeout="timeout ${timeout}ms"
+		;;
+	1)
+		timeout=$((RANDOM%60000))
+		expires=$((timeout))
+		if [ $timeout -gt 0 ];then
+			expires=$((RANDOM%expires))
+		else
+			expires=0
+		fi
+
+		timeout="timeout ${timeout}ms expires ${expires}ms"
+		;;
+	esac
+
+	echo -n "$timeout"
+}
+
+random_element_string=""
 # create a random element.  Could cause any of the following:
 # 1. Invalid set/map
 # 2. Element already exists in set/map w. create
@@ -354,17 +380,17 @@ random_elem()
 				r=$((RANDOM%7))
 				case "$r" in
 				0)
-					random_element_string=" inet $table set_${cnt} { $element }"
+					random_element_string="inet $table set_${cnt} { $element }"
 					;;
-				1)	random_element_string="inet $table sett${cnt} { $element timeout $((RANDOM%60))s }"
+				1)	random_element_string="inet $table sett${cnt} { $element $(random_timeout) }"
 					;;
 				2)	random_element_string="inet $table dmap_${cnt} { $element : $RANDOM }"
 					;;
-				3)	random_element_string="inet $table dmapt${cnt} { $element timeout $((RANDOM%60))s : $RANDOM }"
+				3)	random_element_string="inet $table dmapt${cnt} { $element $(random_timeout) : $RANDOM }"
 					;;
 				4)	random_element_string="inet $table vmap_${cnt} { $element : `random_verdict $count` }"
 					;;
-				5)	random_element_string="inet $table vmapt${cnt} { $element timeout $((RANDOM%60))s : `random_verdict $count` }"
+				5)	random_element_string="inet $table vmapt${cnt} { $element $(random_timeout) : `random_verdict $count` }"
 					;;
 				6)	random_element_string="inet $table setc${cnt} { $element }"
 					;;
@@ -625,11 +651,11 @@ for table in $tables; do
 				esac
 
 				echo "add element inet $table set_${cnt} { $element }" >> "$tmp"
-				echo "add element inet $table sett${cnt} { $element timeout $((RANDOM%60))s }" >> "$tmp"
+				echo "add element inet $table sett${cnt} { $element $(random_timeout) }" >> "$tmp"
 				echo "add element inet $table dmap_${cnt} { $element : $RANDOM }" >> "$tmp"
-				echo "add element inet $table dmapt${cnt} { $element timeout $((RANDOM%60))s : $RANDOM }" >> "$tmp"
+				echo "add element inet $table dmapt${cnt} { $element $(random_timeout) : $RANDOM }" >> "$tmp"
 				echo "add element inet $table vmap_${cnt} { $element : `random_verdict $count` }" >> "$tmp"
-				echo "add element inet $table vmapt${cnt} { $element timeout $((RANDOM%60))s : `random_verdict $count` }" >> "$tmp"
+				echo "add element inet $table vmapt${cnt} { $element $(random_timeout) : `random_verdict $count` }" >> "$tmp"
 			done
 		done
 	done

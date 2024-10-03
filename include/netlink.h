@@ -176,8 +176,6 @@ extern int netlink_delinearize_setelem(struct nftnl_set_elem *nlse,
 				       struct nft_cache *cache);
 
 extern int netlink_list_objs(struct netlink_ctx *ctx, const struct handle *h);
-extern int netlink_reset_objs(struct netlink_ctx *ctx, const struct cmd *cmd,
-			      uint32_t type, bool dump);
 extern struct obj *netlink_delinearize_obj(struct netlink_ctx *ctx,
 					   struct nftnl_obj *nlo);
 
@@ -185,9 +183,6 @@ extern int netlink_list_flowtables(struct netlink_ctx *ctx,
 				   const struct handle *h);
 extern struct flowtable *netlink_delinearize_flowtable(struct netlink_ctx *ctx,
 						       struct nftnl_flowtable *nlo);
-
-extern int netlink_reset_rules(struct netlink_ctx *ctx, const struct cmd *cmd,
-			       bool dump);
 
 extern void netlink_dump_chain(const struct nftnl_chain *nlc,
 			       struct netlink_ctx *ctx);

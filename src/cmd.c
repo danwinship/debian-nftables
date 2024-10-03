@@ -75,6 +75,10 @@ static int nft_cmd_enoent_chain(struct netlink_ctx *ctx, const struct cmd *cmd,
 	if (!cmd->handle.chain.name)
 		return 0;
 
+	if (nft_cache_update(ctx->nft, NFT_CACHE_TABLE | NFT_CACHE_CHAIN,
+			     ctx->msgs, NULL) < 0)
+		return 0;
+
 	chain = chain_lookup_fuzzy(&cmd->handle, &ctx->nft->cache, &table);
 	/* check table first. */
 	if (!table)
@@ -136,6 +140,10 @@ static int nft_cmd_enoent_set(struct netlink_ctx *ctx, const struct cmd *cmd,
 	if (!cmd->handle.set.name)
 		return 0;
 
+	if (nft_cache_update(ctx->nft, NFT_CACHE_TABLE | NFT_CACHE_SET,
+			     ctx->msgs, NULL) < 0)
+		return 0;
+
 	set = set_lookup_fuzzy(cmd->handle.set.name, &ctx->nft->cache, &table);
 	/* check table first. */
 	if (!table)
@@ -165,6 +173,10 @@ static int nft_cmd_enoent_obj(struct netlink_ctx *ctx, const struct cmd *cmd,
 	if (!cmd->handle.obj.name)
 		return 0;
 
+	if (nft_cache_update(ctx->nft, NFT_CACHE_TABLE | NFT_CACHE_OBJECT,
+			     ctx->msgs, NULL) < 0)
+		return 0;
+
 	obj = obj_lookup_fuzzy(cmd->handle.obj.name, &ctx->nft->cache, &table);
 	/* check table first. */
 	if (!table)
@@ -191,6 +203,10 @@ static int nft_cmd_enoent_flowtable(struct netlink_ctx *ctx,
 	struct flowtable *ft;
 
 	if (!cmd->handle.flowtable.name)
+		return 0;
+
+	if (nft_cache_update(ctx->nft, NFT_CACHE_TABLE | NFT_CACHE_FLOWTABLE,
+			     ctx->msgs, NULL) < 0)
 		return 0;
 
 	ft = flowtable_lookup_fuzzy(cmd->handle.flowtable.name,
@@ -270,6 +286,13 @@ static int nft_cmd_chain_error(struct netlink_ctx *ctx, struct cmd *cmd,
 		if (priority <= -200 && !strcmp(chain->type.str, "nat"))
 			return netlink_io_error(ctx, &chain->priority.loc,
 						"Chains of type \"nat\" must have a priority value above -200");
+
+		if (nft_cache_update(ctx->nft, NFT_CACHE_TABLE | NFT_CACHE_CHAIN,
+				     ctx->msgs, NULL) < 0) {
+			return netlink_io_error(ctx, &chain->loc,
+						"Chain of type \"%s\" is not supported, perhaps kernel support is missing?",
+						chain->type.str);
+		}
 
 		table = table_cache_find(&ctx->nft->cache.table_cache,
 					 cmd->handle.table.name, cmd->handle.family);

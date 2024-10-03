@@ -2,12 +2,12 @@
 .\"     Title: nft
 .\"    Author: [see the "AUTHORS" section]
 .\" Generator: DocBook XSL Stylesheets vsnapshot <http://docbook.sf.net/>
-.\"      Date: 07/09/2024
+.\"      Date: 09/18/2024
 .\"    Manual: \ \&
 .\"    Source: \ \&
 .\"  Language: English
 .\"
-.TH "NFT" "8" "07/09/2024" "\ \&" "\ \&"
+.TH "NFT" "8" "09/18/2024" "\ \&" "\ \&"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -757,7 +757,7 @@ T{
 route
 T}:T{
 .sp
-ip, ip6
+ip, ip6, inet
 T}:T{
 .sp
 output
@@ -1660,21 +1660,6 @@ List all flowtables\&.
 T}
 .TE
 .sp 1
-.SH "LISTING"
-.sp
-.if n \{\
-.RS 4
-.\}
-.nf
-\fBlist { secmarks | synproxys | flow tables | meters | hooks }\fR [\fIfamily\fR]
-\fBlist { secmarks | synproxys | flow tables | meters | hooks } table\fR [\fIfamily\fR] \fItable\fR
-\fBlist ct { timeout | expectation | helper | helpers } table\fR [\fIfamily\fR] \fItable\fR
-.fi
-.if n \{\
-.RE
-.\}
-.sp
-Inspect configured objects\&. \fBlist hooks\fR shows the full hook pipeline, including those registered by kernel modules, such as nf_conntrack\&.
 .SH "STATEFUL OBJECTS"
 .sp
 .if n \{\
@@ -7791,7 +7776,7 @@ The payload statement alters packet content\&. It can be used for example to set
 .nf
 # redirect tcp:http from 192\&.160\&.0\&.0/16 to local machine for routing instead of bridging
 # assumes 00:11:22:33:44:55 is local MAC address\&.
-bridge input meta iif eth0 ip saddr 192\&.168\&.0\&.0/16 tcp dport 80 meta pkttype set unicast ether daddr set 00:11:22:33:44:55
+bridge input meta iif eth0 ip saddr 192\&.168\&.0\&.0/16 tcp dport 80 meta pkttype set host ether daddr set 00:11:22:33:44:55
 .fi
 .if n \{\
 .RE
@@ -8843,23 +8828,23 @@ T}
 table ip x {
     chain y {
         type filter hook prerouting priority mangle; policy accept;
-        tcp dport ntp tproxy to 1\&.1\&.1\&.1
-        udp dport ssh tproxy to :2222
+        tcp dport ntp tproxy to 1\&.1\&.1\&.1 accept
+        udp dport ssh tproxy to :2222 accept
     }
 }
 table ip6 x {
     chain y {
        type filter hook prerouting priority mangle; policy accept;
-       tcp dport ntp tproxy to [dead::beef]
-       udp dport ssh tproxy to :2222
+       tcp dport ntp tproxy to [dead::beef] accept
+       udp dport ssh tproxy to :2222 accept
     }
 }
 table inet x {
     chain y {
         type filter hook prerouting priority mangle; policy accept;
-        tcp dport 321 tproxy to :ssh
-        tcp dport 99 tproxy ip to 1\&.1\&.1\&.1:999
-        udp dport 155 tproxy ip6 to [dead::beef]:smux
+        tcp dport 321 tproxy to :22 accept
+        tcp dport 99 tproxy ip to 1\&.1\&.1\&.1:999 accept
+        udp dport 155 tproxy ip6 to [dead::beef]:smux accept
     }
 }
 .fi
@@ -8867,6 +8852,44 @@ table inet x {
 .RE
 .\}
 .sp
+Note that the tproxy statement is non\-terminal to allow post\-processing of packets\&. This allows packets to be logged for debugging as well as updating the mark to ensure that packets are delivered locally through policy routing rules\&.
+.PP
+\fBExample ruleset for tproxy statement with logging and meta mark\fR. 
+.sp
+.if n \{\
+.RS 4
+.\}
+.nf
+table inet x {
+    chain y {
+        type filter hook prerouting priority mangle; policy accept;
+        udp dport 9999 goto {
+            tproxy to :1234 log prefix "packet tproxied: " meta mark set 1 accept
+            log prefix "no socket on port 1234 or not transparent?: " drop
+        }
+    }
+}
+.fi
+.if n \{\
+.RE
+.\}
+.sp
+As packet headers are unchanged, packets might be forwarded instead of delivered locally\&. As mentioned above, this can be avoided by adding policy routing rules and the packet mark\&.
+.PP
+\fBExample policy routing rules for local redirection\fR. 
+.sp
+.if n \{\
+.RS 4
+.\}
+.nf
+ip rule add fwmark 1 lookup 100
+ip route add local 0\&.0\&.0\&.0/0 dev lo table 100
+.fi
+.if n \{\
+.RE
+.\}
+.sp
+This is a change in behavior compared to the legacy iptables TPROXY target which is terminal\&. To terminate the packet processing after the tproxy statement, remember to issue a verdict as in the example above\&.
 .SS "SYNPROXY STATEMENT"
 .sp
 This statement will process TCP three\-way\-handshake parallel in netfilter context to protect either local or backend system\&. This statement requires connection tracking because sequence numbers need to be translated\&.
@@ -9366,6 +9389,60 @@ Seeing this means the ruleset (or parts of it) were created by \fBiptables\-nft\
 .SH "ADDITIONAL COMMANDS"
 .sp
 These are some additional commands included in nft\&.
+.SS "LIST HOOKS"
+.sp
+This shows the list of functions that have been registered for the given protocol family, including functions that have been registered implicitly by kernel modules such as nf_conntrack\&.
+.sp
+.if n \{\
+.RS 4
+.\}
+.nf
+\fBlist hooks\fR [\fIfamily\fR]
+\fBlist hooks netdev\fR [ \fBdevice\fR \fIDEVICE_NAME\fR ]
+.fi
+.if n \{\
+.RE
+.\}
+.sp
+\fBlist hooks\fR is enough to display everything that is active on the system\&. Hooks in the netdev family are tied to a network device\&. If no device name is given, nft will query all network devices in the current network namespace\&. Example Usage:
+.PP
+\fBList all active netfilter hooks in either the ip or ip6 stack\fR. 
+.sp
+.if n \{\
+.RS 4
+.\}
+.nf
+% nft list hooks inet
+family ip {
+        hook prerouting {
+                \-0000000400 ipv4_conntrack_defrag [nf_defrag_ipv4]
+                \-0000000200 ipv4_conntrack_in [nf_conntrack]
+                \-0000000100 nf_nat_ipv4_pre_routing [nf_nat]
+        }
+        hook input {
+                 0000000000 chain inet filter input [nf_tables]
+                +0000000100 nf_nat_ipv4_local_in [nf_nat]
+[\&.\&.]
+.fi
+.if n \{\
+.RE
+.\}
+.sp
+The above shows a host that has nat, conntrack and ipv4 packet defragmentation enabled\&. For each hook location for the queried family a list of active hooks using the format
+.sp
+\fBpriority\fR \fBidentifier\fR [\fBmodule_name\fR]
+.sp
+will be shown\&.
+.sp
+The \fBpriority\fR value dictates the order in which the hooks are called\&. The list is sorted, the lowest number is run first\&.
+.sp
+The priority value of hooks registered by the kernel cannot be changed\&. For basechains registered by nftables, this value corresponds to the \fBpriority\fR value specified in the base chain definition\&.
+.sp
+After the numerical value, information about the hook is shown\&. For basechains defined in nftables this includes the table family, the table name and the basechains name\&. For hooks coming from kernel modules, the function name is used instead\&.
+.sp
+If a \fBmodule name\fR is given, the hook was registered by the kernel module with this name\&. You can use \fImodinfo \fR\fI\fBmodule name\fR\fR to obtain more information about the module\&.
+.sp
+This functionality requires a kernel built with the option CONFIG_NETFILTER_NETLINK_HOOK enabled, either as a module or builtin\&. The module is named \fBnfnetlink_hook\fR\&.
 .SS "MONITOR"
 .sp
 The monitor command allows you to listen to Netlink events produced by the nf_tables subsystem\&. These are either related to creation and deletion of objects or to packets for which \fBmeta nftrace\fR was enabled\&. When they occur, nft will print to stdout the monitored events in either JSON or native nft format\&.

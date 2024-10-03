@@ -123,6 +123,11 @@ void datatype_print(const struct expr *expr, struct output_ctx *octx)
 	    expr->dtype->name);
 }
 
+bool datatype_prefix_notation(const struct datatype *dtype)
+{
+	return dtype->type == TYPE_IPADDR || dtype->type == TYPE_IP6ADDR;
+}
+
 struct error_record *symbol_parse(struct parse_ctx *ctx, const struct expr *sym,
 				  struct expr **res)
 {
@@ -642,7 +647,6 @@ const struct datatype ipaddr_type = {
 	.basetype	= &integer_type,
 	.print		= ipaddr_type_print,
 	.parse		= ipaddr_type_parse,
-	.flags		= DTYPE_F_PREFIX,
 };
 
 static void ip6addr_type_print(const struct expr *expr, struct output_ctx *octx)
@@ -709,7 +713,6 @@ const struct datatype ip6addr_type = {
 	.basetype	= &integer_type,
 	.print		= ip6addr_type_print,
 	.parse		= ip6addr_type_parse,
-	.flags		= DTYPE_F_PREFIX,
 };
 
 static void inet_protocol_type_print(const struct expr *expr,
@@ -1344,7 +1347,7 @@ static struct datatype *datatype_alloc(void)
 	struct datatype *dtype;
 
 	dtype = xzalloc(sizeof(*dtype));
-	dtype->flags = DTYPE_F_ALLOC;
+	dtype->alloc = 1;
 	dtype->refcnt = 1;
 
 	return dtype;
@@ -1356,7 +1359,7 @@ const struct datatype *datatype_get(const struct datatype *ptr)
 
 	if (!dtype)
 		return NULL;
-	if (!(dtype->flags & DTYPE_F_ALLOC))
+	if (!dtype->alloc)
 		return dtype;
 
 	dtype->refcnt++;
@@ -1386,7 +1389,7 @@ struct datatype *datatype_clone(const struct datatype *orig_dtype)
 	*dtype = *orig_dtype;
 	dtype->name = xstrdup(orig_dtype->name);
 	dtype->desc = xstrdup(orig_dtype->desc);
-	dtype->flags = DTYPE_F_ALLOC | orig_dtype->flags;
+	dtype->alloc = 1;
 	dtype->refcnt = 1;
 
 	return dtype;
@@ -1398,7 +1401,7 @@ void datatype_free(const struct datatype *ptr)
 
 	if (!dtype)
 		return;
-	if (!(dtype->flags & DTYPE_F_ALLOC))
+	if (!dtype->alloc)
 		return;
 
 	assert(dtype->refcnt != 0);
@@ -1477,7 +1480,7 @@ static struct error_record *time_unit_parse(const struct location *loc,
 	else if (strcmp(str, "week") == 0)
 		*unit = 1ULL * 60 * 60 * 24 * 7;
 	else
-		return error(loc, "Wrong rate format");
+		return error(loc, "Wrong time format, expecting second, minute, hour, day or week");
 
 	return NULL;
 }
@@ -1485,14 +1488,14 @@ static struct error_record *time_unit_parse(const struct location *loc,
 struct error_record *data_unit_parse(const struct location *loc,
 				     const char *str, uint64_t *rate)
 {
-	if (strncmp(str, "bytes", strlen("bytes")) == 0)
+	if (strcmp(str, "bytes") == 0)
 		*rate = 1ULL;
-	else if (strncmp(str, "kbytes", strlen("kbytes")) == 0)
+	else if (strcmp(str, "kbytes") == 0)
 		*rate = 1024;
-	else if (strncmp(str, "mbytes", strlen("mbytes")) == 0)
+	else if (strcmp(str, "mbytes") == 0)
 		*rate = 1024 * 1024;
 	else
-		return error(loc, "Wrong rate format");
+		return error(loc, "Wrong unit format, expecting bytes, kbytes or mbytes");
 
 	return NULL;
 }
@@ -1500,14 +1503,20 @@ struct error_record *data_unit_parse(const struct location *loc,
 struct error_record *rate_parse(const struct location *loc, const char *str,
 				uint64_t *rate, uint64_t *unit)
 {
+	const char *slash, *rate_str;
 	struct error_record *erec;
-	const char *slash;
 
 	slash = strchr(str, '/');
 	if (!slash)
-		return error(loc, "wrong rate format");
+		return error(loc, "wrong rate format, expecting {bytes,kbytes,mbytes}/{second,minute,hour,day,week}");
 
-	erec = data_unit_parse(loc, str, rate);
+	rate_str = strndup(str, slash - str);
+	if (!rate_str)
+		memory_allocation_error();
+
+	erec = data_unit_parse(loc, rate_str, rate);
+	free_const(rate_str);
+
 	if (erec != NULL)
 		return erec;
 

@@ -604,7 +604,6 @@ noinst_HEADERS = \
 	include/linux/netfilter_arp/arp_tables.h \
 	include/linux/netfilter_bridge.h \
 	include/linux/netfilter_bridge/ebtables.h \
-	include/linux/netfilter_decnet.h \
 	include/linux/netfilter_ipv4.h \
 	include/linux/netfilter_ipv4/ip_tables.h \
 	include/linux/netfilter_ipv6.h \
@@ -740,6 +739,7 @@ examples_nft_json_file_LDADD = src/libnftables.la
 
 @BUILD_MAN_TRUE@ASCIIDOC_MAIN = doc/nft.txt
 @BUILD_MAN_TRUE@ASCIIDOC_INCLUDES = \
+@BUILD_MAN_TRUE@	doc/additional-commands.txt \
 @BUILD_MAN_TRUE@	doc/data-types.txt \
 @BUILD_MAN_TRUE@	doc/payload-expression.txt \
 @BUILD_MAN_TRUE@	doc/primary-expression.txt \

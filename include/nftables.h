@@ -241,4 +241,7 @@ int nft_optimize(struct nft_ctx *nft, struct list_head *cmds);
 
 #define __NFT_OUTPUT_NOTSUPP	UINT_MAX
 
+/* internal marker, not used by the kernel. */
+#define NFT_NEVER_TIMEOUT	UINT64_MAX
+
 #endif /* NFTABLES_NFTABLES_H */

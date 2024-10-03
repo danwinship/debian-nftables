@@ -402,7 +402,7 @@ void concat_range_aggregate(struct expr *set)
 			}
 
 			if (prefix_len < 0 ||
-			    !(r1->dtype->flags & DTYPE_F_PREFIX)) {
+			    !datatype_prefix_notation(r1->dtype)) {
 				tmp = range_expr_alloc(&r1->location, r1,
 						       r2);
 
@@ -517,7 +517,7 @@ add_interval(struct expr *set, struct expr *low, struct expr *i)
 		expr = expr_get(low);
 	} else if (range_is_prefix(range) && !mpz_cmp_ui(p, 0)) {
 
-		if (i->dtype->flags & DTYPE_F_PREFIX)
+		if (datatype_prefix_notation(i->dtype))
 			expr = interval_to_prefix(low, i, range);
 		else if (expr_basetype(i)->type == TYPE_STRING)
 			expr = interval_to_string(low, i, range);

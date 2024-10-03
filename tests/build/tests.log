@@ -1,4 +1,4 @@
-Clonando en '/tmp/tmp.Tx9WGrHGL1'...
+Clonando en '/tmp/tmp.4M2gsDoCZf'...
 hecho.
 libtoolize: putting auxiliary files in AC_CONFIG_AUX_DIR, 'build-aux'.
 libtoolize: copying file 'build-aux/ltmain.sh'
@@ -131,61 +131,61 @@ nft configuration:
   libxtables support:		no
   json output support:          no
 make  dist-xz am__post_remove_distdir='@:'
-make[1]: se entra en el directorio '/tmp/tmp.Tx9WGrHGL1'
+make[1]: se entra en el directorio '/tmp/tmp.4M2gsDoCZf'
   YACC     src/parser_bison.c
-/tmp/tmp.Tx9WGrHGL1/src/parser_bison.y:206.1-19: aviso: directiva no válida: «%name-prefix "nft_"», use «%define api.prefix {nft_}» [-Wdeprecated]
+/tmp/tmp.4M2gsDoCZf/src/parser_bison.y:206.1-19: aviso: directiva no válida: «%name-prefix "nft_"», use «%define api.prefix {nft_}» [-Wdeprecated]
   206 | %name-prefix "nft_"
       | ^~~~~~~~~~~~~~~~~~~
       | %define api.prefix {nft_}
-/tmp/tmp.Tx9WGrHGL1/src/parser_bison.y: aviso: fix-its can be applied.  Rerun with option '--update'. [-Wother]
+/tmp/tmp.4M2gsDoCZf/src/parser_bison.y: aviso: fix-its can be applied.  Rerun with option '--update'. [-Wother]
 updating src/parser_bison.h
 make  distdir-am
-make[2]: se entra en el directorio '/tmp/tmp.Tx9WGrHGL1'
+make[2]: se entra en el directorio '/tmp/tmp.4M2gsDoCZf'
 mkdir -p ./doc
   GEN      doc/nft.8
   GEN      doc/libnftables-json.5
   GEN      doc/libnftables.3
   LEX      src/scanner.c
-if test -d "nftables-1.1.0"; then find "nftables-1.1.0" -type d ! -perm -200 -exec chmod u+w {} ';' && rm -rf "nftables-1.1.0" || { sleep 5 && rm -rf "nftables-1.1.0"; }; else :; fi
-test -d "nftables-1.1.0" || mkdir "nftables-1.1.0"
+if test -d "nftables-1.1.1"; then find "nftables-1.1.1" -type d ! -perm -200 -exec chmod u+w {} ';' && rm -rf "nftables-1.1.1" || { sleep 5 && rm -rf "nftables-1.1.1"; }; else :; fi
+test -d "nftables-1.1.1" || mkdir "nftables-1.1.1"
 test -n "" \
-|| find "nftables-1.1.0" -type d ! -perm -755 \
+|| find "nftables-1.1.1" -type d ! -perm -755 \
 	-exec chmod u+rwx,go+rx {} \; -o \
   ! -type d ! -perm -444 -links 1 -exec chmod a+r {} \; -o \
   ! -type d ! -perm -400 -exec chmod a+r {} \; -o \
-  ! -type d ! -perm -444 -exec /bin/bash /tmp/tmp.Tx9WGrHGL1/build-aux/install-sh -c -m a+r {} {} \; \
-|| chmod -R a+r "nftables-1.1.0"
-make[2]: se sale del directorio '/tmp/tmp.Tx9WGrHGL1'
-tardir=nftables-1.1.0 && tar --format=posix -chf - "$tardir" | XZ_OPT=${XZ_OPT--e} xz -c >nftables-1.1.0.tar.xz
-make[1]: se sale del directorio '/tmp/tmp.Tx9WGrHGL1'
-if test -d "nftables-1.1.0"; then find "nftables-1.1.0" -type d ! -perm -200 -exec chmod u+w {} ';' && rm -rf "nftables-1.1.0" || { sleep 5 && rm -rf "nftables-1.1.0"; }; else :; fi
-case 'nftables-1.1.0.tar.xz' in \
+  ! -type d ! -perm -444 -exec /bin/bash /tmp/tmp.4M2gsDoCZf/build-aux/install-sh -c -m a+r {} {} \; \
+|| chmod -R a+r "nftables-1.1.1"
+make[2]: se sale del directorio '/tmp/tmp.4M2gsDoCZf'
+tardir=nftables-1.1.1 && tar --format=posix -chf - "$tardir" | XZ_OPT=${XZ_OPT--e} xz -c >nftables-1.1.1.tar.xz
+make[1]: se sale del directorio '/tmp/tmp.4M2gsDoCZf'
+if test -d "nftables-1.1.1"; then find "nftables-1.1.1" -type d ! -perm -200 -exec chmod u+w {} ';' && rm -rf "nftables-1.1.1" || { sleep 5 && rm -rf "nftables-1.1.1"; }; else :; fi
+case 'nftables-1.1.1.tar.xz' in \
 *.tar.gz*) \
-  eval GZIP= gzip --best -dc nftables-1.1.0.tar.gz | tar -xf - ;;\
+  eval GZIP= gzip --best -dc nftables-1.1.1.tar.gz | tar -xf - ;;\
 *.tar.bz2*) \
-  bzip2 -dc nftables-1.1.0.tar.bz2 | tar -xf - ;;\
+  bzip2 -dc nftables-1.1.1.tar.bz2 | tar -xf - ;;\
 *.tar.lz*) \
-  lzip -dc nftables-1.1.0.tar.lz | tar -xf - ;;\
+  lzip -dc nftables-1.1.1.tar.lz | tar -xf - ;;\
 *.tar.xz*) \
-  xz -dc nftables-1.1.0.tar.xz | tar -xf - ;;\
+  xz -dc nftables-1.1.1.tar.xz | tar -xf - ;;\
 *.tar.Z*) \
-  uncompress -c nftables-1.1.0.tar.Z | tar -xf - ;;\
+  uncompress -c nftables-1.1.1.tar.Z | tar -xf - ;;\
 *.shar.gz*) \
-  eval GZIP= gzip --best -dc nftables-1.1.0.shar.gz | unshar ;;\
+  eval GZIP= gzip --best -dc nftables-1.1.1.shar.gz | unshar ;;\
 *.zip*) \
-  unzip nftables-1.1.0.zip ;;\
+  unzip nftables-1.1.1.zip ;;\
 *.tar.zst*) \
-  zstd -dc nftables-1.1.0.tar.zst | tar -xf - ;;\
+  zstd -dc nftables-1.1.1.tar.zst | tar -xf - ;;\
 esac
-chmod -R a-w nftables-1.1.0
-chmod u+w nftables-1.1.0
-mkdir nftables-1.1.0/_build nftables-1.1.0/_build/sub nftables-1.1.0/_inst
-chmod a-w nftables-1.1.0
-test -d nftables-1.1.0/_build || exit 0; \
-dc_install_base=`CDPATH="${ZSH_VERSION+.}:" && cd nftables-1.1.0/_inst && pwd | sed -e 's,^[^:\\/]:[\\/],/,'` \
+chmod -R a-w nftables-1.1.1
+chmod u+w nftables-1.1.1
+mkdir nftables-1.1.1/_build nftables-1.1.1/_build/sub nftables-1.1.1/_inst
+chmod a-w nftables-1.1.1
+test -d nftables-1.1.1/_build || exit 0; \
+dc_install_base=`CDPATH="${ZSH_VERSION+.}:" && cd nftables-1.1.1/_inst && pwd | sed -e 's,^[^:\\/]:[\\/],/,'` \
   && dc_destdir="${TMPDIR-/tmp}/am-dc-$$/" \
   && am__cwd=`pwd` \
-  && CDPATH="${ZSH_VERSION+.}:" && cd nftables-1.1.0/_build/sub \
+  && CDPATH="${ZSH_VERSION+.}:" && cd nftables-1.1.1/_build/sub \
   && ../../configure \
      \
      \
@@ -208,7 +208,7 @@ dc_install_base=`CDPATH="${ZSH_VERSION+.}:" && cd nftables-1.1.0/_inst && pwd | 
       } || { rm -rf "$dc_destdir"; exit 1; }) \
   && rm -rf "$dc_destdir" \
   && make  dist \
-  && rm -rf nftables-1.1.0.tar.xz \
+  && rm -rf nftables-1.1.1.tar.xz \
   && make  distcleancheck \
   && cd "$am__cwd" \
   || exit 1
@@ -326,9 +326,9 @@ nft configuration:
   enable man page:              yes
   libxtables support:		no
   json output support:          no
-make[1]: se entra en el directorio '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_build/sub'
+make[1]: se entra en el directorio '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_build/sub'
 make  all-am
-make[2]: se entra en el directorio '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_build/sub'
+make[2]: se entra en el directorio '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_build/sub'
   CC       src/main.o
   CC       src/cli.o
   CC       src/cache.lo
@@ -380,37 +380,37 @@ make[2]: se entra en el directorio '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_build/su
   CCLD     src/libparser.la
   CCLD     src/libnftables.la
   CCLD     src/nft
-make[2]: se sale del directorio '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_build/sub'
-make[1]: se sale del directorio '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_build/sub'
-make[1]: se entra en el directorio '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_build/sub'
+make[2]: se sale del directorio '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_build/sub'
+make[1]: se sale del directorio '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_build/sub'
+make[1]: se entra en el directorio '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_build/sub'
 make[1]: No se hace nada para 'dvi'.
-make[1]: se sale del directorio '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_build/sub'
-make[1]: se entra en el directorio '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_build/sub'
+make[1]: se sale del directorio '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_build/sub'
+make[1]: se entra en el directorio '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_build/sub'
 make  check-am
-make[2]: se entra en el directorio '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_build/sub'
+make[2]: se entra en el directorio '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_build/sub'
 make  examples/nft-buffer examples/nft-json-file
-make[3]: se entra en el directorio '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_build/sub'
+make[3]: se entra en el directorio '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_build/sub'
   CC       examples/nft-buffer.o
   CCLD     examples/nft-buffer
   CC       examples/nft-json-file.o
   CCLD     examples/nft-json-file
-make[3]: se sale del directorio '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_build/sub'
-make[2]: se sale del directorio '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_build/sub'
-make[1]: se sale del directorio '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_build/sub'
-make[1]: se entra en el directorio '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_build/sub'
+make[3]: se sale del directorio '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_build/sub'
+make[2]: se sale del directorio '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_build/sub'
+make[1]: se sale del directorio '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_build/sub'
+make[1]: se entra en el directorio '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_build/sub'
 make  install-am
-make[2]: se entra en el directorio '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_build/sub'
-make[3]: se entra en el directorio '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_build/sub'
- /usr/bin/mkdir -p '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/lib'
- /bin/bash ./libtool   --mode=install /usr/bin/install -c   src/libnftables.la '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/lib'
-libtool: install: /usr/bin/install -c src/.libs/libnftables.so.1.1.0 /tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/lib/libnftables.so.1.1.0
-libtool: install: (cd /tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/lib && { ln -s -f libnftables.so.1.1.0 libnftables.so.1 || { rm -f libnftables.so.1 && ln -s libnftables.so.1.1.0 libnftables.so.1; }; })
-libtool: install: (cd /tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/lib && { ln -s -f libnftables.so.1.1.0 libnftables.so || { rm -f libnftables.so && ln -s libnftables.so.1.1.0 libnftables.so; }; })
-libtool: install: /usr/bin/install -c src/.libs/libnftables.lai /tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/lib/libnftables.la
-libtool: finish: PATH="/home/pablo/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/home/pablo/bin:/u01/app/oracle/product/11.2.0/xe/bin:/home/pablo/devel/scm/git-arm/arm-2011.03/bin:/home/pablo/.local/bin:/home/pablo/bin:/u01/app/oracle/product/11.2.0/xe/bin:/home/pablo/devel/scm/git-arm/arm-2011.03/bin:/home/pablo/.local/bin:/sbin" ldconfig -n /tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/lib
+make[2]: se entra en el directorio '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_build/sub'
+make[3]: se entra en el directorio '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_build/sub'
+ /usr/bin/mkdir -p '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/lib'
+ /bin/bash ./libtool   --mode=install /usr/bin/install -c   src/libnftables.la '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/lib'
+libtool: install: /usr/bin/install -c src/.libs/libnftables.so.1.1.0 /tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/lib/libnftables.so.1.1.0
+libtool: install: (cd /tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/lib && { ln -s -f libnftables.so.1.1.0 libnftables.so.1 || { rm -f libnftables.so.1 && ln -s libnftables.so.1.1.0 libnftables.so.1; }; })
+libtool: install: (cd /tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/lib && { ln -s -f libnftables.so.1.1.0 libnftables.so || { rm -f libnftables.so && ln -s libnftables.so.1.1.0 libnftables.so; }; })
+libtool: install: /usr/bin/install -c src/.libs/libnftables.lai /tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/lib/libnftables.la
+libtool: finish: PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/sbin" ldconfig -n /tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/lib
 ----------------------------------------------------------------------
 Libraries have been installed in:
-   /tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/lib
+   /tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/lib
 
 If you ever happen to want to link against installed libraries
 in a given directory, LIBDIR, you must either use libtool, and
@@ -426,115 +426,115 @@ flag during linking and do at least one of the following:
 See any operating system documentation about shared libraries for
 more information, such as the ld(1) and ld.so(8) manual pages.
 ----------------------------------------------------------------------
- /usr/bin/mkdir -p '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/sbin'
-  /bin/bash ./libtool   --mode=install /usr/bin/install -c src/nft '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/sbin'
-libtool: install: /usr/bin/install -c src/.libs/nft /tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/sbin/nft
- /usr/bin/mkdir -p '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/share/nftables'
- /usr/bin/install -c -m 644 ../../files/nftables/all-in-one.nft ../../files/nftables/arp-filter.nft ../../files/nftables/bridge-filter.nft ../../files/nftables/inet-filter.nft ../../files/nftables/inet-nat.nft ../../files/nftables/ipv4-filter.nft ../../files/nftables/ipv4-mangle.nft ../../files/nftables/ipv4-nat.nft ../../files/nftables/ipv4-raw.nft ../../files/nftables/ipv6-filter.nft ../../files/nftables/ipv6-mangle.nft ../../files/nftables/ipv6-nat.nft ../../files/nftables/ipv6-raw.nft ../../files/nftables/netdev-ingress.nft '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/share/nftables'
- /usr/bin/mkdir -p '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/share/doc/nftables/examples'
- /usr/bin/install -c ../../files/examples/ct_helpers.nft ../../files/examples/load_balancing.nft ../../files/examples/secmark.nft ../../files/examples/sets_and_maps.nft '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/share/doc/nftables/examples'
- /usr/bin/mkdir -p '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/etc/nftables/osf'
- /usr/bin/install -c -m 644 ../../files/osf/pf.os '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/etc/nftables/osf'
- /usr/bin/mkdir -p '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/share/man/man3'
- /usr/bin/install -c -m 644 ../../doc/libnftables.3 '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/share/man/man3'
- /usr/bin/mkdir -p '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/share/man/man5'
- /usr/bin/install -c -m 644 ../../doc/libnftables-json.5 '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/share/man/man5'
- /usr/bin/mkdir -p '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/share/man/man8'
- /usr/bin/install -c -m 644 ../../doc/nft.8 '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/share/man/man8'
- /usr/bin/mkdir -p '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/lib/pkgconfig'
- /usr/bin/install -c -m 644 libnftables.pc '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/lib/pkgconfig'
- /usr/bin/mkdir -p '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/include/nftables'
- /usr/bin/install -c -m 644 ../../include/nftables/libnftables.h '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/include/nftables'
-make[3]: se sale del directorio '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_build/sub'
-make[2]: se sale del directorio '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_build/sub'
-make[1]: se sale del directorio '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_build/sub'
-make[1]: se entra en el directorio '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_build/sub'
+ /usr/bin/mkdir -p '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/sbin'
+  /bin/bash ./libtool   --mode=install /usr/bin/install -c src/nft '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/sbin'
+libtool: install: /usr/bin/install -c src/.libs/nft /tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/sbin/nft
+ /usr/bin/mkdir -p '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/share/nftables'
+ /usr/bin/install -c -m 644 ../../files/nftables/all-in-one.nft ../../files/nftables/arp-filter.nft ../../files/nftables/bridge-filter.nft ../../files/nftables/inet-filter.nft ../../files/nftables/inet-nat.nft ../../files/nftables/ipv4-filter.nft ../../files/nftables/ipv4-mangle.nft ../../files/nftables/ipv4-nat.nft ../../files/nftables/ipv4-raw.nft ../../files/nftables/ipv6-filter.nft ../../files/nftables/ipv6-mangle.nft ../../files/nftables/ipv6-nat.nft ../../files/nftables/ipv6-raw.nft ../../files/nftables/netdev-ingress.nft '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/share/nftables'
+ /usr/bin/mkdir -p '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/share/doc/nftables/examples'
+ /usr/bin/install -c ../../files/examples/ct_helpers.nft ../../files/examples/load_balancing.nft ../../files/examples/secmark.nft ../../files/examples/sets_and_maps.nft '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/share/doc/nftables/examples'
+ /usr/bin/mkdir -p '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/etc/nftables/osf'
+ /usr/bin/install -c -m 644 ../../files/osf/pf.os '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/etc/nftables/osf'
+ /usr/bin/mkdir -p '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/share/man/man3'
+ /usr/bin/install -c -m 644 ../../doc/libnftables.3 '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/share/man/man3'
+ /usr/bin/mkdir -p '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/share/man/man5'
+ /usr/bin/install -c -m 644 ../../doc/libnftables-json.5 '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/share/man/man5'
+ /usr/bin/mkdir -p '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/share/man/man8'
+ /usr/bin/install -c -m 644 ../../doc/nft.8 '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/share/man/man8'
+ /usr/bin/mkdir -p '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/lib/pkgconfig'
+ /usr/bin/install -c -m 644 libnftables.pc '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/lib/pkgconfig'
+ /usr/bin/mkdir -p '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/include/nftables'
+ /usr/bin/install -c -m 644 ../../include/nftables/libnftables.h '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/include/nftables'
+make[3]: se sale del directorio '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_build/sub'
+make[2]: se sale del directorio '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_build/sub'
+make[1]: se sale del directorio '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_build/sub'
+make[1]: se entra en el directorio '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_build/sub'
 make[1]: No se hace nada para 'installcheck'.
-make[1]: se sale del directorio '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_build/sub'
-make[1]: se entra en el directorio '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_build/sub'
- ( cd '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/share/nftables' && rm -f all-in-one.nft arp-filter.nft bridge-filter.nft inet-filter.nft inet-nat.nft ipv4-filter.nft ipv4-mangle.nft ipv4-nat.nft ipv4-raw.nft ipv6-filter.nft ipv6-mangle.nft ipv6-nat.nft ipv6-raw.nft netdev-ingress.nft )
- ( cd '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/share/doc/nftables/examples' && rm -f ct_helpers.nft load_balancing.nft secmark.nft sets_and_maps.nft )
- ( cd '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/etc/nftables/osf' && rm -f pf.os )
- /bin/bash ./libtool   --mode=uninstall rm -f '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/lib/libnftables.la'
-libtool: uninstall: rm -f /tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/lib/libnftables.la /tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/lib/libnftables.so.1.1.0 /tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/lib/libnftables.so.1 /tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/lib/libnftables.so
- ( cd '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/share/man/man3' && rm -f libnftables.3 )
- ( cd '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/share/man/man5' && rm -f libnftables-json.5 )
- ( cd '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/share/man/man8' && rm -f nft.8 )
- ( cd '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/lib/pkgconfig' && rm -f libnftables.pc )
- ( cd '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/include/nftables' && rm -f libnftables.h )
- ( cd '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/sbin' && rm -f nft )
-make[1]: se sale del directorio '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_build/sub'
-make[1]: se entra en el directorio '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_build/sub'
-make[1]: se sale del directorio '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_build/sub'
-make[1]: se entra en el directorio '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_build/sub'
+make[1]: se sale del directorio '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_build/sub'
+make[1]: se entra en el directorio '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_build/sub'
+ ( cd '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/share/nftables' && rm -f all-in-one.nft arp-filter.nft bridge-filter.nft inet-filter.nft inet-nat.nft ipv4-filter.nft ipv4-mangle.nft ipv4-nat.nft ipv4-raw.nft ipv6-filter.nft ipv6-mangle.nft ipv6-nat.nft ipv6-raw.nft netdev-ingress.nft )
+ ( cd '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/share/doc/nftables/examples' && rm -f ct_helpers.nft load_balancing.nft secmark.nft sets_and_maps.nft )
+ ( cd '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/etc/nftables/osf' && rm -f pf.os )
+ /bin/bash ./libtool   --mode=uninstall rm -f '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/lib/libnftables.la'
+libtool: uninstall: rm -f /tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/lib/libnftables.la /tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/lib/libnftables.so.1.1.0 /tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/lib/libnftables.so.1 /tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/lib/libnftables.so
+ ( cd '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/share/man/man3' && rm -f libnftables.3 )
+ ( cd '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/share/man/man5' && rm -f libnftables-json.5 )
+ ( cd '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/share/man/man8' && rm -f nft.8 )
+ ( cd '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/lib/pkgconfig' && rm -f libnftables.pc )
+ ( cd '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/include/nftables' && rm -f libnftables.h )
+ ( cd '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/sbin' && rm -f nft )
+make[1]: se sale del directorio '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_build/sub'
+make[1]: se entra en el directorio '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_build/sub'
+make[1]: se sale del directorio '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_build/sub'
+make[1]: se entra en el directorio '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_build/sub'
 make  install-am
-make[2]: se entra en el directorio '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_build/sub'
-make[3]: se entra en el directorio '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_build/sub'
- /usr/bin/mkdir -p '/tmp/am-dc-26975//tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/lib'
- /bin/bash ./libtool   --mode=install /usr/bin/install -c   src/libnftables.la '/tmp/am-dc-26975//tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/lib'
-libtool: install: /usr/bin/install -c src/.libs/libnftables.so.1.1.0 /tmp/am-dc-26975//tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/lib/libnftables.so.1.1.0
-libtool: install: (cd /tmp/am-dc-26975//tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/lib && { ln -s -f libnftables.so.1.1.0 libnftables.so.1 || { rm -f libnftables.so.1 && ln -s libnftables.so.1.1.0 libnftables.so.1; }; })
-libtool: install: (cd /tmp/am-dc-26975//tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/lib && { ln -s -f libnftables.so.1.1.0 libnftables.so || { rm -f libnftables.so && ln -s libnftables.so.1.1.0 libnftables.so; }; })
-libtool: install: /usr/bin/install -c src/.libs/libnftables.lai /tmp/am-dc-26975//tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/lib/libnftables.la
-libtool: warning: remember to run 'libtool --finish /tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/lib'
- /usr/bin/mkdir -p '/tmp/am-dc-26975//tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/sbin'
-  /bin/bash ./libtool   --mode=install /usr/bin/install -c src/nft '/tmp/am-dc-26975//tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/sbin'
-libtool: warning: 'src/libnftables.la' has not been installed in '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/lib'
-libtool: install: /usr/bin/install -c src/.libs/nft /tmp/am-dc-26975//tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/sbin/nft
- /usr/bin/mkdir -p '/tmp/am-dc-26975//tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/share/nftables'
- /usr/bin/install -c -m 644 ../../files/nftables/all-in-one.nft ../../files/nftables/arp-filter.nft ../../files/nftables/bridge-filter.nft ../../files/nftables/inet-filter.nft ../../files/nftables/inet-nat.nft ../../files/nftables/ipv4-filter.nft ../../files/nftables/ipv4-mangle.nft ../../files/nftables/ipv4-nat.nft ../../files/nftables/ipv4-raw.nft ../../files/nftables/ipv6-filter.nft ../../files/nftables/ipv6-mangle.nft ../../files/nftables/ipv6-nat.nft ../../files/nftables/ipv6-raw.nft ../../files/nftables/netdev-ingress.nft '/tmp/am-dc-26975//tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/share/nftables'
- /usr/bin/mkdir -p '/tmp/am-dc-26975//tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/share/doc/nftables/examples'
- /usr/bin/install -c ../../files/examples/ct_helpers.nft ../../files/examples/load_balancing.nft ../../files/examples/secmark.nft ../../files/examples/sets_and_maps.nft '/tmp/am-dc-26975//tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/share/doc/nftables/examples'
- /usr/bin/mkdir -p '/tmp/am-dc-26975//tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/etc/nftables/osf'
- /usr/bin/install -c -m 644 ../../files/osf/pf.os '/tmp/am-dc-26975//tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/etc/nftables/osf'
- /usr/bin/mkdir -p '/tmp/am-dc-26975//tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/share/man/man3'
- /usr/bin/install -c -m 644 ../../doc/libnftables.3 '/tmp/am-dc-26975//tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/share/man/man3'
- /usr/bin/mkdir -p '/tmp/am-dc-26975//tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/share/man/man5'
- /usr/bin/install -c -m 644 ../../doc/libnftables-json.5 '/tmp/am-dc-26975//tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/share/man/man5'
- /usr/bin/mkdir -p '/tmp/am-dc-26975//tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/share/man/man8'
- /usr/bin/install -c -m 644 ../../doc/nft.8 '/tmp/am-dc-26975//tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/share/man/man8'
- /usr/bin/mkdir -p '/tmp/am-dc-26975//tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/lib/pkgconfig'
- /usr/bin/install -c -m 644 libnftables.pc '/tmp/am-dc-26975//tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/lib/pkgconfig'
- /usr/bin/mkdir -p '/tmp/am-dc-26975//tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/include/nftables'
- /usr/bin/install -c -m 644 ../../include/nftables/libnftables.h '/tmp/am-dc-26975//tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/include/nftables'
-make[3]: se sale del directorio '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_build/sub'
-make[2]: se sale del directorio '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_build/sub'
-make[1]: se sale del directorio '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_build/sub'
-make[1]: se entra en el directorio '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_build/sub'
- ( cd '/tmp/am-dc-26975//tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/share/nftables' && rm -f all-in-one.nft arp-filter.nft bridge-filter.nft inet-filter.nft inet-nat.nft ipv4-filter.nft ipv4-mangle.nft ipv4-nat.nft ipv4-raw.nft ipv6-filter.nft ipv6-mangle.nft ipv6-nat.nft ipv6-raw.nft netdev-ingress.nft )
- ( cd '/tmp/am-dc-26975//tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/share/doc/nftables/examples' && rm -f ct_helpers.nft load_balancing.nft secmark.nft sets_and_maps.nft )
- ( cd '/tmp/am-dc-26975//tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/etc/nftables/osf' && rm -f pf.os )
- /bin/bash ./libtool   --mode=uninstall rm -f '/tmp/am-dc-26975//tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/lib/libnftables.la'
-libtool: uninstall: rm -f /tmp/am-dc-26975//tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/lib/libnftables.la /tmp/am-dc-26975//tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/lib/libnftables.so.1.1.0 /tmp/am-dc-26975//tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/lib/libnftables.so.1 /tmp/am-dc-26975//tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/lib/libnftables.so
- ( cd '/tmp/am-dc-26975//tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/share/man/man3' && rm -f libnftables.3 )
- ( cd '/tmp/am-dc-26975//tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/share/man/man5' && rm -f libnftables-json.5 )
- ( cd '/tmp/am-dc-26975//tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/share/man/man8' && rm -f nft.8 )
- ( cd '/tmp/am-dc-26975//tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/lib/pkgconfig' && rm -f libnftables.pc )
- ( cd '/tmp/am-dc-26975//tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/include/nftables' && rm -f libnftables.h )
- ( cd '/tmp/am-dc-26975//tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_inst/sbin' && rm -f nft )
-make[1]: se sale del directorio '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_build/sub'
-make[1]: se entra en el directorio '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_build/sub'
-make[1]: se sale del directorio '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_build/sub'
-make[1]: se entra en el directorio '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_build/sub'
+make[2]: se entra en el directorio '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_build/sub'
+make[3]: se entra en el directorio '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_build/sub'
+ /usr/bin/mkdir -p '/tmp/am-dc-138350//tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/lib'
+ /bin/bash ./libtool   --mode=install /usr/bin/install -c   src/libnftables.la '/tmp/am-dc-138350//tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/lib'
+libtool: install: /usr/bin/install -c src/.libs/libnftables.so.1.1.0 /tmp/am-dc-138350//tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/lib/libnftables.so.1.1.0
+libtool: install: (cd /tmp/am-dc-138350//tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/lib && { ln -s -f libnftables.so.1.1.0 libnftables.so.1 || { rm -f libnftables.so.1 && ln -s libnftables.so.1.1.0 libnftables.so.1; }; })
+libtool: install: (cd /tmp/am-dc-138350//tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/lib && { ln -s -f libnftables.so.1.1.0 libnftables.so || { rm -f libnftables.so && ln -s libnftables.so.1.1.0 libnftables.so; }; })
+libtool: install: /usr/bin/install -c src/.libs/libnftables.lai /tmp/am-dc-138350//tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/lib/libnftables.la
+libtool: warning: remember to run 'libtool --finish /tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/lib'
+ /usr/bin/mkdir -p '/tmp/am-dc-138350//tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/sbin'
+  /bin/bash ./libtool   --mode=install /usr/bin/install -c src/nft '/tmp/am-dc-138350//tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/sbin'
+libtool: warning: 'src/libnftables.la' has not been installed in '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/lib'
+libtool: install: /usr/bin/install -c src/.libs/nft /tmp/am-dc-138350//tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/sbin/nft
+ /usr/bin/mkdir -p '/tmp/am-dc-138350//tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/share/nftables'
+ /usr/bin/install -c -m 644 ../../files/nftables/all-in-one.nft ../../files/nftables/arp-filter.nft ../../files/nftables/bridge-filter.nft ../../files/nftables/inet-filter.nft ../../files/nftables/inet-nat.nft ../../files/nftables/ipv4-filter.nft ../../files/nftables/ipv4-mangle.nft ../../files/nftables/ipv4-nat.nft ../../files/nftables/ipv4-raw.nft ../../files/nftables/ipv6-filter.nft ../../files/nftables/ipv6-mangle.nft ../../files/nftables/ipv6-nat.nft ../../files/nftables/ipv6-raw.nft ../../files/nftables/netdev-ingress.nft '/tmp/am-dc-138350//tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/share/nftables'
+ /usr/bin/mkdir -p '/tmp/am-dc-138350//tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/share/doc/nftables/examples'
+ /usr/bin/install -c ../../files/examples/ct_helpers.nft ../../files/examples/load_balancing.nft ../../files/examples/secmark.nft ../../files/examples/sets_and_maps.nft '/tmp/am-dc-138350//tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/share/doc/nftables/examples'
+ /usr/bin/mkdir -p '/tmp/am-dc-138350//tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/etc/nftables/osf'
+ /usr/bin/install -c -m 644 ../../files/osf/pf.os '/tmp/am-dc-138350//tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/etc/nftables/osf'
+ /usr/bin/mkdir -p '/tmp/am-dc-138350//tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/share/man/man3'
+ /usr/bin/install -c -m 644 ../../doc/libnftables.3 '/tmp/am-dc-138350//tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/share/man/man3'
+ /usr/bin/mkdir -p '/tmp/am-dc-138350//tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/share/man/man5'
+ /usr/bin/install -c -m 644 ../../doc/libnftables-json.5 '/tmp/am-dc-138350//tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/share/man/man5'
+ /usr/bin/mkdir -p '/tmp/am-dc-138350//tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/share/man/man8'
+ /usr/bin/install -c -m 644 ../../doc/nft.8 '/tmp/am-dc-138350//tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/share/man/man8'
+ /usr/bin/mkdir -p '/tmp/am-dc-138350//tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/lib/pkgconfig'
+ /usr/bin/install -c -m 644 libnftables.pc '/tmp/am-dc-138350//tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/lib/pkgconfig'
+ /usr/bin/mkdir -p '/tmp/am-dc-138350//tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/include/nftables'
+ /usr/bin/install -c -m 644 ../../include/nftables/libnftables.h '/tmp/am-dc-138350//tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/include/nftables'
+make[3]: se sale del directorio '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_build/sub'
+make[2]: se sale del directorio '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_build/sub'
+make[1]: se sale del directorio '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_build/sub'
+make[1]: se entra en el directorio '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_build/sub'
+ ( cd '/tmp/am-dc-138350//tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/share/nftables' && rm -f all-in-one.nft arp-filter.nft bridge-filter.nft inet-filter.nft inet-nat.nft ipv4-filter.nft ipv4-mangle.nft ipv4-nat.nft ipv4-raw.nft ipv6-filter.nft ipv6-mangle.nft ipv6-nat.nft ipv6-raw.nft netdev-ingress.nft )
+ ( cd '/tmp/am-dc-138350//tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/share/doc/nftables/examples' && rm -f ct_helpers.nft load_balancing.nft secmark.nft sets_and_maps.nft )
+ ( cd '/tmp/am-dc-138350//tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/etc/nftables/osf' && rm -f pf.os )
+ /bin/bash ./libtool   --mode=uninstall rm -f '/tmp/am-dc-138350//tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/lib/libnftables.la'
+libtool: uninstall: rm -f /tmp/am-dc-138350//tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/lib/libnftables.la /tmp/am-dc-138350//tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/lib/libnftables.so.1.1.0 /tmp/am-dc-138350//tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/lib/libnftables.so.1 /tmp/am-dc-138350//tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/lib/libnftables.so
+ ( cd '/tmp/am-dc-138350//tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/share/man/man3' && rm -f libnftables.3 )
+ ( cd '/tmp/am-dc-138350//tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/share/man/man5' && rm -f libnftables-json.5 )
+ ( cd '/tmp/am-dc-138350//tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/share/man/man8' && rm -f nft.8 )
+ ( cd '/tmp/am-dc-138350//tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/lib/pkgconfig' && rm -f libnftables.pc )
+ ( cd '/tmp/am-dc-138350//tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/include/nftables' && rm -f libnftables.h )
+ ( cd '/tmp/am-dc-138350//tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_inst/sbin' && rm -f nft )
+make[1]: se sale del directorio '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_build/sub'
+make[1]: se entra en el directorio '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_build/sub'
+make[1]: se sale del directorio '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_build/sub'
+make[1]: se entra en el directorio '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_build/sub'
 make  dist-xz am__post_remove_distdir='@:'
-make[2]: se entra en el directorio '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_build/sub'
+make[2]: se entra en el directorio '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_build/sub'
 make  distdir-am
-make[3]: se entra en el directorio '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_build/sub'
-if test -d "nftables-1.1.0"; then find "nftables-1.1.0" -type d ! -perm -200 -exec chmod u+w {} ';' && rm -rf "nftables-1.1.0" || { sleep 5 && rm -rf "nftables-1.1.0"; }; else :; fi
-test -d "nftables-1.1.0" || mkdir "nftables-1.1.0"
+make[3]: se entra en el directorio '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_build/sub'
+if test -d "nftables-1.1.1"; then find "nftables-1.1.1" -type d ! -perm -200 -exec chmod u+w {} ';' && rm -rf "nftables-1.1.1" || { sleep 5 && rm -rf "nftables-1.1.1"; }; else :; fi
+test -d "nftables-1.1.1" || mkdir "nftables-1.1.1"
 test -n "" \
-|| find "nftables-1.1.0" -type d ! -perm -755 \
+|| find "nftables-1.1.1" -type d ! -perm -755 \
 	-exec chmod u+rwx,go+rx {} \; -o \
   ! -type d ! -perm -444 -links 1 -exec chmod a+r {} \; -o \
   ! -type d ! -perm -400 -exec chmod a+r {} \; -o \
-  ! -type d ! -perm -444 -exec /bin/bash /tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/build-aux/install-sh -c -m a+r {} {} \; \
-|| chmod -R a+r "nftables-1.1.0"
-make[3]: se sale del directorio '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_build/sub'
-tardir=nftables-1.1.0 && tar --format=posix -chf - "$tardir" | XZ_OPT=${XZ_OPT--e} xz -c >nftables-1.1.0.tar.xz
-make[2]: se sale del directorio '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_build/sub'
-if test -d "nftables-1.1.0"; then find "nftables-1.1.0" -type d ! -perm -200 -exec chmod u+w {} ';' && rm -rf "nftables-1.1.0" || { sleep 5 && rm -rf "nftables-1.1.0"; }; else :; fi
-make[1]: se sale del directorio '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_build/sub'
-make[1]: se entra en el directorio '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_build/sub'
+  ! -type d ! -perm -444 -exec /bin/bash /tmp/tmp.4M2gsDoCZf/nftables-1.1.1/build-aux/install-sh -c -m a+r {} {} \; \
+|| chmod -R a+r "nftables-1.1.1"
+make[3]: se sale del directorio '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_build/sub'
+tardir=nftables-1.1.1 && tar --format=posix -chf - "$tardir" | XZ_OPT=${XZ_OPT--e} xz -c >nftables-1.1.1.tar.xz
+make[2]: se sale del directorio '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_build/sub'
+if test -d "nftables-1.1.1"; then find "nftables-1.1.1" -type d ! -perm -200 -exec chmod u+w {} ';' && rm -rf "nftables-1.1.1" || { sleep 5 && rm -rf "nftables-1.1.1"; }; else :; fi
+make[1]: se sale del directorio '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_build/sub'
+make[1]: se entra en el directorio '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_build/sub'
  rm -f examples/nft-buffer examples/nft-json-file
 test -z "doc/*~" || rm -f doc/*~
 test -z "src/libnftables.la" || rm -f src/libnftables.la
@@ -616,11 +616,11 @@ rm -f src/.deps/utils.Plo
 rm -f src/.deps/xfrm.Plo
 rm -f src/.deps/xt.Plo
 rm -f Makefile
-make[1]: se sale del directorio '/tmp/tmp.Tx9WGrHGL1/nftables-1.1.0/_build/sub'
-if test -d "nftables-1.1.0"; then find "nftables-1.1.0" -type d ! -perm -200 -exec chmod u+w {} ';' && rm -rf "nftables-1.1.0" || { sleep 5 && rm -rf "nftables-1.1.0"; }; else :; fi
+make[1]: se sale del directorio '/tmp/tmp.4M2gsDoCZf/nftables-1.1.1/_build/sub'
+if test -d "nftables-1.1.1"; then find "nftables-1.1.1" -type d ! -perm -200 -exec chmod u+w {} ';' && rm -rf "nftables-1.1.1" || { sleep 5 && rm -rf "nftables-1.1.1"; }; else :; fi
 ================================================
-nftables-1.1.0 archives ready for distribution: 
-nftables-1.1.0.tar.xz
+nftables-1.1.1 archives ready for distribution: 
+nftables-1.1.1.tar.xz
 ================================================
 checking for a BSD-compatible install... /usr/bin/install -c
 checking whether build environment is sane... yes
@@ -736,7 +736,7 @@ nft configuration:
   libxtables support:		no
   json output support:          no
 make  all-am
-make[1]: se entra en el directorio '/tmp/tmp.Tx9WGrHGL1'
+make[1]: se entra en el directorio '/tmp/tmp.4M2gsDoCZf'
   CC       src/main.o
   CC       src/cache.lo
   CC       src/cmd.lo
@@ -764,8 +764,8 @@ make[1]: se entra en el directorio '/tmp/tmp.Tx9WGrHGL1'
   CC       src/netlink_linearize.lo
   CC       src/nfnl_osf.lo
   CC       src/nftutils.lo
-  CC       src/optimize.lo
   CC       src/numgen.lo
+  CC       src/optimize.lo
   CC       src/osf.lo
   CC       src/owner.lo
   CC       src/payload.lo
@@ -787,7 +787,7 @@ make[1]: se entra en el directorio '/tmp/tmp.Tx9WGrHGL1'
   CCLD     src/libparser.la
   CCLD     src/libnftables.la
   CCLD     src/nft
-make[1]: se sale del directorio '/tmp/tmp.Tx9WGrHGL1'
+make[1]: se sale del directorio '/tmp/tmp.4M2gsDoCZf'
 checking for a BSD-compatible install... /usr/bin/install -c
 checking whether build environment is sane... yes
 checking for a race-free mkdir -p... /usr/bin/mkdir -p
@@ -885,8 +885,8 @@ checking for __gmpz_init in -lgmp... yes
 checking for linenoise in -llinenoise... no
 configure: error: No suitable version of linenoise found
 make  all-am
-make[1]: se entra en el directorio '/tmp/tmp.Tx9WGrHGL1'
-make[1]: se sale del directorio '/tmp/tmp.Tx9WGrHGL1'
+make[1]: se entra en el directorio '/tmp/tmp.4M2gsDoCZf'
+make[1]: se sale del directorio '/tmp/tmp.4M2gsDoCZf'
 checking for a BSD-compatible install... /usr/bin/install -c
 checking whether build environment is sane... yes
 checking for a race-free mkdir -p... /usr/bin/mkdir -p
@@ -1002,14 +1002,14 @@ nft configuration:
   libxtables support:		no
   json output support:          no
 make  all-am
-make[1]: se entra en el directorio '/tmp/tmp.Tx9WGrHGL1'
+make[1]: se entra en el directorio '/tmp/tmp.4M2gsDoCZf'
   CC       src/cli.o
   CC       src/main.o
   CC       src/cache.lo
   CC       src/cmd.lo
   CC       src/ct.lo
-  CC       src/dccpopt.lo
   CC       src/datatype.lo
+  CC       src/dccpopt.lo
   CC       src/erec.lo
   CC       src/evaluate.lo
   CC       src/expression.lo
@@ -1053,7 +1053,7 @@ make[1]: se entra en el directorio '/tmp/tmp.Tx9WGrHGL1'
   CCLD     src/libparser.la
   CCLD     src/libnftables.la
   CCLD     src/nft
-make[1]: se sale del directorio '/tmp/tmp.Tx9WGrHGL1'
+make[1]: se sale del directorio '/tmp/tmp.4M2gsDoCZf'
 checking for a BSD-compatible install... /usr/bin/install -c
 checking whether build environment is sane... yes
 checking for a race-free mkdir -p... /usr/bin/mkdir -p
@@ -1170,8 +1170,8 @@ nft configuration:
   libxtables support:		no
   json output support:          no
 make  all-am
-make[1]: se entra en el directorio '/tmp/tmp.Tx9WGrHGL1'
-make[1]: se sale del directorio '/tmp/tmp.Tx9WGrHGL1'
+make[1]: se entra en el directorio '/tmp/tmp.4M2gsDoCZf'
+make[1]: se sale del directorio '/tmp/tmp.4M2gsDoCZf'
 checking for a BSD-compatible install... /usr/bin/install -c
 checking whether build environment is sane... yes
 checking for a race-free mkdir -p... /usr/bin/mkdir -p
@@ -1286,7 +1286,7 @@ nft configuration:
   libxtables support:		no
   json output support:          no
 make  all-am
-make[1]: se entra en el directorio '/tmp/tmp.Tx9WGrHGL1'
+make[1]: se entra en el directorio '/tmp/tmp.4M2gsDoCZf'
   CC       src/libminigmp_la-mini-gmp.lo
   CC       src/main.o
   CC       src/cli.o
@@ -1339,7 +1339,7 @@ make[1]: se entra en el directorio '/tmp/tmp.Tx9WGrHGL1'
   CCLD     src/libparser.la
   CCLD     src/libnftables.la
   CCLD     src/nft
-make[1]: se sale del directorio '/tmp/tmp.Tx9WGrHGL1'
+make[1]: se sale del directorio '/tmp/tmp.4M2gsDoCZf'
 checking for a BSD-compatible install... /usr/bin/install -c
 checking whether build environment is sane... yes
 checking for a race-free mkdir -p... /usr/bin/mkdir -p
@@ -1455,13 +1455,13 @@ nft configuration:
   libxtables support:		no
   json output support:          no
 make  all-am
-make[1]: se entra en el directorio '/tmp/tmp.Tx9WGrHGL1'
+make[1]: se entra en el directorio '/tmp/tmp.4M2gsDoCZf'
   CC       src/main.o
   CC       src/cli.o
   CC       src/cache.lo
-  CC       src/cmd.lo
   CC       src/ct.lo
   CC       src/datatype.lo
+  CC       src/cmd.lo
   CC       src/dccpopt.lo
   CC       src/erec.lo
   CC       src/evaluate.lo
@@ -1493,8 +1493,8 @@ make[1]: se entra en el directorio '/tmp/tmp.Tx9WGrHGL1'
   CC       src/proto.lo
   CC       src/rt.lo
   CC       src/rule.lo
-  CC       src/sctp_chunk.lo
   CC       src/segtree.lo
+  CC       src/sctp_chunk.lo
   CC       src/socket.lo
   CC       src/statement.lo
   CC       src/tcpopt.lo
@@ -1506,7 +1506,7 @@ make[1]: se entra en el directorio '/tmp/tmp.Tx9WGrHGL1'
   CCLD     src/libparser.la
   CCLD     src/libnftables.la
   CCLD     src/nft
-make[1]: se sale del directorio '/tmp/tmp.Tx9WGrHGL1'
+make[1]: se sale del directorio '/tmp/tmp.4M2gsDoCZf'
 checking for a BSD-compatible install... /usr/bin/install -c
 checking whether build environment is sane... yes
 checking for a race-free mkdir -p... /usr/bin/mkdir -p
@@ -1623,15 +1623,15 @@ nft configuration:
   libxtables support:		yes
   json output support:          no
 make  all-am
-make[1]: se entra en el directorio '/tmp/tmp.Tx9WGrHGL1'
+make[1]: se entra en el directorio '/tmp/tmp.4M2gsDoCZf'
   CC       src/main.o
   CC       src/cli.o
   CC       src/cache.lo
-  CC       src/ct.lo
   CC       src/cmd.lo
-  CC       src/dccpopt.lo
   CC       src/datatype.lo
   CC       src/erec.lo
+  CC       src/ct.lo
+  CC       src/dccpopt.lo
   CC       src/evaluate.lo
   CC       src/expression.lo
   CC       src/exthdr.lo
@@ -1662,8 +1662,8 @@ make[1]: se entra en el directorio '/tmp/tmp.Tx9WGrHGL1'
   CC       src/rt.lo
   CC       src/rule.lo
   CC       src/sctp_chunk.lo
-  CC       src/socket.lo
   CC       src/segtree.lo
+  CC       src/socket.lo
   CC       src/statement.lo
   CC       src/tcpopt.lo
   CC       src/utils.lo
@@ -1674,7 +1674,7 @@ make[1]: se entra en el directorio '/tmp/tmp.Tx9WGrHGL1'
   CCLD     src/libparser.la
   CCLD     src/libnftables.la
   CCLD     src/nft
-make[1]: se sale del directorio '/tmp/tmp.Tx9WGrHGL1'
+make[1]: se sale del directorio '/tmp/tmp.4M2gsDoCZf'
 checking for a BSD-compatible install... /usr/bin/install -c
 checking whether build environment is sane... yes
 checking for a race-free mkdir -p... /usr/bin/mkdir -p
@@ -1791,7 +1791,7 @@ nft configuration:
   libxtables support:		no
   json output support:          yes
 make  all-am
-make[1]: se entra en el directorio '/tmp/tmp.Tx9WGrHGL1'
+make[1]: se entra en el directorio '/tmp/tmp.4M2gsDoCZf'
   CC       src/json.lo
   CC       src/parser_json.lo
   CC       src/main.o
@@ -1832,8 +1832,8 @@ make[1]: se entra en el directorio '/tmp/tmp.Tx9WGrHGL1'
   CC       src/rt.lo
   CC       src/rule.lo
   CC       src/sctp_chunk.lo
-  CC       src/segtree.lo
   CC       src/socket.lo
+  CC       src/segtree.lo
   CC       src/statement.lo
   CC       src/tcpopt.lo
   CC       src/utils.lo
@@ -1844,4 +1844,4 @@ make[1]: se entra en el directorio '/tmp/tmp.Tx9WGrHGL1'
   CCLD     src/libparser.la
   CCLD     src/libnftables.la
   CCLD     src/nft
-make[1]: se sale del directorio '/tmp/tmp.Tx9WGrHGL1'
+make[1]: se sale del directorio '/tmp/tmp.4M2gsDoCZf'
