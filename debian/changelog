@@ -1,3 +1,13 @@
+nftables (1.1.1-1) unstable; urgency=medium
+
+  * [014d3ef] New upstream version 1.1.1
+  * [42dbb38] d/changelog: fix typo in ealier 1.1.0-2 entry
+  * [1379560] nftables: bump libnftnl build-dep to 1.2.8
+  * [33a7e22] d/patches: drop 000-upstream-cache-fix-revert.patch
+  * [eda2aa7] d/copyright: drop include/linux/netfilter_decnet.h reference
+
+ -- Arturo Borrero Gonzalez <arturo@debian.org>  Fri, 04 Oct 2024 11:13:26 +0200
+
 nftables (1.1.0-2) unstable; urgency=medium
 
   * [029b2fe] nftables: add 000-upstream-cache-fix-revert.patch
