@@ -65,11 +65,6 @@ Files: include/linux/netfilter_arp.h
 Copyright: 2002 Rusty Russell - IBM
 License: GPL-2
 
-Files: include/linux/netfilter_decnet.h
-Copyright: 1999 Steve Whitehouse
-           1998 Rusty Russell
-License: GPL-2
-
 Files: include/linux/netfilter_ipv6.h
 Copyright: 1998 Rusty Russell
            1999 David Jeffery
