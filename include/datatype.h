@@ -126,7 +126,6 @@ struct parse_ctx;
  *
  * @type:	numeric identifier
  * @byteorder:	byteorder of type (non-basetypes only)
- * @flags:	flags
  * @size:	type size (fixed sized non-basetypes only)
  * @subtypes:	number of subtypes (concat type)
  * @name:	type name
@@ -141,8 +140,8 @@ struct parse_ctx;
 struct datatype {
 	uint32_t			type;
 	enum byteorder			byteorder:8;
-	uint32_t			alloc:1;
-	unsigned int			flags;
+	uint32_t			alloc:1,
+					is_typeof:1;
 	unsigned int			size;
 	unsigned int			subtypes;
 	const char			*name;
@@ -252,7 +251,6 @@ extern const struct datatype verdict_type;
 extern const struct datatype nfproto_type;
 extern const struct datatype bitmask_type;
 extern const struct datatype integer_type;
-extern const struct datatype xinteger_type;
 extern const struct datatype string_type;
 extern const struct datatype lladdr_type;
 extern const struct datatype ipaddr_type;
@@ -273,11 +271,16 @@ extern const struct datatype boolean_type;
 extern const struct datatype priority_type;
 extern const struct datatype policy_type;
 extern const struct datatype cgroupv2_type;
+extern const struct datatype queue_type;
 
 /* private datatypes for reject statement. */
 extern const struct datatype reject_icmp_code_type;
 extern const struct datatype reject_icmpv6_code_type;
 extern const struct datatype reject_icmpx_code_type;
+
+/* TYPE_INTEGER aliases: */
+extern const struct datatype xinteger_type;
+extern const struct datatype mptcpopt_subtype;
 
 void inet_service_type_print(const struct expr *expr, struct output_ctx *octx);
 

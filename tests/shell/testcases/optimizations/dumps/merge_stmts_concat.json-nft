@@ -185,6 +185,67 @@
       "rule": {
         "family": "ip",
         "table": "x",
+        "chain": "y",
+        "handle": 0,
+        "expr": [
+          {
+            "match": {
+              "op": "==",
+              "left": {
+                "concat": [
+                  {
+                    "payload": {
+                      "protocol": "udp",
+                      "field": "dport"
+                    }
+                  },
+                  {
+                    "ct": {
+                      "key": "state"
+                    }
+                  }
+                ]
+              },
+              "right": {
+                "set": [
+                  {
+                    "concat": [
+                      137,
+                      "new"
+                    ]
+                  },
+                  {
+                    "concat": [
+                      138,
+                      "new"
+                    ]
+                  },
+                  {
+                    "concat": [
+                      137,
+                      "untracked"
+                    ]
+                  },
+                  {
+                    "concat": [
+                      138,
+                      "untracked"
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "accept": null
+          }
+        ]
+      }
+    },
+    {
+      "rule": {
+        "family": "ip",
+        "table": "x",
         "chain": "c1",
         "handle": 0,
         "expr": [

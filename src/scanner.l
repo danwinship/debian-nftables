@@ -80,7 +80,6 @@ static void update_pos(struct parser_state *state, struct location *loc,
 {
 	loc->indesc			= state->indesc;
 	loc->first_line			= state->indesc->lineno;
-	loc->last_line			= state->indesc->lineno;
 	loc->first_column		= state->indesc->column;
 	loc->last_column		= state->indesc->column + len - 1;
 	state->indesc->column		+= len;
@@ -89,9 +88,15 @@ static void update_pos(struct parser_state *state, struct location *loc,
 static void update_offset(struct parser_state *state, struct location *loc,
 			  unsigned int len)
 {
+	uint32_t line_offset;
+
 	state->indesc->token_offset	+= len;
-	loc->token_offset		= state->indesc->token_offset;
-	loc->line_offset		= state->indesc->line_offset;
+	if (state->indesc->line_offset > UINT32_MAX)
+		line_offset = UINT32_MAX;
+	else
+		line_offset = state->indesc->line_offset;
+
+	loc->line_offset		= line_offset;
 }
 
 static void reset_pos(struct parser_state *state, struct location *loc)
@@ -116,6 +121,7 @@ extern void	yyset_column(int, yyscan_t);
 
 space		[ ]
 tab		\t
+newline_crlf	\r\n
 newline		\n
 digit		[0-9]
 hexdigit	[0-9a-fA-F]
@@ -888,6 +894,8 @@ addrstring	({macaddr}|{ip4addr}|{ip6addr})
 				yylval->string = xstrdup(yytext);
 				return STRING;
 			}
+
+{newline_crlf}		{	return CRLF; }
 
 \\{newline}		{
 				reset_pos(yyget_extra(yyscanner), yylloc);

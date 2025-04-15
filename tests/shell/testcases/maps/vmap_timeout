@@ -9,8 +9,7 @@ $NFT -f $dumpfile
 
 port=23
 for i in $(seq 1 100) ; do
-	timeout=$((RANDOM%5))
-	timeout=$((timeout+1))
+	timeout=$((RANDOM % 5 + 1))
 	expire=$((RANDOM%timeout))
 	j=1
 
@@ -28,11 +27,9 @@ for i in $(seq 1 100) ; do
 
 	port=$((port + 1))
 	for j in $(seq 2 400); do
-		timeout=$((RANDOM%5))
-		timeout=$((timeout+1))
+		timeout=$((RANDOM % 5 + 1))
 		expire=$((RANDOM%timeout))
-		utimeout=$((RANDOM%5))
-		utimeout=$((timeout+1))
+		utimeout=$((RANDOM % 5 + 1))
 
 		timeout_str="timeout ${timeout}s"
 		expire_str=""

@@ -228,3 +228,5 @@ meta day 7 drop;fail
 meta mark set vlan id map { 1 : 0x00000001, 4095 : 0x00004095 };ok
 !map1 typeof vlan id : meta mark;ok
 meta mark set vlan id map @map1;ok
+
+meta mark set meta mark | iif | meta cpu;ok

@@ -341,7 +341,7 @@ ____
 	"auto-merge":* 'BOOLEAN'
 *}}*
 
-'SET_TYPE' := 'STRING' | *[* 'SET_TYPE_LIST' *]*
+'SET_TYPE' := 'STRING' | *[* 'SET_TYPE_LIST' *]* | *{ "typeof":* 'EXPRESSION' *}*
 'SET_TYPE_LIST' := 'STRING' [*,* 'SET_TYPE_LIST' ]
 'SET_POLICY' := *"performance"* | *"memory"*
 'SET_FLAG_LIST' := 'SET_FLAG' [*,* 'SET_FLAG_LIST' ]
@@ -381,8 +381,9 @@ that they translate a unique key to a value.
 	Automatic merging of adjacent/overlapping set elements in interval sets.
 
 ==== TYPE
-The set type might be a string, such as *"ipv4_addr"* or an array
-consisting of strings (for concatenated types).
+The set type might be a string, such as *"ipv4_addr"*, an array
+consisting of strings (for concatenated types) or a *typeof* object containing
+an expression to extract the type from.
 
 ==== ELEM
 A single set element might be given as string, integer or boolean value for
@@ -1182,7 +1183,7 @@ ____
 
 Construct a payload expression, i.e. a reference to a certain part of packet
 data. The first form creates a raw payload expression to point at a random
-number (*len*) of bytes at a certain offset (*offset*) from a given reference
+number (*len*) of bits at a certain offset (*offset*) from a given reference
 point (*base*). The following *base* values are accepted:
 
 *"ll"*::

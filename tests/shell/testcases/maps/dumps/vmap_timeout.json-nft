@@ -87,10 +87,24 @@
         "family": "inet",
         "name": "portaddrmap",
         "table": "filter",
-        "type": [
-          "ipv4_addr",
-          "inet_service"
-        ],
+        "type": {
+          "typeof": {
+            "concat": [
+              {
+                "payload": {
+                  "protocol": "ip",
+                  "field": "daddr"
+                }
+              },
+              {
+                "payload": {
+                  "protocol": "th",
+                  "field": "dport"
+                }
+              }
+            ]
+          }
+        },
         "handle": 0,
         "map": "verdict",
         "flags": [

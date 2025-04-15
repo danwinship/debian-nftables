@@ -2,12 +2,12 @@
 .\"     Title: libnftables-json
 .\"    Author: Phil Sutter <phil@nwl.cc>
 .\" Generator: DocBook XSL Stylesheets vsnapshot <http://docbook.sf.net/>
-.\"      Date: 08/28/2024
+.\"      Date: 01/28/2025
 .\"    Manual: \ \&
 .\"    Source: \ \&
 .\"  Language: English
 .\"
-.TH "LIBNFTABLES\-JSON" "5" "08/28/2024" "\ \&" "\ \&"
+.TH "LIBNFTABLES\-JSON" "5" "01/28/2025" "\ \&" "\ \&"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -498,7 +498,7 @@ Optional rule comment\&.
         "auto\-merge":\fR \fIBOOLEAN\fR
 \fB}}\fR
 
-\fISET_TYPE\fR := \fISTRING\fR | \fB[\fR \fISET_TYPE_LIST\fR \fB]\fR
+\fISET_TYPE\fR := \fISTRING\fR | \fB[\fR \fISET_TYPE_LIST\fR \fB]\fR | \fB{ "typeof":\fR \fIEXPRESSION\fR \fB}\fR
 \fISET_TYPE_LIST\fR := \fISTRING\fR [\fB,\fR \fISET_TYPE_LIST\fR ]
 \fISET_POLICY\fR := \fB"performance"\fR | \fB"memory"\fR
 \fISET_FLAG_LIST\fR := \fISET_FLAG\fR [\fB,\fR \fISET_FLAG_LIST\fR ]
@@ -587,7 +587,7 @@ Automatic merging of adjacent/overlapping set elements in interval sets\&.
 \fBTYPE\fR
 .RS 4
 .sp
-The set type might be a string, such as \fB"ipv4_addr"\fR or an array consisting of strings (for concatenated types)\&.
+The set type might be a string, such as \fB"ipv4_addr"\fR, an array consisting of strings (for concatenated types) or a \fBtypeof\fR object containing an expression to extract the type from\&.
 .RE
 .sp
 .it 1 an-trap
@@ -2062,7 +2062,7 @@ Construct a range of values\&. The first array item denotes the lower boundary, 
 .RE
 .\}
 .sp
-Construct a payload expression, i\&.e\&. a reference to a certain part of packet data\&. The first form creates a raw payload expression to point at a random number (\fBlen\fR) of bytes at a certain offset (\fBoffset\fR) from a given reference point (\fBbase\fR)\&. The following \fBbase\fR values are accepted:
+Construct a payload expression, i\&.e\&. a reference to a certain part of packet data\&. The first form creates a raw payload expression to point at a random number (\fBlen\fR) of bits at a certain offset (\fBoffset\fR) from a given reference point (\fBbase\fR)\&. The following \fBbase\fR values are accepted:
 .PP
 \fB"ll"\fR
 .RS 4

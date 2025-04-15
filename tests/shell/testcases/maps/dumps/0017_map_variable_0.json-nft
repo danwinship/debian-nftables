@@ -19,7 +19,14 @@
         "family": "ip",
         "name": "y",
         "table": "x",
-        "type": "ipv4_addr",
+        "type": {
+          "typeof": {
+            "payload": {
+              "protocol": "ip",
+              "field": "saddr"
+            }
+          }
+        },
         "handle": 0,
         "map": "mark",
         "elem": [
@@ -39,7 +46,14 @@
         "family": "ip",
         "name": "z",
         "table": "x",
-        "type": "ipv4_addr",
+        "type": {
+          "typeof": {
+            "payload": {
+              "protocol": "ip",
+              "field": "saddr"
+            }
+          }
+        },
         "handle": 0,
         "map": "mark",
         "elem": [

@@ -60,10 +60,23 @@
         "family": "ip",
         "name": "s2",
         "table": "t",
-        "type": [
-          "ipv4_addr",
-          "iface_index"
-        ],
+        "type": {
+          "typeof": {
+            "concat": [
+              {
+                "payload": {
+                  "protocol": "ip",
+                  "field": "saddr"
+                }
+              },
+              {
+                "meta": {
+                  "key": "iif"
+                }
+              }
+            ]
+          }
+        },
         "handle": 0,
         "elem": [
           {
@@ -113,10 +126,23 @@
         "family": "ip",
         "name": "nomatch",
         "table": "t",
-        "type": [
-          "ipv4_addr",
-          "iface_index"
-        ],
+        "type": {
+          "typeof": {
+            "concat": [
+              {
+                "payload": {
+                  "protocol": "ip",
+                  "field": "saddr"
+                }
+              },
+              {
+                "meta": {
+                  "key": "iif"
+                }
+              }
+            ]
+          }
+        },
         "handle": 0,
         "elem": [
           {

@@ -395,7 +395,7 @@ int main(int argc, char * const *argv)
 		case OPT_DEFINE:
 			if (nft_ctx_add_var(nft, optarg)) {
 				fprintf(stderr,
-					"Failed to define variable '%s'\n",
+					"Error: Failed to define variable '%s'\n",
 					optarg);
 				goto out_fail;
 			}
@@ -423,9 +423,8 @@ int main(int argc, char * const *argv)
 		case OPT_INCLUDEPATH:
 			if (nft_ctx_add_include_path(nft, optarg)) {
 				fprintf(stderr,
-					"Failed to add include path '%s'\n",
+					"Warning: Cannot include path '%s'\n",
 					optarg);
-				goto out_fail;
 			}
 			break;
 		case OPT_NUMERIC:
@@ -458,7 +457,7 @@ int main(int argc, char * const *argv)
 				}
 
 				if (i == array_size(debug_param)) {
-					fprintf(stderr, "invalid debug parameter `%s'\n",
+					fprintf(stderr, "Error: invalid debug parameter `%s'\n",
 						optarg);
 					goto out_fail;
 				}
@@ -479,7 +478,7 @@ int main(int argc, char * const *argv)
 #ifdef HAVE_LIBJANSSON
 			output_flags |= NFT_CTX_OUTPUT_JSON;
 #else
-			fprintf(stderr, "JSON support not compiled-in\n");
+			fprintf(stderr, "Error: JSON support not compiled-in\n");
 			goto out_fail;
 #endif
 			break;

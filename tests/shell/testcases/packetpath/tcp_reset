@@ -1,9 +1,9 @@
 #!/bin/bash
 
+# NFT_TEST_REQUIRES(NFT_TEST_HAVE_socat)
+
 # regression check for kernel commit
 # netfilter: nf_reject: init skb->dev for reset packet
-
-socat -h > /dev/null || exit 77
 
 ip link set lo up
 

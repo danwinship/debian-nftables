@@ -31,10 +31,23 @@
         "family": "ip",
         "name": "w",
         "table": "x",
-        "type": [
-          "ipv4_addr",
-          "mark"
-        ],
+        "type": {
+          "typeof": {
+            "concat": [
+              {
+                "payload": {
+                  "protocol": "ip",
+                  "field": "saddr"
+                }
+              },
+              {
+                "meta": {
+                  "key": "mark"
+                }
+              }
+            ]
+          }
+        },
         "handle": 0,
         "map": "verdict",
         "flags": [

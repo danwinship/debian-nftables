@@ -17,14 +17,15 @@
 #include <errno.h>
 #include <cache.h>
 
-void cmd_add_loc(struct cmd *cmd, uint16_t offset, const struct location *loc)
+void cmd_add_loc(struct cmd *cmd, const struct nlmsghdr *nlh, const struct location *loc)
 {
 	if (cmd->num_attrs >= cmd->attr_array_len) {
 		cmd->attr_array_len *= 2;
 		cmd->attr = xrealloc(cmd->attr, sizeof(struct nlerr_loc) * cmd->attr_array_len);
 	}
 
-	cmd->attr[cmd->num_attrs].offset = offset;
+	cmd->attr[cmd->num_attrs].seqnum = nlh->nlmsg_seq;
+	cmd->attr[cmd->num_attrs].offset = nlh->nlmsg_len;
 	cmd->attr[cmd->num_attrs].location = loc;
 	cmd->num_attrs++;
 }
@@ -323,9 +324,8 @@ void nft_cmd_error(struct netlink_ctx *ctx, struct cmd *cmd,
 	uint32_t i;
 
 	for (i = 0; i < cmd->num_attrs; i++) {
-		if (!cmd->attr[i].offset)
-			break;
-		if (cmd->attr[i].offset == err->offset)
+		if (cmd->attr[i].seqnum == err->seqnum &&
+		    cmd->attr[i].offset == err->offset)
 			loc = cmd->attr[i].location;
 	}
 
@@ -376,6 +376,32 @@ static void nft_cmd_expand_chain(struct chain *chain, struct list_head *new_cmds
 				&rule->location, rule);
 		list_add_tail(&new->list, new_cmds);
 	}
+}
+
+bool nft_cmd_collapse_elems(enum cmd_ops op, struct list_head *cmds,
+			    struct handle *handle, struct expr *init)
+{
+	struct cmd *last_cmd;
+
+	if (list_empty(cmds))
+		return false;
+
+	if (init->etype == EXPR_VARIABLE)
+		return false;
+
+	last_cmd = list_last_entry(cmds, struct cmd, list);
+	if (last_cmd->op != op ||
+	    last_cmd->obj != CMD_OBJ_ELEMENTS ||
+	    last_cmd->expr->etype == EXPR_VARIABLE ||
+	    last_cmd->handle.family != handle->family ||
+	    strcmp(last_cmd->handle.table.name, handle->table.name) ||
+	    strcmp(last_cmd->handle.set.name, handle->set.name))
+		return false;
+
+	list_splice_tail_init(&init->expressions, &last_cmd->expr->expressions);
+	last_cmd->expr->size += init->size;
+
+	return true;
 }
 
 void nft_cmd_expand(struct cmd *cmd)
@@ -457,84 +483,5 @@ void nft_cmd_expand(struct cmd *cmd)
 		break;
 	default:
 		break;
-	}
-}
-
-bool nft_cmd_collapse(struct list_head *cmds)
-{
-	struct cmd *cmd, *next, *elems = NULL;
-	struct expr *expr, *enext;
-	bool collapse = false;
-
-	list_for_each_entry_safe(cmd, next, cmds, list) {
-		if (cmd->op != CMD_ADD &&
-		    cmd->op != CMD_CREATE) {
-			elems = NULL;
-			continue;
-		}
-
-		if (cmd->obj != CMD_OBJ_ELEMENTS) {
-			elems = NULL;
-			continue;
-		}
-
-		if (cmd->expr->etype == EXPR_VARIABLE)
-			continue;
-
-		if (!elems) {
-			elems = cmd;
-			continue;
-		}
-
-		if (cmd->op != elems->op) {
-			elems = cmd;
-			continue;
-		}
-
-		if (elems->handle.family != cmd->handle.family ||
-		    strcmp(elems->handle.table.name, cmd->handle.table.name) ||
-		    strcmp(elems->handle.set.name, cmd->handle.set.name)) {
-			elems = cmd;
-			continue;
-		}
-
-		collapse = true;
-		list_for_each_entry_safe(expr, enext, &cmd->expr->expressions, list) {
-			expr->cmd = cmd;
-			list_move_tail(&expr->list, &elems->expr->expressions);
-		}
-		elems->expr->size += cmd->expr->size;
-		list_move_tail(&cmd->list, &elems->collapse_list);
-	}
-
-	return collapse;
-}
-
-void nft_cmd_uncollapse(struct list_head *cmds)
-{
-	struct cmd *cmd, *cmd_next, *collapse_cmd, *collapse_cmd_next;
-	struct expr *expr, *next;
-
-	list_for_each_entry_safe(cmd, cmd_next, cmds, list) {
-		if (list_empty(&cmd->collapse_list))
-			continue;
-
-		assert(cmd->obj == CMD_OBJ_ELEMENTS);
-
-		list_for_each_entry_safe(expr, next, &cmd->expr->expressions, list) {
-			if (!expr->cmd)
-				continue;
-
-			list_move_tail(&expr->list, &expr->cmd->expr->expressions);
-			cmd->expr->size--;
-			expr->cmd = NULL;
-		}
-
-		list_for_each_entry_safe(collapse_cmd, collapse_cmd_next, &cmd->collapse_list, list) {
-			if (cmd->elem.set)
-				collapse_cmd->elem.set = set_get(cmd->elem.set);
-
-			list_add(&collapse_cmd->list, &cmd->list);
-		}
 	}
 }

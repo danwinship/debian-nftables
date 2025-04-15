@@ -180,7 +180,7 @@ struct nftnl_set_elem *alloc_nftnl_setelem(const struct expr *set,
 						netlink_gen_stmt_stateful(stmt));
 		}
 	}
-	if (elem->comment || expr->elem_flags) {
+	if (elem->comment || expr->flags & EXPR_F_INTERVAL_OPEN) {
 		udbuf = nftnl_udata_buf_alloc(NFT_USERDATA_MAXLEN);
 		if (!udbuf)
 			memory_allocation_error();
@@ -190,9 +190,9 @@ struct nftnl_set_elem *alloc_nftnl_setelem(const struct expr *set,
 					  elem->comment))
 			memory_allocation_error();
 	}
-	if (expr->elem_flags) {
+	if (expr->flags & EXPR_F_INTERVAL_OPEN) {
 		if (!nftnl_udata_put_u32(udbuf, NFTNL_UDATA_SET_ELEM_FLAGS,
-					 expr->elem_flags))
+					 NFTNL_SET_ELEM_F_INTERVAL_OPEN))
 			memory_allocation_error();
 	}
 	if (udbuf) {
@@ -330,11 +330,15 @@ static void nft_data_memcpy(struct nft_data_linearize *nld,
 static void netlink_gen_concat_key(const struct expr *expr,
 				    struct nft_data_linearize *nld)
 {
-	unsigned int len = expr->len / BITS_PER_BYTE, offset = 0;
-	unsigned char data[len];
+	unsigned int len = netlink_padded_len(expr->len) / BITS_PER_BYTE;
+	unsigned char data[NFT_MAX_EXPR_LEN_BYTES];
+	unsigned int offset = 0;
 	const struct expr *i;
 
-	memset(data, 0, len);
+	if (len > sizeof(data))
+		BUG("Value export of %u bytes would overflow", len);
+
+	memset(data, 0, sizeof(data));
 
 	list_for_each_entry(i, &expr->expressions, list)
 		offset += __netlink_gen_concat_key(expr->flags, i, data + offset);
@@ -373,11 +377,15 @@ static int __netlink_gen_concat_data(int end, const struct expr *i,
 static void __netlink_gen_concat_expand(const struct expr *expr,
 				        struct nft_data_linearize *nld)
 {
-	unsigned int len = div_round_up(expr->len, BITS_PER_BYTE) * 2, offset = 0;
-	unsigned char data[len];
+	unsigned int len = (netlink_padded_len(expr->len) / BITS_PER_BYTE) * 2;
+	unsigned char data[NFT_MAX_EXPR_LEN_BYTES];
+	unsigned int offset = 0;
 	const struct expr *i;
 
-	memset(data, 0, len);
+	if (len > sizeof(data))
+		BUG("Value export of %u bytes would overflow", len);
+
+	memset(data, 0, sizeof(data));
 
 	list_for_each_entry(i, &expr->expressions, list)
 		offset += __netlink_gen_concat_data(false, i, data + offset);
@@ -391,11 +399,15 @@ static void __netlink_gen_concat_expand(const struct expr *expr,
 static void __netlink_gen_concat(const struct expr *expr,
 				 struct nft_data_linearize *nld)
 {
-	unsigned int len = expr->len / BITS_PER_BYTE, offset = 0;
-	unsigned char data[len];
+	unsigned int len = netlink_padded_len(expr->len) / BITS_PER_BYTE;
+	unsigned char data[NFT_MAX_EXPR_LEN_BYTES];
+	unsigned int offset = 0;
 	const struct expr *i;
 
-	memset(data, 0, len);
+	if (len > sizeof(data))
+		BUG("Value export of %u bytes would overflow", len);
+
+	memset(data, 0, sizeof(data));
 
 	list_for_each_entry(i, &expr->expressions, list)
 		offset += __netlink_gen_concat_data(expr->flags, i, data + offset);
@@ -462,11 +474,14 @@ static void netlink_gen_verdict(const struct expr *expr,
 static void netlink_gen_range(const struct expr *expr,
 			      struct nft_data_linearize *nld)
 {
-	unsigned int len = div_round_up(expr->left->len, BITS_PER_BYTE) * 2;
-	unsigned char data[len];
-	unsigned int offset = 0;
+	unsigned int len = (netlink_padded_len(expr->left->len) / BITS_PER_BYTE) * 2;
+	unsigned char data[NFT_MAX_EXPR_LEN_BYTES];
+	unsigned int offset;
 
-	memset(data, 0, len);
+	if (len > sizeof(data))
+		BUG("Value export of %u bytes would overflow", len);
+
+	memset(data, 0, sizeof(data));
 	offset = netlink_export_pad(data, expr->left->value, expr->left);
 	netlink_export_pad(data + offset, expr->right->value, expr->right);
 	nft_data_memcpy(nld, data, len);
@@ -1215,10 +1230,15 @@ static struct expr *range_expr_reduce(struct expr *range)
 static struct expr *netlink_parse_interval_elem(const struct set *set,
 						struct expr *expr)
 {
-	unsigned int len = div_round_up(expr->len, BITS_PER_BYTE);
+	unsigned int len = netlink_padded_len(expr->len) / BITS_PER_BYTE;
 	const struct datatype *dtype = set->data->dtype;
 	struct expr *range, *left, *right;
-	char data[len];
+	char data[NFT_MAX_EXPR_LEN_BYTES];
+
+	if (len > sizeof(data))
+		BUG("Value export of %u bytes would overflow", len);
+
+	memset(data, 0, sizeof(data));
 
 	mpz_export_data(data, expr->value, dtype->byteorder, len);
 	left = constant_expr_alloc(&internal_location, dtype,
@@ -1372,9 +1392,14 @@ static void set_elem_parse_udata(struct nftnl_set_elem *nlse,
 	if (ud[NFTNL_UDATA_SET_ELEM_COMMENT])
 		expr->comment =
 			xstrdup(nftnl_udata_get(ud[NFTNL_UDATA_SET_ELEM_COMMENT]));
-	if (ud[NFTNL_UDATA_SET_ELEM_FLAGS])
-		expr->elem_flags =
+	if (ud[NFTNL_UDATA_SET_ELEM_FLAGS]) {
+		uint32_t elem_flags;
+
+		elem_flags =
 			nftnl_udata_get_u32(ud[NFTNL_UDATA_SET_ELEM_FLAGS]);
+		if (elem_flags & NFTNL_SET_ELEM_F_INTERVAL_OPEN)
+			expr->flags |= EXPR_F_INTERVAL_OPEN;
+	}
 }
 
 int netlink_delinearize_setelem(struct nftnl_set_elem *nlse,
@@ -1430,8 +1455,11 @@ key_end:
 
 	if (nftnl_set_elem_is_set(nlse, NFTNL_SET_ELEM_EXPIRATION))
 		expr->expiration = nftnl_set_elem_get_u64(nlse, NFTNL_SET_ELEM_EXPIRATION);
-	if (nftnl_set_elem_is_set(nlse, NFTNL_SET_ELEM_USERDATA))
+	if (nftnl_set_elem_is_set(nlse, NFTNL_SET_ELEM_USERDATA)) {
 		set_elem_parse_udata(nlse, expr);
+		if (expr->comment)
+			set->elem_has_comment = true;
+	}
 	if (nftnl_set_elem_is_set(nlse, NFTNL_SET_ELEM_EXPR)) {
 		const struct nftnl_expr *nle;
 		struct stmt *stmt;
@@ -1466,7 +1494,11 @@ key_end:
 		data = netlink_alloc_data(&netlink_location, &nld,
 					  set->data->dtype->type == TYPE_VERDICT ?
 					  NFT_REG_VERDICT : NFT_REG_1);
-		datatype_set(data, set->data->dtype);
+
+		if (set->data->dtype->is_typeof)
+			datatype_set(data, set->data->dtype->basetype);
+		else
+			datatype_set(data, set->data->dtype);
 		data->byteorder = set->data->byteorder;
 
 		if (set->data->dtype->subtypes) {

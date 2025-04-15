@@ -1,66 +1,69 @@
-diff --git a/tests/shell/testcases/packetpath/payload b/tests/shell/testcases/packetpath/payload
-index 7bf2ff2657e0..39a076a344ca 100755
---- a/tests/shell/testcases/packetpath/payload
-+++ b/tests/shell/testcases/packetpath/payload
-@@ -23,16 +23,19 @@ run_test()
- 
- 	case $mode in
- 	"udp")
-+		echo "UDP"
- 		l4proto="udp"
- 		udp_checksum="udp checksum != 0"
- 		udp_zero_checksum=""
- 		;;
- 	"udp-zero-checksum")
-+		echo "UDP with zero checksum"
- 		l4proto="udp"
- 		udp_checksum="udp checksum 0"
- 		udp_zero_checksum="udp checksum set 0"
- 		;;
- 	"tcp")
-+		echo "TCP"
- 		l4proto="tcp"
- 		udp_checksum=""
- 		udp_zero_checksum=""
-@@ -118,17 +121,17 @@ table inet payload_inet {
- 
- 	case $l4proto in
- 	"tcp")
--		ip netns exec "$ns1" socat -u STDIN TCP:$nsx2_addr:8887,connect-timeout=2 < /dev/null > /dev/null
--		ip netns exec "$ns1" socat -u STDIN TCP:$nsx2_addr:8888,connect-timeout=2 < /dev/null > /dev/null
-+		ip netns exec "$ns1" socat -u STDIN TCP:$nsx2_addr:8887,connect-timeout=4 < /dev/null > /dev/null
-+		ip netns exec "$ns1" socat -u STDIN TCP:$nsx2_addr:8888,connect-timeout=4 < /dev/null > /dev/null
- 
--		ip netns exec "$ns1" socat -u STDIN TCP:$nsx2_addr:8880,connect-timeout=2 < /dev/null > /dev/null
--		ip netns exec "$ns1" socat -u STDIN TCP:$nsx2_addr:8881,connect-timeout=2 < /dev/null > /dev/null
-+		ip netns exec "$ns1" socat -u STDIN TCP:$nsx2_addr:8880,connect-timeout=4 < /dev/null > /dev/null
-+		ip netns exec "$ns1" socat -u STDIN TCP:$nsx2_addr:8881,connect-timeout=4 < /dev/null > /dev/null
- 
--		ip netns exec "$ns2" socat -u STDIN TCP:$nsx1_addr:7777,connect-timeout=2 < /dev/null > /dev/null
--		ip netns exec "$ns2" socat -u STDIN TCP:$nsx1_addr:7778,connect-timeout=2 < /dev/null > /dev/null
-+		ip netns exec "$ns2" socat -u STDIN TCP:$nsx1_addr:7777,connect-timeout=4 < /dev/null > /dev/null
-+		ip netns exec "$ns2" socat -u STDIN TCP:$nsx1_addr:7778,connect-timeout=4 < /dev/null > /dev/null
- 
--		ip netns exec "$ns2" socat -u STDIN TCP:$nsx1_addr:7770,connect-timeout=2 < /dev/null > /dev/null
--		ip netns exec "$ns2" socat -u STDIN TCP:$nsx1_addr:7771,connect-timeout=2 < /dev/null > /dev/null
-+		ip netns exec "$ns2" socat -u STDIN TCP:$nsx1_addr:7770,connect-timeout=4 < /dev/null > /dev/null
-+		ip netns exec "$ns2" socat -u STDIN TCP:$nsx1_addr:7771,connect-timeout=4 < /dev/null > /dev/null
- 		;;
- 	"udp")
- 		ip netns exec "$ns1" bash -c "echo 'AA' | socat -u STDIN UDP:$nsx2_addr:8887 > /dev/null"
-@@ -207,11 +210,11 @@ RULESET="table bridge payload_bridge {
- 
- 	case $l4proto in
- 	"tcp")
--		ip netns exec "$ns1" socat -u STDIN TCP:$nsx2_addr:8880,connect-timeout=2 < /dev/null > /dev/null
--		ip netns exec "$ns1" socat -u STDIN TCP:$nsx2_addr:8881,connect-timeout=2 < /dev/null > /dev/null
-+		ip netns exec "$ns1" socat -u STDIN TCP:$nsx2_addr:8880,connect-timeout=4 < /dev/null > /dev/null
-+		ip netns exec "$ns1" socat -u STDIN TCP:$nsx2_addr:8881,connect-timeout=4 < /dev/null > /dev/null
- 
--		ip netns exec "$ns2" socat -u STDIN TCP:$nsx1_addr:7770,connect-timeout=2 < /dev/null > /dev/null
--		ip netns exec "$ns2" socat -u STDIN TCP:$nsx1_addr:7771,connect-timeout=2 < /dev/null > /dev/null
-+		ip netns exec "$ns2" socat -u STDIN TCP:$nsx1_addr:7770,connect-timeout=4 < /dev/null > /dev/null
-+		ip netns exec "$ns2" socat -u STDIN TCP:$nsx1_addr:7771,connect-timeout=4 < /dev/null > /dev/null
- 		;;
- 	"udp")
- 		ip netns exec "$ns1" bash -c "echo 'AA' | socat -u STDIN UDP:$nsx2_addr:8880 > /dev/null"
+#!/bin/bash
+
+# test adding many map elements
+
+export NFT=nft
+
+HOWMANY=31
+
+tmpfile=$(mktemp)
+if [ ! -w $tmpfile ] ; then
+	echo "Failed to create tmp file" >&2
+	exit 0
+fi
+
+trap "rm -rf $tmpfile" EXIT # cleanup if aborted
+
+generate_add() {
+	echo -n "{"
+	for ((i=HOWMANY; i>=1; i--)) ; do
+		for ((j=HOWMANY; j>=1; j--)) ; do
+			[ "$i" == 1 ] && [ "$j" == 1 ] && break
+			echo -n "10.0.${i}.${j} : 10.0.${i}.${j}, "
+		done
+	done
+	echo -n "}"
+}
+
+generate_test() {
+	count=0
+	elements=""
+	for ((i=1; i<=HOWMANY; i++)) ; do
+		for ((j=1; j<=HOWMANY; j++)) ; do
+			((count++))
+			elements="${elements}10.0.${i}.${j} : 10.0.${i}.${j}"
+			[ "$i" == "$HOWMANY" ] && [ "$j" == "$HOWMANY" ] && break
+			if [ "$count" == "2" ] ; then
+				count=0
+				elements="${elements},\\n\\t\\t\\t     "
+			else
+				elements="${elements}, "
+			fi
+		done
+	done
+	echo -e "$elements"
+}
+
+echo "add table x
+add map x y { type ipv4_addr : ipv4_addr; }
+add element x y $(generate_add)" > $tmpfile
+
+set -e
+$NFT -f $tmpfile
+
+n=$HOWMANY
+echo "add element x y { 10.0.1.1 : 10.0.1.1 }" > $tmpfile
+$NFT -f $tmpfile
+
+EXPECTED="table ip x {
+	map y {
+		type ipv4_addr : ipv4_addr
+		elements = { "$(generate_test)" }
+	}
+}"
+GET=$($NFT list ruleset)
+if [ "$EXPECTED" != "$GET" ] ; then
+	$DIFF -u <(echo "$EXPECTED") <(echo "$GET")
+	exit 1
+fi
+

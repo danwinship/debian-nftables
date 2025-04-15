@@ -40,3 +40,9 @@ inet test-inet input
   [ meta load l4proto => reg 11 ]
   [ lookup reg 1 set __set%d ]
 
+# meta mark set ct mark >> 8
+inet test-inet input
+  [ ct load mark => reg 1 ]
+  [ bitwise reg 1 = ( reg 1 >> 0x00000008 ) ]
+  [ byteorder reg 1 = ntoh(reg 1, 4, 4) ]
+  [ meta set mark with reg 1 ]

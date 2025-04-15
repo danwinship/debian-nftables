@@ -332,6 +332,7 @@ void rule_stmt_insert_at(struct rule *rule, struct stmt *nstmt,
  * @automerge:	merge adjacents and overlapping elements, if possible
  * @comment:	comment
  * @errors:	expr evaluation errors seen
+ * @elem_has_comment: element with comment seen (for printing)
  * @desc.size:		count of set elements
  * @desc.field_len:	length of single concatenated fields, bytes
  * @desc.field_count:	count of concatenated fields
@@ -357,6 +358,7 @@ struct set {
 	bool			automerge;
 	bool			key_typeof_valid;
 	bool			errors;
+	bool			elem_has_comment;
 	const char		*comment;
 	struct {
 		uint32_t	size;
@@ -423,7 +425,7 @@ static inline bool set_is_interval(uint32_t set_flags)
 	return set_flags & NFT_SET_INTERVAL;
 }
 
-static inline bool set_is_non_concat_range(struct set *s)
+static inline bool set_is_non_concat_range(const struct set *s)
 {
 	return (s->flags & NFT_SET_INTERVAL) && s->desc.field_count <= 1;
 }
@@ -551,6 +553,7 @@ extern struct flowtable *flowtable_lookup_fuzzy(const char *ft_name,
 						const struct table **table);
 
 void flowtable_print(const struct flowtable *n, struct output_ctx *octx);
+void flowtable_print_plain(const struct flowtable *ft, struct output_ctx *octx);
 
 /**
  * enum cmd_ops - command operations
@@ -695,7 +698,8 @@ void monitor_free(struct monitor *m);
 #define NFT_NLATTR_LOC_MAX 32
 
 struct nlerr_loc {
-	uint16_t		offset;
+	uint32_t		seqnum;
+	uint32_t		offset;
 	const struct location	*location;
 };
 
@@ -717,8 +721,8 @@ struct cmd {
 	enum cmd_ops		op;
 	enum cmd_obj		obj;
 	struct handle		handle;
-	uint32_t		seqnum;
-	struct list_head	collapse_list;
+	uint32_t		seqnum_from;
+	uint32_t		seqnum_to;
 	union {
 		void		*data;
 		struct expr	*expr;

@@ -37,9 +37,9 @@ static int nft_netlink(struct nft_ctx *nft,
 	if (list_empty(cmds))
 		goto out;
 
-	batch_seqnum = mnl_batch_begin(ctx.batch, mnl_seqnum_alloc(&seqnum));
+	batch_seqnum = mnl_batch_begin(ctx.batch, mnl_seqnum_inc(&seqnum));
 	list_for_each_entry(cmd, cmds, list) {
-		ctx.seqnum = cmd->seqnum = mnl_seqnum_alloc(&seqnum);
+		ctx.seqnum = cmd->seqnum_from = mnl_seqnum_inc(&seqnum);
 		ret = do_command(&ctx, cmd);
 		if (ret < 0) {
 			netlink_io_error(&ctx, &cmd->location,
@@ -47,10 +47,12 @@ static int nft_netlink(struct nft_ctx *nft,
 					 strerror(errno));
 			goto out;
 		}
+		seqnum = cmd->seqnum_to = ctx.seqnum;
+		mnl_seqnum_inc(&seqnum);
 		num_cmds++;
 	}
 	if (!nft->check)
-		mnl_batch_end(ctx.batch, mnl_seqnum_alloc(&seqnum));
+		mnl_batch_end(ctx.batch, mnl_seqnum_inc(&seqnum));
 
 	if (!mnl_batch_ready(ctx.batch))
 		goto out;
@@ -80,12 +82,14 @@ static int nft_netlink(struct nft_ctx *nft,
 			cmd = list_first_entry(cmds, struct cmd, list);
 
 		list_for_each_entry_from(cmd, cmds, list) {
-			last_seqnum = cmd->seqnum;
-			if (err->seqnum == cmd->seqnum ||
+			last_seqnum = cmd->seqnum_to;
+			if ((err->seqnum >= cmd->seqnum_from &&
+			     err->seqnum <= cmd->seqnum_to) ||
 			    err->seqnum == batch_seqnum) {
 				nft_cmd_error(&ctx, cmd, err);
 				errno = err->err;
-				if (err->seqnum == cmd->seqnum) {
+				if (err->seqnum >= cmd->seqnum_from ||
+				    err->seqnum <= cmd->seqnum_to) {
 					mnl_err_list_free(err);
 					break;
 				}
@@ -163,8 +167,19 @@ void nft_ctx_clear_vars(struct nft_ctx *ctx)
 	ctx->vars = NULL;
 }
 
-EXPORT_SYMBOL(nft_ctx_add_include_path);
-int nft_ctx_add_include_path(struct nft_ctx *ctx, const char *path)
+static bool nft_ctx_find_include_path(struct nft_ctx *ctx, const char *path)
+{
+	unsigned int i;
+
+	for (i = 0; i < ctx->num_include_paths; i++) {
+		if (!strcmp(ctx->include_paths[i], path))
+			return true;
+	}
+
+	return false;
+}
+
+static int __nft_ctx_add_include_path(struct nft_ctx *ctx, const char *path)
 {
 	char **tmp;
 	int pcount = ctx->num_include_paths;
@@ -178,6 +193,20 @@ int nft_ctx_add_include_path(struct nft_ctx *ctx, const char *path)
 
 	ctx->num_include_paths++;
 	return 0;
+}
+
+EXPORT_SYMBOL(nft_ctx_add_include_path);
+int nft_ctx_add_include_path(struct nft_ctx *ctx, const char *path)
+{
+	char canonical_path[PATH_MAX];
+
+	if (!realpath(path, canonical_path))
+		return -1;
+
+	if (nft_ctx_find_include_path(ctx, canonical_path))
+		return 0;
+
+	return __nft_ctx_add_include_path(ctx, canonical_path);
 }
 
 EXPORT_SYMBOL(nft_ctx_clear_include_paths);
@@ -513,7 +542,6 @@ static int nft_evaluate(struct nft_ctx *nft, struct list_head *msgs,
 {
 	struct nft_cache_filter *filter;
 	struct cmd *cmd, *next;
-	bool collapsed = false;
 	unsigned int flags;
 	int err = 0;
 
@@ -528,9 +556,6 @@ static int nft_evaluate(struct nft_ctx *nft, struct list_head *msgs,
 	}
 
 	nft_cache_filter_fini(filter);
-
-	if (nft_cmd_collapse(cmds))
-		collapsed = true;
 
 	list_for_each_entry(cmd, cmds, list) {
 		if (cmd->op != CMD_ADD &&
@@ -552,9 +577,6 @@ static int nft_evaluate(struct nft_ctx *nft, struct list_head *msgs,
 			break;
 		}
 	}
-
-	if (collapsed)
-		nft_cmd_uncollapse(cmds);
 
 	if (err < 0 || nft->state->nerrs)
 		return -1;
