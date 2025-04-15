@@ -1,3 +1,11 @@
+nftables (1.1.2-1) unstable; urgency=medium
+
+  * [3649fbe] d/upstream/signing-key.asc: refresh key
+  * [22577cd] New upstream version 1.1.2
+  * [86465b7] nftables: bump build-dep on libnftnl to 1.2.9
+
+ -- Arturo Borrero Gonzalez <arturo@debian.org>  Tue, 15 Apr 2025 23:29:26 +0200
+
 nftables (1.1.1-1) unstable; urgency=medium
 
   * [014d3ef] New upstream version 1.1.1
