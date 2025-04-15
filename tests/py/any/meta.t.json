@@ -2818,3 +2818,35 @@
     }
 ]
 
+# meta mark set meta mark | iif | meta cpu
+[
+    {
+        "mangle": {
+            "key": {
+                "meta": {
+                    "key": "mark"
+                }
+            },
+            "value": {
+                "|": [
+                    {
+                        "meta": {
+                            "key": "mark"
+                        }
+                    },
+                    {
+                        "meta": {
+                            "key": "iif"
+                        }
+                    },
+                    {
+                        "meta": {
+                            "key": "cpu"
+                        }
+                    }
+                ]
+            }
+        }
+    }
+]
+

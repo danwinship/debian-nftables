@@ -47,7 +47,8 @@ cat >&"${COPROC[1]}" <<EOF
 add table ip t { flags owner, persist; }
 EOF
 
-EXPECT="table ip t { # progname nft
+COMM=$(</proc/${COPROC_PID}/comm)
+EXPECT="table ip t { # progname $COMM
 	flags owner,persist
 }"
 diff -u <(echo "$EXPECT") <($NFT list ruleset) || {

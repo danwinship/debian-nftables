@@ -16,3 +16,15 @@ ip6 test-ip6 input
   [ lookup reg 1 set __set%d 0x1 ]
   [ immediate reg 0 accept ]
 
+# icmpv6 code 3-66
+ip6 test-ip6 input
+  [ meta load l4proto => reg 1 ]
+  [ cmp eq reg 1 0x0000003a ]
+  [ payload load 1b @ transport header + 1 => reg 1 ]
+  [ range eq reg 1 0x00000003 0x00000042 ]
+# icmpv6 checksum 222-226
+ip6 test-ip6 input
+  [ meta load l4proto => reg 1 ]
+  [ cmp eq reg 1 0x0000003a ]
+  [ payload load 2b @ transport header + 2 => reg 1 ]
+  [ range eq reg 1 0x0000de00 0x0000e200 ]

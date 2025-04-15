@@ -1,0 +1,12 @@
+# esp spi 111-222
+ip test-ip4 input
+  [ meta load l4proto => reg 1 ]
+  [ cmp eq reg 1 0x00000032 ]
+  [ payload load 4b @ transport header + 0 => reg 1 ]
+  [ range eq reg 1 0x6f000000 0xde000000 ]
+# esp sequence 22-24
+ip test-ip4 input
+  [ meta load l4proto => reg 1 ]
+  [ cmp eq reg 1 0x00000032 ]
+  [ payload load 4b @ transport header + 4 => reg 1 ]
+  [ range eq reg 1 0x16000000 0x18000000 ]

@@ -31,3 +31,5 @@ meta mark set ip dscp;ok
 meta mark set ip dscp | 0x40;ok
 meta mark set ip6 dscp;ok
 meta mark set ip6 dscp | 0x40;ok
+
+meta mark set ct mark and 0xffff0000 or meta mark and 0xffff;ok;meta mark set ct mark & 0xffff0000 | meta mark & 0x0000ffff

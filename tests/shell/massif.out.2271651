@@ -1,0 +1,893 @@
+desc: (none)
+cmd: nft -f x.nft
+time_unit: i
+#-----------
+snapshot=0
+#-----------
+time=0
+mem_heap_B=0
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=1
+#-----------
+time=1004380
+mem_heap_B=296
+mem_heap_extra_B=16
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=2
+#-----------
+time=1005303
+mem_heap_B=560
+mem_heap_extra_B=32
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=3
+#-----------
+time=1006254
+mem_heap_B=660
+mem_heap_extra_B=52
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=4
+#-----------
+time=1006946
+mem_heap_B=683
+mem_heap_extra_B=69
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=5
+#-----------
+time=1006998
+mem_heap_B=683
+mem_heap_extra_B=69
+mem_stacks_B=0
+heap_tree=detailed
+n4: 683 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 296 0x48BB47D: xmalloc (utils.c:31)
+  n1: 296 0x48BB47D: xzalloc (utils.c:70)
+   n1: 296 0x4892586: nft_ctx_new (libnftables.c:231)
+    n0: 296 0x10A427: main (main.c:377)
+ n1: 264 0x48BB358: xmalloc (utils.c:31)
+  n1: 264 0x487D0F6: rt_symbol_table_init (datatype.c:918)
+   n1: 264 0x487D47F: mark_table_init (datatype.c:1001)
+    n1: 264 0x4892591: nft_init (libnftables.c:117)
+     n1: 264 0x4892591: nft_ctx_new (libnftables.c:232)
+      n0: 264 0x10A427: main (main.c:377)
+ n1: 100 0x49FE32C: __vasprintf_internal (vasprintf.c:45)
+  n1: 100 0x49D1BD5: asprintf (asprintf.c:31)
+   n1: 100 0x487C212: open_iproute2_db (datatype.c:888)
+    n1: 100 0x487D10C: rt_symbol_table_init (datatype.c:922)
+     n1: 100 0x487D47F: mark_table_init (datatype.c:1001)
+      n1: 100 0x4892591: nft_init (libnftables.c:117)
+       n1: 100 0x4892591: nft_ctx_new (libnftables.c:232)
+        n0: 100 0x10A427: main (main.c:377)
+ n1: 23 0x49FE427: __vasprintf_internal (vasprintf.c:71)
+  n1: 23 0x49D1BD5: asprintf (asprintf.c:31)
+   n1: 23 0x487C212: open_iproute2_db (datatype.c:888)
+    n1: 23 0x487D10C: rt_symbol_table_init (datatype.c:922)
+     n1: 23 0x487D47F: mark_table_init (datatype.c:1001)
+      n1: 23 0x4892591: nft_init (libnftables.c:117)
+       n1: 23 0x4892591: nft_ctx_new (libnftables.c:232)
+        n0: 23 0x10A427: main (main.c:377)
+#-----------
+snapshot=6
+#-----------
+time=1006998
+mem_heap_B=583
+mem_heap_extra_B=49
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=7
+#-----------
+time=1007922
+mem_heap_B=1055
+mem_heap_extra_B=65
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=8
+#-----------
+time=1008369
+mem_heap_B=1055
+mem_heap_extra_B=65
+mem_stacks_B=0
+heap_tree=detailed
+n5: 1055 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 472 0x49F61FA: __fopen_internal (iofopen.c:65)
+  n1: 472 0x487C22A: open_iproute2_db (datatype.c:891)
+   n1: 472 0x487D10C: rt_symbol_table_init (datatype.c:922)
+    n1: 472 0x487D47F: mark_table_init (datatype.c:1001)
+     n1: 472 0x4892591: nft_init (libnftables.c:117)
+      n1: 472 0x4892591: nft_ctx_new (libnftables.c:232)
+       n0: 472 0x10A427: main (main.c:377)
+ n1: 296 0x48BB47D: xmalloc (utils.c:31)
+  n1: 296 0x48BB47D: xzalloc (utils.c:70)
+   n1: 296 0x4892586: nft_ctx_new (libnftables.c:231)
+    n0: 296 0x10A427: main (main.c:377)
+ n1: 264 0x48BB358: xmalloc (utils.c:31)
+  n1: 264 0x487D0F6: rt_symbol_table_init (datatype.c:918)
+   n1: 264 0x487D47F: mark_table_init (datatype.c:1001)
+    n1: 264 0x4892591: nft_init (libnftables.c:117)
+     n1: 264 0x4892591: nft_ctx_new (libnftables.c:232)
+      n0: 264 0x10A427: main (main.c:377)
+ n1: 23 0x49FE427: __vasprintf_internal (vasprintf.c:71)
+  n1: 23 0x49D1BD5: asprintf (asprintf.c:31)
+   n1: 23 0x487C212: open_iproute2_db (datatype.c:888)
+    n1: 23 0x487D10C: rt_symbol_table_init (datatype.c:922)
+     n1: 23 0x487D47F: mark_table_init (datatype.c:1001)
+      n1: 23 0x4892591: nft_init (libnftables.c:117)
+       n1: 23 0x4892591: nft_ctx_new (libnftables.c:232)
+        n0: 23 0x10A427: main (main.c:377)
+ n0: 0 in 1 place, below massif's threshold (1.00%)
+#-----------
+snapshot=9
+#-----------
+time=1008369
+mem_heap_B=583
+mem_heap_extra_B=49
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=10
+#-----------
+time=1009211
+mem_heap_B=560
+mem_heap_extra_B=32
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=11
+#-----------
+time=1009282
+mem_heap_B=660
+mem_heap_extra_B=52
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=12
+#-----------
+time=1010028
+mem_heap_B=689
+mem_heap_extra_B=63
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=13
+#-----------
+time=1010080
+mem_heap_B=589
+mem_heap_extra_B=43
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=14
+#-----------
+time=1010146
+mem_heap_B=1061
+mem_heap_extra_B=59
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=15
+#-----------
+time=1010593
+mem_heap_B=589
+mem_heap_extra_B=43
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=16
+#-----------
+time=1010631
+mem_heap_B=560
+mem_heap_extra_B=32
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=17
+#-----------
+time=1010705
+mem_heap_B=824
+mem_heap_extra_B=48
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=18
+#-----------
+time=1010798
+mem_heap_B=924
+mem_heap_extra_B=68
+mem_stacks_B=0
+heap_tree=detailed
+n4: 924 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 528 0x48BB358: xmalloc (utils.c:31)
+  n2: 528 0x487D0F6: rt_symbol_table_init (datatype.c:918)
+   n1: 264 0x487D47F: mark_table_init (datatype.c:1001)
+    n1: 264 0x4892591: nft_init (libnftables.c:117)
+     n1: 264 0x4892591: nft_ctx_new (libnftables.c:232)
+      n0: 264 0x10A427: main (main.c:377)
+   n1: 264 0x48B172F: realm_table_rt_init (rt.c:28)
+    n1: 264 0x4892599: nft_init (libnftables.c:118)
+     n1: 264 0x4892599: nft_ctx_new (libnftables.c:232)
+      n0: 264 0x10A427: main (main.c:377)
+ n1: 296 0x48BB47D: xmalloc (utils.c:31)
+  n1: 296 0x48BB47D: xzalloc (utils.c:70)
+   n1: 296 0x4892586: nft_ctx_new (libnftables.c:231)
+    n0: 296 0x10A427: main (main.c:377)
+ n1: 100 0x49FE32C: __vasprintf_internal (vasprintf.c:45)
+  n2: 100 0x49D1BD5: asprintf (asprintf.c:31)
+   n1: 100 0x487C212: open_iproute2_db (datatype.c:888)
+    n2: 100 0x487D10C: rt_symbol_table_init (datatype.c:922)
+     n1: 100 0x48B172F: realm_table_rt_init (rt.c:28)
+      n1: 100 0x4892599: nft_init (libnftables.c:118)
+       n1: 100 0x4892599: nft_ctx_new (libnftables.c:232)
+        n0: 100 0x10A427: main (main.c:377)
+     n0: 0 in 1 place, below massif's threshold (1.00%)
+   n0: 0 in 1 place, below massif's threshold (1.00%)
+ n0: 0 in 2 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=19
+#-----------
+time=1011495
+mem_heap_B=948
+mem_heap_extra_B=84
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=20
+#-----------
+time=1011547
+mem_heap_B=848
+mem_heap_extra_B=64
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=21
+#-----------
+time=1011614
+mem_heap_B=1320
+mem_heap_extra_B=80
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=22
+#-----------
+time=1013121
+mem_heap_B=5416
+mem_heap_extra_B=88
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=23
+#-----------
+time=1017806
+mem_heap_B=5423
+mem_heap_extra_B=105
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=24
+#-----------
+time=1020846
+mem_heap_B=5423
+mem_heap_extra_B=105
+mem_stacks_B=0
+heap_tree=detailed
+n5: 5423 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 4096 0x49F58CB: _IO_file_doallocate (filedoalloc.c:101)
+  n1: 4096 0x4A030AF: _IO_doallocbuf (genops.c:347)
+   n1: 4096 0x4A030AF: _IO_doallocbuf (genops.c:342)
+    n1: 4096 0x4A02203: _IO_file_underflow@@GLIBC_2.2.5 (fileops.c:485)
+     n1: 4096 0x4A03161: _IO_default_uflow (genops.c:362)
+      n1: 4096 0x49F6F89: _IO_getline_info (iogetline.c:60)
+       n1: 4096 0x49F60CD: fgets (iofgets.c:53)
+        n1: 4096 0x487D13F: rt_symbol_table_init (datatype.c:926)
+         n1: 4096 0x48B172F: realm_table_rt_init (rt.c:28)
+          n1: 4096 0x4892599: nft_init (libnftables.c:118)
+           n1: 4096 0x4892599: nft_ctx_new (libnftables.c:232)
+            n0: 4096 0x10A427: main (main.c:377)
+ n1: 528 0x48BB358: xmalloc (utils.c:31)
+  n2: 528 0x487D0F6: rt_symbol_table_init (datatype.c:918)
+   n1: 264 0x487D47F: mark_table_init (datatype.c:1001)
+    n1: 264 0x4892591: nft_init (libnftables.c:117)
+     n1: 264 0x4892591: nft_ctx_new (libnftables.c:232)
+      n0: 264 0x10A427: main (main.c:377)
+   n1: 264 0x48B172F: realm_table_rt_init (rt.c:28)
+    n1: 264 0x4892599: nft_init (libnftables.c:118)
+     n1: 264 0x4892599: nft_ctx_new (libnftables.c:232)
+      n0: 264 0x10A427: main (main.c:377)
+ n2: 472 0x49F61FA: __fopen_internal (iofopen.c:65)
+  n1: 472 0x487C22A: open_iproute2_db (datatype.c:891)
+   n2: 472 0x487D10C: rt_symbol_table_init (datatype.c:922)
+    n1: 472 0x48B172F: realm_table_rt_init (rt.c:28)
+     n1: 472 0x4892599: nft_init (libnftables.c:118)
+      n1: 472 0x4892599: nft_ctx_new (libnftables.c:232)
+       n0: 472 0x10A427: main (main.c:377)
+    n0: 0 in 1 place, below massif's threshold (1.00%)
+  n0: 0 in 1 place, below massif's threshold (1.00%)
+ n1: 296 0x48BB47D: xmalloc (utils.c:31)
+  n1: 296 0x48BB47D: xzalloc (utils.c:70)
+   n1: 296 0x4892586: nft_ctx_new (libnftables.c:231)
+    n0: 296 0x10A427: main (main.c:377)
+ n0: 31 in 3 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=25
+#-----------
+time=1020846
+mem_heap_B=1327
+mem_heap_extra_B=97
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=26
+#-----------
+time=1020973
+mem_heap_B=855
+mem_heap_extra_B=81
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=27
+#-----------
+time=1021008
+mem_heap_B=831
+mem_heap_extra_B=65
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=28
+#-----------
+time=1021069
+mem_heap_B=1095
+mem_heap_extra_B=81
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=29
+#-----------
+time=1021162
+mem_heap_B=1195
+mem_heap_extra_B=101
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=30
+#-----------
+time=1021839
+mem_heap_B=1215
+mem_heap_extra_B=121
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=31
+#-----------
+time=1021891
+mem_heap_B=1115
+mem_heap_extra_B=101
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=32
+#-----------
+time=1021958
+mem_heap_B=1587
+mem_heap_extra_B=117
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=33
+#-----------
+time=1022623
+mem_heap_B=5683
+mem_heap_extra_B=125
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=34
+#-----------
+time=1025290
+mem_heap_B=5691
+mem_heap_extra_B=141
+mem_stacks_B=0
+heap_tree=detailed
+n5: 5691 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 4096 0x49F58CB: _IO_file_doallocate (filedoalloc.c:101)
+  n1: 4096 0x4A030AF: _IO_doallocbuf (genops.c:347)
+   n1: 4096 0x4A030AF: _IO_doallocbuf (genops.c:342)
+    n1: 4096 0x4A02203: _IO_file_underflow@@GLIBC_2.2.5 (fileops.c:485)
+     n1: 4096 0x4A03161: _IO_default_uflow (genops.c:362)
+      n1: 4096 0x49F6F89: _IO_getline_info (iogetline.c:60)
+       n1: 4096 0x49F60CD: fgets (iofgets.c:53)
+        n2: 4096 0x487D13F: rt_symbol_table_init (datatype.c:926)
+         n1: 4096 0x489404F: devgroup_table_init (meta.c:328)
+          n1: 4096 0x48925A1: nft_init (libnftables.c:119)
+           n1: 4096 0x48925A1: nft_ctx_new (libnftables.c:232)
+            n0: 4096 0x10A427: main (main.c:377)
+         n0: 0 in 1 place, below massif's threshold (1.00%)
+ n1: 792 0x48BB358: xmalloc (utils.c:31)
+  n3: 792 0x487D0F6: rt_symbol_table_init (datatype.c:918)
+   n1: 264 0x487D47F: mark_table_init (datatype.c:1001)
+    n1: 264 0x4892591: nft_init (libnftables.c:117)
+     n1: 264 0x4892591: nft_ctx_new (libnftables.c:232)
+      n0: 264 0x10A427: main (main.c:377)
+   n1: 264 0x489404F: devgroup_table_init (meta.c:328)
+    n1: 264 0x48925A1: nft_init (libnftables.c:119)
+     n1: 264 0x48925A1: nft_ctx_new (libnftables.c:232)
+      n0: 264 0x10A427: main (main.c:377)
+   n1: 264 0x48B172F: realm_table_rt_init (rt.c:28)
+    n1: 264 0x4892599: nft_init (libnftables.c:118)
+     n1: 264 0x4892599: nft_ctx_new (libnftables.c:232)
+      n0: 264 0x10A427: main (main.c:377)
+ n2: 472 0x49F61FA: __fopen_internal (iofopen.c:65)
+  n1: 472 0x487C22A: open_iproute2_db (datatype.c:891)
+   n2: 472 0x487D10C: rt_symbol_table_init (datatype.c:922)
+    n1: 472 0x489404F: devgroup_table_init (meta.c:328)
+     n1: 472 0x48925A1: nft_init (libnftables.c:119)
+      n1: 472 0x48925A1: nft_ctx_new (libnftables.c:232)
+       n0: 472 0x10A427: main (main.c:377)
+    n0: 0 in 2 places, all below massif's threshold (1.00%)
+  n0: 0 in 1 place, below massif's threshold (1.00%)
+ n1: 296 0x48BB47D: xmalloc (utils.c:31)
+  n1: 296 0x48BB47D: xzalloc (utils.c:70)
+   n1: 296 0x4892586: nft_ctx_new (libnftables.c:231)
+    n0: 296 0x10A427: main (main.c:377)
+ n0: 35 in 3 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=35
+#-----------
+time=1025832
+mem_heap_B=5691
+mem_heap_extra_B=141
+mem_stacks_B=0
+heap_tree=detailed
+n5: 5691 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 4096 0x49F58CB: _IO_file_doallocate (filedoalloc.c:101)
+  n1: 4096 0x4A030AF: _IO_doallocbuf (genops.c:347)
+   n1: 4096 0x4A030AF: _IO_doallocbuf (genops.c:342)
+    n1: 4096 0x4A02203: _IO_file_underflow@@GLIBC_2.2.5 (fileops.c:485)
+     n1: 4096 0x4A03161: _IO_default_uflow (genops.c:362)
+      n1: 4096 0x49F6F89: _IO_getline_info (iogetline.c:60)
+       n1: 4096 0x49F60CD: fgets (iofgets.c:53)
+        n2: 4096 0x487D13F: rt_symbol_table_init (datatype.c:926)
+         n1: 4096 0x489404F: devgroup_table_init (meta.c:328)
+          n1: 4096 0x48925A1: nft_init (libnftables.c:119)
+           n1: 4096 0x48925A1: nft_ctx_new (libnftables.c:232)
+            n0: 4096 0x10A427: main (main.c:377)
+         n0: 0 in 1 place, below massif's threshold (1.00%)
+ n1: 792 0x48BB358: xmalloc (utils.c:31)
+  n3: 792 0x487D0F6: rt_symbol_table_init (datatype.c:918)
+   n1: 264 0x487D47F: mark_table_init (datatype.c:1001)
+    n1: 264 0x4892591: nft_init (libnftables.c:117)
+     n1: 264 0x4892591: nft_ctx_new (libnftables.c:232)
+      n0: 264 0x10A427: main (main.c:377)
+   n1: 264 0x489404F: devgroup_table_init (meta.c:328)
+    n1: 264 0x48925A1: nft_init (libnftables.c:119)
+     n1: 264 0x48925A1: nft_ctx_new (libnftables.c:232)
+      n0: 264 0x10A427: main (main.c:377)
+   n1: 264 0x48B172F: realm_table_rt_init (rt.c:28)
+    n1: 264 0x4892599: nft_init (libnftables.c:118)
+     n1: 264 0x4892599: nft_ctx_new (libnftables.c:232)
+      n0: 264 0x10A427: main (main.c:377)
+ n2: 472 0x49F61FA: __fopen_internal (iofopen.c:65)
+  n1: 472 0x487C22A: open_iproute2_db (datatype.c:891)
+   n2: 472 0x487D10C: rt_symbol_table_init (datatype.c:922)
+    n1: 472 0x489404F: devgroup_table_init (meta.c:328)
+     n1: 472 0x48925A1: nft_init (libnftables.c:119)
+      n1: 472 0x48925A1: nft_ctx_new (libnftables.c:232)
+       n0: 472 0x10A427: main (main.c:377)
+    n0: 0 in 2 places, all below massif's threshold (1.00%)
+  n0: 0 in 1 place, below massif's threshold (1.00%)
+ n1: 296 0x48BB47D: xmalloc (utils.c:31)
+  n1: 296 0x48BB47D: xzalloc (utils.c:70)
+   n1: 296 0x4892586: nft_ctx_new (libnftables.c:231)
+    n0: 296 0x10A427: main (main.c:377)
+ n0: 35 in 3 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=36
+#-----------
+time=1025832
+mem_heap_B=1595
+mem_heap_extra_B=133
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=37
+#-----------
+time=1025959
+mem_heap_B=1123
+mem_heap_extra_B=117
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=38
+#-----------
+time=1025994
+mem_heap_B=1103
+mem_heap_extra_B=97
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=39
+#-----------
+time=1026055
+mem_heap_B=1367
+mem_heap_extra_B=113
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=40
+#-----------
+time=1026121
+mem_heap_B=1839
+mem_heap_extra_B=129
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=41
+#-----------
+time=1026780
+mem_heap_B=5935
+mem_heap_extra_B=137
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=42
+#-----------
+time=1029248
+mem_heap_B=5943
+mem_heap_extra_B=153
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=43
+#-----------
+time=1031663
+mem_heap_B=5953
+mem_heap_extra_B=167
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=44
+#-----------
+time=1032205
+mem_heap_B=5953
+mem_heap_extra_B=167
+mem_stacks_B=0
+heap_tree=detailed
+n5: 5953 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 4096 0x49F58CB: _IO_file_doallocate (filedoalloc.c:101)
+  n1: 4096 0x4A030AF: _IO_doallocbuf (genops.c:347)
+   n1: 4096 0x4A030AF: _IO_doallocbuf (genops.c:342)
+    n1: 4096 0x4A02203: _IO_file_underflow@@GLIBC_2.2.5 (fileops.c:485)
+     n1: 4096 0x4A03161: _IO_default_uflow (genops.c:362)
+      n1: 4096 0x49F6F89: _IO_getline_info (iogetline.c:60)
+       n1: 4096 0x49F60CD: fgets (iofgets.c:53)
+        n2: 4096 0x487D13F: rt_symbol_table_init (datatype.c:926)
+         n1: 4096 0x487B41F: ct_label_table_init (ct.c:240)
+          n1: 4096 0x48925A9: nft_init (libnftables.c:120)
+           n1: 4096 0x48925A9: nft_ctx_new (libnftables.c:232)
+            n0: 4096 0x10A427: main (main.c:377)
+         n0: 0 in 2 places, all below massif's threshold (1.00%)
+ n1: 1056 0x48BB358: xmalloc (utils.c:31)
+  n4: 1056 0x487D0F6: rt_symbol_table_init (datatype.c:918)
+   n1: 264 0x487B41F: ct_label_table_init (ct.c:240)
+    n1: 264 0x48925A9: nft_init (libnftables.c:120)
+     n1: 264 0x48925A9: nft_ctx_new (libnftables.c:232)
+      n0: 264 0x10A427: main (main.c:377)
+   n1: 264 0x487D47F: mark_table_init (datatype.c:1001)
+    n1: 264 0x4892591: nft_init (libnftables.c:117)
+     n1: 264 0x4892591: nft_ctx_new (libnftables.c:232)
+      n0: 264 0x10A427: main (main.c:377)
+   n1: 264 0x489404F: devgroup_table_init (meta.c:328)
+    n1: 264 0x48925A1: nft_init (libnftables.c:119)
+     n1: 264 0x48925A1: nft_ctx_new (libnftables.c:232)
+      n0: 264 0x10A427: main (main.c:377)
+   n1: 264 0x48B172F: realm_table_rt_init (rt.c:28)
+    n1: 264 0x4892599: nft_init (libnftables.c:118)
+     n1: 264 0x4892599: nft_ctx_new (libnftables.c:232)
+      n0: 264 0x10A427: main (main.c:377)
+ n2: 472 0x49F61FA: __fopen_internal (iofopen.c:65)
+  n1: 472 0x487D10C: rt_symbol_table_init (datatype.c:922)
+   n1: 472 0x487B41F: ct_label_table_init (ct.c:240)
+    n1: 472 0x48925A9: nft_init (libnftables.c:120)
+     n1: 472 0x48925A9: nft_ctx_new (libnftables.c:232)
+      n0: 472 0x10A427: main (main.c:377)
+  n0: 0 in 2 places, all below massif's threshold (1.00%)
+ n1: 296 0x48BB47D: xmalloc (utils.c:31)
+  n1: 296 0x48BB47D: xzalloc (utils.c:70)
+   n1: 296 0x4892586: nft_ctx_new (libnftables.c:231)
+    n0: 296 0x10A427: main (main.c:377)
+ n0: 33 in 3 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=45
+#-----------
+time=1032205
+mem_heap_B=1857
+mem_heap_extra_B=159
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=46
+#-----------
+time=1032332
+mem_heap_B=1385
+mem_heap_extra_B=143
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=47
+#-----------
+time=1032405
+mem_heap_B=1489
+mem_heap_extra_B=159
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=48
+#-----------
+time=1032452
+mem_heap_B=132561
+mem_heap_extra_B=167
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=49
+#-----------
+time=1081675
+mem_heap_B=132585
+mem_heap_extra_B=183
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=50
+#-----------
+time=1082638
+mem_heap_B=132601
+mem_heap_extra_B=191
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=51
+#-----------
+time=1089264
+mem_heap_B=132607
+mem_heap_extra_B=209
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=52
+#-----------
+time=1093551
+mem_heap_B=132615
+mem_heap_extra_B=225
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=53
+#-----------
+time=1093633
+mem_heap_B=132715
+mem_heap_extra_B=245
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=54
+#-----------
+time=1094955
+mem_heap_B=132715
+mem_heap_extra_B=245
+mem_stacks_B=0
+heap_tree=peak
+n2: 132715 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n2: 132128 0x48BB358: xmalloc (utils.c:31)
+  n1: 131072 0x487A03D: cache_init (cache.c:1370)
+   n1: 131072 0x48925CD: nft_ctx_new (libnftables.c:236)
+    n0: 131072 0x10A427: main (main.c:377)
+  n0: 1056 in 1 place, below massif's threshold (1.00%)
+ n0: 587 in 8 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=55
+#-----------
+time=1094955
+mem_heap_B=132672
+mem_heap_extra_B=288
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=56
+#-----------
+time=1095024
+mem_heap_B=132666
+mem_heap_extra_B=270
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=57
+#-----------
+time=1098277
+mem_heap_B=132770
+mem_heap_extra_B=286
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=58
+#-----------
+time=1099240
+mem_heap_B=132870
+mem_heap_extra_B=306
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=59
+#-----------
+time=1100217
+mem_heap_B=132826
+mem_heap_extra_B=350
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=60
+#-----------
+time=1105805
+mem_heap_B=132770
+mem_heap_extra_B=286
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=61
+#-----------
+time=1105834
+mem_heap_B=132666
+mem_heap_extra_B=270
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=62
+#-----------
+time=1107574
+mem_heap_B=132650
+mem_heap_extra_B=262
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=63
+#-----------
+time=1109180
+mem_heap_B=132593
+mem_heap_extra_B=199
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=64
+#-----------
+time=1109211
+mem_heap_B=132585
+mem_heap_extra_B=183
+mem_stacks_B=0
+heap_tree=detailed
+n2: 132585 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n2: 132128 0x48BB358: xmalloc (utils.c:31)
+  n1: 131072 0x487A03D: cache_init (cache.c:1370)
+   n1: 131072 0x48925CD: nft_ctx_new (libnftables.c:236)
+    n0: 131072 0x10A427: main (main.c:377)
+  n0: 1056 in 2 places, all below massif's threshold (1.00%)
+ n0: 457 in 9 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=65
+#-----------
+time=1109261
+mem_heap_B=132561
+mem_heap_extra_B=167
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=66
+#-----------
+time=1109289
+mem_heap_B=132457
+mem_heap_extra_B=151
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=67
+#-----------
+time=1109319
+mem_heap_B=1385
+mem_heap_extra_B=143
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=68
+#-----------
+time=1109359
+mem_heap_B=1377
+mem_heap_extra_B=127
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=69
+#-----------
+time=1109390
+mem_heap_B=1367
+mem_heap_extra_B=113
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=70
+#-----------
+time=1109425
+mem_heap_B=1103
+mem_heap_extra_B=97
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=71
+#-----------
+time=1109465
+mem_heap_B=1096
+mem_heap_extra_B=80
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=72
+#-----------
+time=1109500
+mem_heap_B=832
+mem_heap_extra_B=64
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=73
+#-----------
+time=1109540
+mem_heap_B=824
+mem_heap_extra_B=48
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=74
+#-----------
+time=1109575
+mem_heap_B=560
+mem_heap_extra_B=32
+mem_stacks_B=0
+heap_tree=detailed
+n3: 560 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 296 0x48BB47D: xmalloc (utils.c:31)
+  n2: 296 0x48BB47D: xzalloc (utils.c:70)
+   n1: 296 0x4892586: nft_ctx_new (libnftables.c:231)
+    n0: 296 0x10A427: main (main.c:377)
+   n0: 0 in 2 places, all below massif's threshold (1.00%)
+ n2: 264 0x48BB358: xmalloc (utils.c:31)
+  n2: 264 0x487D0F6: rt_symbol_table_init (datatype.c:918)
+   n1: 264 0x487D47F: mark_table_init (datatype.c:1001)
+    n1: 264 0x4892591: nft_init (libnftables.c:117)
+     n1: 264 0x4892591: nft_ctx_new (libnftables.c:232)
+      n0: 264 0x10A427: main (main.c:377)
+   n0: 0 in 3 places, all below massif's threshold (1.00%)
+  n0: 0 in 2 places, all below massif's threshold (1.00%)
+ n0: 0 in 8 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=75
+#-----------
+time=1109615
+mem_heap_B=296
+mem_heap_extra_B=16
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=76
+#-----------
+time=1109644
+mem_heap_B=0
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty

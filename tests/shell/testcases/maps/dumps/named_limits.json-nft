@@ -75,7 +75,14 @@
         "family": "inet",
         "name": "tarpit4",
         "table": "filter",
-        "type": "ipv4_addr",
+        "type": {
+          "typeof": {
+            "payload": {
+              "protocol": "ip",
+              "field": "saddr"
+            }
+          }
+        },
         "handle": 0,
         "size": 10000,
         "flags": [
@@ -90,7 +97,14 @@
         "family": "inet",
         "name": "tarpit6",
         "table": "filter",
-        "type": "ipv6_addr",
+        "type": {
+          "typeof": {
+            "payload": {
+              "protocol": "ip6",
+              "field": "saddr"
+            }
+          }
+        },
         "handle": 0,
         "size": 10000,
         "flags": [
@@ -105,11 +119,29 @@
         "family": "inet",
         "name": "addr4limit",
         "table": "filter",
-        "type": [
-          "inet_proto",
-          "ipv4_addr",
-          "inet_service"
-        ],
+        "type": {
+          "typeof": {
+            "concat": [
+              {
+                "meta": {
+                  "key": "l4proto"
+                }
+              },
+              {
+                "payload": {
+                  "protocol": "ip",
+                  "field": "saddr"
+                }
+              },
+              {
+                "payload": {
+                  "protocol": "tcp",
+                  "field": "sport"
+                }
+              }
+            ]
+          }
+        },
         "handle": 0,
         "map": "limit",
         "flags": [
@@ -244,7 +276,14 @@
         "family": "inet",
         "name": "saddr6limit",
         "table": "filter",
-        "type": "ipv6_addr",
+        "type": {
+          "typeof": {
+            "payload": {
+              "protocol": "ip6",
+              "field": "saddr"
+            }
+          }
+        },
         "handle": 0,
         "map": "limit",
         "flags": [

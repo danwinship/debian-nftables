@@ -31,7 +31,14 @@
         "family": "ip",
         "name": "y",
         "table": "x",
-        "type": "ipv4_addr",
+        "type": {
+          "typeof": {
+            "payload": {
+              "protocol": "ip",
+              "field": "saddr"
+            }
+          }
+        },
         "handle": 0,
         "elem": [
           {

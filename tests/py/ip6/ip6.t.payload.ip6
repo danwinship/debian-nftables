@@ -129,8 +129,7 @@ ip6 test-ip6 input
 # ip6 length 33-45
 ip6 test-ip6 input
   [ payload load 2b @ network header + 4 => reg 1 ]
-  [ cmp gte reg 1 0x00002100 ]
-  [ cmp lte reg 1 0x00002d00 ]
+  [ range eq reg 1 0x00002100 0x00002d00 ]
 
 # ip6 length != 33-45
 ip6 test-ip6 input
@@ -190,8 +189,7 @@ ip6 test-ip6 input
 # ip6 nexthdr 33-44
 ip6 test-ip6 input
   [ payload load 1b @ network header + 6 => reg 1 ]
-  [ cmp gte reg 1 0x00000021 ]
-  [ cmp lte reg 1 0x0000002c ]
+  [ range eq reg 1 0x00000021 0x0000002c ]
 
 # ip6 nexthdr != 33-44
 ip6 test-ip6 input
@@ -211,8 +209,7 @@ ip6 test-ip6 input
 # ip6 hoplimit 33-45
 ip6 test-ip6 input
   [ payload load 1b @ network header + 7 => reg 1 ]
-  [ cmp gte reg 1 0x00000021 ]
-  [ cmp lte reg 1 0x0000002d ]
+  [ range eq reg 1 0x00000021 0x0000002d ]
 
 # ip6 hoplimit != 33-45
 ip6 test-ip6 input

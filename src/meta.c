@@ -952,7 +952,7 @@ static void meta_stmt_destroy(struct stmt *stmt)
 	expr_free(stmt->meta.expr);
 }
 
-static const struct stmt_ops meta_stmt_ops = {
+const struct stmt_ops meta_stmt_ops = {
 	.type		= STMT_META,
 	.name		= "meta",
 	.print		= meta_stmt_print,

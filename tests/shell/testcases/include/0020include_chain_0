@@ -2,11 +2,7 @@
 
 set -e
 
-tmpfile1=$(mktemp -p .)
-if [ ! -w $tmpfile1 ] ; then
-	echo "Failed to create tmp file" >&2
-	exit 0
-fi
+tmpfile1=$(mktemp)
 
 trap "rm -rf $tmpfile1" EXIT # cleanup if aborted
 

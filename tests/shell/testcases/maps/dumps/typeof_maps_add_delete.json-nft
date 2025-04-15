@@ -39,7 +39,14 @@
         "family": "ip",
         "name": "dynmark",
         "table": "dynset",
-        "type": "ipv4_addr",
+        "type": {
+          "typeof": {
+            "payload": {
+              "protocol": "ip",
+              "field": "daddr"
+            }
+          }
+        },
         "handle": 0,
         "map": "mark",
         "size": 64,

@@ -38,6 +38,7 @@ static inline bool nft_input_json(const struct input_ctx *ictx)
 
 struct output_ctx {
 	unsigned int flags;
+	bool force_newline;
 	union {
 		FILE *output_fp;
 		struct cookie output_cookie;
@@ -158,11 +159,8 @@ struct location {
 	const struct input_descriptor		*indesc;
 	union {
 		struct {
-			off_t			token_offset;
-			off_t			line_offset;
-
+			unsigned int 		line_offset;
 			unsigned int		first_line;
-			unsigned int		last_line;
 			unsigned int		first_column;
 			unsigned int		last_column;
 		};

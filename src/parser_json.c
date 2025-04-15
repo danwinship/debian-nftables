@@ -18,6 +18,7 @@
 #include <netlink.h>
 #include <parser.h>
 #include <rule.h>
+#include <cmd.h>
 #include <sctp_chunk.h>
 #include <socket.h>
 
@@ -49,6 +50,7 @@
 #define CTX_F_SES	(1 << 6)	/* set_elem_expr_stmt */
 #define CTX_F_MAP	(1 << 7)	/* LHS of map_expr */
 #define CTX_F_CONCAT	(1 << 8)	/* inside concat_expr */
+#define CTX_F_COLLAPSED	(1 << 9)
 
 struct json_ctx {
 	struct nft_ctx *nft;
@@ -121,7 +123,6 @@ static void json_lib_error(struct json_ctx *ctx, json_error_t *err)
 		.indesc = &json_indesc,
 		.line_offset = err->position - err->column,
 		.first_line = err->line,
-		.last_line = err->line,
 		.first_column = err->column,
 		/* no information where problematic part ends :( */
 		.last_column = err->column,
@@ -1209,11 +1210,25 @@ static struct expr *json_parse_binop_expr(struct json_ctx *ctx,
 
 	if (json_array_size(root) > 2) {
 		left = json_parse_primary_expr(ctx, json_array_get(root, 0));
+		if (!left) {
+			json_error(ctx, "Failed to parse LHS of binop expression.");
+			return NULL;
+		}
 		right = json_parse_primary_expr(ctx, json_array_get(root, 1));
+		if (!right) {
+			json_error(ctx, "Failed to parse RHS of binop expression.");
+			expr_free(left);
+			return NULL;
+		}
 		left = binop_expr_alloc(int_loc, thisop, left, right);
 		for (i = 2; i < json_array_size(root); i++) {
 			jright = json_array_get(root, i);
 			right = json_parse_primary_expr(ctx, jright);
+			if (!right) {
+				json_error(ctx, "Failed to parse RHS of binop expression.");
+				expr_free(left);
+				return NULL;
+			}
 			left = binop_expr_alloc(int_loc, thisop, left, right);
 		}
 		return left;
@@ -1234,6 +1249,16 @@ static struct expr *json_parse_binop_expr(struct json_ctx *ctx,
 		return NULL;
 	}
 	return binop_expr_alloc(int_loc, thisop, left, right);
+}
+
+static struct expr *json_check_concat_expr(struct json_ctx *ctx, struct expr *e)
+{
+	if (e->size >= 2)
+		return e;
+
+	json_error(ctx, "Concatenation with %d elements is illegal", e->size);
+	expr_free(e);
+	return NULL;
 }
 
 static struct expr *json_parse_concat_expr(struct json_ctx *ctx,
@@ -1269,7 +1294,7 @@ static struct expr *json_parse_concat_expr(struct json_ctx *ctx,
 		}
 		compound_expr_add(expr, tmp);
 	}
-	return expr;
+	return expr ? json_check_concat_expr(ctx, expr) : NULL;
 }
 
 static struct expr *json_parse_prefix_expr(struct json_ctx *ctx,
@@ -1345,9 +1370,13 @@ static struct expr *json_parse_verdict_expr(struct json_ctx *ctx,
 		if (strcmp(type, verdict_tbl[i].name))
 			continue;
 
-		if (verdict_tbl[i].need_chain &&
-		    json_unpack_err(ctx, root, "{s:s}", "target", &chain))
-			return NULL;
+		if (verdict_tbl[i].need_chain) {
+			if (json_unpack_err(ctx, root, "{s:s}", "target", &chain))
+				return NULL;
+
+			if (!chain || chain[0] == '\0')
+				return NULL;
+		}
 
 		return verdict_expr_alloc(int_loc, verdict_tbl[i].verdict,
 					  json_alloc_chain_expr(chain));
@@ -1555,12 +1584,12 @@ static struct expr *json_parse_expr(struct json_ctx *ctx, json_t *root)
 		{ "ip option", json_parse_ip_option_expr, CTX_F_PRIMARY | CTX_F_SET_RHS | CTX_F_MANGLE | CTX_F_SES | CTX_F_CONCAT },
 		{ "sctp chunk", json_parse_sctp_chunk_expr, CTX_F_PRIMARY | CTX_F_SET_RHS | CTX_F_MANGLE | CTX_F_SES | CTX_F_CONCAT },
 		{ "dccp option", json_parse_dccp_option_expr, CTX_F_PRIMARY },
-		{ "meta", json_parse_meta_expr, CTX_F_STMT | CTX_F_PRIMARY | CTX_F_SET_RHS | CTX_F_MANGLE | CTX_F_SES | CTX_F_MAP | CTX_F_CONCAT },
+		{ "meta", json_parse_meta_expr, CTX_F_RHS | CTX_F_STMT | CTX_F_PRIMARY | CTX_F_SET_RHS | CTX_F_MANGLE | CTX_F_SES | CTX_F_MAP | CTX_F_CONCAT },
 		{ "osf", json_parse_osf_expr, CTX_F_STMT | CTX_F_PRIMARY | CTX_F_MAP | CTX_F_CONCAT },
 		{ "ipsec", json_parse_xfrm_expr, CTX_F_PRIMARY | CTX_F_MAP | CTX_F_CONCAT },
 		{ "socket", json_parse_socket_expr, CTX_F_PRIMARY | CTX_F_CONCAT },
 		{ "rt", json_parse_rt_expr, CTX_F_STMT | CTX_F_PRIMARY | CTX_F_SET_RHS | CTX_F_SES | CTX_F_MAP | CTX_F_CONCAT },
-		{ "ct", json_parse_ct_expr, CTX_F_STMT | CTX_F_PRIMARY | CTX_F_SET_RHS | CTX_F_MANGLE | CTX_F_SES | CTX_F_MAP | CTX_F_CONCAT },
+		{ "ct", json_parse_ct_expr, CTX_F_RHS | CTX_F_STMT | CTX_F_PRIMARY | CTX_F_SET_RHS | CTX_F_MANGLE | CTX_F_SES | CTX_F_MAP | CTX_F_CONCAT },
 		{ "numgen", json_parse_numgen_expr, CTX_F_STMT | CTX_F_PRIMARY | CTX_F_SET_RHS | CTX_F_SES | CTX_F_MAP | CTX_F_CONCAT },
 		/* below two are hash expr */
 		{ "jhash", json_parse_hash_expr, CTX_F_STMT | CTX_F_PRIMARY | CTX_F_SET_RHS | CTX_F_SES | CTX_F_MAP | CTX_F_CONCAT },
@@ -1728,8 +1757,18 @@ static struct expr *json_parse_dtype_expr(struct json_ctx *ctx, json_t *root)
 			}
 			compound_expr_add(expr, i);
 		}
-		return expr;
+
+		return json_check_concat_expr(ctx, expr);
+	} else if (json_is_object(root)) {
+		const char *key;
+		json_t *val;
+
+		if (!json_unpack_stmt(ctx, root, &key, &val) &&
+		    !strcmp(key, "typeof")) {
+			return json_parse_expr(ctx, val);
+		}
 	}
+
 	json_error(ctx, "Invalid set datatype.");
 	return NULL;
 }
@@ -2375,9 +2414,9 @@ static struct stmt *json_parse_reject_stmt(struct json_ctx *ctx,
 	return stmt;
 }
 
-static void json_parse_set_stmt_list(struct json_ctx *ctx,
-				     struct list_head *stmt_list,
-				     json_t *stmt_json)
+static int json_parse_set_stmt_list(struct json_ctx *ctx,
+				    struct list_head *stmt_list,
+				    json_t *stmt_json)
 {
 	struct list_head *head;
 	struct stmt *stmt;
@@ -2385,10 +2424,12 @@ static void json_parse_set_stmt_list(struct json_ctx *ctx,
 	size_t index;
 
 	if (!stmt_json)
-		return;
+		return 0;
 
-	if (!json_is_array(stmt_json))
+	if (!json_is_array(stmt_json)) {
 		json_error(ctx, "Unexpected object type in stmt");
+		return -1;
+	}
 
 	head = stmt_list;
 	json_array_foreach(stmt_json, index, value) {
@@ -2396,11 +2437,19 @@ static void json_parse_set_stmt_list(struct json_ctx *ctx,
 		if (!stmt) {
 			json_error(ctx, "Parsing set statements array at index %zd failed.", index);
 			stmt_list_free(stmt_list);
-			return;
+			return -1;
+		}
+		if (!(stmt->flags & STMT_F_STATEFUL)) {
+			stmt_free(stmt);
+			json_error(ctx, "Unsupported set statements array at index %zd failed.", index);
+			stmt_list_free(stmt_list);
+			return -1;
 		}
 		list_add(&stmt->list, head);
 		head = &stmt->list;
 	}
+
+	return 0;
 }
 
 static struct stmt *json_parse_set_stmt(struct json_ctx *ctx,
@@ -2445,8 +2494,11 @@ static struct stmt *json_parse_set_stmt(struct json_ctx *ctx,
 	stmt->set.key = expr;
 	stmt->set.set = expr2;
 
-	if (!json_unpack(value, "{s:o}", "stmt", &stmt_json))
-		json_parse_set_stmt_list(ctx, &stmt->set.stmt_list, stmt_json);
+	if (!json_unpack(value, "{s:o}", "stmt", &stmt_json) &&
+	    json_parse_set_stmt_list(ctx, &stmt->set.stmt_list, stmt_json) < 0) {
+		stmt_free(stmt);
+		return NULL;
+	}
 
 	return stmt;
 }
@@ -2502,8 +2554,11 @@ static struct stmt *json_parse_map_stmt(struct json_ctx *ctx,
 	stmt->map.data = expr_data;
 	stmt->map.set = expr2;
 
-	if (!json_unpack(value, "{s:o}", "stmt", &stmt_json))
-		json_parse_set_stmt_list(ctx, &stmt->set.stmt_list, stmt_json);
+	if (!json_unpack(value, "{s:o}", "stmt", &stmt_json) &&
+	    json_parse_set_stmt_list(ctx, &stmt->set.stmt_list, stmt_json) < 0) {
+		stmt_free(stmt);
+		return NULL;
+	}
 
 	return stmt;
 }
@@ -3450,8 +3505,12 @@ static struct cmd *json_parse_cmd_add_set(struct json_ctx *ctx, json_t *root,
 	json_unpack(root, "{s:i}", "size", &set->desc.size);
 	json_unpack(root, "{s:b}", "auto-merge", &set->automerge);
 
-	if (!json_unpack(root, "{s:o}", "stmt", &stmt_json))
-		json_parse_set_stmt_list(ctx, &set->stmt_list, stmt_json);
+	if (!json_unpack(root, "{s:o}", "stmt", &stmt_json) &&
+	    json_parse_set_stmt_list(ctx, &set->stmt_list, stmt_json) < 0) {
+		set_free(set);
+		handle_free(&h);
+		return NULL;
+	}
 
 	handle_merge(&set->handle, &h);
 
@@ -3490,6 +3549,15 @@ static struct cmd *json_parse_cmd_add_element(struct json_ctx *ctx,
 		handle_free(&h);
 		return NULL;
 	}
+
+	if ((op == CMD_CREATE || op == CMD_ADD) &&
+	    nft_cmd_collapse_elems(op, ctx->cmds, &h, expr)) {
+		handle_free(&h);
+		expr_free(expr);
+		ctx->flags |= CTX_F_COLLAPSED;
+		return NULL;
+	}
+
 	return cmd_alloc(op, cmd_obj, &h, int_loc, expr);
 }
 
@@ -3703,6 +3771,7 @@ static struct cmd *json_parse_cmd_add_object(struct json_ctx *ctx,
 		break;
 	case NFT_OBJECT_CT_TIMEOUT:
 		cmd_obj = CMD_OBJ_CT_TIMEOUT;
+		init_list_head(&obj->ct_timeout.timeout_list);
 		obj->type = NFT_OBJECT_CT_TIMEOUT;
 		if (!json_unpack(root, "{s:s}", "protocol", &tmp)) {
 			if (!strcmp(tmp, "tcp")) {
@@ -3721,7 +3790,6 @@ static struct cmd *json_parse_cmd_add_object(struct json_ctx *ctx,
 		}
 		obj->ct_timeout.l3proto = l3proto;
 
-		init_list_head(&obj->ct_timeout.timeout_list);
 		if (json_parse_ct_timeout_policy(ctx, root, obj))
 			goto err_free_obj;
 		break;
@@ -4269,13 +4337,13 @@ static json_t *seqnum_to_json(const uint32_t seqnum)
 		cur = json_cmd_assoc_list;
 		json_cmd_assoc_list = cur->next;
 
-		key = cur->cmd->seqnum % CMD_ASSOC_HSIZE;
+		key = cur->cmd->seqnum_from % CMD_ASSOC_HSIZE;
 		hlist_add_head(&cur->hnode, &json_cmd_assoc_hash[key]);
 	}
 
 	key = seqnum % CMD_ASSOC_HSIZE;
 	hlist_for_each_entry(cur, n, &json_cmd_assoc_hash[key], hnode) {
-		if (cur->cmd->seqnum == seqnum)
+		if (cur->cmd->seqnum_from == seqnum)
 			return cur->json;
 	}
 
@@ -4319,6 +4387,11 @@ static int __json_parse(struct json_ctx *ctx)
 		cmd = json_parse_cmd(ctx, value);
 
 		if (!cmd) {
+			if (ctx->flags & CTX_F_COLLAPSED) {
+				ctx->flags &= ~CTX_F_COLLAPSED;
+				continue;
+			}
+
 			json_error(ctx, "Parsing command array at index %zd failed.", index);
 			return -1;
 		}
@@ -4412,6 +4485,7 @@ static int json_echo_error(struct netlink_mon_handler *monh,
 
 static uint64_t handle_from_nlmsg(const struct nlmsghdr *nlh)
 {
+	struct nftnl_flowtable *nlf;
 	struct nftnl_table *nlt;
 	struct nftnl_chain *nlc;
 	struct nftnl_rule *nlr;
@@ -4447,6 +4521,11 @@ static uint64_t handle_from_nlmsg(const struct nlmsghdr *nlh)
 		nlo = netlink_obj_alloc(nlh);
 		handle = nftnl_obj_get_u64(nlo, NFTNL_OBJ_HANDLE);
 		nftnl_obj_free(nlo);
+		break;
+	case NFT_MSG_NEWFLOWTABLE:
+		nlf = netlink_flowtable_alloc(nlh);
+		handle = nftnl_flowtable_get_u64(nlf, NFTNL_FLOWTABLE_HANDLE);
+		nftnl_flowtable_free(nlf);
 		break;
 	}
 	return handle;

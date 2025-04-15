@@ -456,7 +456,11 @@ struct expr *ct_expr_alloc(const struct location *loc, enum nft_ct_keys key,
 
 	switch (key) {
 	case NFT_CT_SRC:
+	case NFT_CT_SRC_IP:
+	case NFT_CT_SRC_IP6:
 	case NFT_CT_DST:
+	case NFT_CT_DST_IP:
+	case NFT_CT_DST_IP6:
 		expr->ct.base = PROTO_BASE_NETWORK_HDR;
 		break;
 	case NFT_CT_PROTO_SRC:
@@ -530,7 +534,7 @@ static void ct_stmt_destroy(struct stmt *stmt)
 	expr_free(stmt->ct.expr);
 }
 
-static const struct stmt_ops ct_stmt_ops = {
+const struct stmt_ops ct_stmt_ops = {
 	.type		= STMT_CT,
 	.name		= "ct",
 	.print		= ct_stmt_print,
@@ -557,7 +561,7 @@ static void notrack_stmt_print(const struct stmt *stmt, struct output_ctx *octx)
 	nft_print(octx, "notrack");
 }
 
-static const struct stmt_ops notrack_stmt_ops = {
+const struct stmt_ops notrack_stmt_ops = {
 	.type		= STMT_NOTRACK,
 	.name		= "notrack",
 	.print		= notrack_stmt_print,
@@ -580,7 +584,7 @@ static void flow_offload_stmt_destroy(struct stmt *stmt)
 	free_const(stmt->flow.table_name);
 }
 
-static const struct stmt_ops flow_offload_stmt_ops = {
+const struct stmt_ops flow_offload_stmt_ops = {
 	.type		= STMT_FLOW_OFFLOAD,
 	.name		= "flow_offload",
 	.print		= flow_offload_stmt_print,

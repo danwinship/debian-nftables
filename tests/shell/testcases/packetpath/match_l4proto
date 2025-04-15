@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # NFT_TEST_REQUIRES(NFT_TEST_HAVE_netdev_egress)
+# NFT_TEST_REQUIRES(NFT_TEST_HAVE_socat)
 
 rnd=$(mktemp -u XXXXXXXX)
 ns1="nft1payload-$rnd"

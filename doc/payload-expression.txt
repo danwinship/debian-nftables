@@ -729,13 +729,13 @@ nftables currently supports matching (finding) a given ipv6 extension header, TC
 *dst* {*nexthdr* | *hdrlength*}
 *mh* {*nexthdr* | *hdrlength* | *checksum* | *type*}
 *srh* {*flags* | *tag* | *sid* | *seg-left*}
-*tcp option* {*eol* | *nop* | *maxseg* | *window* | *sack-perm* | *sack* | *sack0* | *sack1* | *sack2* | *sack3* | *timestamp*} 'tcp_option_field'
+*tcp option* {*eol* | *nop* | *maxseg* | *window* | *sack-perm* | *sack* | *sack0* | *sack1* | *sack2* | *sack3* | *timestamp* | *mptcp* } 'tcp_option_field'
 *ip option* { lsrr | ra | rr | ssrr } 'ip_option_field'
 
 The following syntaxes are valid only in a relational expression with boolean type on right-hand side for checking header existence only:
 [verse]
 *exthdr* {*hbh* | *frag* | *rt* | *dst* | *mh*}
-*tcp option* {*eol* | *nop* | *maxseg* | *window* | *sack-perm* | *sack* | *sack0* | *sack1* | *sack2* | *sack3* | *timestamp*}
+*tcp option* {*eol* | *nop* | *maxseg* | *window* | *sack-perm* | *sack* | *sack0* | *sack1* | *sack2* | *sack3* | *timestamp* | *mptcp* }
 *ip option* { lsrr | ra | rr | ssrr }
 *dccp option* 'dccp_option_type'
 
@@ -794,7 +794,12 @@ length, left, right
 |timestamp|
 TCP Timestamps |
 length, tsval, tsecr
+|mptcp|
+Multipath TCP |
+subtype
 |============================
+
+Data types can be queried with 'nft describe tcp option *keyword* [ *fieldname* ]'.
 
 TCP option matching also supports raw expression syntax to access arbitrary options:
 [verse]
@@ -808,16 +813,16 @@ TCP option matching also supports raw expression syntax to access arbitrary opti
 |Keyword| Description | IP option fields
 |lsrr|
 Loose Source Route |
-type, length, ptr, addr
+length, ptr, addr
 |ra|
 Router Alert |
-type, length, value
+length, value
 |rr|
 Record Route |
-type, length, ptr, addr
+length, ptr, addr
 |ssrr|
 Strict Source Route |
-type, length, ptr, addr
+length, ptr, addr
 |============================
 
 .finding TCP options

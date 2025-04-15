@@ -420,7 +420,16 @@ static void do_set_print(const struct set *set, struct print_fmt_options *opts,
 
 	if (set->init != NULL && set->init->size > 0) {
 		nft_print(octx, "%s%selements = ", opts->tab, opts->tab);
+
+		if (set->timeout || set->elem_has_comment ||
+		    (set->flags & (NFT_SET_MAP | NFT_SET_OBJECT |
+				   NFT_SET_TIMEOUT | NFT_SET_CONCAT)) ||
+		    !list_empty(&set->stmt_list))
+			octx->force_newline = true;
+
 		expr_print(set->init, octx);
+		octx->force_newline = false;
+
 		nft_print(octx, "%s", opts->nl);
 	}
 	nft_print(octx, "%s}%s", opts->tab, opts->nl);
@@ -485,10 +494,12 @@ void rule_free(struct rule *rule)
 
 void rule_print(const struct rule *rule, struct output_ctx *octx)
 {
+	const struct stmt_ops *ops;
 	const struct stmt *stmt;
 
 	list_for_each_entry(stmt, &rule->stmts, list) {
-		stmt->ops->print(stmt, octx);
+		ops = stmt_ops(stmt);
+		ops->print(stmt, octx);
 		if (!list_is_last(&stmt->list, &rule->stmts))
 			nft_print(octx, " ");
 	}
@@ -1332,7 +1343,6 @@ struct cmd *cmd_alloc(enum cmd_ops op, enum cmd_obj obj,
 	cmd->attr     = xzalloc_array(NFT_NLATTR_LOC_MAX,
 				      sizeof(struct nlerr_loc));
 	cmd->attr_array_len = NFT_NLATTR_LOC_MAX;
-	init_list_head(&cmd->collapse_list);
 
 	return cmd;
 }
@@ -1373,6 +1383,9 @@ void monitor_free(struct monitor *m)
 
 void cmd_free(struct cmd *cmd)
 {
+	if (cmd == NULL)
+		return;
+
 	handle_free(&cmd->handle);
 	if (cmd->data != NULL) {
 		switch (cmd->obj) {
@@ -1551,14 +1564,14 @@ static int do_command_insert(struct netlink_ctx *ctx, struct cmd *cmd)
 
 static int do_delete_setelems(struct netlink_ctx *ctx, struct cmd *cmd)
 {
+	const struct set *set = cmd->elem.set;
 	struct expr *expr = cmd->elem.expr;
-	struct set *set = cmd->elem.set;
 
 	if (set_is_non_concat_range(set) &&
 	    set_to_intervals(set, expr, false) < 0)
 		return -1;
 
-	if (mnl_nft_setelem_del(ctx, cmd, &cmd->handle, cmd->elem.expr) < 0)
+	if (mnl_nft_setelem_del(ctx, cmd, &cmd->handle, set, cmd->elem.expr) < 0)
 		return -1;
 
 	return 0;
@@ -2155,6 +2168,21 @@ void flowtable_print(const struct flowtable *s, struct output_ctx *octx)
 	do_flowtable_print(s, &opts, octx);
 }
 
+void flowtable_print_plain(const struct flowtable *ft, struct output_ctx *octx)
+{
+	struct print_fmt_options opts = {
+		.tab		= "",
+		.nl		= " ",
+		.table		= ft->handle.table.name,
+		.family		= family2str(ft->handle.family),
+		.stmt_separator = "; ",
+	};
+
+	flowtable_print_declaration(ft, &opts, octx);
+	nft_print(octx, "}");
+}
+
+
 struct flowtable *flowtable_lookup_fuzzy(const char *ft_name,
 					 const struct nft_cache *cache,
 					 const struct table **t)
@@ -2352,10 +2380,16 @@ static int do_command_list(struct netlink_ctx *ctx, struct cmd *cmd)
 	if (nft_output_json(&ctx->nft->output))
 		return do_command_list_json(ctx, cmd);
 
-	if (cmd->handle.table.name != NULL)
+	if (cmd->handle.table.name != NULL) {
 		table = table_cache_find(&ctx->nft->cache.table_cache,
 					 cmd->handle.table.name,
 					 cmd->handle.family);
+		if (!table) {
+			errno = ENOENT;
+			return -1;
+		}
+	}
+
 	switch (cmd->obj) {
 	case CMD_OBJ_TABLE:
 		if (!cmd->handle.table.name)
@@ -2411,10 +2445,18 @@ static int do_command_list(struct netlink_ctx *ctx, struct cmd *cmd)
 		return do_list_flowtables(ctx, cmd);
 	case CMD_OBJ_HOOKS:
 		return do_list_hooks(ctx, cmd);
-	default:
-		BUG("invalid command object type %u\n", cmd->obj);
+	case CMD_OBJ_MONITOR:
+	case CMD_OBJ_MARKUP:
+	case CMD_OBJ_SETELEMS:
+	case CMD_OBJ_EXPR:
+	case CMD_OBJ_ELEMENTS:
+		errno = EOPNOTSUPP;
+		return -1;
+	case CMD_OBJ_INVALID:
+		break;
 	}
 
+	BUG("invalid command object type %u\n", cmd->obj);
 	return 0;
 }
 
@@ -2715,7 +2757,7 @@ static void stmt_reduce(const struct rule *rule)
 		}
 
 		/* Must not merge across other statements */
-		if (stmt->ops->type != STMT_EXPRESSION) {
+		if (stmt->type != STMT_EXPRESSION) {
 			if (idx >= 2)
 				payload_do_merge(sa, idx);
 			idx = 0;

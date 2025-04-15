@@ -96,21 +96,33 @@ static json_t *set_dtype_json(const struct expr *key)
 	return root;
 }
 
+static json_t *set_key_dtype_json(const struct set *set,
+				  struct output_ctx *octx)
+{
+	bool use_typeof = set->key_typeof_valid;
+
+	if (!use_typeof)
+		return set_dtype_json(set->key);
+
+	return json_pack("{s:o}", "typeof", expr_print_json(set->key, octx));
+}
+
 static json_t *stmt_print_json(const struct stmt *stmt, struct output_ctx *octx)
 {
+	const struct stmt_ops *ops = stmt_ops(stmt);
 	char buf[1024];
 	FILE *fp;
 
-	if (stmt->ops->json)
-		return stmt->ops->json(stmt, octx);
+	if (ops->json)
+		return ops->json(stmt, octx);
 
 	fprintf(stderr, "warning: stmt ops %s have no json callback\n",
-		stmt->ops->name);
+		ops->name);
 
 	fp = octx->output_fp;
 	octx->output_fp = fmemopen(buf, 1024, "w");
 
-	stmt->ops->print(stmt, octx);
+	ops->print(stmt, octx);
 
 	fclose(octx->output_fp);
 	octx->output_fp = fp;
@@ -158,7 +170,7 @@ static json_t *set_print_json(struct output_ctx *octx, const struct set *set)
 			"family", family2str(set->handle.family),
 			"name", set->handle.set.name,
 			"table", set->handle.table.name,
-			"type", set_dtype_json(set->key),
+			"type", set_key_dtype_json(set, octx),
 			"handle", set->handle.handle.id);
 
 	if (set->comment)
@@ -533,20 +545,6 @@ static json_t *table_print_json(const struct table *table)
 		json_object_set_new(root, "comment", json_string(table->comment));
 
 	return json_pack("{s:o}", "table", root);
-}
-
-json_t *flagcmp_expr_json(const struct expr *expr, struct output_ctx *octx)
-{
-	json_t *left;
-
-	left = json_pack("{s:[o, o]}", expr_op_symbols[OP_AND],
-			 expr_print_json(expr->flagcmp.expr, octx),
-			 expr_print_json(expr->flagcmp.mask, octx));
-
-	return json_pack("{s:{s:s, s:o, s:o}}", "match",
-			 "op", expr_op_symbols[expr->op] ? : "in",
-			 "left", left,
-			 "right", expr_print_json(expr->flagcmp.value, octx));
 }
 
 static json_t *
@@ -1959,12 +1957,17 @@ static json_t *generate_json_metainfo(void)
 int do_command_list_json(struct netlink_ctx *ctx, struct cmd *cmd)
 {
 	struct table *table = NULL;
-	json_t *root;
+	json_t *root = NULL;
 
-	if (cmd->handle.table.name)
+	if (cmd->handle.table.name) {
 		table = table_cache_find(&ctx->nft->cache.table_cache,
 					 cmd->handle.table.name,
 					 cmd->handle.family);
+		if (!table) {
+			errno = ENOENT;
+			return -1;
+		}
+	}
 
 	switch (cmd->obj) {
 	case CMD_OBJ_TABLE:
@@ -2014,6 +2017,13 @@ int do_command_list_json(struct netlink_ctx *ctx, struct cmd *cmd)
 	case CMD_OBJ_CT_HELPERS:
 		root = do_list_obj_json(ctx, cmd, NFT_OBJECT_CT_HELPER);
 		break;
+	case CMD_OBJ_CT_TIMEOUT:
+	case CMD_OBJ_CT_TIMEOUTS:
+		root = do_list_obj_json(ctx, cmd, NFT_OBJECT_CT_TIMEOUT);
+	case CMD_OBJ_CT_EXPECT:
+	case CMD_OBJ_CT_EXPECTATIONS:
+		root = do_list_obj_json(ctx, cmd, NFT_OBJECT_CT_EXPECT);
+		break;
 	case CMD_OBJ_LIMIT:
 	case CMD_OBJ_LIMITS:
 		root = do_list_obj_json(ctx, cmd, NFT_OBJECT_LIMIT);
@@ -2022,14 +2032,29 @@ int do_command_list_json(struct netlink_ctx *ctx, struct cmd *cmd)
 	case CMD_OBJ_SECMARKS:
 		root = do_list_obj_json(ctx, cmd, NFT_OBJECT_SECMARK);
 		break;
+	case CMD_OBJ_SYNPROXY:
+	case CMD_OBJ_SYNPROXYS:
+		root = do_list_obj_json(ctx, cmd, NFT_OBJECT_SYNPROXY);
+		break;
 	case CMD_OBJ_FLOWTABLE:
 		root = do_list_flowtable_json(ctx, cmd, table);
 		break;
 	case CMD_OBJ_FLOWTABLES:
 		root = do_list_flowtables_json(ctx, cmd);
 		break;
-	default:
+	case CMD_OBJ_HOOKS:
+		return 0;
+	case CMD_OBJ_MONITOR:
+	case CMD_OBJ_MARKUP:
+	case CMD_OBJ_SETELEMS:
+	case CMD_OBJ_RULE:
+	case CMD_OBJ_EXPR:
+	case CMD_OBJ_ELEMENTS:
+		errno = EOPNOTSUPP;
+		return -1;
+	case CMD_OBJ_INVALID:
 		BUG("invalid command object type %u\n", cmd->obj);
+		break;
 	}
 
 	if (!json_is_array(root)) {
@@ -2095,6 +2120,12 @@ void monitor_print_obj_json(struct netlink_mon_handler *monh,
 			    const char *cmd, struct obj *o)
 {
 	monitor_print_json(monh, cmd, obj_print_json(o));
+}
+
+void monitor_print_flowtable_json(struct netlink_mon_handler *monh,
+				  const char *cmd, struct flowtable *ft)
+{
+	monitor_print_json(monh, cmd, flowtable_print_json(ft));
 }
 
 void monitor_print_rule_json(struct netlink_mon_handler *monh,

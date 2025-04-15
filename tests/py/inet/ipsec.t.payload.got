@@ -1,0 +1,4 @@
+# ipsec out spi 1-561
+ip ipsec-ip4 ipsec-forw
+  [ xfrm load out 0 spi => reg 1 ]
+  [ range eq reg 1 0x01000000 0x31020000 ]

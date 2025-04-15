@@ -1,5 +1,5 @@
-AC_INIT([nftables], [1.1.1], [netfilter-devel@vger.kernel.org])
-AC_DEFINE([RELEASE_NAME], ["Commodore Bullmoose #2"], [Release name])
+AC_INIT([nftables], [1.1.2], [netfilter-devel@vger.kernel.org])
+AC_DEFINE([RELEASE_NAME], ["Commodore Bullmoose #3"], [Release name])
 
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIR([m4])
@@ -53,11 +53,11 @@ CHECK_GCC_FVISIBILITY
 AS_IF([test "x$enable_man_doc" = "xyes"], [
        AC_CHECK_PROG(A2X, [a2x], [a2x], [no])
        AS_IF([test "$A2X" = "no" -a ! -f "${srcdir}/doc/nft.8"],
-	     [AC_MSG_ERROR([a2x not found, please install asciidoc])])
+	     [AC_MSG_ERROR([a2x not found, please install asciidoc, or pass --disable-man-doc])])
 ])
 
 PKG_CHECK_MODULES([LIBMNL], [libmnl >= 1.0.4])
-PKG_CHECK_MODULES([LIBNFTNL], [libnftnl >= 1.2.8])
+PKG_CHECK_MODULES([LIBNFTNL], [libnftnl >= 1.2.9])
 
 AC_ARG_WITH([mini-gmp], [AS_HELP_STRING([--with-mini-gmp],
             [Use builtin mini-gmp (for embedded builds)])],
