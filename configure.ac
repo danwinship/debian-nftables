@@ -1,5 +1,5 @@
-AC_INIT([nftables], [1.1.2], [netfilter-devel@vger.kernel.org])
-AC_DEFINE([RELEASE_NAME], ["Commodore Bullmoose #3"], [Release name])
+AC_INIT([nftables], [1.1.3], [netfilter-devel@vger.kernel.org])
+AC_DEFINE([RELEASE_NAME], ["Commodore Bullmoose #4"], [Release name])
 
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIR([m4])

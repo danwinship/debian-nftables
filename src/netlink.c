@@ -268,6 +268,8 @@ static int __netlink_gen_concat_key(uint32_t flags, const struct expr *i,
 				    unsigned char *data)
 {
 	struct expr *expr;
+	mpz_t value;
+	int ret;
 
 	switch (i->etype) {
 	case EXPR_RANGE:
@@ -276,9 +278,11 @@ static int __netlink_gen_concat_key(uint32_t flags, const struct expr *i,
 		else
 			expr = i->left;
 
+		mpz_init_set(value, expr->value);
+
 		if (expr_basetype(expr)->type == TYPE_INTEGER &&
 		    expr->byteorder == BYTEORDER_HOST_ENDIAN)
-			byteorder_switch_expr_value(expr->value, expr);
+			byteorder_switch_expr_value(value, expr);
 
 		i = expr;
 		break;
@@ -299,22 +303,27 @@ static int __netlink_gen_concat_key(uint32_t flags, const struct expr *i,
 		}
 		return netlink_export_pad(data, i->prefix->value, i);
 	case EXPR_VALUE:
-		/* Switch byteorder only once for singleton values when the set
+		mpz_init_set(value, i->value);
+
+		/* Switch byteorder to big endian representation when the set
 		 * contains concatenation of intervals.
 		 */
-		if (!(flags & EXPR_F_INTERVAL))
+		if (!(flags & (EXPR_F_INTERVAL| EXPR_F_INTERVAL_END)))
 			break;
 
 		expr = (struct expr *)i;
 		if (expr_basetype(expr)->type == TYPE_INTEGER &&
 		    expr->byteorder == BYTEORDER_HOST_ENDIAN)
-			byteorder_switch_expr_value(expr->value, expr);
+			byteorder_switch_expr_value(value, expr);
 		break;
 	default:
 		BUG("invalid expression type '%s' in set", expr_ops(i)->name);
 	}
 
-	return netlink_export_pad(data, i->value, i);
+	ret = netlink_export_pad(data, value, i);
+	mpz_clear(value);
+
+	return ret;
 }
 
 static void nft_data_memcpy(struct nft_data_linearize *nld,
