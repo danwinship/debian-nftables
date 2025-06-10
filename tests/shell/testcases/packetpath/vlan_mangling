@@ -48,12 +48,14 @@ table netdev t {
 
 	chain in {
 		type filter hook ingress device veth0 priority filter;
+		vlan pcp 0 counter
 		ether saddr da:d3:00:01:02:03 vlan id 123 jump in_update_vlan
 	}
 
 	chain out_update_vlan {
 		vlan type arp vlan id set 123 counter
 		ip daddr 10.1.1.1 icmp type echo-reply vlan id set 123 counter
+		vlan pcp set 6 counter
 	}
 
 	chain out {

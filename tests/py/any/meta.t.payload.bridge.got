@@ -1,9 +1,0 @@
-# meta mark set meta mark | meta random | meta cpu
-bridge test-bridge input
-  [ meta load mark => reg 1 ]
-  [ meta load prandom => reg 2 ]
-  [ byteorder reg 2 = ntoh(reg 2, 4, 4) ]
-  [ bitwise reg 1 = ( reg 1 | reg 2 ) ]
-  [ meta load cpu => reg 2 ]
-  [ bitwise reg 1 = ( reg 1 | reg 2 ) ]
-  [ meta set mark with reg 1 ]
