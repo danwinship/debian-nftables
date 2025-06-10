@@ -1,3 +1,12 @@
+nftables (1.1.3-1) unstable; urgency=medium
+
+  * [c73e482] New upstream version 1.1.3 (Closes: #1107417)
+    - Make vlan pcp updates work
+    - Restore set auto-merge feature with timeouts
+    - Fix large concatenated set-ranges
+
+ -- Jeremy Sowden <azazel@debian.org>  Tue, 10 Jun 2025 21:18:17 +0100
+
 nftables (1.1.2-1) unstable; urgency=medium
 
   * [3649fbe] d/upstream/signing-key.asc: refresh key
