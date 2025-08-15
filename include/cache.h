@@ -123,7 +123,7 @@ struct cache_item {
 
 void cache_init(struct cache *cache);
 void cache_free(struct cache *cache);
-void cache_add(struct cache_item *item, struct cache *cache, uint32_t hash);
+void cache_add(struct cache_item *item, struct cache *cache, const char *name);
 void cache_del(struct cache_item *item);
 
 void table_cache_add(struct table *table, struct nft_cache *cache);

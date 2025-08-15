@@ -612,7 +612,7 @@ struct expr *constant_range_expr_alloc(const struct location *loc,
 	struct expr *expr;
 
 	expr = expr_alloc(loc, EXPR_RANGE_VALUE, dtype, byteorder, len);
-	expr->flags = EXPR_F_CONSTANT | EXPR_F_SINGLETON;
+	expr->flags = EXPR_F_CONSTANT;
 
 	mpz_init_set(expr->range.low, low);
 	mpz_init_set(expr->range.high, high);
@@ -940,7 +940,7 @@ void relational_expr_pctx_update(struct proto_ctx *ctx,
 		if (expr_is_singleton(right))
 			ops->pctx_update(ctx, &expr->location, left, right);
 		else if (right->etype == EXPR_SET) {
-			list_for_each_entry(i, &right->expressions, list) {
+			list_for_each_entry(i, &expr_set(right)->expressions, list) {
 				if (i->etype == EXPR_SET_ELEM &&
 				    i->key->etype == EXPR_VALUE)
 					ops->pctx_update(ctx, &expr->location, left, i->key);
@@ -1022,7 +1022,8 @@ struct expr *compound_expr_alloc(const struct location *loc,
 	struct expr *expr;
 
 	expr = expr_alloc(loc, etype, &invalid_type, BYTEORDER_INVALID, 0);
-	init_list_head(&expr->expressions);
+	/* same layout for EXPR_CONCAT, EXPR_SET and EXPR_LIST. */
+	init_list_head(&expr->expr_set.expressions);
 	return expr;
 }
 
@@ -1030,8 +1031,8 @@ static void compound_expr_clone(struct expr *new, const struct expr *expr)
 {
 	struct expr *i;
 
-	init_list_head(&new->expressions);
-	list_for_each_entry(i, &expr->expressions, list)
+	init_list_head(&new->expr_set.expressions);
+	list_for_each_entry(i, &expr->expr_set.expressions, list)
 		compound_expr_add(new, expr_clone(i));
 }
 
@@ -1039,7 +1040,7 @@ static void compound_expr_destroy(struct expr *expr)
 {
 	struct expr *i, *next;
 
-	list_for_each_entry_safe(i, next, &expr->expressions, list)
+	list_for_each_entry_safe(i, next, &expr->expr_set.expressions, list)
 		expr_free(i);
 }
 
@@ -1049,7 +1050,7 @@ static void compound_expr_print(const struct expr *expr, const char *delim,
 	const struct expr *i;
 	const char *d = "";
 
-	list_for_each_entry(i, &expr->expressions, list) {
+	list_for_each_entry(i, &expr->expr_set.expressions, list) {
 		nft_print(octx, "%s", d);
 		expr_print(i, octx);
 		d = delim;
@@ -1058,13 +1059,13 @@ static void compound_expr_print(const struct expr *expr, const char *delim,
 
 void compound_expr_add(struct expr *compound, struct expr *expr)
 {
-	list_add_tail(&expr->list, &compound->expressions);
-	compound->size++;
+	list_add_tail(&expr->list, &compound->expr_set.expressions);
+	compound->expr_set.size++;
 }
 
 void compound_expr_remove(struct expr *compound, struct expr *expr)
 {
-	compound->size--;
+	compound->expr_set.size--;
 	list_del(&expr->list);
 }
 
@@ -1104,7 +1105,7 @@ static int concat_expr_build_udata(struct nftnl_udata_buf *udbuf,
 	struct expr *expr, *tmp;
 	unsigned int i = 0;
 
-	list_for_each_entry_safe(expr, tmp, &concat_expr->expressions, list) {
+	list_for_each_entry_safe(expr, tmp, &expr_concat(concat_expr)->expressions, list) {
 		struct nftnl_udata *nest_expr;
 		int err;
 
@@ -1268,12 +1269,12 @@ struct expr *list_expr_to_binop(struct expr *expr)
 {
 	struct expr *first, *last = NULL, *i;
 
-	assert(!list_empty(&expr->expressions));
+	assert(!list_empty(&expr_list(expr)->expressions));
 
-	first = list_first_entry(&expr->expressions, struct expr, list);
+	first = list_first_entry(&expr_list(expr)->expressions, struct expr, list);
 	i = first;
 
-	list_for_each_entry_continue(i, &expr->expressions, list) {
+	list_for_each_entry_continue(i, &expr_list(expr)->expressions, list) {
 		if (first) {
 			last = binop_expr_alloc(&expr->location, OP_OR, first, i);
 			first = NULL;
@@ -1285,7 +1286,7 @@ struct expr *list_expr_to_binop(struct expr *expr)
 	assert(!first);
 
 	/* zap list expressions, they have been moved to binop expression. */
-	init_list_head(&expr->expressions);
+	init_list_head(&expr_list(expr)->expressions);
 	expr_free(expr);
 
 	return last;
@@ -1300,7 +1301,7 @@ static const char *calculate_delim(const struct expr *expr, int *count,
 	if (octx->force_newline)
 		return newline;
 
-	if (set_is_anonymous(expr->set_flags))
+	if (set_is_anonymous(expr_set(expr)->set_flags))
 		return singleline;
 
 	if (!expr->dtype)
@@ -1348,7 +1349,7 @@ static void set_expr_print(const struct expr *expr, struct output_ctx *octx)
 
 	nft_print(octx, "{ ");
 
-	list_for_each_entry(i, &expr->expressions, list) {
+	list_for_each_entry(i, &expr_set(expr)->expressions, list) {
 		nft_print(octx, "%s", d);
 		expr_print(i, octx);
 		count++;
@@ -1364,7 +1365,7 @@ static void set_expr_set_type(const struct expr *expr,
 {
 	struct expr *i;
 
-	list_for_each_entry(i, &expr->expressions, list)
+	list_for_each_entry(i, &expr_set(expr)->expressions, list)
 		expr_set_type(i, dtype, byteorder);
 }
 
@@ -1385,7 +1386,7 @@ struct expr *set_expr_alloc(const struct location *loc, const struct set *set)
 	if (!set)
 		return set_expr;
 
-	set_expr->set_flags = set->flags;
+	expr_set(set_expr)->set_flags = set->flags;
 	datatype_set(set_expr, set->key->dtype);
 
 	return set_expr;
@@ -1443,10 +1444,10 @@ static bool __set_expr_is_vmap(const struct expr *mappings)
 {
 	const struct expr *mapping;
 
-	if (list_empty(&mappings->expressions))
+	if (list_empty(&expr_set(mappings)->expressions))
 		return false;
 
-	mapping = list_first_entry(&mappings->expressions, struct expr, list);
+	mapping = list_first_entry(&expr_set(mappings)->expressions, struct expr, list);
 	if (mapping->etype == EXPR_MAPPING &&
 	    mapping->right->etype == EXPR_VERDICT)
 		return true;

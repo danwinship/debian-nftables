@@ -77,9 +77,9 @@ struct expr *get_set_intervals(const struct set *set, const struct expr *init)
 	mpz_init2(low, set->key->len);
 	mpz_init2(high, set->key->len);
 
-	new_init = list_expr_alloc(&internal_location);
+	new_init = set_expr_alloc(&internal_location, NULL);
 
-	list_for_each_entry(i, &init->expressions, list) {
+	list_for_each_entry(i, &expr_set(init)->expressions, list) {
 		switch (i->key->etype) {
 		case EXPR_VALUE:
 			set_elem_add(set, new_init, i->key->value,
@@ -135,7 +135,7 @@ static struct expr *get_set_interval_find(const struct set *cache_set,
 
 	mpz_init2(val, set->key->len);
 
-	list_for_each_entry(i, &set->init->expressions, list) {
+	list_for_each_entry(i, &expr_set(set->init)->expressions, list) {
 		key = expr_value(i);
 		switch (key->etype) {
 		case EXPR_VALUE:
@@ -236,7 +236,7 @@ int get_set_decompose(struct set *cache_set, struct set *set)
 
 	new_init = set_expr_alloc(&internal_location, set);
 
-	list_for_each_entry_safe(i, next, &set->init->expressions, list) {
+	list_for_each_entry_safe(i, next, &expr_set(set->init)->expressions, list) {
 		if (i->flags & EXPR_F_INTERVAL_END && left) {
 			list_del(&left->list);
 			list_del(&i->list);
@@ -354,7 +354,7 @@ void concat_range_aggregate(struct expr *set)
 	int prefix_len, free_r1;
 	mpz_t range, p;
 
-	list_for_each_entry_safe(i, next, &set->expressions, list) {
+	list_for_each_entry_safe(i, next, &expr_set(set)->expressions, list) {
 		if (!start) {
 			start = i;
 			continue;
@@ -366,10 +366,10 @@ void concat_range_aggregate(struct expr *set)
 		 * store them by replacing r2 expressions, and free r1
 		 * expressions.
 		 */
-		r2 = list_first_entry(&expr_value(end)->expressions,
+		r2 = list_first_entry(&expr_concat(expr_value(end))->expressions,
 				      struct expr, list);
 		list_for_each_entry_safe(r1, r1_next,
-					 &expr_value(start)->expressions,
+					 &expr_concat(expr_value(start))->expressions,
 					 list) {
 			bool string_type = false;
 
@@ -564,15 +564,15 @@ void interval_map_decompose(struct expr *set)
 	unsigned int n, m, size;
 	bool interval;
 
-	if (set->size == 0)
+	if (expr_set(set)->size == 0)
 		return;
 
-	elements = xmalloc_array(set->size, sizeof(struct expr *));
-	ranges = xmalloc_array(set->size * 2, sizeof(struct expr *));
+	elements = xmalloc_array(expr_set(set)->size, sizeof(struct expr *));
+	ranges = xmalloc_array(expr_set(set)->size * 2, sizeof(struct expr *));
 
 	/* Sort elements */
 	n = 0;
-	list_for_each_entry_safe(i, next, &set->expressions, list) {
+	list_for_each_entry_safe(i, next, &expr_set(set)->expressions, list) {
 		key = NULL;
 		if (i->etype == EXPR_SET_ELEM)
 			key = i->key;

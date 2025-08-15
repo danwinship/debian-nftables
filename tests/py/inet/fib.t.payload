@@ -26,7 +26,21 @@ ip test-ip prerouting
   [ fib daddr oif present => reg 1 ]
   [ cmp eq reg 1 0x00000001 ]
 
-# fib daddr oif missing
+# fib daddr check missing
 ip test-ip prerouting
   [ fib daddr oif present => reg 1 ]
   [ cmp eq reg 1 0x00000000 ]
+
+# fib daddr check vmap { missing : drop, exists : accept }
+        element 00000000  : drop 0 [end]        element 00000001  : accept 0 [end]
+ip test-ip prerouting
+  [ fib daddr oif present => reg 1 ]
+  [ lookup reg 1 set __map%d dreg 0 ]
+
+# meta mark set fib daddr check . ct mark map { exists . 0x00000000 : 0x00000001 }
+        element 00000001 00000000  : 00000001 0 [end]
+ip test-ip prerouting
+  [ fib daddr oif present => reg 1 ]
+  [ ct load mark => reg 9 ]
+  [ lookup reg 1 set __map%d dreg 1 ]
+  [ meta set mark with reg 1 ]

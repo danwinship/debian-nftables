@@ -1,7 +1,5 @@
 #!/bin/bash
 
-NFT=nft
-
 HANDLE=$($NFT -a -e add table ip x | cut -d '#' -f 2 | awk '{ print $2 }' | head -1)
 
 # should fail

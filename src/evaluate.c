@@ -137,7 +137,7 @@ static struct expr *implicit_set_declaration(struct eval_ctx *ctx,
 	handle_merge(&set->handle, &ctx->cmd->handle);
 
 	if (set_evaluate(ctx, set) < 0) {
-		if (set->flags & NFT_SET_MAP)
+		if (set->flags & (NFT_SET_MAP|NFT_SET_OBJECT))
 			set->init = NULL;
 		set_free(set);
 		return NULL;
@@ -191,7 +191,7 @@ static int byteorder_conversion(struct eval_ctx *ctx, struct expr **expr,
 	if ((*expr)->etype == EXPR_CONCAT) {
 		struct expr *i, *next, *unary;
 
-		list_for_each_entry_safe(i, next, &(*expr)->expressions, list) {
+		list_for_each_entry_safe(i, next, &expr_concat(*expr)->expressions, list) {
 			if (i->byteorder == BYTEORDER_BIG_ENDIAN)
 				continue;
 
@@ -482,7 +482,8 @@ static int expr_evaluate_value(struct eval_ctx *ctx, struct expr **expr)
 			return -1;
 		break;
 	default:
-		BUG("invalid basetype %s\n", expr_basetype(*expr)->name);
+		return expr_error(ctx->msgs, *expr, "Unexpected datatype %s",
+				  (*expr)->dtype->name);
 	}
 	return 0;
 }
@@ -1519,11 +1520,11 @@ static int expr_evaluate_binop(struct eval_ctx *ctx, struct expr **expr)
 	unsigned int max_shift_len = ctx->ectx.len;
 	int ret = -1;
 
-	if (ctx->recursion >= USHRT_MAX)
+	if (ctx->recursion.binop >= USHRT_MAX)
 		return expr_binary_error(ctx->msgs, op, NULL,
 					 "Binary operation limit %u reached ",
-					 ctx->recursion);
-	ctx->recursion++;
+					 ctx->recursion.binop);
+	ctx->recursion.binop++;
 
 	if (expr_evaluate(ctx, &op->left) < 0)
 		return -1;
@@ -1608,7 +1609,7 @@ static int expr_evaluate_binop(struct eval_ctx *ctx, struct expr **expr)
 	}
 
 
-	if (ctx->recursion == 0)
+	if (ctx->recursion.binop == 0)
 		BUG("recursion counter underflow");
 
 	/* can't check earlier: evaluate functions might do constant-merging + expr_free.
@@ -1616,7 +1617,7 @@ static int expr_evaluate_binop(struct eval_ctx *ctx, struct expr **expr)
 	 * So once we've evaluate everything check for remaining length of the
 	 * binop chain.
 	 */
-	if (--ctx->recursion == 0) {
+	if (--ctx->recursion.binop == 0) {
 		unsigned int to_linearize = 0;
 
 		op = *expr;
@@ -1639,10 +1640,18 @@ static int list_member_evaluate(struct eval_ctx *ctx, struct expr **expr)
 	struct expr *next = list_entry((*expr)->list.next, struct expr, list);
 	int err;
 
+	/* should never be hit in practice */
+	if (ctx->recursion.list >= USHRT_MAX)
+		return expr_binary_error(ctx->msgs, next, NULL,
+					 "List limit %u reached ",
+					 ctx->recursion.list);
+
+	ctx->recursion.list++;
 	assert(*expr != next);
 	list_del(&(*expr)->list);
 	err = expr_evaluate(ctx, expr);
 	list_add_tail(&(*expr)->list, &next->list);
+	ctx->recursion.list--;
 	return err;
 }
 
@@ -1660,12 +1669,12 @@ static int expr_evaluate_concat(struct eval_ctx *ctx, struct expr **expr)
 
 	if (ctx->ectx.key && ctx->ectx.key->etype == EXPR_CONCAT) {
 		key_ctx = ctx->ectx.key;
-		assert(!list_empty(&ctx->ectx.key->expressions));
-		key = list_first_entry(&ctx->ectx.key->expressions, struct expr, list);
-		expressions = &ctx->ectx.key->expressions;
+		assert(!list_empty(&expr_concat(ctx->ectx.key)->expressions));
+		key = list_first_entry(&expr_concat(ctx->ectx.key)->expressions, struct expr, list);
+		expressions = &expr_concat(ctx->ectx.key)->expressions;
 	}
 
-	list_for_each_entry_safe(i, next, &(*expr)->expressions, list) {
+	list_for_each_entry_safe(i, next, &expr_concat(*expr)->expressions, list) {
 		enum byteorder bo = BYTEORDER_INVALID;
 		unsigned dsize_bytes, dsize = 0;
 
@@ -1705,10 +1714,61 @@ static int expr_evaluate_concat(struct eval_ctx *ctx, struct expr **expr)
 		if (list_member_evaluate(ctx, &i) < 0)
 			return -1;
 
-		if (i->etype == EXPR_SET)
+		switch (i->etype) {
+		case EXPR_INVALID:
+		case __EXPR_MAX:
+			BUG("Unexpected etype %d", i->etype);
+			break;
+		case EXPR_VALUE:
+		case EXPR_UNARY:
+		case EXPR_BINOP:
+		case EXPR_RELATIONAL:
+		case EXPR_CONCAT:
+		case EXPR_MAP:
+		case EXPR_PAYLOAD:
+		case EXPR_EXTHDR:
+		case EXPR_META:
+		case EXPR_RT:
+		case EXPR_CT:
+		case EXPR_SET_ELEM:
+		case EXPR_NUMGEN:
+		case EXPR_HASH:
+		case EXPR_FIB:
+		case EXPR_SOCKET:
+		case EXPR_OSF:
+		case EXPR_XFRM:
+			break;
+		case EXPR_RANGE:
+		case EXPR_PREFIX:
+		case EXPR_RANGE_VALUE:
+			/* allowed on RHS (e.g. th dport . mark { 1-65535 . 42 }
+			 *                                       ~~~~~~~~ allowed
+			 * but not on LHS (e.g  1-4 . mark { ...}
+			 *                      ~~~ illegal
+			 *
+			 * recursion.list > 0 means that the concatenation is
+			 * part of another expression, such as EXPR_MAPPING or
+			 * EXPR_SET_ELEM (is used as RHS).
+			 */
+			if (ctx->recursion.list > 0)
+				break;
+
 			return expr_error(ctx->msgs, i,
 					  "cannot use %s in concatenation",
 					  expr_name(i));
+		case EXPR_VERDICT:
+		case EXPR_SYMBOL:
+		case EXPR_VARIABLE:
+		case EXPR_LIST:
+		case EXPR_SET:
+		case EXPR_SET_REF:
+		case EXPR_MAPPING:
+		case EXPR_SET_ELEM_CATCHALL:
+		case EXPR_RANGE_SYMBOL:
+			return expr_error(ctx->msgs, i,
+					  "cannot use %s in concatenation",
+					  expr_name(i));
+		}
 
 		if (!i->dtype)
 			return expr_error(ctx->msgs, i,
@@ -1738,7 +1798,7 @@ static int expr_evaluate_concat(struct eval_ctx *ctx, struct expr **expr)
 		ntype = concat_subtype_add(ntype, i->dtype->type);
 
 		dsize_bytes = div_round_up(dsize, BITS_PER_BYTE);
-		(*expr)->field_len[(*expr)->field_count++] = dsize_bytes;
+		expr_concat(*expr)->field_len[expr_concat(*expr)->field_count++] = dsize_bytes;
 		size += netlink_padded_len(dsize);
 		if (key && expressions) {
 			if (list_is_last(&key->list, expressions))
@@ -1779,7 +1839,7 @@ static int expr_evaluate_list(struct eval_ctx *ctx, struct expr **expr)
 	mpz_t val;
 
 	mpz_init_set_ui(val, 0);
-	list_for_each_entry_safe(i, next, &list->expressions, list) {
+	list_for_each_entry_safe(i, next, &expr_list(list)->expressions, list) {
 		if (list_member_evaluate(ctx, &i) < 0) {
 			mpz_clear(val);
 			return -1;
@@ -1857,6 +1917,23 @@ static int __expr_evaluate_set_elem(struct eval_ctx *ctx, struct expr *elem)
 	return 0;
 }
 
+static bool datatype_compatible(const struct datatype *a, const struct datatype *b)
+{
+	return (a->type == TYPE_MARK &&
+		datatype_equal(datatype_basetype(a), datatype_basetype(b))) ||
+		datatype_equal(a, b);
+}
+
+static bool elem_key_compatible(const struct expr *set_key,
+				const struct expr *elem_key)
+{
+	/* Catchall element is always compatible with the set key declaration */
+	if (elem_key->etype == EXPR_SET_ELEM_CATCHALL)
+		return true;
+
+	return datatype_compatible(set_key->dtype, elem_key->dtype);
+}
+
 static int expr_evaluate_set_elem(struct eval_ctx *ctx, struct expr **expr)
 {
 	struct expr *elem = *expr;
@@ -1879,13 +1956,15 @@ static int expr_evaluate_set_elem(struct eval_ctx *ctx, struct expr **expr)
 		switch (elem->key->etype) {
 		case EXPR_PREFIX:
 		case EXPR_RANGE:
+		case EXPR_RANGE_VALUE:
 			key = elem->key;
 			goto err_missing_flag;
 		case EXPR_CONCAT:
-			list_for_each_entry(key, &elem->key->expressions, list) {
+			list_for_each_entry(key, &expr_concat(elem->key)->expressions, list) {
 				switch (key->etype) {
 				case EXPR_PREFIX:
 				case EXPR_RANGE:
+				case EXPR_RANGE_VALUE:
 					goto err_missing_flag;
 				default:
 					break;
@@ -1896,6 +1975,12 @@ static int expr_evaluate_set_elem(struct eval_ctx *ctx, struct expr **expr)
 			break;
 		}
 	}
+
+	if (ctx->set && !elem_key_compatible(ctx->set->key, elem->key))
+		return expr_error(ctx->msgs, elem,
+				  "Element mismatches %s definition, expected %s, not '%s'",
+				  set_is_map(ctx->set->flags) ? "map" : "set",
+				  ctx->set->key->dtype->desc, elem->key->dtype->desc);
 
 	datatype_set(elem, elem->key->dtype);
 	elem->len   = elem->key->len;
@@ -1977,7 +2062,7 @@ static int expr_evaluate_set(struct eval_ctx *ctx, struct expr **expr)
 	struct expr *set = *expr, *i, *next;
 	const struct expr *elem;
 
-	list_for_each_entry_safe(i, next, &set->expressions, list) {
+	list_for_each_entry_safe(i, next, &expr_set(set)->expressions, list) {
 		if (list_member_evaluate(ctx, &i) < 0)
 			return -1;
 
@@ -1986,12 +2071,12 @@ static int expr_evaluate_set(struct eval_ctx *ctx, struct expr **expr)
 		    i->left->key->etype == EXPR_SET) {
 			struct expr *new, *j;
 
-			list_for_each_entry(j, &i->left->key->expressions, list) {
+			list_for_each_entry(j, &expr_set(i->left->key)->expressions, list) {
 				new = mapping_expr_alloc(&i->location,
 							 expr_get(j),
 							 expr_get(i->right));
-				list_add_tail(&new->list, &set->expressions);
-				set->size++;
+				list_add_tail(&new->list, &expr_set(set)->expressions);
+				expr_set(set)->size++;
 			}
 			list_del(&i->list);
 			expr_free(i);
@@ -2009,7 +2094,7 @@ static int expr_evaluate_set(struct eval_ctx *ctx, struct expr **expr)
 		    elem->key->etype == EXPR_SET) {
 			struct expr *new = expr_get(elem->key);
 
-			set->set_flags |= elem->key->set_flags;
+			expr_set(set)->set_flags |= expr_set(elem->key)->set_flags;
 			list_replace(&i->list, &new->list);
 			expr_free(i);
 			i = new;
@@ -2022,24 +2107,24 @@ static int expr_evaluate_set(struct eval_ctx *ctx, struct expr **expr)
 
 		if (i->etype == EXPR_SET) {
 			/* Merge recursive set definitions */
-			list_splice_tail_init(&i->expressions, &i->list);
+			list_splice_tail_init(&expr_set(i)->expressions, &i->list);
 			list_del(&i->list);
-			set->size      += i->size - 1;
-			set->set_flags |= i->set_flags;
+			expr_set(set)->size      += expr_set(i)->size - 1;
+			expr_set(set)->set_flags |= expr_set(i)->set_flags;
 			expr_free(i);
 		} else if (!expr_is_singleton(i)) {
-			set->set_flags |= NFT_SET_INTERVAL;
+			expr_set(set)->set_flags |= NFT_SET_INTERVAL;
 			if (elem->key->etype == EXPR_CONCAT)
-				set->set_flags |= NFT_SET_CONCAT;
+				expr_set(set)->set_flags |= NFT_SET_CONCAT;
 		}
 	}
 
 	if (ctx->set) {
 		if (ctx->set->flags & NFT_SET_CONCAT)
-			set->set_flags |= NFT_SET_CONCAT;
+			expr_set(set)->set_flags |= NFT_SET_CONCAT;
 	}
 
-	set->set_flags |= NFT_SET_CONSTANT;
+	expr_set(set)->set_flags |= NFT_SET_CONSTANT;
 
 	datatype_set(set, ctx->ectx.dtype);
 	set->len   = ctx->ectx.len;
@@ -2052,13 +2137,15 @@ static int binop_transfer(struct eval_ctx *ctx, struct expr **expr);
 
 static void map_set_concat_info(struct expr *map)
 {
-	map->mappings->set->flags |= map->mappings->set->init->set_flags;
+	map->mappings->set->flags |= expr_set(map->mappings->set->init)->set_flags;
 
 	if (map->mappings->set->flags & NFT_SET_INTERVAL &&
 	    map->map->etype == EXPR_CONCAT) {
-		memcpy(&map->mappings->set->desc.field_len, &map->map->field_len,
+		memcpy(&map->mappings->set->desc.field_len,
+		       &expr_concat(map->map)->field_len,
 		       sizeof(map->mappings->set->desc.field_len));
-		map->mappings->set->desc.field_count = map->map->field_count;
+		map->mappings->set->desc.field_count =
+			expr_concat(map->map)->field_count;
 		map->mappings->flags |= NFT_SET_CONCAT;
 	}
 }
@@ -2075,7 +2162,7 @@ static void __mapping_expr_expand(struct expr *i)
 		i->right = range;
 		break;
 	case EXPR_CONCAT:
-		list_for_each_entry_safe(j, next, &i->right->expressions, list) {
+		list_for_each_entry_safe(j, next, &expr_concat(i->right)->expressions, list) {
 			if (j->etype != EXPR_VALUE)
 				continue;
 
@@ -2097,7 +2184,7 @@ static int mapping_expr_expand(struct eval_ctx *ctx)
 	if (!set_is_anonymous(ctx->set->flags))
 		return 0;
 
-	list_for_each_entry(i, &ctx->set->init->expressions, list) {
+	list_for_each_entry(i, &expr_set(ctx->set->init)->expressions, list) {
 		if (i->etype != EXPR_MAPPING)
 			return expr_error(ctx->msgs, i,
 					  "expected mapping, not %s", expr_name(i));
@@ -2105,13 +2192,6 @@ static int mapping_expr_expand(struct eval_ctx *ctx)
 	}
 
 	return 0;
-}
-
-static bool datatype_compatible(const struct datatype *a, const struct datatype *b)
-{
-	return (a->type == TYPE_MARK &&
-		datatype_equal(datatype_basetype(a), datatype_basetype(b))) ||
-		datatype_equal(a, b);
 }
 
 static int expr_evaluate_map(struct eval_ctx *ctx, struct expr **expr)
@@ -2129,7 +2209,7 @@ static int expr_evaluate_map(struct eval_ctx *ctx, struct expr **expr)
 	else if (map->map->etype == EXPR_CONCAT) {
 		struct expr *i;
 
-		list_for_each_entry(i, &map->map->expressions, list) {
+		list_for_each_entry(i, &expr_concat(map->map)->expressions, list) {
 			if (i->etype == EXPR_CT &&
 			    (i->ct.key == NFT_CT_SRC ||
 			     i->ct.key == NFT_CT_DST))
@@ -2149,10 +2229,8 @@ static int expr_evaluate_map(struct eval_ctx *ctx, struct expr **expr)
 	mappings = map->mappings;
 
 	switch (map->mappings->etype) {
-	case EXPR_CONCAT:
-	case EXPR_LIST:
 	case EXPR_SET:
-		set_flags |= mappings->set_flags;
+		set_flags |= expr_set(mappings)->set_flags;
 		/* fallthrough */
 	case EXPR_VARIABLE:
 		if (ctx->ectx.key && ctx->ectx.key->etype == EXPR_CONCAT) {
@@ -2202,8 +2280,8 @@ static int expr_evaluate_map(struct eval_ctx *ctx, struct expr **expr)
 					  "Expression is not a map");
 		}
 
-		if (set_is_interval(map->mappings->set->init->set_flags) &&
-		    !(map->mappings->set->init->set_flags & NFT_SET_CONCAT) &&
+		if (set_is_interval(expr_set(map->mappings->set->init)->set_flags) &&
+		    !(expr_set(map->mappings->set->init)->set_flags & NFT_SET_CONCAT) &&
 		    interval_set_eval(ctx, ctx->set, map->mappings->set->init) < 0)
 			return -1;
 
@@ -2266,19 +2344,35 @@ static bool data_mapping_has_interval(struct expr *data)
 	struct expr *i;
 
 	if (data->etype == EXPR_RANGE ||
+	    data->etype == EXPR_RANGE_VALUE ||
 	    data->etype == EXPR_PREFIX)
 		return true;
 
 	if (data->etype != EXPR_CONCAT)
 		return false;
 
-	list_for_each_entry(i, &data->expressions, list) {
+	list_for_each_entry(i, &expr_concat(data)->expressions, list) {
 		if (i->etype == EXPR_RANGE ||
+		    i->etype == EXPR_RANGE_VALUE ||
 		    i->etype == EXPR_PREFIX)
 			return true;
 	}
 
 	return false;
+}
+
+static bool elem_data_compatible(const struct expr *set_data,
+				const struct expr *elem_data)
+{
+	if (elem_data->etype == EXPR_RANGE) {
+		/* EXPR_RANGE has invalid_type, use the lhs type.
+		 * It should be impossible to have a EXPR_RANGE where
+		 * lhs and rhs don't have the same dtype.
+		 */
+		return elem_data_compatible(set_data, elem_data->left);
+	}
+
+	return datatype_compatible(set_data->dtype, elem_data->dtype);
 }
 
 static int expr_evaluate_mapping(struct eval_ctx *ctx, struct expr **expr)
@@ -2337,14 +2431,19 @@ static int expr_evaluate_mapping(struct eval_ctx *ctx, struct expr **expr)
 				  "Object mapping data should be a value, not %s",
 				  expr_name(mapping->right));
 
+	if (set_is_datamap(set->flags) &&
+	    !elem_data_compatible(set->data, mapping->right))
+		return expr_error(ctx->msgs, mapping->right,
+				  "Element mapping mismatches map definition, expected %s, not '%s'",
+				  set->data->dtype->desc, mapping->right->dtype->desc);
+
 	mapping->flags |= EXPR_F_CONSTANT;
 	return 0;
 }
 
-static int expr_evaluate_symbol_range(struct eval_ctx *ctx, struct expr **exprp)
+static struct expr *symbol_range_expand(struct expr *expr)
 {
-	struct expr *left, *right, *range, *constant_range;
-	struct expr *expr = *exprp;
+	struct expr *left, *right;
 
 	/* expand to symbol and range expressions to consolidate evaluation. */
 	left = symbol_expr_alloc(&expr->location, expr->symtype,
@@ -2353,7 +2452,16 @@ static int expr_evaluate_symbol_range(struct eval_ctx *ctx, struct expr **exprp)
 	right = symbol_expr_alloc(&expr->location, expr->symtype,
 				  (struct scope *)expr->scope,
 				  expr->identifier_range[1]);
-	range = range_expr_alloc(&expr->location, left, right);
+	return range_expr_alloc(&expr->location, left, right);
+}
+
+static int expr_evaluate_symbol_range(struct eval_ctx *ctx, struct expr **exprp)
+{
+	struct expr *left, *right, *range, *constant_range;
+	struct expr *expr = *exprp;
+
+	/* expand to symbol and range expressions to consolidate evaluation. */
+	range = symbol_range_expand(expr);
 
 	if (expr_evaluate(ctx, &range) < 0) {
 		expr_free(range);
@@ -2366,9 +2474,7 @@ static int expr_evaluate_symbol_range(struct eval_ctx *ctx, struct expr **exprp)
 	left = range->left;
 	right = range->right;
 
-	/* concatenation and maps need more work to use constant_range_expr. */
-	if (ctx->set && !set_is_map(ctx->set->flags) &&
-	    set_is_non_concat_range(ctx->set) &&
+	if (ctx->set &&
 	    left->etype == EXPR_VALUE &&
 	    right->etype == EXPR_VALUE) {
 		constant_range = constant_range_expr_alloc(&expr->location,
@@ -2579,12 +2685,12 @@ static int __binop_transfer(struct eval_ctx *ctx,
 			return -1;
 		break;
 	case EXPR_SET:
-		list_for_each_entry(i, &(*right)->expressions, list) {
+		list_for_each_entry(i, &expr_set(*right)->expressions, list) {
 			err = binop_can_transfer(ctx, left, i);
 			if (err <= 0)
 				return err;
 		}
-		list_for_each_entry_safe(i, next, &(*right)->expressions, list) {
+		list_for_each_entry_safe(i, next, &expr_set(*right)->expressions, list) {
 			list_del(&i->list);
 			err = binop_transfer_one(ctx, left, &i);
 			list_add_tail(&i->list, &next->list);
@@ -2650,7 +2756,7 @@ static void optimize_singleton_set(struct expr *rel, struct expr **expr)
 {
 	struct expr *set = rel->right, *i;
 
-	i = list_first_entry(&set->expressions, struct expr, list);
+	i = list_first_entry(&expr_set(set)->expressions, struct expr, list);
 	if (i->etype == EXPR_SET_ELEM &&
 	    list_empty(&i->stmt_list)) {
 
@@ -2694,7 +2800,14 @@ static int expr_evaluate_relational(struct eval_ctx *ctx, struct expr **expr)
 
 	pctx = eval_proto_ctx(ctx);
 
-	if (rel->right->etype == EXPR_RANGE && lhs_is_meta_hour(rel->left)) {
+	if (lhs_is_meta_hour(rel->left) &&
+	    (rel->right->etype == EXPR_RANGE ||
+	     rel->right->etype == EXPR_RANGE_SYMBOL)) {
+		if (rel->right->etype == EXPR_RANGE_SYMBOL) {
+			range = symbol_range_expand(rel->right);
+			expr_free(rel->right);
+			rel->right = range;
+		}
 		ret = __expr_evaluate_range(ctx, &rel->right);
 		if (ret)
 			return ret;
@@ -2759,7 +2872,7 @@ static int expr_evaluate_relational(struct eval_ctx *ctx, struct expr **expr)
 		case OP_EQ:
 		case OP_IMPLICIT:
 		case OP_NEQ:
-			if (right->etype == EXPR_SET && right->size == 1)
+			if (right->etype == EXPR_SET && expr_set(right)->size == 1)
 				optimize_singleton_set(rel, &right);
 			break;
 		default:
@@ -2808,14 +2921,14 @@ static int expr_evaluate_relational(struct eval_ctx *ctx, struct expr **expr)
 				return -1;
 			break;
 		case EXPR_SET:
-			if (right->size == 0)
+			if (expr_set(right)->size == 0)
 				return expr_error(ctx->msgs, right, "Set is empty");
 
 			right = rel->right =
 				implicit_set_declaration(ctx, "__set%d",
 							 expr_get(left), NULL,
 							 right,
-							 right->set_flags | NFT_SET_ANONYMOUS);
+							 expr_set(right)->set_flags | NFT_SET_ANONYMOUS);
 			if (!right)
 				return -1;
 
@@ -2978,16 +3091,32 @@ static int expr_evaluate_xfrm(struct eval_ctx *ctx, struct expr **exprp)
 	return expr_evaluate_primary(ctx, exprp);
 }
 
-static int verdict_validate_chainlen(struct eval_ctx *ctx,
+static int verdict_validate_chain(struct eval_ctx *ctx,
 				     struct expr *chain)
 {
-	if (chain->len > NFT_CHAIN_MAXNAMELEN * BITS_PER_BYTE)
+	char buf[NFT_CHAIN_MAXNAMELEN];
+	unsigned int len;
+
+	len = chain->len / BITS_PER_BYTE;
+	if (len > NFT_CHAIN_MAXNAMELEN)
 		return expr_error(ctx->msgs, chain,
 				  "chain name too long (%u, max %u)",
 				  chain->len / BITS_PER_BYTE,
 				  NFT_CHAIN_MAXNAMELEN);
 
-	return 0;
+	if (!len)
+		return expr_error(ctx->msgs, chain,
+				  "chain name length 0 not allowed");
+
+	memset(buf, 0, sizeof(buf));
+	mpz_export_data(buf, chain->value, BYTEORDER_HOST_ENDIAN, len);
+
+	if (strnlen(buf, sizeof(buf)) < sizeof(buf))
+		return 0;
+
+	return expr_error(ctx->msgs, chain,
+			  "chain name must be smaller than %u",
+			  NFT_CHAIN_MAXNAMELEN);
 }
 
 static int expr_evaluate_verdict(struct eval_ctx *ctx, struct expr **exprp)
@@ -2998,7 +3127,7 @@ static int expr_evaluate_verdict(struct eval_ctx *ctx, struct expr **exprp)
 	case NFT_GOTO:
 	case NFT_JUMP:
 		if (expr->chain->etype == EXPR_VALUE &&
-		    verdict_validate_chainlen(ctx, expr->chain))
+		    verdict_validate_chain(ctx, expr->chain))
 			return -1;
 
 		break;
@@ -3234,7 +3363,7 @@ static int stmt_evaluate_verdict(struct eval_ctx *ctx, struct stmt *stmt)
 						  "not a value expression");
 			}
 
-			if (verdict_validate_chainlen(ctx, stmt->expr->chain))
+			if (verdict_validate_chain(ctx, stmt->expr->chain))
 				return -1;
 		}
 		break;
@@ -3557,12 +3686,12 @@ static int stmt_evaluate_meter(struct eval_ctx *ctx, struct stmt *stmt)
 
 		set = set_expr_alloc(&key->location, existing_set);
 		if (key->timeout)
-			set->set_flags |= NFT_SET_TIMEOUT;
+			expr_set(set)->set_flags |= NFT_SET_TIMEOUT;
 
-		set->set_flags |= NFT_SET_EVAL;
+		expr_set(set)->set_flags |= NFT_SET_EVAL;
 		setref = implicit_set_declaration(ctx, stmt->meter.name,
 						  expr_get(key), NULL, set,
-						  NFT_SET_EVAL | set->set_flags);
+						  NFT_SET_EVAL | expr_set(set)->set_flags);
 		if (setref)
 			setref->set->desc.size = stmt->meter.size;
 	}
@@ -4092,7 +4221,7 @@ static bool nat_evaluate_addr_has_th_expr(const struct expr *map)
 	if (concat ->etype != EXPR_CONCAT)
 		return false;
 
-	list_for_each_entry(i, &concat->expressions, list) {
+	list_for_each_entry(i, &expr_concat(concat)->expressions, list) {
 		enum proto_bases base;
 
 		if (i->etype == EXPR_PAYLOAD &&
@@ -4169,7 +4298,7 @@ static void expr_family_infer(struct proto_ctx *pctx, const struct expr *expr,
 	if (expr->etype == EXPR_MAP) {
 		switch (expr->map->etype) {
 		case EXPR_CONCAT:
-			list_for_each_entry(i, &expr->map->expressions, list) {
+			list_for_each_entry(i, &expr_concat(expr->map)->expressions, list) {
 				if (i->etype == EXPR_PAYLOAD) {
 					if (i->payload.desc == &proto_ip)
 						*family = NFPROTO_IPV4;
@@ -4280,10 +4409,10 @@ static int stmt_evaluate_nat_map(struct eval_ctx *ctx, struct stmt *stmt)
 		goto out;
 	}
 
-	one = list_first_entry(&data->expressions, struct expr, list);
+	one = list_first_entry(&expr_concat(data)->expressions, struct expr, list);
 	two = list_entry(one->list.next, struct expr, list);
 
-	if (one == two || !list_is_last(&two->list, &data->expressions)) {
+	if (one == two || !list_is_last(&two->list, &expr_concat(data)->expressions)) {
 		err = __stmt_evaluate_arg(ctx, stmt, dtype, dtype->size,
 					   BYTEORDER_BIG_ENDIAN,
 					   &stmt->nat.addr);
@@ -4321,7 +4450,7 @@ static bool nat_concat_map(struct eval_ctx *ctx, struct stmt *stmt)
 
 	switch (stmt->nat.addr->mappings->etype) {
 	case EXPR_SET:
-		list_for_each_entry(i, &stmt->nat.addr->mappings->expressions, list) {
+		list_for_each_entry(i, &expr_set(stmt->nat.addr->mappings)->expressions, list) {
 			if (i->etype == EXPR_MAPPING &&
 			    i->right->etype == EXPR_CONCAT) {
 				stmt->nat.type_flags |= STMT_NAT_F_CONCAT;
@@ -4791,7 +4920,7 @@ static int stmt_evaluate_objref_map(struct eval_ctx *ctx, struct stmt *stmt)
 
 	switch (map->mappings->etype) {
 	case EXPR_SET:
-		set_flags |= mappings->set_flags;
+		set_flags |= expr_set(mappings)->set_flags;
 		/* fallthrough */
 	case EXPR_VARIABLE:
 		key = constant_expr_alloc(&stmt->location,
@@ -4817,8 +4946,8 @@ static int stmt_evaluate_objref_map(struct eval_ctx *ctx, struct stmt *stmt)
 					  "Expression is not a map");
 		}
 
-		if (set_is_interval(map->mappings->set->init->set_flags) &&
-		    !(map->mappings->set->init->set_flags & NFT_SET_CONCAT) &&
+		if (set_is_interval(expr_set(map->mappings->set->init)->set_flags) &&
+		    !(expr_set(map->mappings->set->init)->set_flags & NFT_SET_CONCAT) &&
 		    interval_set_eval(ctx, ctx->set, map->mappings->set->init) < 0)
 			return -1;
 
@@ -4978,7 +5107,7 @@ static int setelem_evaluate(struct eval_ctx *ctx, struct cmd *cmd)
 			return -1;
 
 		assert(cmd->expr->etype == EXPR_SET);
-		cmd->expr->set_flags |= NFT_SET_INTERVAL;
+		expr_set(cmd->expr)->set_flags |= NFT_SET_INTERVAL;
 	}
 
 	ctx->set = NULL;
@@ -5006,7 +5135,7 @@ static int set_expr_evaluate_concat(struct eval_ctx *ctx, struct expr **expr)
 	uint32_t ntype = 0, size = 0;
 	struct expr *i, *next;
 
-	list_for_each_entry_safe(i, next, &(*expr)->expressions, list) {
+	list_for_each_entry_safe(i, next, &expr_concat(*expr)->expressions, list) {
 		unsigned dsize_bytes;
 
 		if (i->etype == EXPR_CT &&
@@ -5041,7 +5170,7 @@ static int set_expr_evaluate_concat(struct eval_ctx *ctx, struct expr **expr)
 		if (i->dtype->size)
 			assert(dsize_bytes == div_round_up(i->dtype->size, BITS_PER_BYTE));
 
-		(*expr)->field_len[(*expr)->field_count++] = dsize_bytes;
+		expr_concat(*expr)->field_len[expr_concat(*expr)->field_count++] = dsize_bytes;
 		size += netlink_padded_len(i->len);
 
 		if (size > NFT_MAX_EXPR_LEN_BITS)
@@ -5085,6 +5214,18 @@ static int elems_evaluate(struct eval_ctx *ctx, struct set *set)
 	ctx->set = NULL;
 
 	return 0;
+}
+
+static bool set_type_compatible(const struct set *set, const struct set *existing_set)
+{
+	if (set_is_datamap(set->flags))
+		return set_is_datamap(existing_set->flags);
+
+	if (set_is_objmap(set->flags))
+		return set_is_objmap(existing_set->flags);
+
+	assert(!set_is_map(set->flags));
+	return !set_is_map(existing_set->flags);
 }
 
 static int set_evaluate(struct eval_ctx *ctx, struct set *set)
@@ -5140,9 +5281,9 @@ static int set_evaluate(struct eval_ctx *ctx, struct set *set)
 	}
 
 	if (set->flags & NFT_SET_INTERVAL && set->key->etype == EXPR_CONCAT) {
-		memcpy(&set->desc.field_len, &set->key->field_len,
+		memcpy(&set->desc.field_len, &expr_concat(set->key)->field_len,
 		       sizeof(set->desc.field_len));
-		set->desc.field_count = set->key->field_count;
+		set->desc.field_count = expr_concat(set->key)->field_count;
 		set->flags |= NFT_SET_CONCAT;
 
 		if (set->automerge)
@@ -5152,7 +5293,7 @@ static int set_evaluate(struct eval_ctx *ctx, struct set *set)
 	if (set_is_anonymous(set->flags) && set->key->etype == EXPR_CONCAT) {
 		struct expr *i;
 
-		list_for_each_entry(i, &set->init->expressions, list) {
+		list_for_each_entry(i, &expr_set(set->init)->expressions, list) {
 			if ((i->etype == EXPR_SET_ELEM &&
 			     i->key->etype != EXPR_CONCAT &&
 			     i->key->etype != EXPR_SET_ELEM_CATCHALL) ||
@@ -5202,16 +5343,36 @@ static int set_evaluate(struct eval_ctx *ctx, struct set *set)
 		set->flags |= NFT_SET_EXPR;
 
 	if (set_is_anonymous(set->flags)) {
-		if (set_is_interval(set->init->set_flags) &&
-		    !(set->init->set_flags & NFT_SET_CONCAT) &&
+		if (set->init->etype == EXPR_SET &&
+		    set_is_interval(expr_set(set->init)->set_flags) &&
+		    !(expr_set(set->init)->set_flags & NFT_SET_CONCAT) &&
 		    interval_set_eval(ctx, set, set->init) < 0)
 			return -1;
 
 		return 0;
 	}
 
-	if (existing_set && set_is_interval(set->flags) && !set_is_interval(existing_set->flags))
-		return set_error(ctx, set, "existing %s lacks interval flag", type);
+	if (existing_set) {
+		if (set_is_interval(set->flags) && !set_is_interval(existing_set->flags))
+			return set_error(ctx, set,
+					 "existing %s lacks interval flag", type);
+		if (set->data && existing_set->data &&
+		    !datatype_equal(existing_set->data->dtype, set->data->dtype))
+			return set_error(ctx, set,
+					 "%s already exists with different datatype (%s vs %s)",
+					 type, existing_set->data->dtype->desc,
+					 set->data->dtype->desc);
+		if (!datatype_equal(existing_set->key->dtype, set->key->dtype))
+			return set_error(ctx, set,
+					 "%s already exists with different datatype (%s vs %s)",
+					 type, existing_set->key->dtype->desc,
+					 set->key->dtype->desc);
+		/* Catch attempt to merge set and map */
+		if (!set_type_compatible(set, existing_set))
+			return set_error(ctx, set, "Cannot merge %s with incompatible existing %s of same name",
+					type,
+					set_is_map(existing_set->flags) ? "map" : "set");
+	}
 
 	set->existing_set = existing_set;
 
@@ -5285,9 +5446,54 @@ static bool evaluate_expr_variable(struct eval_ctx *ctx, struct expr **exprp)
 	return true;
 }
 
-static bool evaluate_device_expr(struct eval_ctx *ctx, struct expr **dev_expr)
+static struct expr *expr_set_to_list(struct eval_ctx *ctx, struct expr *dev_expr)
 {
 	struct expr *expr, *next, *key;
+	struct location loc;
+	LIST_HEAD(tmp);
+
+	list_for_each_entry_safe(expr, next, &expr_set(dev_expr)->expressions, list) {
+		list_del(&expr->list);
+
+		switch (expr->etype) {
+		case EXPR_VARIABLE:
+			expr_set_context(&ctx->ectx, &ifname_type,
+					 IFNAMSIZ * BITS_PER_BYTE);
+			if (!evaluate_expr_variable(ctx, &expr))
+				return false;
+
+			if (expr->etype == EXPR_SET) {
+				expr = expr_set_to_list(ctx, expr);
+				list_splice_init(&expr_list(expr)->expressions, &tmp);
+				expr_free(expr);
+				continue;
+			}
+			break;
+		case EXPR_SET_ELEM:
+			key = expr_clone(expr->key);
+			expr_free(expr);
+			expr = key;
+			break;
+		case EXPR_VALUE:
+			break;
+		default:
+			break;
+		}
+
+		list_add(&expr->list, &tmp);
+	}
+
+	loc = dev_expr->location;
+	expr_free(dev_expr);
+	dev_expr = compound_expr_alloc(&loc, EXPR_LIST);
+	list_splice_init(&tmp, &expr_list(dev_expr)->expressions);
+
+	return dev_expr;
+}
+
+static bool evaluate_device_expr(struct eval_ctx *ctx, struct expr **dev_expr)
+{
+	struct expr *expr, *next;
 	LIST_HEAD(tmp);
 
 	if ((*dev_expr)->etype == EXPR_VARIABLE) {
@@ -5297,11 +5503,12 @@ static bool evaluate_device_expr(struct eval_ctx *ctx, struct expr **dev_expr)
 			return false;
 	}
 
-	if ((*dev_expr)->etype != EXPR_SET &&
-	    (*dev_expr)->etype != EXPR_LIST)
-		return true;
+	if ((*dev_expr)->etype == EXPR_SET)
+		*dev_expr = expr_set_to_list(ctx, *dev_expr);
 
-	list_for_each_entry_safe(expr, next, &(*dev_expr)->expressions, list) {
+	assert((*dev_expr)->etype == EXPR_LIST);
+
+	list_for_each_entry_safe(expr, next, &expr_list(*dev_expr)->expressions, list) {
 		list_del(&expr->list);
 
 		switch (expr->etype) {
@@ -5310,11 +5517,13 @@ static bool evaluate_device_expr(struct eval_ctx *ctx, struct expr **dev_expr)
 					 IFNAMSIZ * BITS_PER_BYTE);
 			if (!evaluate_expr_variable(ctx, &expr))
 				return false;
-			break;
-		case EXPR_SET_ELEM:
-			key = expr_clone(expr->key);
-			expr_free(expr);
-			expr = key;
+
+			if (expr->etype == EXPR_SET) {
+				expr = expr_set_to_list(ctx, expr);
+				list_splice_init(&expr_list(expr)->expressions, &tmp);
+				expr_free(expr);
+				continue;
+			}
 			break;
 		case EXPR_VALUE:
 			break;
@@ -5325,7 +5534,7 @@ static bool evaluate_device_expr(struct eval_ctx *ctx, struct expr **dev_expr)
 
 		list_add(&expr->list, &tmp);
 	}
-	list_splice_init(&tmp, &(*dev_expr)->expressions);
+	list_splice_init(&tmp, &expr_list(*dev_expr)->expressions);
 
 	return true;
 }

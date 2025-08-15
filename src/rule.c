@@ -211,6 +211,9 @@ struct set *set_lookup_fuzzy(const char *set_name,
 	struct table *table;
 	struct set *set;
 
+	if (!set_name)
+		return NULL;
+
 	string_misspell_init(&st);
 
 	list_for_each_entry(table, &cache->table_cache.list, cache.list) {
@@ -335,10 +338,13 @@ static void set_print_declaration(const struct set *set,
 		}
 
 		if (set->desc.size > 0) {
-			nft_print(octx, "%s%ssize %u%s",
+			nft_print(octx, "%s%ssize %u",
 				  opts->tab, opts->tab,
-				  set->desc.size,
-				  opts->stmt_separator);
+				  set->desc.size);
+			if (set->count > 0)
+				nft_print(octx, "%s# count %u", opts->tab,
+					  set->count);
+			nft_print(octx, "%s", opts->stmt_separator);
 		}
 	}
 
@@ -418,7 +424,7 @@ static void do_set_print(const struct set *set, struct print_fmt_options *opts,
 		return;
 	}
 
-	if (set->init != NULL && set->init->size > 0) {
+	if (set->init != NULL && expr_set(set->init)->size > 0) {
 		nft_print(octx, "%s%selements = ", opts->tab, opts->tab);
 
 		if (set->timeout || set->elem_has_comment ||
@@ -1047,23 +1053,27 @@ static void chain_print_declaration(const struct chain *chain,
 		nft_print(octx, "\n\t\tcomment \"%s\"", chain->comment);
 	nft_print(octx, "\n");
 	if (chain->flags & CHAIN_F_BASECHAIN) {
-		nft_print(octx, "\t\ttype %s hook %s", chain->type.str,
-			  hooknum2str(chain->handle.family, chain->hook.num));
+		if (chain->type.str)
+			nft_print(octx, "\t\ttype %s hook %s", chain->type.str,
+				  hooknum2str(chain->handle.family, chain->hook.num));
+
 		if (chain->dev_array_len == 1) {
 			nft_print(octx, " device \"%s\"", chain->dev_array[0]);
 		} else if (chain->dev_array_len > 1) {
 			nft_print(octx, " devices = { ");
 			for (i = 0; i < chain->dev_array_len; i++) {
-				nft_print(octx, "%s", chain->dev_array[i]);
+				nft_print(octx, "\"%s\"", chain->dev_array[i]);
 					if (i + 1 != chain->dev_array_len)
 						nft_print(octx, ", ");
 			}
 			nft_print(octx, " }");
 		}
-		nft_print(octx, " priority %s;",
-			  prio2str(octx, priobuf, sizeof(priobuf),
-				   chain->handle.family, chain->hook.num,
-				   chain->priority.expr));
+
+		if (chain->priority.expr)
+			nft_print(octx, " priority %s;",
+				  prio2str(octx, priobuf, sizeof(priobuf),
+					   chain->handle.family, chain->hook.num,
+					   chain->priority.expr));
 		if (chain->policy) {
 			mpz_export_data(&policy, chain->policy->value,
 					BYTEORDER_HOST_ENDIAN, sizeof(int));
@@ -1213,6 +1223,9 @@ struct table *table_lookup_fuzzy(const struct handle *h,
 {
 	struct string_misspell_state st;
 	struct table *table;
+
+	if (!h->table.name)
+		return NULL;
 
 	string_misspell_init(&st);
 
@@ -1446,7 +1459,7 @@ void cmd_free(struct cmd *cmd)
 static int __do_add_elements(struct netlink_ctx *ctx, struct cmd *cmd,
 			     struct set *set, struct expr *expr, uint32_t flags)
 {
-	expr->set_flags |= set->flags;
+	expr_set(expr)->set_flags |= set->flags;
 	if (mnl_nft_setelem_add(ctx, cmd, set, expr, flags) < 0)
 		return -1;
 
@@ -1695,6 +1708,9 @@ struct obj *obj_lookup_fuzzy(const char *obj_name,
 	struct string_misspell_state st;
 	struct table *table;
 	struct obj *obj;
+
+	if (!obj_name)
+		return NULL;
 
 	string_misspell_init(&st);
 
@@ -2133,7 +2149,7 @@ static void flowtable_print_declaration(const struct flowtable *flowtable,
 	if (flowtable->dev_array_len > 0) {
 		nft_print(octx, "%s%sdevices = { ", opts->tab, opts->tab);
 		for (i = 0; i < flowtable->dev_array_len; i++) {
-			nft_print(octx, "%s", flowtable->dev_array[i]);
+			nft_print(octx, "\"%s\"", flowtable->dev_array[i]);
 			if (i + 1 != flowtable->dev_array_len)
 				nft_print(octx, ", ");
 		}
@@ -2190,6 +2206,9 @@ struct flowtable *flowtable_lookup_fuzzy(const char *ft_name,
 	struct string_misspell_state st;
 	struct table *table;
 	struct flowtable *ft;
+
+	if (!ft_name)
+		return NULL;
 
 	string_misspell_init(&st);
 

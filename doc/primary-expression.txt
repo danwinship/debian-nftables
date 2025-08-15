@@ -117,7 +117,7 @@ devgroup
 outgoing device group|
 devgroup
 |cgroup|
-control group id |
+control group net_cls.classid (for matching on cgroupv2, see *socket cgroupv2*)|
 integer (32 bit)
 |random|
 pseudo-random number|
@@ -137,7 +137,8 @@ Day of week|
 Integer (8 bit) or string
 |hour|
 Hour of day|
-String
+String value in the form HH:MM or HH:MM:SS. Values are expected to be less than
+24:00, although for technical reasons, 23:59:60 is accepted, too.
 |====================
 
 .Meta expression specific types
@@ -312,7 +313,7 @@ FIB EXPRESSIONS
 [verse]
 *fib* 'FIB_TUPLE' 'FIB_RESULT'
 'FIB_TUPLE' := { *saddr* | *daddr*} [ *.* { *iif* | *oif* } *.* *mark* ]
-'FIB_RESULT'  := { *oif* | *oifname* | *type* }
+'FIB_RESULT'  := { *oif* | *oifname* | *check* | *type* }
 
 
 A fib expression queries the fib (forwarding information base) to obtain information
@@ -355,6 +356,9 @@ address types can be shown with *nft* *describe* *fib_addrtype*.
 |oif|
 Output interface index|
 iface_index
+|check|
+Output interface check|
+boolean
 |oifname|
 Output interface name|
 ifname

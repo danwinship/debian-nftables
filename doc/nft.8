@@ -2,12 +2,12 @@
 .\"     Title: nft
 .\"    Author: [see the "AUTHORS" section]
 .\" Generator: DocBook XSL Stylesheets vsnapshot <http://docbook.sf.net/>
-.\"      Date: 04/22/2025
+.\"      Date: 08/06/2025
 .\"    Manual: \ \&
 .\"    Source: \ \&
 .\"  Language: English
 .\"
-.TH "NFT" "8" "04/22/2025" "\ \&" "\ \&"
+.TH "NFT" "8" "08/06/2025" "\ \&" "\ \&"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -641,7 +641,7 @@ T}
 .RE
 .\}
 .sp
-Chains are containers for rules\&. They exist in two kinds, base chains and regular chains\&. A base chain is an entry point for packets from the networking stack, a regular chain may be used as jump target and is used for better rule organization\&.
+Chains are containers for rules\&. They exist in two kinds, base chains and regular chains\&. A base chain is an entry point for packets from the networking stack, a regular chain may be used as jump target and is used for better rule organization\&. Regular chains can be anonymous, see \fBVERDICT STATEMENT\fR examples for details\&.
 .TS
 tab(:);
 lt lt
@@ -1170,6 +1170,8 @@ The sets allowed_hosts and allowed_ports need to be created first\&. The next se
 .\}
 .sp
 Sets are element containers of a user\-defined data type, they are uniquely identified by a user\-defined name and attached to tables\&. Their behaviour can be tuned with the flags that can be specified at set creation time\&.
+.sp
+See Set and Map flags below for more details\&.
 .TS
 tab(:);
 lt lt
@@ -1339,6 +1341,14 @@ T}:T{
 T}
 .TE
 .sp 1
+.sp
+The \fBgc\-interval\fR doesn\(cqt affect element timeout, but it does affect memory reclaim\&. A large set that rarely has elements that time out can use a higher (less frequent) garbage collection to save cpu time, whereas sets that see many updates with short\-lived elements will benefit from a lower interval\&. Lower intervals ensure the set stays below its maximum size\&. Internally, a timed\-out entry stays around until it is removed by the garbage collector, which also decrements the sets element count\&. This also means that it is possible to have a set that can not accept more elements, even if all elements timed out, if the \fBgc\-interval\fR is set too large\&.
+.sp
+The \fBsize\fR defines the upper limit of the amount of elements that the set can support\&. Mandatory for sets that are added to from the ruleset with the \fBadd\fR and \fBupdate\fR keywords\&. Providing the \fBsize\fR keyword for sets that are only added to via \fBnft add element\fR allows for a more compact (memory conserving) set implementation selection, but it is not required\&.
+.sp
+The optional \fBpolicy\fR keyword can be used to request a more memory\-conserving set implementation\&.
+.sp
+\fBauto\-merge\fR instructs the nftables frontend to merge adjacent and overlapping ranges\&. Example: When the set contains range \fB1\&.2\&.3\&.1\-1\&.2\&.3\&.4\fR, then adding element \fB1\&.2\&.3\&.2\fR has no effect\&. Adding \fB1\&.2\&.3\&.5\fR changes the existing range to cover \fB1\&.2\&.3\&.1\-1\&.2\&.3\&.5\fR\&. Without this flag, \fB1\&.2\&.3\&.2\fR can not be added and \fB1\&.2\&.3\&.5\fR is inserted as a new entry\&.
 .SH "MAPS"
 .sp
 .if n \{\
@@ -1492,7 +1502,7 @@ T}
 .TE
 .sp 1
 .sp
-Users can specifiy the properties/features that the set/map must support\&. This allows the kernel to pick an optimal internal representation\&. If a required flag is missing, the ruleset might still work, as nftables will auto\-enable features if it can infer this from the ruleset\&. This may not work for all cases, however, so it is recommended to specify all required features in the set/map definition manually\&.
+Users can specifiy the properties/features that the set/map must support\&. This allows the kernel to pick an optimal internal representation\&. If a required flag is missing, the ruleset might still work, as nftables will auto\-enable features if it can infer this from the ruleset\&. This may not work for all cases, however, so it is recommended to specify all required features in the set/map definition manually\&. Also, some features are mutually exclusive\&. For example, it is not possible for a set to support intervals and insertion from the packet path\&.
 .sp
 .it 1 an-trap
 .nr an-no-space-flag 1
@@ -1531,7 +1541,7 @@ T{
 interval
 T}:T{
 .sp
-Set must be able to store intervals (ranges)
+Set must be able to store intervals (ranges)\&. Cannot be combined with the \fBdynamic\fR flag\&.
 T}
 T{
 .sp
@@ -2729,7 +2739,7 @@ T}
 .\}
 .nf
 # match if route exists
-filter input fib daddr \&. iif oif exists
+filter input fib daddr \&. iif check exists
 
 # match only non\-fragmented packets in IPv6 traffic
 filter input exthdr frag missing
@@ -3395,26 +3405,38 @@ T}
 .B Table\ \&24.\ \&conntrack status (ct_status)
 .TS
 allbox tab(:);
-ltB ltB.
+ltB ltB ltB.
 T{
 Keyword
 T}:T{
 Value
+T}:T{
+Description
 T}
 .T&
-lt lt
-lt lt
-lt lt
-lt lt
-lt lt
-lt lt
-lt lt.
+lt lt lt
+lt lt lt
+lt lt lt
+lt lt lt
+lt lt lt
+lt lt lt
+lt lt lt
+lt lt lt
+lt lt lt
+lt lt lt
+lt lt lt
+lt lt lt
+lt lt lt
+lt lt lt.
 T{
 .sp
 expected
 T}:T{
 .sp
 1
+T}:T{
+.sp
+Expected connection; conntrack helper set it up
 T}
 T{
 .sp
@@ -3422,6 +3444,9 @@ seen\-reply
 T}:T{
 .sp
 2
+T}:T{
+.sp
+Conntrack has seen packets in both directions
 T}
 T{
 .sp
@@ -3429,6 +3454,9 @@ assured
 T}:T{
 .sp
 4
+T}:T{
+.sp
+Conntrack entry will not be removed if hash table is full
 T}
 T{
 .sp
@@ -3436,6 +3464,9 @@ confirmed
 T}:T{
 .sp
 8
+T}:T{
+.sp
+Initial packet processed
 T}
 T{
 .sp
@@ -3443,6 +3474,9 @@ snat
 T}:T{
 .sp
 16
+T}:T{
+.sp
+Original source address differs from reply destination
 T}
 T{
 .sp
@@ -3450,6 +3484,39 @@ dnat
 T}:T{
 .sp
 32
+T}:T{
+.sp
+Original destination differs from reply source
+T}
+T{
+.sp
+seq\-adjust
+T}:T{
+.sp
+64
+T}:T{
+.sp
+tcp sequence number rewrite due to conntrack helper or synproxy
+T}
+T{
+.sp
+snat\-done
+T}:T{
+.sp
+128
+T}:T{
+.sp
+tried to find matching snat/masquerade rule
+T}
+T{
+.sp
+dnat\-done
+T}:T{
+.sp
+256
+T}:T{
+.sp
+tried to find matching dnat/redirect rule
 T}
 T{
 .sp
@@ -3457,6 +3524,49 @@ dying
 T}:T{
 .sp
 512
+T}:T{
+.sp
+Connection about to be deleted
+T}
+T{
+.sp
+fixed\-timeout
+T}:T{
+.sp
+1024
+T}:T{
+.sp
+entry expires even if traffic is active
+T}
+T{
+.sp
+helper
+T}:T{
+.sp
+8192
+T}:T{
+.sp
+connection is monitored by conntrack helper
+T}
+T{
+.sp
+offload
+T}:T{
+.sp
+16384
+T}:T{
+.sp
+connection is offloaded to a flow table
+T}
+T{
+.sp
+hw\-offload
+T}:T{
+.sp
+32768
+T}:T{
+.sp
+connection is offloaded to hardware
 T}
 .TE
 .sp 1
@@ -4020,7 +4130,7 @@ T{
 cgroup
 T}:T{
 .sp
-control group id
+control group net_cls\&.classid (for matching on cgroupv2, see \fBsocket cgroupv2\fR)
 T}:T{
 .sp
 integer (32 bit)
@@ -4091,7 +4201,7 @@ T}:T{
 Hour of day
 T}:T{
 .sp
-String
+String value in the form HH:MM or HH:MM:SS\&. Values are expected to be less than 24:00, although for technical reasons, 23:59:60 is accepted, too\&.
 T}
 .TE
 .sp 1
@@ -4460,7 +4570,7 @@ table inet x {
 .nf
 \fBfib\fR \fIFIB_TUPLE\fR \fIFIB_RESULT\fR
 \fIFIB_TUPLE\fR := { \fBsaddr\fR | \fBdaddr\fR} [ \fB\&.\fR { \fBiif\fR | \fBoif\fR } \fB\&.\fR \fBmark\fR ]
-\fIFIB_RESULT\fR  := { \fBoif\fR | \fBoifname\fR | \fBtype\fR }
+\fIFIB_RESULT\fR  := { \fBoif\fR | \fBoifname\fR | \fBcheck\fR | \fBtype\fR }
 .fi
 .if n \{\
 .RE
@@ -4555,6 +4665,7 @@ T}
 .T&
 lt lt lt
 lt lt lt
+lt lt lt
 lt lt lt.
 T{
 .sp
@@ -4565,6 +4676,16 @@ Output interface index
 T}:T{
 .sp
 iface_index
+T}
+T{
+.sp
+check
+T}:T{
+.sp
+Output interface check
+T}:T{
+.sp
+boolean
 T}
 T{
 .sp
@@ -7763,7 +7884,9 @@ The verdict statement alters control flow in the ruleset and issues policy decis
 .\}
 .nf
 {\fBaccept\fR | \fBdrop\fR | \fBqueue\fR | \fBcontinue\fR | \fBreturn\fR}
-{\fBjump\fR | \fBgoto\fR} \fIchain\fR
+{\fBjump\fR | \fBgoto\fR} \fICHAIN\fR
+
+\fICHAIN\fR := \fIchain_name\fR | \fB{\fR \fIstatement\fR \&... \fB}\fR
 .fi
 .if n \{\
 .RE
@@ -7816,20 +7939,22 @@ Return from the current chain and continue evaluation at the next rule in the la
 T}
 T{
 .sp
-\fBjump\fR \fIchain\fR
+\fBjump\fR \fICHAIN\fR
 T}:T{
 .sp
-Continue evaluation at the first rule in \fIchain\fR\&. The current position in the ruleset is pushed to a call stack and evaluation will continue there when the new chain is entirely evaluated or a \fBreturn\fR verdict is issued\&. In case an absolute verdict is issued by a rule in the chain, ruleset evaluation terminates immediately and the specific action is taken\&.
+Continue evaluation at the first rule in \fICHAIN\fR\&. The current position in the ruleset is pushed to a call stack and evaluation will continue there when the new chain is entirely evaluated or a \fBreturn\fR verdict is issued\&. In case an absolute verdict is issued by a rule in the chain, ruleset evaluation terminates immediately and the specific action is taken\&.
 T}
 T{
 .sp
-\fBgoto\fR \fIchain\fR
+\fBgoto\fR \fICHAIN\fR
 T}:T{
 .sp
 Similar to \fBjump\fR, but the current position is not pushed to the call stack, meaning that after the new chain evaluation will continue at the last chain instead of the one containing the goto statement\&.
 T}
 .TE
 .sp 1
+.sp
+An alternative to specifying the name of an existing, regular chain in \fICHAIN\fR is to specify an anonymous chain ad\-hoc\&. Like with anonymous sets, it can\(cqt be referenced from another rule and will be removed along with the rule containing it\&.
 .PP
 \fBUsing verdict statements\fR. 
 .sp
@@ -7842,6 +7967,9 @@ T}
 
 filter input iif eth0 ip saddr 192\&.168\&.0\&.0/24 jump from_lan
 filter input iif eth0 drop
+
+# jump and goto statements support anonymous chain creation
+filter input iif eth0 jump { ip saddr 192\&.168\&.0\&.0/24 drop ; udp dport domain drop; }
 .fi
 .if n \{\
 .RE
@@ -8651,11 +8779,12 @@ T}
 .RS 4
 .\}
 .nf
-\fBsnat\fR [[\fBip\fR | \fBip6\fR] [ \fBprefix\fR ] \fBto\fR] \fIADDR_SPEC\fR [\fB:\fR\fIPORT_SPEC\fR] [\fIFLAGS\fR]
-\fBdnat\fR [[\fBip\fR | \fBip6\fR] [ \fBprefix\fR ] \fBto\fR] \fIADDR_SPEC\fR [\fB:\fR\fIPORT_SPEC\fR] [\fIFLAGS\fR]
+\fBsnat\fR [[\fBip\fR | \fBip6\fR] [ \fBprefix\fR ] \fBto\fR] \fITARGET_SPEC\fR [\fIFLAGS\fR]
+\fBdnat\fR [[\fBip\fR | \fBip6\fR] [ \fBprefix\fR ] \fBto\fR] \fITARGET_SPEC\fR [\fIFLAGS\fR]
 \fBmasquerade\fR [\fBto :\fR\fIPORT_SPEC\fR] [\fIFLAGS\fR]
 \fBredirect\fR [\fBto :\fR\fIPORT_SPEC\fR] [\fIFLAGS\fR]
 
+\fITARGET_SPEC\fR := \fIADDR_SPEC\fR | [\fIADDR_SPEC\fR] \fB:\fR\fIPORT_SPEC\fR
 \fIADDR_SPEC\fR := \fIaddress\fR | \fIaddress\fR \fB\-\fR \fIaddress\fR
 \fIPORT_SPEC\fR := \fIport\fR | \fIport\fR \fB\-\fR \fIport\fR
 
@@ -8668,17 +8797,19 @@ T}
 .sp
 The nat statements are only valid from nat chain types\&.
 .sp
-The \fBsnat\fR and \fBmasquerade\fR statements specify that the source address of the packet should be modified\&. While \fBsnat\fR is only valid in the postrouting and input chains, \fBmasquerade\fR makes sense only in postrouting\&. The dnat and redirect statements are only valid in the prerouting and output chains, they specify that the destination address of the packet should be modified\&. You can use non\-base chains which are called from base chains of nat chain type too\&. All future packets in this connection will also be mangled, and rules should cease being examined\&.
+The \fBsnat\fR and \fBmasquerade\fR statements specify that the source address/port of the packet should be modified\&. While \fBsnat\fR is only valid in the postrouting and input chains, \fBmasquerade\fR makes sense only in postrouting\&. The dnat and redirect statements are only valid in the prerouting and output chains, they specify that the destination address/port of the packet should be modified\&. You can use non\-base chains which are called from base chains of nat chain type too\&. All future packets in this connection will also be mangled, and rules should cease being examined\&.
 .sp
 The \fBmasquerade\fR statement is a special form of snat which always uses the outgoing interface\(cqs IP address to translate to\&. It is particularly useful on gateways with dynamic (public) IP addresses\&.
 .sp
-The \fBredirect\fR statement is a special form of dnat which always translates the destination address to the local host\(cqs one\&. It comes in handy if one only wants to alter the destination port of incoming traffic on different interfaces\&.
+The \fBredirect\fR statement is a special form of dnat which always translates the destination address to the local host\(cqs one\&. It comes in handy to intercept traffic passing a router and feeding it to a locally running daemon, e\&.g\&. when building a transparent proxy or application\-layer gateway\&.
+.sp
+For \fITARGET_SPEC\fR, one may specify addresses, ports, or both\&. If no address or no port is specified, the respective packet header field remains unchanged\&.
 .sp
 When used in the inet family (available with kernel 5\&.2), the dnat and snat statements require the use of the ip and ip6 keyword in case an address is provided, see the examples below\&.
 .sp
 Before kernel 4\&.18 nat statements require both prerouting and postrouting base chains to be present since otherwise packets on the return path won\(cqt be seen by netfilter and therefore no reverse translation will take place\&.
 .sp
-The optional \fBprefix\fR keyword allows to map to map \fBn\fR source addresses to \fBn\fR destination addresses\&. See \fIAdvanced NAT examples\fR below\&.
+The optional \fBprefix\fR keyword allows to map \fBn\fR source addresses to \fBn\fR destination addresses\&. See \fIAdvanced NAT examples\fR below\&.
 .sp
 .it 1 an-trap
 .nr an-no-space-flag 1

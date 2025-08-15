@@ -204,28 +204,28 @@ am__src_libnftables_la_SOURCES_DIST = src/libnftables.map src/cache.c \
 	src/evaluate.c src/expression.c src/exthdr.c src/fib.c \
 	src/gmputil.c src/hash.c src/iface.c src/intervals.c \
 	src/ipopt.c src/libnftables.c src/mergesort.c src/meta.c \
-	src/misspell.c src/mnl.c src/monitor.c src/netlink.c \
-	src/netlink_delinearize.c src/netlink_linearize.c \
-	src/nfnl_osf.c src/nftutils.c src/nftutils.h src/numgen.c \
-	src/optimize.c src/osf.c src/owner.c src/payload.c \
-	src/preprocess.c src/print.c src/proto.c src/rt.c src/rule.c \
-	src/sctp_chunk.c src/segtree.c src/socket.c src/statement.c \
-	src/tcpopt.c src/utils.c src/xfrm.c src/xt.c src/json.c \
-	src/parser_json.c
+	src/misspell.c src/mnl.c src/monitor.c src/trace.c \
+	src/netlink.c src/netlink_delinearize.c \
+	src/netlink_linearize.c src/nfnl_osf.c src/nftutils.c \
+	src/nftutils.h src/numgen.c src/optimize.c src/osf.c \
+	src/owner.c src/payload.c src/preprocess.c src/print.c \
+	src/proto.c src/rt.c src/rule.c src/sctp_chunk.c src/segtree.c \
+	src/socket.c src/statement.c src/tcpopt.c src/utils.c \
+	src/xfrm.c src/xt.c src/json.c src/parser_json.c
 @BUILD_JSON_TRUE@am__objects_1 = src/json.lo src/parser_json.lo
 am_src_libnftables_la_OBJECTS = src/cache.lo src/cmd.lo src/ct.lo \
 	src/datatype.lo src/dccpopt.lo src/erec.lo src/evaluate.lo \
 	src/expression.lo src/exthdr.lo src/fib.lo src/gmputil.lo \
 	src/hash.lo src/iface.lo src/intervals.lo src/ipopt.lo \
 	src/libnftables.lo src/mergesort.lo src/meta.lo \
-	src/misspell.lo src/mnl.lo src/monitor.lo src/netlink.lo \
-	src/netlink_delinearize.lo src/netlink_linearize.lo \
-	src/nfnl_osf.lo src/nftutils.lo src/numgen.lo src/optimize.lo \
-	src/osf.lo src/owner.lo src/payload.lo src/preprocess.lo \
-	src/print.lo src/proto.lo src/rt.lo src/rule.lo \
-	src/sctp_chunk.lo src/segtree.lo src/socket.lo \
-	src/statement.lo src/tcpopt.lo src/utils.lo src/xfrm.lo \
-	src/xt.lo $(am__objects_1)
+	src/misspell.lo src/mnl.lo src/monitor.lo src/trace.lo \
+	src/netlink.lo src/netlink_delinearize.lo \
+	src/netlink_linearize.lo src/nfnl_osf.lo src/nftutils.lo \
+	src/numgen.lo src/optimize.lo src/osf.lo src/owner.lo \
+	src/payload.lo src/preprocess.lo src/print.lo src/proto.lo \
+	src/rt.lo src/rule.lo src/sctp_chunk.lo src/segtree.lo \
+	src/socket.lo src/statement.lo src/tcpopt.lo src/utils.lo \
+	src/xfrm.lo src/xt.lo $(am__objects_1)
 src_libnftables_la_OBJECTS = $(am_src_libnftables_la_OBJECTS)
 src_libnftables_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC \
 	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CCLD) \
@@ -293,8 +293,9 @@ am__depfiles_remade = examples/$(DEPDIR)/nft-buffer.Po \
 	src/$(DEPDIR)/rt.Plo src/$(DEPDIR)/rule.Plo \
 	src/$(DEPDIR)/sctp_chunk.Plo src/$(DEPDIR)/segtree.Plo \
 	src/$(DEPDIR)/socket.Plo src/$(DEPDIR)/statement.Plo \
-	src/$(DEPDIR)/tcpopt.Plo src/$(DEPDIR)/utils.Plo \
-	src/$(DEPDIR)/xfrm.Plo src/$(DEPDIR)/xt.Plo
+	src/$(DEPDIR)/tcpopt.Plo src/$(DEPDIR)/trace.Plo \
+	src/$(DEPDIR)/utils.Plo src/$(DEPDIR)/xfrm.Plo \
+	src/$(DEPDIR)/xt.Plo
 am__mv = mv -f
 COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
@@ -646,6 +647,7 @@ noinst_HEADERS = \
 	include/socket.h \
 	include/statement.h \
 	include/tcpopt.h \
+	include/trace.h \
 	include/utils.h \
 	include/xfrm.h \
 	include/xt.h \
@@ -708,14 +710,14 @@ src_libnftables_la_SOURCES = src/libnftables.map src/cache.c src/cmd.c \
 	src/evaluate.c src/expression.c src/exthdr.c src/fib.c \
 	src/gmputil.c src/hash.c src/iface.c src/intervals.c \
 	src/ipopt.c src/libnftables.c src/mergesort.c src/meta.c \
-	src/misspell.c src/mnl.c src/monitor.c src/netlink.c \
-	src/netlink_delinearize.c src/netlink_linearize.c \
-	src/nfnl_osf.c src/nftutils.c src/nftutils.h src/numgen.c \
-	src/optimize.c src/osf.c src/owner.c src/payload.c \
-	src/preprocess.c src/print.c src/proto.c src/rt.c src/rule.c \
-	src/sctp_chunk.c src/segtree.c src/socket.c src/statement.c \
-	src/tcpopt.c src/utils.c src/xfrm.c $(NULL) src/xt.c \
-	$(am__append_7)
+	src/misspell.c src/mnl.c src/monitor.c src/trace.c \
+	src/netlink.c src/netlink_delinearize.c \
+	src/netlink_linearize.c src/nfnl_osf.c src/nftutils.c \
+	src/nftutils.h src/numgen.c src/optimize.c src/osf.c \
+	src/owner.c src/payload.c src/preprocess.c src/print.c \
+	src/proto.c src/rt.c src/rule.c src/sctp_chunk.c src/segtree.c \
+	src/socket.c src/statement.c src/tcpopt.c src/utils.c \
+	src/xfrm.c $(NULL) src/xt.c $(am__append_7)
 src_libnftables_la_LDFLAGS = \
 	-version-info "${libnftables_LIBVERSION}" \
 	-Wl,--version-script="$(srcdir)/src//libnftables.map" \
@@ -978,6 +980,7 @@ src/meta.lo: src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
 src/misspell.lo: src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
 src/mnl.lo: src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
 src/monitor.lo: src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
+src/trace.lo: src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
 src/netlink.lo: src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
 src/netlink_delinearize.lo: src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
@@ -1137,6 +1140,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/socket.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/statement.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/tcpopt.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/trace.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/utils.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/xfrm.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/xt.Plo@am__quote@ # am--include-marker
@@ -1765,6 +1769,7 @@ distclean: distclean-am
 	-rm -f src/$(DEPDIR)/socket.Plo
 	-rm -f src/$(DEPDIR)/statement.Plo
 	-rm -f src/$(DEPDIR)/tcpopt.Plo
+	-rm -f src/$(DEPDIR)/trace.Plo
 	-rm -f src/$(DEPDIR)/utils.Plo
 	-rm -f src/$(DEPDIR)/xfrm.Plo
 	-rm -f src/$(DEPDIR)/xt.Plo
@@ -1867,6 +1872,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f src/$(DEPDIR)/socket.Plo
 	-rm -f src/$(DEPDIR)/statement.Plo
 	-rm -f src/$(DEPDIR)/tcpopt.Plo
+	-rm -f src/$(DEPDIR)/trace.Plo
 	-rm -f src/$(DEPDIR)/utils.Plo
 	-rm -f src/$(DEPDIR)/xfrm.Plo
 	-rm -f src/$(DEPDIR)/xt.Plo

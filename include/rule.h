@@ -321,6 +321,7 @@ void rule_stmt_insert_at(struct rule *rule, struct stmt *nstmt,
  * @refcnt:	reference count
  * @flags:	bitmask of set flags
  * @gc_int:	garbage collection interval
+ * @count:	count of kernel-allocated elements
  * @timeout:	default timeout value
  * @key:	key expression (data type, length))
  * @data:	mapping data expression
@@ -345,6 +346,7 @@ struct set {
 	unsigned int		refcnt;
 	uint32_t		flags;
 	uint32_t		gc_int;
+	uint32_t		count;
 	uint64_t		timeout;
 	struct expr		*key;
 	struct expr		*data;
@@ -756,6 +758,11 @@ extern void cmd_free(struct cmd *cmd);
 #include <payload.h>
 #include <expression.h>
 
+struct eval_recursion {
+	uint16_t binop;
+	uint16_t list;
+};
+
 /**
  * struct eval_ctx - evaluation context
  *
@@ -767,7 +774,7 @@ extern void cmd_free(struct cmd *cmd);
  * @set:	current set
  * @stmt:	current statement
  * @stmt_len:	current statement template length
- * @recursion:  expr evaluation recursion counter
+ * @recursion:  expr evaluation recursion counters
  * @cache:	cache context
  * @debug_mask: debugging bitmask
  * @ectx:	expression context
@@ -783,7 +790,7 @@ struct eval_ctx {
 	struct set		*set;
 	struct stmt		*stmt;
 	uint32_t		stmt_len;
-	uint32_t		recursion;
+	struct eval_recursion	recursion;
 	struct expr_ctx		ectx;
 	struct proto_ctx	_pctx[2];
 	const struct proto_desc	*inner_desc;

@@ -23,7 +23,7 @@ import traceback
 import tempfile
 
 TESTS_PATH = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, os.path.join(TESTS_PATH, '../../py/'))
+sys.path.insert(0, os.path.join(TESTS_PATH, '../../py/src'))
 os.environ['TZ'] = 'UTC-2'
 
 from nftables import Nftables
@@ -717,15 +717,18 @@ def payload_check(payload_buffer, file, cmd):
         return False
 
     for lineno, want_line in enumerate(payload_buffer):
+        # skip irreleant parts, such as "ip test-ipv4 output"
+        if want_line.find("[") < 0 or want_line.find("]") < 0:
+             continue
+
         line = file.readline()
+        while line.find("[") < 0 or line.find("]") < 0 or (line.startswith("family ") and line.find(" [nf_tables]") > 0):
+            line = file.readline()
+            if line == "":
+                break
 
         if want_line == line:
             i += 1
-            continue
-
-        if want_line.find('[') < 0 and line.find('[') < 0:
-            continue
-        if want_line.find(']') < 0 and line.find(']') < 0:
             continue
 
         if payload_check_set_elems(want_line, line):
@@ -877,6 +880,8 @@ def rule_add(rule, filename, lineno, force_all_family_option, filename_path):
                     gotf.write("# %s\n" % rule[0])
                     while True:
                         line = payload_log.readline()
+                        if line.startswith("family "):
+                            continue
                         if line == "":
                             break
                         gotf.write(line)

@@ -36,9 +36,7 @@
           "iface_index"
         ],
         "handle": 0,
-        "flags": [
-          "interval"
-        ],
+        "flags": "interval",
         "elem": [
           {
             "concat": [
@@ -113,9 +111,7 @@
         "table": "t",
         "type": "iface_index",
         "handle": 0,
-        "flags": [
-          "interval"
-        ],
+        "flags": "interval",
         "elem": [
           "lo"
         ]

@@ -284,6 +284,7 @@ int nft_lex(void *, void *, void *);
 %token UNDEFINE			"undefine"
 
 %token FIB			"fib"
+%token CHECK			"check"
 
 %token SOCKET			"socket"
 %token TRANSPARENT		"transparent"
@@ -718,7 +719,7 @@ int nft_lex(void *, void *, void *);
 %destructor { handle_free(&$$); } obj_spec objid_spec obj_or_id_spec
 
 %type <handle>			set_identifier flowtableid_spec flowtable_identifier obj_identifier
-%destructor { handle_free(&$$); } set_identifier flowtableid_spec obj_identifier
+%destructor { handle_free(&$$); } set_identifier flowtableid_spec flowtable_identifier obj_identifier
 
 %type <handle>			basehook_spec
 %destructor { handle_free(&$$); } basehook_spec
@@ -1450,7 +1451,7 @@ delete_cmd		:	TABLE		table_or_id_spec
 			{
 				$$ = cmd_alloc(CMD_DELETE, CMD_OBJ_SET, &$2, &@$, NULL);
 			}
-			|	MAP		set_spec
+			|	MAP		set_or_id_spec
 			{
 				$$ = cmd_alloc(CMD_DELETE, CMD_OBJ_SET, &$2, &@$, NULL);
 			}
@@ -1757,11 +1758,11 @@ reset_cmd		:	COUNTERS	list_cmd_spec_any
 			{
 				$$ = cmd_alloc(CMD_RESET, CMD_OBJ_ELEMENTS, &$2, &@$, $3);
 			}
-			|	SET		set_or_id_spec
+			|	SET		set_spec
 			{
 				$$ = cmd_alloc(CMD_RESET, CMD_OBJ_SET, &$2, &@$, NULL);
 			}
-			|	MAP		set_or_id_spec
+			|	MAP		set_spec
 			{
 				$$ = cmd_alloc(CMD_RESET, CMD_OBJ_MAP, &$2, &@$, NULL);
 			}
@@ -2072,7 +2073,7 @@ chain_block		:	/* empty */	{ $$ = $<chain>-1; }
 			|	chain_block	DEVICES		'='	flowtable_expr	stmt_separator
 			{
 				if ($$->dev_expr) {
-					list_splice_init(&$4->expressions, &$$->dev_expr->expressions);
+					list_splice_init(&expr_list($4)->expressions, &expr_list($$->dev_expr)->expressions);
 					expr_free($4);
 					break;
 				}
@@ -2426,6 +2427,7 @@ flowtable_block		:	/* empty */	{ $$ = $<flowtable>-1; }
 					erec_queue(error(&@3, "unknown chain hook"),
 						   state->msgs);
 					free_const($3);
+					expr_free($4.expr);
 					YYERROR;
 				}
 				free_const($3);
@@ -3872,6 +3874,7 @@ primary_stmt_expr	:	symbol_expr			{ $$ = $1; }
 			|	payload_expr			{ $$ = $1; }
 			|	keyword_expr			{ $$ = $1; }
 			|	socket_expr			{ $$ = $1; }
+			|	fib_expr			{ $$ = $1; }
 			|	osf_expr			{ $$ = $1; }
 			|	'('	basic_stmt_expr	')'	{ $$ = $2; }
 			;
@@ -4360,30 +4363,38 @@ primary_expr		:	symbol_expr			{ $$ = $1; }
 
 fib_expr		:	FIB	fib_tuple	fib_result	close_scope_fib
 			{
-				if (($2 & (NFTA_FIB_F_SADDR|NFTA_FIB_F_DADDR)) == 0) {
+				uint32_t flags = $2, result = $3;
+
+				if (result == __NFT_FIB_RESULT_MAX) {
+					result = NFT_FIB_RESULT_OIF;
+					flags |= NFTA_FIB_F_PRESENT;
+				}
+
+				if ((flags & (NFTA_FIB_F_SADDR|NFTA_FIB_F_DADDR)) == 0) {
 					erec_queue(error(&@2, "fib: need either saddr or daddr"), state->msgs);
 					YYERROR;
 				}
 
-				if (($2 & (NFTA_FIB_F_SADDR|NFTA_FIB_F_DADDR)) ==
-					  (NFTA_FIB_F_SADDR|NFTA_FIB_F_DADDR)) {
+				if ((flags & (NFTA_FIB_F_SADDR|NFTA_FIB_F_DADDR)) ==
+					     (NFTA_FIB_F_SADDR|NFTA_FIB_F_DADDR)) {
 					erec_queue(error(&@2, "fib: saddr and daddr are mutually exclusive"), state->msgs);
 					YYERROR;
 				}
 
-				if (($2 & (NFTA_FIB_F_IIF|NFTA_FIB_F_OIF)) ==
-					  (NFTA_FIB_F_IIF|NFTA_FIB_F_OIF)) {
+				if ((flags & (NFTA_FIB_F_IIF|NFTA_FIB_F_OIF)) ==
+					     (NFTA_FIB_F_IIF|NFTA_FIB_F_OIF)) {
 					erec_queue(error(&@2, "fib: iif and oif are mutually exclusive"), state->msgs);
 					YYERROR;
 				}
 
-				$$ = fib_expr_alloc(&@$, $2, $3);
+				$$ = fib_expr_alloc(&@$, flags, result);
 			}
 			;
 
 fib_result		:	OIF	{ $$ =NFT_FIB_RESULT_OIF; }
 			|	OIFNAME { $$ =NFT_FIB_RESULT_OIFNAME; }
 			|	TYPE	close_scope_type	{ $$ =NFT_FIB_RESULT_ADDRTYPE; }
+			|	CHECK	{ $$ = __NFT_FIB_RESULT_MAX; }	/* actually, NFT_FIB_F_PRESENT. */
 			;
 
 fib_flag		:       SADDR	{ $$ = NFTA_FIB_F_SADDR; }
@@ -4485,10 +4496,8 @@ prefix_rhs_expr		:	basic_rhs_expr	SLASH	NUM
 
 range_rhs_expr		:	basic_rhs_expr	DASH	basic_rhs_expr
 			{
-				if ($1->etype == EXPR_SYMBOL &&
-				    $1->symtype == SYMBOL_VALUE &&
-				    $3->etype == EXPR_SYMBOL &&
-				    $3->symtype == SYMBOL_VALUE) {
+				if (is_symbol_value_expr($1) &&
+				    is_symbol_value_expr($3)) {
 					$$ = symbol_range_expr_alloc(&@$, $1->symtype, $1->scope, $1->identifier, $3->identifier);
 					expr_free($1);
 					expr_free($3);

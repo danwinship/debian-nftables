@@ -18,7 +18,7 @@ static void concat_expr_msort_value(const struct expr *expr, mpz_t value)
 	const struct expr *i;
 	char data[512];
 
-	list_for_each_entry(i, &expr->expressions, list) {
+	list_for_each_entry(i, &expr_concat(expr)->expressions, list) {
 		ilen = div_round_up(i->len, BITS_PER_BYTE);
 		mpz_export_data(data + len, i->value, i->byteorder, ilen);
 		len += ilen;

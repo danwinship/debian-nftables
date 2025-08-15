@@ -172,6 +172,7 @@ static bool stmt_expr_supported(const struct expr *expr)
 	case EXPR_SYMBOL:
 	case EXPR_RANGE_SYMBOL:
 	case EXPR_RANGE:
+	case EXPR_RANGE_VALUE:
 	case EXPR_PREFIX:
 	case EXPR_SET:
 	case EXPR_LIST:
@@ -564,7 +565,7 @@ static void merge_expr_stmts(const struct optimize_ctx *ctx,
 	uint32_t i;
 
 	set = set_expr_alloc(&internal_location, NULL);
-	set->set_flags |= NFT_SET_ANONYMOUS;
+	expr_set(set)->set_flags |= NFT_SET_ANONYMOUS;
 
 	expr_a = stmt_a->expr->right;
 	elem = set_elem_expr_alloc(&internal_location, expr_get(expr_a));
@@ -587,7 +588,7 @@ static void merge_vmap(const struct optimize_ctx *ctx,
 	struct expr *mappings, *mapping, *expr;
 
 	mappings = stmt_b->expr->mappings;
-	list_for_each_entry(expr, &mappings->expressions, list) {
+	list_for_each_entry(expr, &expr_set(mappings)->expressions, list) {
 		mapping = expr_clone(expr);
 		compound_expr_add(stmt_a->expr->mappings, mapping);
 	}
@@ -653,7 +654,7 @@ static void __merge_concat(const struct optimize_ctx *ctx, uint32_t i,
 			stmt_a = ctx->stmt_matrix[i][merge->stmt[k]];
 			switch (stmt_a->expr->right->etype) {
 			case EXPR_SET:
-				list_for_each_entry(expr, &stmt_a->expr->right->expressions, list) {
+				list_for_each_entry(expr, &expr_set(stmt_a->expr->right)->expressions, list) {
 					concat_clone = expr_clone(concat);
 					clone = expr_clone(expr->key);
 					compound_expr_add(concat_clone, clone);
@@ -667,11 +668,12 @@ static void __merge_concat(const struct optimize_ctx *ctx, uint32_t i,
 			case EXPR_PREFIX:
 			case EXPR_RANGE_SYMBOL:
 			case EXPR_RANGE:
+			case EXPR_RANGE_VALUE:
 				clone = expr_clone(stmt_a->expr->right);
 				compound_expr_add(concat, clone);
 				break;
 			case EXPR_LIST:
-				list_for_each_entry(expr, &stmt_a->expr->right->expressions, list) {
+				list_for_each_entry(expr, &expr_list(stmt_a->expr->right)->expressions, list) {
 					concat_clone = expr_clone(concat);
 					clone = expr_clone(expr);
 					compound_expr_add(concat_clone, clone);
@@ -725,7 +727,7 @@ static void merge_concat_stmts(const struct optimize_ctx *ctx,
 
 	/* build set data contenation, eg. { eth0 . 1.1.1.1 . 22 } */
 	set = set_expr_alloc(&internal_location, NULL);
-	set->set_flags |= NFT_SET_ANONYMOUS;
+	expr_set(set)->set_flags |= NFT_SET_ANONYMOUS;
 
 	for (i = from; i <= to; i++)
 		__merge_concat_stmts(ctx, i, merge, set);
@@ -748,7 +750,7 @@ static void build_verdict_map(struct expr *expr, struct stmt *verdict,
 
 	switch (expr->etype) {
 	case EXPR_LIST:
-		list_for_each_entry(item, &expr->expressions, list) {
+		list_for_each_entry(item, &expr_list(expr)->expressions, list) {
 			elem = set_elem_expr_alloc(&internal_location, expr_get(item));
 			if (counter) {
 				counter_elem = counter_stmt_alloc(&counter->location);
@@ -762,7 +764,7 @@ static void build_verdict_map(struct expr *expr, struct stmt *verdict,
 		stmt_free(counter);
 		break;
 	case EXPR_SET:
-		list_for_each_entry(item, &expr->expressions, list) {
+		list_for_each_entry(item, &expr_set(expr)->expressions, list) {
 			elem = set_elem_expr_alloc(&internal_location, expr_get(item->key));
 			if (counter) {
 				counter_elem = counter_stmt_alloc(&counter->location);
@@ -778,6 +780,7 @@ static void build_verdict_map(struct expr *expr, struct stmt *verdict,
 	case EXPR_PREFIX:
 	case EXPR_RANGE_SYMBOL:
 	case EXPR_RANGE:
+	case EXPR_RANGE_VALUE:
 	case EXPR_VALUE:
 	case EXPR_SYMBOL:
 	case EXPR_CONCAT:
@@ -848,7 +851,7 @@ static void merge_stmts_vmap(const struct optimize_ctx *ctx,
 	assert(k >= 0);
 
 	set = set_expr_alloc(&internal_location, NULL);
-	set->set_flags |= NFT_SET_ANONYMOUS;
+	expr_set(set)->set_flags |= NFT_SET_ANONYMOUS;
 
 	expr_a = stmt_a->expr->right;
 	verdict_a = ctx->stmt_matrix[from][k];
@@ -922,7 +925,7 @@ static void merge_concat_stmts_vmap(const struct optimize_ctx *ctx,
 
 	/* build set data contenation, eg. { eth0 . 1.1.1.1 . 22 : accept } */
 	set = set_expr_alloc(&internal_location, NULL);
-	set->set_flags |= NFT_SET_ANONYMOUS;
+	expr_set(set)->set_flags |= NFT_SET_ANONYMOUS;
 
 	for (i = from; i <= to; i++) {
 		verdict = ctx->stmt_matrix[i][k];
@@ -1047,7 +1050,7 @@ static void merge_nat(const struct optimize_ctx *ctx,
 	assert(k >= 0);
 
 	set = set_expr_alloc(&internal_location, NULL);
-	set->set_flags |= NFT_SET_ANONYMOUS;
+	expr_set(set)->set_flags |= NFT_SET_ANONYMOUS;
 
 	for (i = from; i <= to; i++) {
 		stmt = ctx->stmt_matrix[i][merge->stmt[0]];
@@ -1099,7 +1102,7 @@ static void merge_concat_nat(const struct optimize_ctx *ctx,
 	assert(k >= 0);
 
 	set = set_expr_alloc(&internal_location, NULL);
-	set->set_flags |= NFT_SET_ANONYMOUS;
+	expr_set(set)->set_flags |= NFT_SET_ANONYMOUS;
 
 	for (i = from; i <= to; i++) {
 

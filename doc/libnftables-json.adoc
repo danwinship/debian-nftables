@@ -317,7 +317,7 @@ ____
 	"handle":* 'NUMBER'*,
 	"type":* 'SET_TYPE'*,
 	"policy":* 'SET_POLICY'*,
-	"flags": [* 'SET_FLAG_LIST' *],
+	"flags":* 'SET_FLAGS'*,
 	"elem":* 'SET_ELEMENTS'*,
 	"timeout":* 'NUMBER'*,
 	"gc-interval":* 'NUMBER'*,
@@ -333,7 +333,7 @@ ____
 	"type":* 'SET_TYPE'*,
 	"map":* 'STRING'*,
 	"policy":* 'SET_POLICY'*,
-	"flags": [* 'SET_FLAG_LIST' *],
+	"flags":* 'SET_FLAGS'*,
 	"elem":* 'SET_ELEMENTS'*,
 	"timeout":* 'NUMBER'*,
 	"gc-interval":* 'NUMBER'*,
@@ -344,6 +344,7 @@ ____
 'SET_TYPE' := 'STRING' | *[* 'SET_TYPE_LIST' *]* | *{ "typeof":* 'EXPRESSION' *}*
 'SET_TYPE_LIST' := 'STRING' [*,* 'SET_TYPE_LIST' ]
 'SET_POLICY' := *"performance"* | *"memory"*
+'SET_FLAGS' := 'SET_FLAG' | *[* 'SET_FLAG_LIST' *]*
 'SET_FLAG_LIST' := 'SET_FLAG' [*,* 'SET_FLAG_LIST' ]
 'SET_FLAG' := *"constant"* | *"interval"* | *"timeout"*
 'SET_ELEMENTS' := 'EXPRESSION' | *[* 'EXPRESSION_LIST' *]*

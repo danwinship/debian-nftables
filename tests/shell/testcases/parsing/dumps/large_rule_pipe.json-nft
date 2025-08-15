@@ -2009,7 +2009,7 @@
               "op": "==",
               "left": {
                 "fib": {
-                  "result": "oif",
+                  "result": "check",
                   "flags": [
                     "saddr",
                     "iif"

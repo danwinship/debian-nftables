@@ -77,6 +77,22 @@ enum ip_conntrack_status {
 	/* Connection has fixed timeout. */
 	IPS_FIXED_TIMEOUT_BIT = 10,
 	IPS_FIXED_TIMEOUT = (1 << IPS_FIXED_TIMEOUT_BIT),
+
+	/* Conntrack is a fake untracked entry.  Obsolete and not used anymore */
+	IPS_UNTRACKED_BIT = 12,
+	IPS_UNTRACKED = (1 << IPS_UNTRACKED_BIT),
+
+	/* Conntrack got a helper explicitly attached (ruleset, ctnetlink). */
+	IPS_HELPER_BIT = 13,
+	IPS_HELPER = (1 << IPS_HELPER_BIT),
+
+	/* Conntrack has been offloaded to flow table. */
+	IPS_OFFLOAD_BIT = 14,
+	IPS_OFFLOAD = (1 << IPS_OFFLOAD_BIT),
+
+	/* Conntrack has been offloaded to hardware. */
+	IPS_HW_OFFLOAD_BIT = 15,
+	IPS_HW_OFFLOAD = (1 << IPS_HW_OFFLOAD_BIT),
 };
 
 /* Connection tracking event types */

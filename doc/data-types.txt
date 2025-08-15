@@ -166,7 +166,7 @@ Check TCP option header existence.
 .Boolean specification
 ----------------------
 # match if route exists
-filter input fib daddr . iif oif exists
+filter input fib daddr . iif check exists
 
 # match only non-fragmented packets in IPv6 traffic
 filter input exthdr frag missing
@@ -378,21 +378,21 @@ For each of the types above, keywords are available for convenience:
 .conntrack status (ct_status)
 [options="header"]
 |==================
-|Keyword| Value
-|expected|
-1
-|seen-reply|
-2
-|assured|
-4
-|confirmed|
-8
-|snat|
-16
-|dnat|
-32
-|dying|
-512
+|Keyword| Value	| Description
+|expected|1| Expected connection; conntrack helper set it up
+|seen-reply|2| Conntrack has seen packets in both directions
+|assured| 4 |Conntrack entry will not be removed if hash table is full
+|confirmed | 8 | Initial packet processed
+|snat| 16 | Original source address differs from reply destination
+|dnat| 32 | Original destination differs from reply source
+|seq-adjust| 64 | tcp sequence number rewrite due to conntrack helper or synproxy
+|snat-done| 128 | tried to find matching snat/masquerade rule
+|dnat-done| 256 | tried to find matching dnat/redirect rule
+|dying| 512 | Connection about to be deleted
+|fixed-timeout | 1024 | entry expires even if traffic is active
+|helper | 8192 | connection is monitored by conntrack helper
+|offload | 16384 | connection is offloaded to a flow table
+|hw-offload | 32768 | connection is offloaded to hardware
 |================
 
 .conntrack event bits (ct_event)

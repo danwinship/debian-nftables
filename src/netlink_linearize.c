@@ -123,7 +123,7 @@ static void netlink_gen_concat(struct netlink_linearize_ctx *ctx,
 {
 	const struct expr *i;
 
-	list_for_each_entry(i, &expr->expressions, list) {
+	list_for_each_entry(i, &expr_concat(expr)->expressions, list) {
 		netlink_gen_expr(ctx, i, dreg);
 		dreg += netlink_register_space(i->len);
 	}

@@ -98,7 +98,14 @@ static const struct symbol_table ct_status_tbl = {
 		SYMBOL("confirmed",	IPS_CONFIRMED),
 		SYMBOL("snat",		IPS_SRC_NAT),
 		SYMBOL("dnat",		IPS_DST_NAT),
+		SYMBOL("seq-adjust",	IPS_SEQ_ADJUST),
+		SYMBOL("snat-done",	IPS_SRC_NAT_DONE),
+		SYMBOL("dnat-done",	IPS_DST_NAT_DONE),
 		SYMBOL("dying",		IPS_DYING),
+		SYMBOL("fixed-timeout",	IPS_FIXED_TIMEOUT),
+		SYMBOL("helper",	IPS_HELPER_BIT),
+		SYMBOL("offload",	IPS_OFFLOAD_BIT),
+		SYMBOL("hw-offload",	IPS_HW_OFFLOAD_BIT),
 		SYMBOL_LIST_END
 	},
 };

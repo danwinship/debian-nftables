@@ -293,14 +293,24 @@ struct expr {
 			struct expr		*prefix;
 			unsigned int		prefix_len;
 		};
-		struct {
-			/* EXPR_CONCAT, EXPR_LIST, EXPR_SET */
+		struct expr_concat {
+			/* EXPR_CONCAT */
+			struct list_head	expressions;
+			unsigned int		size;
+			uint8_t			field_len[NFT_REG32_COUNT];
+			uint8_t			field_count;
+		} expr_concat;
+		struct expr_set {
+			/* EXPR_SET */
 			struct list_head	expressions;
 			unsigned int		size;
 			uint32_t		set_flags;
-			uint8_t			field_len[NFT_REG32_COUNT];
-			uint8_t			field_count;
-		};
+		} expr_set;
+		struct expr_list {
+			/* EXPR_LIST */
+			struct list_head	expressions;
+			unsigned int		size;
+		} expr_list;
 		struct {
 			/* EXPR_SET_REF */
 			struct set		*set;
@@ -403,6 +413,10 @@ struct expr {
 	};
 };
 
+#define expr_set(__expr)	(assert((__expr)->etype == EXPR_SET), &(__expr)->expr_set)
+#define expr_concat(__expr)	(assert((__expr)->etype == EXPR_CONCAT), &(__expr)->expr_concat)
+#define expr_list(__expr)	(assert((__expr)->etype == EXPR_LIST), &(__expr)->expr_list)
+
 extern struct expr *expr_alloc(const struct location *loc,
 			       enum expr_types etype,
 			       const struct datatype *dtype,
@@ -456,6 +470,8 @@ extern struct expr *verdict_expr_alloc(const struct location *loc,
 extern struct expr *symbol_expr_alloc(const struct location *loc,
 				      enum symbol_types type, struct scope *scope,
 				      const char *identifier);
+#define is_symbol_value_expr(expr) \
+	((expr)->etype == EXPR_SYMBOL && (expr)->symtype == SYMBOL_VALUE)
 
 const char *expr_name(const struct expr *e);
 

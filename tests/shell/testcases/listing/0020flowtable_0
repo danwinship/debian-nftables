@@ -8,11 +8,11 @@ set -e
 
 FLOWTABLES="flowtable f {
 	hook ingress priority filter
-	devices = { lo }
+	devices = { \"lo\" }
 }
 flowtable f2 {
 	hook ingress priority filter
-	devices = { d0 }
+	devices = { \"d0\" }
 }"
 
 RULESET="table inet filter {
@@ -25,30 +25,36 @@ table ip filter {
 EXPECTED="table inet filter {
 	flowtable f {
 		hook ingress priority filter
-		devices = { lo }
+		devices = { \"lo\" }
 	}
 }"
 EXPECTED2="table ip filter {
 	flowtable f2 {
 		hook ingress priority filter
-		devices = { d0 }
+		devices = { \"d0\" }
 	}
 }"
 EXPECTED3="table ip filter {
 	flowtable f {
 		hook ingress priority filter
-		devices = { lo }
+		devices = { \"lo\" }
 	}
 	flowtable f2 {
 		hook ingress priority filter
-		devices = { d0 }
+		devices = { \"d0\" }
 	}
 }"
 
 iface_cleanup() {
 	ip link del d0 &>/dev/null || :
 }
-trap 'iface_cleanup' EXIT
+ft_cleanup() {
+	if [ "$NFT_TEST_HAVE_ifname_based_hooks" = y ]; then
+		$NFT 'delete flowtable ip filter f2 { devices = { d0 }; }'
+		$NFT 'delete flowtable inet filter f2 { devices = { d0 }; }'
+	fi
+}
+trap 'iface_cleanup; ft_cleanup' EXIT
 iface_cleanup
 
 ip link add d0 type dummy

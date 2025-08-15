@@ -1052,6 +1052,57 @@ ip meta-test input
   [ cmp eq reg 1 0x0001359c ]
   [ immediate reg 0 drop ]
 
+# meta hour "01:01" drop
+ip test-ip4 input
+  [ meta load hour => reg 1 ]
+  [ cmp eq reg 1 0x000143ac ]
+  [ immediate reg 0 drop ]
+
+# meta hour "02:02" drop
+ip test-ip4 input
+  [ meta load hour => reg 1 ]
+  [ cmp eq reg 1 0x00000078 ]
+  [ immediate reg 0 drop ]
+
+# meta hour "03:03" drop
+ip test-ip4 input
+  [ meta load hour => reg 1 ]
+  [ cmp eq reg 1 0x00000ec4 ]
+  [ immediate reg 0 drop ]
+
+# meta hour "23:59:60" drop
+ip test-ip4 input
+  [ meta load hour => reg 1 ]
+  [ cmp eq reg 1 0x00013560 ]
+  [ immediate reg 0 drop ]
+
+# meta hour "00:00"-"02:02" drop
+  [ meta load hour => reg 1 ]
+  [ byteorder reg 1 = hton(reg 1, 4, 4) ]
+  [ range neq reg 1 0x78000000 0x60350100 ]
+  [ immediate reg 0 drop ]
+
+# meta hour "01:01"-"03:03" drop
+ip test-ip4 input
+  [ meta load hour => reg 1 ]
+  [ byteorder reg 1 = hton(reg 1, 4, 4) ]
+  [ range neq reg 1 0xc40e0000 0xac430100 ]
+  [ immediate reg 0 drop ]
+
+# meta hour "02:02"-"04:04" drop
+ip test-ip4 input
+  [ meta load hour => reg 1 ]
+  [ byteorder reg 1 = hton(reg 1, 4, 4) ]
+  [ range eq reg 1 0x78000000 0x101d0000 ]
+  [ immediate reg 0 drop ]
+
+# meta hour "21:00"-"02:00" drop
+ip test-ip4 input
+  [ meta load hour => reg 1 ]
+  [ byteorder reg 1 = hton(reg 1, 4, 4) ]
+  [ range neq reg 1 0x00000000 0x300b0100 ]
+  [ immediate reg 0 drop ]
+
 # time < "2022-07-01 11:00:00" accept
 ip test-ip4 input
   [ meta load time => reg 1 ]

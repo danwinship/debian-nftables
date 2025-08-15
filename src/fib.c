@@ -53,8 +53,16 @@ const struct datatype fib_addr_type = {
 	.sym_tbl	= &addrtype_tbl,
 };
 
-const char *fib_result_str(enum nft_fib_result result)
+const char *fib_result_str(const struct expr *expr)
 {
+	enum nft_fib_result result = expr->fib.result;
+	uint32_t flags = expr->fib.flags;
+
+	/* Exception: check if route exists. */
+	if (result == NFT_FIB_RESULT_OIF &&
+	    flags & NFTA_FIB_F_PRESENT)
+		return "check";
+
 	if (result <= NFT_FIB_RESULT_MAX)
 		return fib_result[result];
 
@@ -87,7 +95,7 @@ static void fib_expr_print(const struct expr *expr, struct output_ctx *octx)
 	if (flags)
 		nft_print(octx, "0x%x", flags);
 
-	nft_print(octx, " %s", fib_result_str(expr->fib.result));
+	nft_print(octx, " %s", fib_result_str(expr));
 }
 
 static bool fib_expr_cmp(const struct expr *e1, const struct expr *e2)

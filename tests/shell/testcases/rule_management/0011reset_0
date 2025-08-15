@@ -4,6 +4,12 @@
 
 set -e
 
+if [ $NFT_TEST_HAVE_setcount = y ]; then
+	size="size 65535	# count 1"
+else
+	size="size 65535"
+fi
+
 echo "loading ruleset with anonymous set"
 $NFT -f - <<EOF
 table t {
@@ -60,10 +66,10 @@ EOF
 echo "resetting specific rule"
 handle=$($NFT -a list chain t c | sed -n 's/.*accept # handle \([0-9]*\)$/\1/p')
 $NFT reset rule t c handle $handle
-EXPECT='table ip t {
+EXPECT="table ip t {
 	set s {
 		type ipv4_addr
-		size 65535
+		$size
 		flags dynamic
 		counter
 		elements = { 1.1.1.1 counter packets 1 bytes 11 }
@@ -90,7 +96,7 @@ table ip t2 {
 		counter packets 7 bytes 17 accept
 		counter packets 8 bytes 18 drop
 	}
-}'
+}"
 $DIFF -u <(echo "$EXPECT") <($NFT list ruleset)
 
 echo "resetting specific chain"
@@ -103,10 +109,10 @@ EXPECT='table ip t {
 $DIFF -u <(echo "$EXPECT") <($NFT reset rules chain t c2)
 
 echo "resetting specific table"
-EXPECT='table ip t {
+EXPECT="table ip t {
 	set s {
 		type ipv4_addr
-		size 65535
+		$size
 		flags dynamic
 		counter
 		elements = { 1.1.1.1 counter packets 1 bytes 11 }
@@ -121,14 +127,14 @@ EXPECT='table ip t {
 		counter packets 0 bytes 0 accept
 		counter packets 0 bytes 0 drop
 	}
-}'
+}"
 $DIFF -u <(echo "$EXPECT") <($NFT reset rules table t)
 
 echo "resetting specific family"
-EXPECT='table ip t {
+EXPECT="table ip t {
 	set s {
 		type ipv4_addr
-		size 65535
+		$size
 		flags dynamic
 		counter
 		elements = { 1.1.1.1 counter packets 1 bytes 11 }
@@ -149,14 +155,14 @@ table ip t2 {
 		counter packets 7 bytes 17 accept
 		counter packets 8 bytes 18 drop
 	}
-}'
+}"
 $DIFF -u <(echo "$EXPECT") <($NFT reset rules ip)
 
 echo "resetting whole ruleset"
-EXPECT='table ip t {
+EXPECT="table ip t {
 	set s {
 		type ipv4_addr
-		size 65535
+		$size
 		flags dynamic
 		counter
 		elements = { 1.1.1.1 counter packets 1 bytes 11 }
@@ -183,5 +189,5 @@ table ip t2 {
 		counter packets 0 bytes 0 accept
 		counter packets 0 bytes 0 drop
 	}
-}'
+}"
 $DIFF -u <(echo "$EXPECT") <($NFT reset rules)
