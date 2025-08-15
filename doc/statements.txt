@@ -3,8 +3,12 @@ VERDICT STATEMENT
 The verdict statement alters control flow in the ruleset and issues policy decisions for packets.
 
 [verse]
+____
 {*accept* | *drop* | *queue* | *continue* | *return*}
-{*jump* | *goto*} 'chain'
+{*jump* | *goto*} 'CHAIN'
+
+'CHAIN' := 'chain_name' | *{* 'statement' ... *}*
+____
 
 *accept* and *drop* are absolute verdicts -- they terminate ruleset evaluation immediately.
 
@@ -26,14 +30,19 @@ resumes with the next base chain hook, not the rule following the queue verdict.
 *return*:: Return from the current chain and continue evaluation at the
  next rule in the last chain. If issued in a base chain, it is equivalent to the
  base chain policy.
-*jump* 'chain':: Continue evaluation at the first rule in 'chain'. The current
+*jump* 'CHAIN':: Continue evaluation at the first rule in 'CHAIN'. The current
  position in the ruleset is pushed to a call stack and evaluation will continue
  there when the new chain is entirely evaluated or a *return* verdict is issued.
  In case an absolute verdict is issued by a rule in the chain, ruleset evaluation
  terminates immediately and the specific action is taken.
-*goto* 'chain':: Similar to *jump*, but the current position is not pushed to the
+*goto* 'CHAIN':: Similar to *jump*, but the current position is not pushed to the
  call stack, meaning that after the new chain evaluation will continue at the last
  chain instead of the one containing the goto statement.
+
+An alternative to specifying the name of an existing, regular chain in 'CHAIN'
+is to specify an anonymous chain ad-hoc. Like with anonymous sets, it can't be
+referenced from another rule and will be removed along with the rule containing
+it.
 
 .Using verdict statements
 -------------------
@@ -42,6 +51,10 @@ resumes with the next base chain hook, not the rule following the queue verdict.
 
 filter input iif eth0 ip saddr 192.168.0.0/24 jump from_lan
 filter input iif eth0 drop
+
+# jump and goto statements support anonymous chain creation
+filter input iif eth0 jump { ip saddr 192.168.0.0/24 drop ; udp dport domain drop; }
+
 -------------------
 
 PAYLOAD STATEMENT
@@ -399,11 +412,12 @@ NAT STATEMENTS
 ~~~~~~~~~~~~~~
 [verse]
 ____
-*snat* [[*ip* | *ip6*] [ *prefix* ] *to*] 'ADDR_SPEC' [*:*'PORT_SPEC'] ['FLAGS']
-*dnat* [[*ip* | *ip6*] [ *prefix* ] *to*] 'ADDR_SPEC' [*:*'PORT_SPEC'] ['FLAGS']
+*snat* [[*ip* | *ip6*] [ *prefix* ] *to*] 'TARGET_SPEC' ['FLAGS']
+*dnat* [[*ip* | *ip6*] [ *prefix* ] *to*] 'TARGET_SPEC' ['FLAGS']
 *masquerade* [*to :*'PORT_SPEC'] ['FLAGS']
 *redirect* [*to :*'PORT_SPEC'] ['FLAGS']
 
+'TARGET_SPEC' := 'ADDR_SPEC' | ['ADDR_SPEC'] *:*'PORT_SPEC'
 'ADDR_SPEC' := 'address' | 'address' *-* 'address'
 'PORT_SPEC' := 'port' | 'port' *-* 'port'
 
@@ -413,11 +427,11 @@ ____
 
 The nat statements are only valid from nat chain types. +
 
-The *snat* and *masquerade* statements specify that the source address of the
+The *snat* and *masquerade* statements specify that the source address/port of the
 packet should be modified. While *snat* is only valid in the postrouting and
 input chains, *masquerade* makes sense only in postrouting. The dnat and
 redirect statements are only valid in the prerouting and output chains, they
-specify that the destination address of the packet should be modified. You can
+specify that the destination address/port of the packet should be modified. You can
 use non-base chains which are called from base chains of nat chain type too.
 All future packets in this connection will also be mangled, and rules should
 cease being examined.
@@ -427,8 +441,12 @@ outgoing interface's IP address to translate to. It is particularly useful on
 gateways with dynamic (public) IP addresses.
 
 The *redirect* statement is a special form of dnat which always translates the
-destination address to the local host's one. It comes in handy if one only wants
-to alter the destination port of incoming traffic on different interfaces.
+destination address to the local host's one. It comes in handy to intercept
+traffic passing a router and feeding it to a locally running daemon, e.g. when
+building a transparent proxy or application-layer gateway.
+
+For 'TARGET_SPEC', one may specify addresses, ports, or both. If no address or
+no port is specified, the respective packet header field remains unchanged.
 
 When used in the inet family (available with kernel 5.2), the dnat and snat
 statements require the use of the ip and ip6 keyword in case an address is
@@ -438,7 +456,7 @@ Before kernel 4.18 nat statements require both prerouting and postrouting base c
 to be present since otherwise packets on the return path won't be seen by
 netfilter and therefore no reverse translation will take place.
 
-The optional *prefix* keyword allows to map to map *n* source addresses to *n*
+The optional *prefix* keyword allows to map *n* source addresses to *n*
 destination addresses.  See 'Advanced NAT examples' below.
 
 .NAT statement values

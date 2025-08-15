@@ -795,6 +795,10 @@ addrstring	({macaddr}|{ip4addr}|{ip6addr})
 
 "fib"			{ scanner_push_start_cond(yyscanner, SCANSTATE_EXPR_FIB); return FIB; }
 
+<SCANSTATE_EXPR_FIB>{
+	"check"		{ return CHECK; }
+}
+
 "osf"			{ scanner_push_start_cond(yyscanner, SCANSTATE_EXPR_OSF); return OSF; }
 
 "synproxy"		{ scanner_push_start_cond(yyscanner, SCANSTATE_STMT_SYNPROXY); return SYNPROXY; }

@@ -397,7 +397,8 @@ CHAINS
 Chains are containers for rules. They exist in two kinds, base chains and
 regular chains. A base chain is an entry point for packets from the networking
 stack, a regular chain may be used as jump target and is used for better rule
-organization.
+organization. Regular chains can be anonymous, see *VERDICT STATEMENT* examples
+for details.
 
 [horizontal]
 *add*:: Add a new chain in the specified table. When a hook and priority value
@@ -595,6 +596,8 @@ Sets are element containers of a user-defined data type, they are uniquely
 identified by a user-defined name and attached to tables. Their behaviour can
 be tuned with the flags that can be specified at set creation time.
 
+See Set and Map flags below for more details.
+
 [horizontal]
 *add*:: Add a new set in the specified table. See the Set specification table below for more information about how to specify properties of a set.
 *delete*:: Delete the specified set.
@@ -635,6 +638,27 @@ string: performance [default], memory
 automatic merge of adjacent/overlapping set elements (only for interval sets) |
 |=================
 
+The *gc-interval* doesn't affect element timeout, but it does affect memory reclaim.
+A large set that rarely has elements that time out can use a higher (less frequent) garbage
+collection to save cpu time, whereas sets that see many updates with short-lived elements
+will benefit from a lower interval.
+Lower intervals ensure the set stays below its maximum size.
+Internally, a timed-out entry stays around until it is removed by the garbage collector, which
+also decrements the sets element count.
+This also means that it is possible to have a set that can not accept more elements, even
+if all elements timed out, if the *gc-interval* is set too large.
+
+The *size* defines the upper limit of the amount of elements that the set can support.
+Mandatory for sets that are added to from the ruleset with the *add* and *update* keywords.
+Providing the *size* keyword for sets that are only added to via *nft add element* allows for
+a more compact (memory conserving) set implementation selection, but it is not required.
+
+The optional *policy* keyword can be used to request a more memory-conserving set implementation.
+
+*auto-merge* instructs the nftables frontend to merge adjacent and overlapping ranges.
+Example: When the set contains range *1.2.3.1-1.2.3.4*, then adding element *1.2.3.2* has no
+effect.  Adding *1.2.3.5* changes the existing range to cover *1.2.3.1-1.2.3.5*.
+Without this flag, *1.2.3.2* can not be added and *1.2.3.5* is inserted as a new entry.
 
 MAPS
 -----
@@ -683,6 +707,8 @@ If a required flag is missing, the ruleset might still work, as
 nftables will auto-enable features if it can infer this from the ruleset.
 This may not work for all cases, however, so it is recommended to
 specify all required features in the set/map definition manually.
+Also, some features are mutually exclusive.  For example, it is not possible
+for a set to support intervals and insertion from the packet path.
 
 .Set and Map flags
 [options="header"]
@@ -690,7 +716,7 @@ specify all required features in the set/map definition manually.
 |Flag		| Description
 |constant	| Set contents will never change after creation
 |dynamic	| Set must support updates from the packet path with the *add*, *update* or *delete* keywords.
-|interval	| Set must be able to store intervals (ranges)
+|interval	| Set must be able to store intervals (ranges). Cannot be combined with the *dynamic* flag.
 |timeout	| Set must support element timeouts (auto-removal of elements once they expire).
 |=================
 

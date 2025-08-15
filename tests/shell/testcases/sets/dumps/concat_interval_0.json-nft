@@ -25,9 +25,7 @@
           "inet_service"
         ],
         "handle": 0,
-        "flags": [
-          "interval"
-        ],
+        "flags": "interval",
         "stmt": [
           {
             "counter": null
@@ -45,9 +43,7 @@
           "mark"
         ],
         "handle": 0,
-        "flags": [
-          "interval"
-        ],
+        "flags": "interval",
         "elem": [
           {
             "concat": [

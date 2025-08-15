@@ -1,6 +1,6 @@
 #!/bin/bash
 
-## requires EXPR
+# NFT_TEST_REQUIRES(NFT_TEST_HAVE_set_expr)
 
 set -e
 

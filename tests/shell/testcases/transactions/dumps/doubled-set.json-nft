@@ -24,9 +24,7 @@
           "ifname"
         ],
         "handle": 0,
-        "flags": [
-          "interval"
-        ],
+        "flags": "interval",
         "elem": [
           {
             "concat": [

@@ -50,9 +50,7 @@
         "handle": 0,
         "map": "mark",
         "size": 64,
-        "flags": [
-          "timeout"
-        ],
+        "flags": "timeout",
         "timeout": 300,
         "stmt": [
           {

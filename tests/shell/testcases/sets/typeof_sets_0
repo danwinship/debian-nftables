@@ -5,6 +5,7 @@
 # ways for declaration.
 
 # NFT_TEST_REQUIRES(NFT_TEST_HAVE_ip_options)
+# NFT_TEST_REQUIRES(NFT_TEST_HAVE_bitshift)
 
 set -e
 

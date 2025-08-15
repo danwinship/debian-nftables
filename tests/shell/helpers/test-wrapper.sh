@@ -5,6 +5,8 @@
 #
 # For some printf debugging, you can also patch this file.
 
+rc_dump=0
+
 array_contains() {
 	local needle="$1"
 	local a
@@ -25,6 +27,29 @@ show_file() {
 	printf "<<<<\n"
 }
 
+diff_check_setcount() {
+	local dumpfile="$1"
+	local after="$2"
+
+	if $DIFF -u "$dumpfile" "$after" &> "$NFT_TEST_TESTTMPDIR/ruleset-diff" ; then
+		rm -f "$NFT_TEST_TESTTMPDIR/ruleset-diff"
+		return
+	fi
+
+	if [ $NFT_TEST_HAVE_setcount = n ];then
+		# old kernel or nft binary, expect "size 42", not "size 42	# count 1".
+		sed s/.\#\ count\ .\*//g "$dumpfile" > "$NFT_TEST_TESTTMPDIR/ruleset-diff-postprocess"
+
+		if $DIFF -u "$NFT_TEST_TESTTMPDIR/ruleset-diff-postprocess" "$after" > /dev/null ; then
+			rm -f "$NFT_TEST_TESTTMPDIR/ruleset-diff" "$NFT_TEST_TESTTMPDIR/ruleset-diff-postprocess"
+			return
+		fi
+	fi
+
+	show_file "$NFT_TEST_TESTTMPDIR/ruleset-diff" "Failed \`$DIFF -u \"$dumpfile\" \"$after\"\`" >> "$NFT_TEST_TESTTMPDIR/rc-failed-dump"
+	rc_dump=1
+}
+
 json_pretty() {
 	"$NFT_TEST_BASEDIR/helpers/json-pretty.sh" "$@" 2>&1 || :
 }
@@ -36,6 +61,7 @@ TESTDIR="$(dirname "$TEST")"
 START_TIME="$(cut -d ' ' -f1 /proc/uptime)"
 
 export TMPDIR="$NFT_TEST_TESTTMPDIR"
+export NFT_TEST_LIBRARY_FILE="$NFT_TEST_BASEDIR/helpers/lib.sh"
 
 CLEANUP_UMOUNT_VAR_RUN=n
 
@@ -62,7 +88,7 @@ if [ "$NFT_TEST_HAS_UNSHARED_MOUNT" = y ] ; then
 	# Note that this also hides everything that might reside in /var/run.
 	# That is desirable, as tests should not depend on content there (or if
 	# they do, we need to explicitly handle it as appropriate).
-	if mount -t tmpfs --make-private tmpfs "/var/run" ; then
+	if mount -t tmpfs --make-private tmpfs "/var/run" 2>/dev/null ; then
 		CLEANUP_UMOUNT_VAR_RUN=y
 	fi
 	mkdir -p /var/run/netns
@@ -195,15 +221,9 @@ if [ "$rc_test" -eq 0 -a '(' "$DUMPGEN" = all -o "$DUMPGEN" = y ')' ] ; then
 	fi
 fi
 
-rc_dump=0
 if [ "$rc_test" -ne 77 -a "$dump_written" != y ] ; then
 	if [ -f "$DUMPFILE" ] ; then
-		if ! $DIFF -u "$DUMPFILE" "$NFT_TEST_TESTTMPDIR/ruleset-after" &> "$NFT_TEST_TESTTMPDIR/ruleset-diff" ; then
-			show_file "$NFT_TEST_TESTTMPDIR/ruleset-diff" "Failed \`$DIFF -u \"$DUMPFILE\" \"$NFT_TEST_TESTTMPDIR/ruleset-after\"\`" >> "$NFT_TEST_TESTTMPDIR/rc-failed-dump"
-			rc_dump=1
-		else
-			rm -f "$NFT_TEST_TESTTMPDIR/ruleset-diff"
-		fi
+		diff_check_setcount "$DUMPFILE" "$NFT_TEST_TESTTMPDIR/ruleset-after"
 	fi
 	if [ "$NFT_TEST_HAVE_json" != n -a -f "$JDUMPFILE" ] ; then
 		if ! $DIFF -u "$JDUMPFILE" "$NFT_TEST_TESTTMPDIR/ruleset-after.json-pretty" &> "$NFT_TEST_TESTTMPDIR/ruleset-diff.json" ; then

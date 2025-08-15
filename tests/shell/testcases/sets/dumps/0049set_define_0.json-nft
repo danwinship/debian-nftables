@@ -33,9 +33,7 @@
         "table": "filter",
         "type": "ipv4_addr",
         "handle": 0,
-        "flags": [
-          "interval"
-        ],
+        "flags": "interval",
         "auto-merge": true,
         "elem": [
           "1.1.1.1"

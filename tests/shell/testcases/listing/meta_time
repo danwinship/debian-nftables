@@ -65,3 +65,33 @@ printf "\t\tmeta hour \"%02d:%02d\"-\"%02d:%02d\"\n" 5 0 16 0 >> "$TMP1"
 printf "\t\tmeta hour \"%02d:%02d\"-\"%02d:%02d\"\n" 6 0 17 0 >> "$TMP1"
 
 check_decode EADT
+
+$NFT flush chain t c
+TZ=UTC-2 $NFT add rule t c meta hour "00:00"-"01:00"
+TZ=UTC-2 $NFT add rule t c meta hour "00:00"-"03:00"
+TZ=UTC-2 $NFT add rule t c meta hour "01:00"-"04:00"
+
+printf "\t\tmeta hour \"%02d:%02d\"-\"%02d:%02d\"\n" 0 0 1 0 > "$TMP1"
+printf "\t\tmeta hour \"%02d:%02d\"-\"%02d:%02d\"\n" 0 0 3 0 >> "$TMP1"
+printf "\t\tmeta hour \"%02d:%02d\"-\"%02d:%02d\"\n" 1 0 4 0 >> "$TMP1"
+
+check_decode UTC-2
+
+$NFT flush chain t c
+TZ=UTC-2 $NFT --debug=eval -f - <<EOF
+define midnight="00:00"
+define threeam="03:00"
+table t {
+	chain c {
+		meta hour \$midnight - "03:00"
+		meta hour 00:00 - \$threeam
+		meta hour \$midnight - \$threeam
+	}
+}
+EOF
+
+printf "\t\tmeta hour \"%02d:%02d\"-\"%02d:%02d\"\n" 0 0 3 0 > "$TMP1"
+printf "\t\tmeta hour \"%02d:%02d\"-\"%02d:%02d\"\n" 0 0 3 0 >> "$TMP1"
+printf "\t\tmeta hour \"%02d:%02d\"-\"%02d:%02d\"\n" 0 0 3 0 >> "$TMP1"
+
+check_decode UTC-2

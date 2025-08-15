@@ -34,9 +34,7 @@
         "type": "inet_proto",
         "handle": 0,
         "size": 65535,
-        "flags": [
-          "dynamic"
-        ]
+        "flags": "dynamic"
       }
     },
     {
@@ -47,9 +45,7 @@
         "type": "ipv4_addr",
         "handle": 0,
         "size": 65535,
-        "flags": [
-          "dynamic"
-        ]
+        "flags": "dynamic"
       }
     },
     {
@@ -60,9 +56,7 @@
         "type": "ipv4_addr",
         "handle": 0,
         "size": 1024,
-        "flags": [
-          "dynamic"
-        ]
+        "flags": "dynamic"
       }
     },
     {

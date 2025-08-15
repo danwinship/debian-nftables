@@ -2723,6 +2723,188 @@
     }
 ]
 
+# meta hour "01:01" drop
+[
+    {
+        "match": {
+            "left": {
+                "meta": {
+                    "key": "hour"
+                }
+            },
+            "op": "==",
+            "right": "01:01"
+        }
+    },
+    {
+        "drop": null
+    }
+]
+
+# meta hour "02:02" drop
+[
+    {
+        "match": {
+            "left": {
+                "meta": {
+                    "key": "hour"
+                }
+            },
+            "op": "==",
+            "right": "02:02"
+        }
+    },
+    {
+        "drop": null
+    }
+]
+
+# meta hour "03:03" drop
+[
+    {
+        "match": {
+            "left": {
+                "meta": {
+                    "key": "hour"
+                }
+            },
+            "op": "==",
+            "right": "03:03"
+        }
+    },
+    {
+        "drop": null
+    }
+]
+
+# meta hour "24:00" drop
+[
+    {
+        "match": {
+            "left": {
+                "meta": {
+                    "key": "hour"
+                }
+            },
+            "op": "==",
+            "right": "24:00"
+        }
+    },
+    {
+        "drop": null
+    }
+]
+
+# meta hour "23:59:60" drop
+[
+    {
+        "match": {
+            "left": {
+                "meta": {
+                    "key": "hour"
+                }
+            },
+            "op": "==",
+            "right": "23:59:60"
+        }
+    },
+    {
+        "drop": null
+    }
+]
+
+# meta hour "00:00"-"02:02" drop
+[
+    {
+        "match": {
+            "left": {
+                "meta": {
+                    "key": "hour"
+                }
+            },
+            "op": "in",
+            "right": {
+		"range": [
+		    "00:00",
+		    "02:02"
+		]
+	    }
+        }
+    },
+    {
+        "drop": null
+    }
+]
+
+# meta hour "01:01"-"03:03" drop
+[
+    {
+        "match": {
+            "left": {
+                "meta": {
+                    "key": "hour"
+                }
+            },
+            "op": "in",
+            "right": {
+		"range": [
+		    "01:01",
+		    "03:03"
+		]
+            }
+        }
+    },
+    {
+        "drop": null
+    }
+]
+
+# meta hour "02:02"-"04:04" drop
+[
+    {
+        "match": {
+            "left": {
+                "meta": {
+                    "key": "hour"
+                }
+            },
+            "op": "==",
+            "right": {
+                "range": [
+                    "02:02",
+                    "04:04"
+                ]
+            }
+        }
+    },
+    {
+        "drop": null
+    }
+]
+
+# meta hour "21:00"-"02:00" drop
+[
+    {
+        "match": {
+            "left": {
+                "meta": {
+                    "key": "hour"
+                }
+            },
+            "op": "in",
+            "right": {
+                "range": [
+                    "21:00",
+                    "02:00"
+                ]
+            }
+        }
+    },
+    {
+        "drop": null
+    }
+]
+
 # time < "2022-07-01 11:00:00" accept
 [
     {

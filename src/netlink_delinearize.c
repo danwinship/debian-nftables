@@ -605,7 +605,8 @@ static void netlink_parse_bitwise(struct netlink_parse_ctx *ctx,
 						   sreg, left);
 		break;
 	default:
-		BUG("invalid bitwise operation %u\n", op);
+		return netlink_error(ctx, loc,
+				     "Invalid bitwise operation %u", op);
 	}
 
 	dreg = netlink_parse_register(nle, NFTNL_EXPR_BITWISE_DREG);
@@ -616,6 +617,7 @@ static void netlink_parse_byteorder(struct netlink_parse_ctx *ctx,
 				    const struct location *loc,
 				    const struct nftnl_expr *nle)
 {
+	uint32_t opval = nftnl_expr_get_u32(nle, NFTNL_EXPR_BYTEORDER_OP);
 	enum nft_registers sreg, dreg;
 	struct expr *expr, *arg;
 	enum ops op;
@@ -627,7 +629,7 @@ static void netlink_parse_byteorder(struct netlink_parse_ctx *ctx,
 				     "Byteorder expression has no left "
 				     "hand side");
 
-	switch (nftnl_expr_get_u32(nle, NFTNL_EXPR_BYTEORDER_OP)) {
+	switch (opval) {
 	case NFT_BYTEORDER_NTOH:
 		op = OP_NTOH;
 		break;
@@ -635,8 +637,9 @@ static void netlink_parse_byteorder(struct netlink_parse_ctx *ctx,
 		op = OP_HTON;
 		break;
 	default:
-		BUG("invalid byteorder operation %u\n",
-		    nftnl_expr_get_u32(nle, NFTNL_EXPR_BYTEORDER_OP));
+		expr_free(arg);
+		return netlink_error(ctx, loc,
+				     "Invalid byteorder operation %u", opval);
 	}
 
 	expr = unary_expr_alloc(loc, op, arg);
@@ -733,8 +736,10 @@ static void netlink_parse_inner(struct netlink_parse_ctx *ctx,
 		expr->meta.inner_desc = inner_desc;
 		break;
 	default:
-		assert(0);
-		break;
+		netlink_error(ctx, loc, "Unsupported inner expression type %s",
+			      expr_ops(expr)->name);
+		expr_free(expr);
+		return;
 	}
 
 	netlink_set_register(ctx, ctx->inner_reg, expr);
@@ -2181,10 +2186,10 @@ static void payload_match_postprocess(struct rule_pp_ctx *ctx,
 
 			if (set_is_anonymous(set->flags) &&
 			    set->init &&
-			    !list_empty(&set->init->expressions)) {
+			    !list_empty(&expr_set(set->init)->expressions)) {
 				struct expr *elem;
 
-				elem = list_first_entry(&set->init->expressions, struct expr, list);
+				elem = list_first_entry(&expr_set(set->init)->expressions, struct expr, list);
 
 				if (elem->etype == EXPR_SET_ELEM &&
 				    elem->key->etype == EXPR_VALUE)
@@ -2471,7 +2476,7 @@ static void binop_adjust(const struct expr *binop, struct expr *right,
 		if (!set_is_anonymous(right->set->flags))
 			break;
 
-		list_for_each_entry(i, &right->set->init->expressions, list) {
+		list_for_each_entry(i, &expr_set(right->set->init)->expressions, list) {
 			switch (i->key->etype) {
 			case EXPR_VALUE:
 				binop_adjust_one(binop, i->key, shift);
@@ -2817,7 +2822,7 @@ static void expr_postprocess_concat(struct rule_pp_ctx *ctx, struct expr **exprp
 	assert(expr->etype == EXPR_CONCAT);
 
 	ctx->flags |= RULE_PP_IN_CONCATENATION;
-	list_for_each_entry_safe(i, n, &expr->expressions, list) {
+	list_for_each_entry_safe(i, n, &expr_concat(expr)->expressions, list) {
 		if (type) {
 			dtype = concat_subtype_lookup(type, --off);
 			expr_set_type(i, dtype, dtype->byteorder);
@@ -2829,7 +2834,7 @@ static void expr_postprocess_concat(struct rule_pp_ctx *ctx, struct expr **exprp
 		ntype = concat_subtype_add(ntype, i->dtype->type);
 	}
 	ctx->flags &= ~RULE_PP_IN_CONCATENATION;
-	list_splice(&tmp, &expr->expressions);
+	list_splice(&tmp, &expr_concat(expr)->expressions);
 	__datatype_set(expr, concat_type_alloc(ntype));
 }
 
@@ -2856,7 +2861,7 @@ static void expr_postprocess(struct rule_pp_ctx *ctx, struct expr **exprp)
 		expr_postprocess(ctx, &expr->right);
 		break;
 	case EXPR_SET:
-		list_for_each_entry(i, &expr->expressions, list)
+		list_for_each_entry(i, &expr_set(expr)->expressions, list)
 			expr_postprocess(ctx, &i);
 		break;
 	case EXPR_CONCAT:
@@ -3427,7 +3432,7 @@ static bool has_inner_desc(const struct expr *expr)
 	case EXPR_BINOP:
 		return has_inner_desc(expr->left);
 	case EXPR_CONCAT:
-		list_for_each_entry(i, &expr->expressions, list) {
+		list_for_each_entry(i, &expr_concat(expr)->expressions, list) {
 			if (has_inner_desc(i))
 				return true;
 		}

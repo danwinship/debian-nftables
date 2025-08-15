@@ -398,8 +398,9 @@ bool nft_cmd_collapse_elems(enum cmd_ops op, struct list_head *cmds,
 	    strcmp(last_cmd->handle.set.name, handle->set.name))
 		return false;
 
-	list_splice_tail_init(&init->expressions, &last_cmd->expr->expressions);
-	last_cmd->expr->size += init->size;
+	list_splice_tail_init(&expr_set(init)->expressions,
+			      &expr_set(last_cmd->expr)->expressions);
+	expr_set(last_cmd->expr)->size += expr_set(init)->size;
 
 	return true;
 }

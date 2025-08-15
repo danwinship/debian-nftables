@@ -2,7 +2,7 @@ table inet firewalld {
 	chain raw_PREROUTING {
 		type filter hook prerouting priority raw + 10; policy accept;
 		icmpv6 type { nd-router-advert, nd-neighbor-solicit } accept
-		meta nfproto ipv6 fib saddr . iif oif missing drop
+		meta nfproto ipv6 fib saddr . iif check missing drop
 		jump raw_PREROUTING_ZONES
 	}
 

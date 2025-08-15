@@ -66,9 +66,7 @@
         "type": "inet_service",
         "handle": 0,
         "map": "verdict",
-        "flags": [
-          "timeout"
-        ],
+        "flags": "timeout",
         "gc-interval": 10,
         "elem": [
           [
@@ -107,9 +105,7 @@
         },
         "handle": 0,
         "map": "verdict",
-        "flags": [
-          "timeout"
-        ],
+        "flags": "timeout",
         "gc-interval": 10,
         "elem": [
           [

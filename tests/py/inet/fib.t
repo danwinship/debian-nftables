@@ -13,5 +13,9 @@ fib daddr . iif type local;ok
 fib daddr . iif type vmap { blackhole : drop, prohibit : drop, unicast : accept };ok
 fib daddr . oif type local;fail
 
-fib daddr oif exists;ok
-fib daddr oif missing;ok
+fib daddr check missing;ok
+fib daddr oif exists;ok;fib daddr check exists
+
+fib daddr check vmap { missing : drop, exists : accept };ok
+
+meta mark set fib daddr check . ct mark map { exists . 0x00000000 : 0x00000001 };ok

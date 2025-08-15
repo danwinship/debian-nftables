@@ -49,9 +49,7 @@
         "type": "ipv4_addr",
         "handle": 0,
         "size": 1024,
-        "flags": [
-          "dynamic"
-        ]
+        "flags": "dynamic"
       }
     },
     {

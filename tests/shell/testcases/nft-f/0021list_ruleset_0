@@ -12,4 +12,9 @@ RULESET="table filter {
 list  ruleset
 "
 
-exec $NFT -f - <<< "$RULESET"
+$NFT -f - <<< "$RULESET"
+
+if [ "$NFT_TEST_HAVE_json" != n ]; then
+	$NFT flush ruleset
+	$NFT -j -f - <<< "$RULESET"
+fi

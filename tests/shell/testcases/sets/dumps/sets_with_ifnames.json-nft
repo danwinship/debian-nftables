@@ -71,9 +71,7 @@
         "table": "testifsets",
         "type": "ifname",
         "handle": 0,
-        "flags": [
-          "interval"
-        ],
+        "flags": "interval",
         "elem": [
           "abcdef*",
           "othername",
@@ -117,9 +115,7 @@
           "ifname"
         ],
         "handle": 0,
-        "flags": [
-          "interval"
-        ],
+        "flags": "interval",
         "elem": [
           {
             "concat": [
@@ -166,9 +162,7 @@
         "type": "ifname",
         "handle": 0,
         "map": "verdict",
-        "flags": [
-          "interval"
-        ],
+        "flags": "interval",
         "elem": [
           [
             "abcdef*",
