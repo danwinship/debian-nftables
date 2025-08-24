@@ -51,3 +51,7 @@ override_dh_installsystemd:
 
 override_dh_installexamples:
 	dh_installexamples -XMakefile
+
+ifneq (,$(filter nodoc,$(DEB_BUILD_OPTIONS)))
+override_dh_link:
+endif
