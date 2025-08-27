@@ -62,14 +62,10 @@ static int json_array_extend_new(json_t *array, json_t *other_array)
 
 static void json_add_array_new(json_t *obj, const char *name, json_t *array)
 {
-	if (json_array_size(array) > 1) {
+	if (json_array_size(array))
 		json_object_set_new(obj, name, array);
-	} else {
-		if (json_array_size(array))
-			json_object_set(obj, name,
-					json_array_get(array, 0));
+	else
 		json_decref(array);
-	}
 }
 
 static json_t *expr_print_json(const struct expr *expr, struct output_ctx *octx)
@@ -590,12 +586,21 @@ json_t *binop_expr_json(const struct expr *expr, struct output_ctx *octx)
 			 __binop_expr_json(expr->op, expr, octx));
 }
 
+/* Workaround to retain backwards compatibility in fib output. */
+#define __NFT_CTX_OUTPUT_RELATIONAL	(1 << 30)
+
 json_t *relational_expr_json(const struct expr *expr, struct output_ctx *octx)
 {
-	return nft_json_pack("{s:{s:s, s:o, s:o}}", "match",
-			 "op", expr_op_symbols[expr->op] ? : "in",
-			 "left", expr_print_json(expr->left, octx),
-			 "right", expr_print_json(expr->right, octx));
+	json_t *ret;
+
+	octx->flags |= __NFT_CTX_OUTPUT_RELATIONAL;
+	ret = nft_json_pack("{s:{s:s, s:o, s:o}}", "match",
+			    "op", expr_op_symbols[expr->op] ? : "in",
+			    "left", expr_print_json(expr->left, octx),
+			    "right", expr_print_json(expr->right, octx));
+	octx->flags &= ~__NFT_CTX_OUTPUT_RELATIONAL;
+
+	return ret;
 }
 
 json_t *range_expr_json(const struct expr *expr, struct output_ctx *octx)
@@ -944,9 +949,10 @@ json_t *fib_expr_json(const struct expr *expr, struct output_ctx *octx)
 {
 	const char *fib_flags[] = { "saddr", "daddr", "mark", "iif", "oif" };
 	unsigned int flags = expr->fib.flags & ~NFTA_FIB_F_PRESENT;
+	bool check = !(octx->flags & __NFT_CTX_OUTPUT_RELATIONAL);
 	json_t *root;
 
-	root = nft_json_pack("{s:s}", "result", fib_result_str(expr));
+	root = nft_json_pack("{s:s}", "result", fib_result_str(expr, check));
 
 	if (flags) {
 		json_t *tmp = json_array();

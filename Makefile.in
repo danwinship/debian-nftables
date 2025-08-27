@@ -136,9 +136,9 @@ am__aclocal_m4_deps = $(top_srcdir)/m4/gcc4_visibility.m4 \
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 DIST_COMMON = $(srcdir)/Makefile.am $(top_srcdir)/configure \
-	$(am__configure_deps) $(dist_pkgdoc_SCRIPTS) \
-	$(dist_pkgdata_DATA) $(dist_pkgsysconf_DATA) $(noinst_HEADERS) \
-	$(pkginclude_HEADERS) $(am__DIST_COMMON)
+	$(am__configure_deps) $(dist_example_SCRIPTS) $(dist_osf_DATA) \
+	$(dist_pkgdata_DATA) $(noinst_HEADERS) $(pkginclude_HEADERS) \
+	$(am__DIST_COMMON)
 am__CONFIG_DISTCLEAN_FILES = config.status config.cache config.log \
  configure.lineno config.status.lineno
 mkinstalldirs = $(install_sh) -d
@@ -146,10 +146,11 @@ CONFIG_HEADER = config.h
 CONFIG_CLEAN_FILES = libnftables.pc
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(sbindir)" "$(DESTDIR)$(libdir)" \
-	"$(DESTDIR)$(pkgdocdir)" "$(DESTDIR)$(man3dir)" \
+	"$(DESTDIR)$(exampledir)" "$(DESTDIR)$(man3dir)" \
 	"$(DESTDIR)$(man5dir)" "$(DESTDIR)$(man8dir)" \
-	"$(DESTDIR)$(pkgdatadir)" "$(DESTDIR)$(pkgsysconfdir)" \
-	"$(DESTDIR)$(pkgconfigdir)" "$(DESTDIR)$(pkgincludedir)"
+	"$(DESTDIR)$(osfdir)" "$(DESTDIR)$(pkgdatadir)" \
+	"$(DESTDIR)$(docdir)" "$(DESTDIR)$(pkgconfigdir)" \
+	"$(DESTDIR)$(unitdir)" "$(DESTDIR)$(pkgincludedir)"
 PROGRAMS = $(sbin_PROGRAMS)
 am__vpath_adj_setup = srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`;
 am__vpath_adj = case $$p in \
@@ -250,7 +251,7 @@ am__src_nft_SOURCES_DIST = src/main.c src/cli.c
 am_src_nft_OBJECTS = src/main.$(OBJEXT) $(am__objects_2)
 src_nft_OBJECTS = $(am_src_nft_OBJECTS)
 src_nft_DEPENDENCIES = src/libnftables.la
-SCRIPTS = $(dist_pkgdoc_SCRIPTS)
+SCRIPTS = $(dist_example_SCRIPTS)
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -348,8 +349,9 @@ man3dir = $(mandir)/man3
 man5dir = $(mandir)/man5
 man8dir = $(mandir)/man8
 NROFF = nroff
-MANS = $(dist_man_MANS)
-DATA = $(dist_pkgdata_DATA) $(dist_pkgsysconf_DATA) $(pkgconfig_DATA)
+MANS = $(dist_man_MANS) $(man_MANS)
+DATA = $(dist_osf_DATA) $(dist_pkgdata_DATA) $(doc_DATA) \
+	$(pkgconfig_DATA) $(unit_DATA)
 HEADERS = $(noinst_HEADERS) $(pkginclude_HEADERS)
 am__tagged_files = $(HEADERS) $(SOURCES) $(TAGS_FILES) $(LISP) \
 	config.h.in
@@ -538,6 +540,7 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
+unitdir = @unitdir@
 
 # This is _NOT_ the library release version, it's an API version.
 # Extracted from Chapter 6 "Library interface versions" of the libtool docs.
@@ -569,7 +572,8 @@ ACLOCAL_AMFLAGS = -I m4
 ###############################################################################
 EXTRA_DIST = $(am__append_13) py/pyproject.toml py/setup.cfg \
 	py/setup.py py/src/__init__.py py/src/nftables.py \
-	py/src/schema.json $(NULL) files tests $(NULL)
+	py/src/schema.json $(NULL) files tests \
+	tools/nftables.service.8 tools/nftables.service.in $(NULL)
 
 ###############################################################################
 BUILT_SOURCES = src/parser_bison.h
@@ -581,7 +585,7 @@ lib_LTLIBRARIES = src/libnftables.la
 # yacc and lex generate dirty code
 noinst_LTLIBRARIES = src/libparser.la $(am__append_6)
 dist_man_MANS = $(am__append_12)
-CLEANFILES = $(am__append_14)
+CLEANFILES = $(am__append_14) tools/nftables.service
 
 ###############################################################################
 pkginclude_HEADERS = \
@@ -774,21 +778,25 @@ dist_pkgdata_DATA = \
 	files/nftables/netdev-ingress.nft \
 	$(NULL)
 
-pkgdocdir = ${docdir}/examples
-dist_pkgdoc_SCRIPTS = \
+exampledir = ${docdir}/examples
+dist_example_SCRIPTS = \
 	files/examples/ct_helpers.nft \
 	files/examples/load_balancing.nft \
 	files/examples/secmark.nft \
 	files/examples/sets_and_maps.nft \
 	$(NULL)
 
-pkgsysconfdir = ${sysconfdir}/nftables/osf
-dist_pkgsysconf_DATA = \
+pkgsysconfdir = ${sysconfdir}/${PACKAGE}
+osfdir = ${pkgsysconfdir}/osf
+dist_osf_DATA = \
 	files/osf/pf.os \
 	$(NULL)
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = libnftables.pc
+unit_DATA = tools/nftables.service
+man_MANS = tools/nftables.service.8
+doc_DATA = files/nftables/main.nft
 all: $(BUILT_SOURCES) config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-am
 
@@ -1045,12 +1053,12 @@ src/cli.$(OBJEXT): src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
 src/nft$(EXEEXT): $(src_nft_OBJECTS) $(src_nft_DEPENDENCIES) $(EXTRA_src_nft_DEPENDENCIES) src/$(am__dirstamp)
 	@rm -f src/nft$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(src_nft_OBJECTS) $(src_nft_LDADD) $(LIBS)
-install-dist_pkgdocSCRIPTS: $(dist_pkgdoc_SCRIPTS)
+install-dist_exampleSCRIPTS: $(dist_example_SCRIPTS)
 	@$(NORMAL_INSTALL)
-	@list='$(dist_pkgdoc_SCRIPTS)'; test -n "$(pkgdocdir)" || list=; \
+	@list='$(dist_example_SCRIPTS)'; test -n "$(exampledir)" || list=; \
 	if test -n "$$list"; then \
-	  echo " $(MKDIR_P) '$(DESTDIR)$(pkgdocdir)'"; \
-	  $(MKDIR_P) "$(DESTDIR)$(pkgdocdir)" || exit 1; \
+	  echo " $(MKDIR_P) '$(DESTDIR)$(exampledir)'"; \
+	  $(MKDIR_P) "$(DESTDIR)$(exampledir)" || exit 1; \
 	fi; \
 	for p in $$list; do \
 	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
@@ -1069,17 +1077,17 @@ install-dist_pkgdocSCRIPTS: $(dist_pkgdoc_SCRIPTS)
 	while read type dir files; do \
 	     if test "$$dir" = .; then dir=; else dir=/$$dir; fi; \
 	     test -z "$$files" || { \
-	       echo " $(INSTALL_SCRIPT) $$files '$(DESTDIR)$(pkgdocdir)$$dir'"; \
-	       $(INSTALL_SCRIPT) $$files "$(DESTDIR)$(pkgdocdir)$$dir" || exit $$?; \
+	       echo " $(INSTALL_SCRIPT) $$files '$(DESTDIR)$(exampledir)$$dir'"; \
+	       $(INSTALL_SCRIPT) $$files "$(DESTDIR)$(exampledir)$$dir" || exit $$?; \
 	     } \
 	; done
 
-uninstall-dist_pkgdocSCRIPTS:
+uninstall-dist_exampleSCRIPTS:
 	@$(NORMAL_UNINSTALL)
-	@list='$(dist_pkgdoc_SCRIPTS)'; test -n "$(pkgdocdir)" || exit 0; \
+	@list='$(dist_example_SCRIPTS)'; test -n "$(exampledir)" || exit 0; \
 	files=`for p in $$list; do echo "$$p"; done | \
 	       sed -e 's,.*/,,;$(transform)'`; \
-	dir='$(DESTDIR)$(pkgdocdir)'; $(am__uninstall_files_from_dir)
+	dir='$(DESTDIR)$(exampledir)'; $(am__uninstall_files_from_dir)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -1212,10 +1220,10 @@ clean-libtool:
 
 distclean-libtool:
 	-rm -f libtool config.lt
-install-man3: $(dist_man_MANS)
+install-man3: $(dist_man_MANS) $(man_MANS)
 	@$(NORMAL_INSTALL)
 	@list1=''; \
-	list2='$(dist_man_MANS)'; \
+	list2='$(dist_man_MANS) $(man_MANS)'; \
 	test -n "$(man3dir)" \
 	  && test -n "`echo $$list1$$list2`" \
 	  || exit 0; \
@@ -1250,15 +1258,15 @@ uninstall-man3:
 	@$(NORMAL_UNINSTALL)
 	@list=''; test -n "$(man3dir)" || exit 0; \
 	files=`{ for i in $$list; do echo "$$i"; done; \
-	l2='$(dist_man_MANS)'; for i in $$l2; do echo "$$i"; done | \
+	l2='$(dist_man_MANS) $(man_MANS)'; for i in $$l2; do echo "$$i"; done | \
 	  sed -n '/\.3[a-z]*$$/p'; \
 	} | sed -e 's,.*/,,;h;s,.*\.,,;s,^[^3][0-9a-z]*$$,3,;x' \
 	      -e 's,\.[0-9a-z]*$$,,;$(transform);G;s,\n,.,'`; \
 	dir='$(DESTDIR)$(man3dir)'; $(am__uninstall_files_from_dir)
-install-man5: $(dist_man_MANS)
+install-man5: $(dist_man_MANS) $(man_MANS)
 	@$(NORMAL_INSTALL)
 	@list1=''; \
-	list2='$(dist_man_MANS)'; \
+	list2='$(dist_man_MANS) $(man_MANS)'; \
 	test -n "$(man5dir)" \
 	  && test -n "`echo $$list1$$list2`" \
 	  || exit 0; \
@@ -1293,15 +1301,15 @@ uninstall-man5:
 	@$(NORMAL_UNINSTALL)
 	@list=''; test -n "$(man5dir)" || exit 0; \
 	files=`{ for i in $$list; do echo "$$i"; done; \
-	l2='$(dist_man_MANS)'; for i in $$l2; do echo "$$i"; done | \
+	l2='$(dist_man_MANS) $(man_MANS)'; for i in $$l2; do echo "$$i"; done | \
 	  sed -n '/\.5[a-z]*$$/p'; \
 	} | sed -e 's,.*/,,;h;s,.*\.,,;s,^[^5][0-9a-z]*$$,5,;x' \
 	      -e 's,\.[0-9a-z]*$$,,;$(transform);G;s,\n,.,'`; \
 	dir='$(DESTDIR)$(man5dir)'; $(am__uninstall_files_from_dir)
-install-man8: $(dist_man_MANS)
+install-man8: $(dist_man_MANS) $(man_MANS)
 	@$(NORMAL_INSTALL)
 	@list1=''; \
-	list2='$(dist_man_MANS)'; \
+	list2='$(dist_man_MANS) $(man_MANS)'; \
 	test -n "$(man8dir)" \
 	  && test -n "`echo $$list1$$list2`" \
 	  || exit 0; \
@@ -1336,11 +1344,32 @@ uninstall-man8:
 	@$(NORMAL_UNINSTALL)
 	@list=''; test -n "$(man8dir)" || exit 0; \
 	files=`{ for i in $$list; do echo "$$i"; done; \
-	l2='$(dist_man_MANS)'; for i in $$l2; do echo "$$i"; done | \
+	l2='$(dist_man_MANS) $(man_MANS)'; for i in $$l2; do echo "$$i"; done | \
 	  sed -n '/\.8[a-z]*$$/p'; \
 	} | sed -e 's,.*/,,;h;s,.*\.,,;s,^[^8][0-9a-z]*$$,8,;x' \
 	      -e 's,\.[0-9a-z]*$$,,;$(transform);G;s,\n,.,'`; \
 	dir='$(DESTDIR)$(man8dir)'; $(am__uninstall_files_from_dir)
+install-dist_osfDATA: $(dist_osf_DATA)
+	@$(NORMAL_INSTALL)
+	@list='$(dist_osf_DATA)'; test -n "$(osfdir)" || list=; \
+	if test -n "$$list"; then \
+	  echo " $(MKDIR_P) '$(DESTDIR)$(osfdir)'"; \
+	  $(MKDIR_P) "$(DESTDIR)$(osfdir)" || exit 1; \
+	fi; \
+	for p in $$list; do \
+	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
+	  echo "$$d$$p"; \
+	done | $(am__base_list) | \
+	while read files; do \
+	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(osfdir)'"; \
+	  $(INSTALL_DATA) $$files "$(DESTDIR)$(osfdir)" || exit $$?; \
+	done
+
+uninstall-dist_osfDATA:
+	@$(NORMAL_UNINSTALL)
+	@list='$(dist_osf_DATA)'; test -n "$(osfdir)" || list=; \
+	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
+	dir='$(DESTDIR)$(osfdir)'; $(am__uninstall_files_from_dir)
 install-dist_pkgdataDATA: $(dist_pkgdata_DATA)
 	@$(NORMAL_INSTALL)
 	@list='$(dist_pkgdata_DATA)'; test -n "$(pkgdatadir)" || list=; \
@@ -1362,27 +1391,27 @@ uninstall-dist_pkgdataDATA:
 	@list='$(dist_pkgdata_DATA)'; test -n "$(pkgdatadir)" || list=; \
 	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
 	dir='$(DESTDIR)$(pkgdatadir)'; $(am__uninstall_files_from_dir)
-install-dist_pkgsysconfDATA: $(dist_pkgsysconf_DATA)
+install-docDATA: $(doc_DATA)
 	@$(NORMAL_INSTALL)
-	@list='$(dist_pkgsysconf_DATA)'; test -n "$(pkgsysconfdir)" || list=; \
+	@list='$(doc_DATA)'; test -n "$(docdir)" || list=; \
 	if test -n "$$list"; then \
-	  echo " $(MKDIR_P) '$(DESTDIR)$(pkgsysconfdir)'"; \
-	  $(MKDIR_P) "$(DESTDIR)$(pkgsysconfdir)" || exit 1; \
+	  echo " $(MKDIR_P) '$(DESTDIR)$(docdir)'"; \
+	  $(MKDIR_P) "$(DESTDIR)$(docdir)" || exit 1; \
 	fi; \
 	for p in $$list; do \
 	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
 	  echo "$$d$$p"; \
 	done | $(am__base_list) | \
 	while read files; do \
-	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(pkgsysconfdir)'"; \
-	  $(INSTALL_DATA) $$files "$(DESTDIR)$(pkgsysconfdir)" || exit $$?; \
+	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(docdir)'"; \
+	  $(INSTALL_DATA) $$files "$(DESTDIR)$(docdir)" || exit $$?; \
 	done
 
-uninstall-dist_pkgsysconfDATA:
+uninstall-docDATA:
 	@$(NORMAL_UNINSTALL)
-	@list='$(dist_pkgsysconf_DATA)'; test -n "$(pkgsysconfdir)" || list=; \
+	@list='$(doc_DATA)'; test -n "$(docdir)" || list=; \
 	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
-	dir='$(DESTDIR)$(pkgsysconfdir)'; $(am__uninstall_files_from_dir)
+	dir='$(DESTDIR)$(docdir)'; $(am__uninstall_files_from_dir)
 install-pkgconfigDATA: $(pkgconfig_DATA)
 	@$(NORMAL_INSTALL)
 	@list='$(pkgconfig_DATA)'; test -n "$(pkgconfigdir)" || list=; \
@@ -1404,6 +1433,27 @@ uninstall-pkgconfigDATA:
 	@list='$(pkgconfig_DATA)'; test -n "$(pkgconfigdir)" || list=; \
 	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
 	dir='$(DESTDIR)$(pkgconfigdir)'; $(am__uninstall_files_from_dir)
+install-unitDATA: $(unit_DATA)
+	@$(NORMAL_INSTALL)
+	@list='$(unit_DATA)'; test -n "$(unitdir)" || list=; \
+	if test -n "$$list"; then \
+	  echo " $(MKDIR_P) '$(DESTDIR)$(unitdir)'"; \
+	  $(MKDIR_P) "$(DESTDIR)$(unitdir)" || exit 1; \
+	fi; \
+	for p in $$list; do \
+	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
+	  echo "$$d$$p"; \
+	done | $(am__base_list) | \
+	while read files; do \
+	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(unitdir)'"; \
+	  $(INSTALL_DATA) $$files "$(DESTDIR)$(unitdir)" || exit $$?; \
+	done
+
+uninstall-unitDATA:
+	@$(NORMAL_UNINSTALL)
+	@list='$(unit_DATA)'; test -n "$(unitdir)" || list=; \
+	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
+	dir='$(DESTDIR)$(unitdir)'; $(am__uninstall_files_from_dir)
 install-pkgincludeHEADERS: $(pkginclude_HEADERS)
 	@$(NORMAL_INSTALL)
 	@list='$(pkginclude_HEADERS)'; test -n "$(pkgincludedir)" || list=; \
@@ -1666,7 +1716,7 @@ install-checkPROGRAMS: install-libLTLIBRARIES
 install-sbinPROGRAMS: install-libLTLIBRARIES
 
 installdirs:
-	for dir in "$(DESTDIR)$(sbindir)" "$(DESTDIR)$(libdir)" "$(DESTDIR)$(pkgdocdir)" "$(DESTDIR)$(man3dir)" "$(DESTDIR)$(man5dir)" "$(DESTDIR)$(man8dir)" "$(DESTDIR)$(pkgdatadir)" "$(DESTDIR)$(pkgsysconfdir)" "$(DESTDIR)$(pkgconfigdir)" "$(DESTDIR)$(pkgincludedir)"; do \
+	for dir in "$(DESTDIR)$(sbindir)" "$(DESTDIR)$(libdir)" "$(DESTDIR)$(exampledir)" "$(DESTDIR)$(man3dir)" "$(DESTDIR)$(man5dir)" "$(DESTDIR)$(man8dir)" "$(DESTDIR)$(osfdir)" "$(DESTDIR)$(pkgdatadir)" "$(DESTDIR)$(docdir)" "$(DESTDIR)$(pkgconfigdir)" "$(DESTDIR)$(unitdir)" "$(DESTDIR)$(pkgincludedir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
 install: $(BUILT_SOURCES)
@@ -1789,9 +1839,10 @@ info: info-am
 
 info-am:
 
-install-data-am: install-dist_pkgdataDATA install-dist_pkgdocSCRIPTS \
-	install-dist_pkgsysconfDATA install-man install-pkgconfigDATA \
-	install-pkgincludeHEADERS
+install-data-am: install-dist_exampleSCRIPTS install-dist_osfDATA \
+	install-dist_pkgdataDATA install-docDATA install-man \
+	install-pkgconfigDATA install-pkgincludeHEADERS \
+	install-unitDATA
 
 install-dvi: install-dvi-am
 
@@ -1892,10 +1943,11 @@ ps: ps-am
 
 ps-am:
 
-uninstall-am: uninstall-dist_pkgdataDATA uninstall-dist_pkgdocSCRIPTS \
-	uninstall-dist_pkgsysconfDATA uninstall-libLTLIBRARIES \
-	uninstall-man uninstall-pkgconfigDATA \
-	uninstall-pkgincludeHEADERS uninstall-sbinPROGRAMS
+uninstall-am: uninstall-dist_exampleSCRIPTS uninstall-dist_osfDATA \
+	uninstall-dist_pkgdataDATA uninstall-docDATA \
+	uninstall-libLTLIBRARIES uninstall-man uninstall-pkgconfigDATA \
+	uninstall-pkgincludeHEADERS uninstall-sbinPROGRAMS \
+	uninstall-unitDATA
 
 uninstall-man: uninstall-man3 uninstall-man5 uninstall-man8
 
@@ -1912,21 +1964,24 @@ uninstall-man: uninstall-man3 uninstall-man5 uninstall-man8
 	distclean-libtool distclean-tags distcleancheck distdir \
 	distuninstallcheck dvi dvi-am html html-am info info-am \
 	install install-am install-data install-data-am \
-	install-dist_pkgdataDATA install-dist_pkgdocSCRIPTS \
-	install-dist_pkgsysconfDATA install-dvi install-dvi-am \
-	install-exec install-exec-am install-html install-html-am \
-	install-info install-info-am install-libLTLIBRARIES \
-	install-man install-man3 install-man5 install-man8 install-pdf \
-	install-pdf-am install-pkgconfigDATA install-pkgincludeHEADERS \
-	install-ps install-ps-am install-sbinPROGRAMS install-strip \
+	install-dist_exampleSCRIPTS install-dist_osfDATA \
+	install-dist_pkgdataDATA install-docDATA install-dvi \
+	install-dvi-am install-exec install-exec-am install-html \
+	install-html-am install-info install-info-am \
+	install-libLTLIBRARIES install-man install-man3 install-man5 \
+	install-man8 install-pdf install-pdf-am install-pkgconfigDATA \
+	install-pkgincludeHEADERS install-ps install-ps-am \
+	install-sbinPROGRAMS install-strip install-unitDATA \
 	installcheck installcheck-am installdirs maintainer-clean \
 	maintainer-clean-generic mostlyclean mostlyclean-compile \
 	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
-	tags tags-am uninstall uninstall-am uninstall-dist_pkgdataDATA \
-	uninstall-dist_pkgdocSCRIPTS uninstall-dist_pkgsysconfDATA \
+	tags tags-am uninstall uninstall-am \
+	uninstall-dist_exampleSCRIPTS uninstall-dist_osfDATA \
+	uninstall-dist_pkgdataDATA uninstall-docDATA \
 	uninstall-libLTLIBRARIES uninstall-man uninstall-man3 \
 	uninstall-man5 uninstall-man8 uninstall-pkgconfigDATA \
-	uninstall-pkgincludeHEADERS uninstall-sbinPROGRAMS
+	uninstall-pkgincludeHEADERS uninstall-sbinPROGRAMS \
+	uninstall-unitDATA
 
 .PRECIOUS: Makefile
 
@@ -1940,6 +1995,10 @@ uninstall-man: uninstall-man3 uninstall-man5 uninstall-man8
 
 @BUILD_MAN_TRUE@.adoc.5:
 @BUILD_MAN_TRUE@	$(AM_V_GEN)$(A2X) $(A2X_OPTS_MANPAGE) $<
+
+tools/nftables.service: tools/nftables.service.in ${top_builddir}/config.status
+	${AM_V_GEN}${MKDIR_P} tools
+	${AM_V_at}sed -e 's|@''sbindir''@|${sbindir}|g;s|@''pkgsysconfdir''@|${pkgsysconfdir}|g' <${srcdir}/tools/nftables.service.in >$@
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

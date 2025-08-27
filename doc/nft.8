@@ -2,12 +2,12 @@
 .\"     Title: nft
 .\"    Author: [see the "AUTHORS" section]
 .\" Generator: DocBook XSL Stylesheets vsnapshot <http://docbook.sf.net/>
-.\"      Date: 08/06/2025
+.\"      Date: 08/27/2025
 .\"    Manual: \ \&
 .\"    Source: \ \&
 .\"  Language: English
 .\"
-.TH "NFT" "8" "08/06/2025" "\ \&" "\ \&"
+.TH "NFT" "8" "08/27/2025" "\ \&" "\ \&"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -8810,6 +8810,8 @@ When used in the inet family (available with kernel 5\&.2), the dnat and snat st
 Before kernel 4\&.18 nat statements require both prerouting and postrouting base chains to be present since otherwise packets on the return path won\(cqt be seen by netfilter and therefore no reverse translation will take place\&.
 .sp
 The optional \fBprefix\fR keyword allows to map \fBn\fR source addresses to \fBn\fR destination addresses\&. See \fIAdvanced NAT examples\fR below\&.
+.sp
+If the \fIaddress\fR for \fBdnat\fR is an IPv4 loopback address (i\&.e\&. 127\&.0\&.0\&.0/8) the "net\&.ipv4\&.conf\&.*\&.route_localnet" sysctl for the input interface needs to be set to 1\&. Otherwise packets will be dropped by the routing code as "martians"\&.
 .sp
 .it 1 an-trap
 .nr an-no-space-flag 1

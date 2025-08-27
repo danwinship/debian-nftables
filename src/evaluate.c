@@ -2578,16 +2578,20 @@ static int binop_can_transfer(struct eval_ctx *ctx,
 
 	switch (left->op) {
 	case OP_LSHIFT:
+		assert(left->right->etype == EXPR_VALUE);
+		assert(right->etype == EXPR_VALUE);
+
 		if (mpz_scan1(right->value, 0) < mpz_get_uint32(left->right->value))
 			return expr_binary_error(ctx->msgs, right, left,
 						 "Comparison is always false");
 		return 1;
 	case OP_RSHIFT:
+		assert(left->right->etype == EXPR_VALUE);
 		if (ctx->ectx.len < right->len + mpz_get_uint32(left->right->value))
 			ctx->ectx.len += mpz_get_uint32(left->right->value);
 		return 1;
 	case OP_XOR:
-		return 1;
+		return expr_is_constant(left->right);
 	default:
 		return 0;
 	}
@@ -4592,7 +4596,7 @@ static int rule_evaluate(struct eval_ctx *ctx, struct rule *rule,
 
 static int stmt_evaluate_chain(struct eval_ctx *ctx, struct stmt *stmt)
 {
-	struct chain *chain = stmt->chain.chain;
+	struct chain *chain = chain_get(stmt->chain.chain);
 	struct cmd *cmd;
 
 	chain->flags |= CHAIN_F_BINDING;
@@ -5772,18 +5776,21 @@ static int chain_evaluate(struct eval_ctx *ctx, struct chain *chain)
 	}
 
 	if (chain->flags & CHAIN_F_BASECHAIN) {
-		chain->hook.num = str2hooknum(chain->handle.family,
-					      chain->hook.name);
-		if (chain->hook.num == NF_INET_NUMHOOKS)
-			return __stmt_binary_error(ctx, &chain->hook.loc, NULL,
-						   "The %s family does not support this hook",
-						   family2str(chain->handle.family));
-
-		if (!evaluate_priority(ctx, &chain->priority,
-				       chain->handle.family, chain->hook.num))
-			return __stmt_binary_error(ctx, &chain->priority.loc, NULL,
-						   "invalid priority expression %s in this context.",
-						   expr_name(chain->priority.expr));
+		if (chain->hook.name) {
+			chain->hook.num = str2hooknum(chain->handle.family,
+						      chain->hook.name);
+			if (chain->hook.num == NF_INET_NUMHOOKS)
+				return __stmt_binary_error(ctx, &chain->hook.loc, NULL,
+							   "The %s family does not support this hook",
+							   family2str(chain->handle.family));
+		}
+		if (chain->priority.expr) {
+			if (!evaluate_priority(ctx, &chain->priority,
+					       chain->handle.family, chain->hook.num))
+				return __stmt_binary_error(ctx, &chain->priority.loc, NULL,
+							   "invalid priority expression %s in this context.",
+							   expr_name(chain->priority.expr));
+		}
 		if (chain->policy) {
 			expr_set_context(&ctx->ectx, &policy_type,
 					 NFT_NAME_MAXLEN * BITS_PER_BYTE);

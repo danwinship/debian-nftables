@@ -2413,103 +2413,103 @@ static const yytype_int16 yyrline[] =
     2630,  2631,  2632,  2636,  2646,  2647,  2648,  2649,  2653,  2663,
     2664,  2665,  2666,  2670,  2680,  2681,  2682,  2683,  2684,  2687,
     2723,  2730,  2734,  2737,  2747,  2754,  2765,  2778,  2793,  2794,
-    2797,  2808,  2814,  2818,  2821,  2827,  2840,  2845,  2854,  2855,
-    2858,  2859,  2862,  2863,  2864,  2867,  2883,  2884,  2887,  2888,
-    2891,  2892,  2893,  2894,  2895,  2896,  2899,  2908,  2917,  2925,
-    2933,  2941,  2949,  2957,  2965,  2973,  2981,  2989,  2997,  3005,
-    3013,  3021,  3029,  3037,  3041,  3046,  3054,  3061,  3068,  3082,
-    3086,  3093,  3097,  3103,  3115,  3121,  3128,  3134,  3141,  3149,
-    3157,  3165,  3173,  3180,  3188,  3189,  3190,  3191,  3192,  3195,
-    3196,  3197,  3198,  3199,  3202,  3203,  3204,  3205,  3206,  3207,
-    3208,  3209,  3210,  3211,  3212,  3213,  3214,  3215,  3216,  3217,
-    3218,  3219,  3220,  3221,  3222,  3223,  3224,  3227,  3238,  3239,
-    3242,  3251,  3255,  3261,  3267,  3272,  3275,  3280,  3285,  3288,
-    3294,  3300,  3303,  3309,  3318,  3319,  3321,  3327,  3331,  3334,
-    3339,  3346,  3352,  3353,  3356,  3357,  3368,  3369,  3372,  3378,
-    3382,  3385,  3402,  3407,  3412,  3417,  3422,  3428,  3458,  3462,
-    3466,  3470,  3474,  3480,  3484,  3487,  3491,  3497,  3503,  3506,
-    3524,  3539,  3540,  3541,  3544,  3545,  3548,  3549,  3564,  3570,
-    3573,  3594,  3595,  3596,  3599,  3600,  3603,  3610,  3611,  3614,
-    3628,  3635,  3636,  3651,  3652,  3653,  3654,  3655,  3658,  3661,
-    3667,  3673,  3677,  3681,  3688,  3695,  3702,  3709,  3715,  3721,
-    3727,  3730,  3731,  3734,  3740,  3746,  3752,  3759,  3766,  3774,
-    3775,  3778,  3784,  3788,  3791,  3796,  3801,  3805,  3811,  3827,
-    3846,  3852,  3853,  3859,  3860,  3866,  3867,  3868,  3869,  3870,
-    3871,  3872,  3873,  3874,  3875,  3876,  3877,  3878,  3879,  3882,
-    3883,  3887,  3893,  3894,  3900,  3901,  3907,  3908,  3914,  3917,
-    3918,  3929,  3930,  3933,  3937,  3940,  3946,  3952,  3953,  3956,
-    3957,  3958,  3961,  3965,  3969,  3974,  3979,  3984,  3990,  3994,
-    3998,  4002,  4008,  4013,  4017,  4025,  4034,  4035,  4038,  4041,
-    4045,  4050,  4056,  4057,  4060,  4063,  4067,  4071,  4075,  4080,
-    4087,  4092,  4100,  4105,  4114,  4115,  4121,  4122,  4123,  4126,
-    4127,  4131,  4135,  4141,  4142,  4145,  4151,  4155,  4158,  4163,
-    4169,  4170,  4173,  4174,  4175,  4181,  4182,  4183,  4184,  4187,
-    4188,  4194,  4195,  4198,  4199,  4202,  4208,  4215,  4222,  4233,
-    4234,  4235,  4238,  4246,  4258,  4267,  4278,  4284,  4310,  4311,
-    4320,  4321,  4324,  4333,  4344,  4345,  4346,  4347,  4348,  4349,
-    4350,  4351,  4352,  4353,  4354,  4355,  4358,  4359,  4360,  4361,
-    4364,  4394,  4395,  4396,  4397,  4400,  4401,  4402,  4403,  4404,
-    4407,  4411,  4414,  4418,  4425,  4428,  4444,  4445,  4449,  4455,
-    4456,  4462,  4463,  4469,  4470,  4476,  4479,  4480,  4491,  4497,
-    4510,  4511,  4514,  4520,  4521,  4522,  4525,  4532,  4537,  4542,
-    4545,  4549,  4553,  4559,  4560,  4567,  4573,  4574,  4575,  4583,
-    4584,  4587,  4593,  4599,  4603,  4606,  4627,  4631,  4635,  4645,
-    4649,  4652,  4658,  4665,  4666,  4667,  4668,  4669,  4672,  4676,
-    4680,  4690,  4693,  4694,  4697,  4698,  4699,  4700,  4711,  4722,
-    4728,  4749,  4755,  4772,  4778,  4779,  4780,  4783,  4784,  4785,
-    4788,  4789,  4792,  4815,  4821,  4827,  4834,  4847,  4855,  4863,
-    4869,  4873,  4877,  4881,  4885,  4892,  4897,  4908,  4922,  4928,
-    4932,  4936,  4943,  4951,  4958,  4966,  4970,  4976,  4982,  4990,
-    4991,  4992,  4995,  4996,  5000,  5006,  5007,  5013,  5014,  5020,
-    5021,  5027,  5030,  5031,  5032,  5041,  5052,  5053,  5056,  5064,
-    5065,  5066,  5067,  5068,  5069,  5070,  5071,  5072,  5073,  5074,
-    5075,  5076,  5077,  5080,  5081,  5082,  5083,  5084,  5091,  5098,
-    5105,  5112,  5119,  5126,  5133,  5140,  5147,  5154,  5161,  5168,
-    5175,  5178,  5179,  5180,  5181,  5182,  5183,  5184,  5187,  5191,
-    5195,  5199,  5203,  5207,  5213,  5214,  5224,  5228,  5232,  5248,
-    5249,  5252,  5253,  5254,  5255,  5256,  5259,  5260,  5261,  5262,
-    5263,  5264,  5265,  5266,  5267,  5268,  5269,  5270,  5271,  5272,
-    5273,  5274,  5275,  5276,  5277,  5278,  5279,  5280,  5281,  5282,
-    5285,  5305,  5309,  5324,  5328,  5332,  5338,  5342,  5348,  5349,
-    5350,  5353,  5354,  5357,  5358,  5361,  5367,  5368,  5371,  5372,
-    5375,  5376,  5379,  5380,  5383,  5391,  5418,  5423,  5428,  5434,
-    5435,  5438,  5442,  5462,  5463,  5464,  5465,  5468,  5472,  5476,
-    5482,  5483,  5486,  5487,  5488,  5489,  5490,  5491,  5492,  5493,
-    5494,  5495,  5496,  5497,  5498,  5499,  5500,  5501,  5502,  5505,
-    5506,  5507,  5508,  5509,  5510,  5511,  5514,  5515,  5516,  5517,
-    5520,  5521,  5522,  5523,  5526,  5527,  5530,  5536,  5544,  5557,
-    5563,  5572,  5573,  5574,  5575,  5576,  5577,  5578,  5579,  5580,
-    5581,  5582,  5583,  5584,  5585,  5586,  5587,  5588,  5589,  5590,
-    5591,  5592,  5593,  5596,  5614,  5623,  5624,  5625,  5626,  5639,
-    5645,  5646,  5647,  5650,  5656,  5657,  5658,  5659,  5660,  5663,
-    5669,  5670,  5671,  5672,  5673,  5674,  5675,  5676,  5677,  5680,
-    5684,  5695,  5702,  5703,  5704,  5705,  5706,  5707,  5708,  5709,
-    5710,  5711,  5712,  5713,  5716,  5717,  5718,  5719,  5722,  5723,
-    5724,  5725,  5726,  5729,  5735,  5736,  5737,  5738,  5739,  5740,
-    5741,  5744,  5750,  5751,  5752,  5753,  5756,  5762,  5763,  5764,
-    5765,  5766,  5767,  5768,  5769,  5770,  5772,  5778,  5779,  5780,
-    5781,  5782,  5783,  5784,  5785,  5786,  5787,  5790,  5796,  5797,
-    5798,  5799,  5800,  5803,  5809,  5810,  5813,  5819,  5820,  5821,
-    5824,  5830,  5831,  5832,  5833,  5836,  5842,  5843,  5844,  5845,
-    5848,  5852,  5857,  5865,  5872,  5873,  5874,  5875,  5876,  5877,
-    5878,  5879,  5880,  5881,  5882,  5883,  5884,  5885,  5888,  5889,
-    5890,  5893,  5894,  5897,  5905,  5913,  5914,  5917,  5925,  5933,
-    5934,  5937,  5941,  5948,  5949,  5950,  5953,  5960,  5967,  5968,
-    5969,  5970,  5971,  5972,  5973,  5974,  5975,  5976,  5979,  5984,
-    5989,  5994,  5999,  6004,  6011,  6012,  6013,  6014,  6015,  6018,
-    6019,  6020,  6021,  6022,  6023,  6024,  6025,  6026,  6027,  6028,
-    6029,  6038,  6039,  6042,  6045,  6046,  6049,  6052,  6055,  6059,
-    6070,  6071,  6072,  6075,  6076,  6077,  6078,  6079,  6080,  6081,
-    6082,  6083,  6084,  6085,  6086,  6087,  6088,  6089,  6090,  6091,
-    6092,  6095,  6096,  6097,  6100,  6101,  6102,  6103,  6106,  6107,
-    6108,  6109,  6110,  6113,  6114,  6115,  6116,  6119,  6124,  6128,
-    6132,  6136,  6140,  6144,  6149,  6154,  6159,  6164,  6169,  6176,
-    6180,  6186,  6187,  6188,  6189,  6192,  6200,  6201,  6204,  6205,
-    6206,  6207,  6208,  6209,  6210,  6211,  6214,  6220,  6221,  6224,
-    6230,  6231,  6232,  6233,  6236,  6242,  6248,  6254,  6257,  6263,
-    6264,  6265,  6266,  6272,  6278,  6279,  6280,  6281,  6282,  6283,
-    6286,  6292,  6293,  6296,  6302,  6303,  6304,  6305,  6306,  6309,
-    6323,  6324,  6325,  6326,  6327
+    2797,  2808,  2814,  2818,  2821,  2827,  2841,  2846,  2855,  2856,
+    2859,  2860,  2863,  2864,  2865,  2868,  2884,  2885,  2888,  2889,
+    2892,  2893,  2894,  2895,  2896,  2897,  2900,  2909,  2918,  2926,
+    2934,  2942,  2950,  2958,  2966,  2974,  2982,  2990,  2998,  3006,
+    3014,  3022,  3030,  3038,  3042,  3047,  3055,  3062,  3069,  3083,
+    3087,  3094,  3098,  3104,  3116,  3122,  3129,  3135,  3142,  3150,
+    3158,  3166,  3174,  3181,  3189,  3190,  3191,  3192,  3193,  3196,
+    3197,  3198,  3199,  3200,  3203,  3204,  3205,  3206,  3207,  3208,
+    3209,  3210,  3211,  3212,  3213,  3214,  3215,  3216,  3217,  3218,
+    3219,  3220,  3221,  3222,  3223,  3224,  3225,  3228,  3239,  3240,
+    3243,  3252,  3256,  3262,  3268,  3273,  3276,  3281,  3286,  3289,
+    3295,  3301,  3304,  3310,  3319,  3320,  3322,  3328,  3332,  3335,
+    3340,  3347,  3353,  3354,  3357,  3358,  3369,  3370,  3373,  3379,
+    3383,  3386,  3403,  3408,  3413,  3418,  3423,  3429,  3459,  3463,
+    3467,  3471,  3475,  3481,  3485,  3488,  3492,  3498,  3504,  3507,
+    3525,  3540,  3541,  3542,  3545,  3546,  3549,  3550,  3565,  3571,
+    3574,  3595,  3596,  3597,  3600,  3601,  3604,  3611,  3612,  3615,
+    3629,  3636,  3637,  3652,  3653,  3654,  3655,  3656,  3659,  3662,
+    3668,  3674,  3678,  3682,  3689,  3696,  3703,  3710,  3716,  3722,
+    3728,  3731,  3732,  3735,  3741,  3747,  3753,  3760,  3767,  3775,
+    3776,  3779,  3785,  3789,  3792,  3797,  3802,  3806,  3812,  3828,
+    3847,  3853,  3854,  3860,  3861,  3867,  3868,  3869,  3870,  3871,
+    3872,  3873,  3874,  3875,  3876,  3877,  3878,  3879,  3880,  3883,
+    3884,  3888,  3894,  3895,  3901,  3902,  3908,  3909,  3915,  3918,
+    3919,  3930,  3931,  3934,  3938,  3941,  3947,  3953,  3954,  3957,
+    3958,  3959,  3962,  3966,  3970,  3975,  3980,  3985,  3991,  3995,
+    3999,  4003,  4009,  4014,  4018,  4026,  4035,  4036,  4039,  4042,
+    4046,  4051,  4057,  4058,  4061,  4064,  4068,  4072,  4076,  4081,
+    4088,  4093,  4101,  4106,  4115,  4116,  4122,  4123,  4124,  4127,
+    4128,  4132,  4136,  4142,  4143,  4146,  4152,  4156,  4159,  4164,
+    4170,  4171,  4174,  4175,  4176,  4182,  4183,  4184,  4185,  4188,
+    4189,  4195,  4196,  4199,  4200,  4203,  4209,  4216,  4223,  4234,
+    4235,  4236,  4239,  4247,  4259,  4268,  4279,  4285,  4311,  4312,
+    4321,  4322,  4325,  4334,  4345,  4346,  4347,  4348,  4349,  4350,
+    4351,  4352,  4353,  4354,  4355,  4356,  4359,  4360,  4361,  4362,
+    4365,  4395,  4396,  4397,  4398,  4401,  4402,  4403,  4404,  4405,
+    4408,  4412,  4415,  4419,  4426,  4429,  4445,  4446,  4450,  4456,
+    4457,  4463,  4464,  4470,  4471,  4477,  4480,  4481,  4492,  4498,
+    4511,  4512,  4515,  4521,  4522,  4523,  4526,  4533,  4538,  4543,
+    4546,  4550,  4554,  4560,  4561,  4568,  4574,  4575,  4576,  4584,
+    4585,  4588,  4594,  4600,  4604,  4607,  4628,  4632,  4636,  4646,
+    4650,  4653,  4659,  4666,  4667,  4668,  4669,  4670,  4673,  4677,
+    4681,  4691,  4694,  4695,  4698,  4699,  4700,  4701,  4712,  4723,
+    4729,  4750,  4756,  4773,  4779,  4780,  4781,  4784,  4785,  4786,
+    4789,  4790,  4793,  4816,  4822,  4828,  4835,  4848,  4856,  4864,
+    4870,  4874,  4878,  4882,  4886,  4893,  4898,  4909,  4923,  4929,
+    4933,  4937,  4944,  4952,  4959,  4967,  4971,  4977,  4983,  4991,
+    4992,  4993,  4996,  4997,  5001,  5007,  5008,  5014,  5015,  5021,
+    5022,  5028,  5031,  5032,  5033,  5042,  5053,  5054,  5057,  5065,
+    5066,  5067,  5068,  5069,  5070,  5071,  5072,  5073,  5074,  5075,
+    5076,  5077,  5078,  5081,  5082,  5083,  5084,  5085,  5092,  5099,
+    5106,  5113,  5120,  5127,  5134,  5141,  5148,  5155,  5162,  5169,
+    5176,  5179,  5180,  5181,  5182,  5183,  5184,  5185,  5188,  5192,
+    5196,  5200,  5204,  5208,  5214,  5215,  5225,  5229,  5233,  5249,
+    5250,  5253,  5254,  5255,  5256,  5257,  5260,  5261,  5262,  5263,
+    5264,  5265,  5266,  5267,  5268,  5269,  5270,  5271,  5272,  5273,
+    5274,  5275,  5276,  5277,  5278,  5279,  5280,  5281,  5282,  5283,
+    5286,  5306,  5310,  5325,  5329,  5333,  5339,  5343,  5349,  5350,
+    5351,  5354,  5355,  5358,  5359,  5362,  5368,  5369,  5372,  5373,
+    5376,  5377,  5380,  5381,  5384,  5392,  5419,  5424,  5429,  5435,
+    5436,  5439,  5443,  5463,  5464,  5465,  5466,  5469,  5473,  5477,
+    5483,  5484,  5487,  5488,  5489,  5490,  5491,  5492,  5493,  5494,
+    5495,  5496,  5497,  5498,  5499,  5500,  5501,  5502,  5503,  5506,
+    5507,  5508,  5509,  5510,  5511,  5512,  5515,  5516,  5517,  5518,
+    5521,  5522,  5523,  5524,  5527,  5528,  5531,  5537,  5545,  5558,
+    5564,  5573,  5574,  5575,  5576,  5577,  5578,  5579,  5580,  5581,
+    5582,  5583,  5584,  5585,  5586,  5587,  5588,  5589,  5590,  5591,
+    5592,  5593,  5594,  5597,  5615,  5624,  5625,  5626,  5627,  5640,
+    5646,  5647,  5648,  5651,  5657,  5658,  5659,  5660,  5661,  5664,
+    5670,  5671,  5672,  5673,  5674,  5675,  5676,  5677,  5678,  5681,
+    5685,  5696,  5703,  5704,  5705,  5706,  5707,  5708,  5709,  5710,
+    5711,  5712,  5713,  5714,  5717,  5718,  5719,  5720,  5723,  5724,
+    5725,  5726,  5727,  5730,  5736,  5737,  5738,  5739,  5740,  5741,
+    5742,  5745,  5751,  5752,  5753,  5754,  5757,  5763,  5764,  5765,
+    5766,  5767,  5768,  5769,  5770,  5771,  5773,  5779,  5780,  5781,
+    5782,  5783,  5784,  5785,  5786,  5787,  5788,  5791,  5797,  5798,
+    5799,  5800,  5801,  5804,  5810,  5811,  5814,  5820,  5821,  5822,
+    5825,  5831,  5832,  5833,  5834,  5837,  5843,  5844,  5845,  5846,
+    5849,  5853,  5858,  5866,  5873,  5874,  5875,  5876,  5877,  5878,
+    5879,  5880,  5881,  5882,  5883,  5884,  5885,  5886,  5889,  5890,
+    5891,  5894,  5895,  5898,  5906,  5914,  5915,  5918,  5926,  5934,
+    5935,  5938,  5942,  5949,  5950,  5951,  5954,  5961,  5968,  5969,
+    5970,  5971,  5972,  5973,  5974,  5975,  5976,  5977,  5980,  5985,
+    5990,  5995,  6000,  6005,  6012,  6013,  6014,  6015,  6016,  6019,
+    6020,  6021,  6022,  6023,  6024,  6025,  6026,  6027,  6028,  6029,
+    6030,  6039,  6040,  6043,  6046,  6047,  6050,  6053,  6056,  6060,
+    6071,  6072,  6073,  6076,  6077,  6078,  6079,  6080,  6081,  6082,
+    6083,  6084,  6085,  6086,  6087,  6088,  6089,  6090,  6091,  6092,
+    6093,  6096,  6097,  6098,  6101,  6102,  6103,  6104,  6107,  6108,
+    6109,  6110,  6111,  6114,  6115,  6116,  6117,  6120,  6125,  6129,
+    6133,  6137,  6141,  6145,  6150,  6155,  6160,  6165,  6170,  6177,
+    6181,  6187,  6188,  6189,  6190,  6193,  6201,  6202,  6205,  6206,
+    6207,  6208,  6209,  6210,  6211,  6212,  6215,  6221,  6222,  6225,
+    6231,  6232,  6233,  6234,  6237,  6243,  6249,  6255,  6258,  6264,
+    6265,  6266,  6267,  6273,  6279,  6280,  6281,  6282,  6283,  6284,
+    6287,  6293,  6294,  6297,  6303,  6304,  6305,  6306,  6307,  6310,
+    6324,  6325,  6326,  6327,  6328
 };
 #endif
 
@@ -11299,50 +11299,51 @@ yyreduce:
 				}
 				(yyvsp[-3].chain)->policy		= (yyvsp[-1].expr);
 				(yyvsp[-3].chain)->policy->location	= (yyloc);
+				(yyvsp[-3].chain)->flags		|= CHAIN_F_BASECHAIN;
 			}
-#line 11304 "src/parser_bison.c"
+#line 11305 "src/parser_bison.c"
     break;
 
   case 426: /* policy_expr: variable_expr  */
-#line 2841 "src/parser_bison.y"
+#line 2842 "src/parser_bison.y"
                         {
 				datatype_set((yyvsp[0].expr)->sym->expr, &policy_type);
 				(yyval.expr) = (yyvsp[0].expr);
 			}
-#line 11313 "src/parser_bison.c"
+#line 11314 "src/parser_bison.c"
     break;
 
   case 427: /* policy_expr: chain_policy  */
-#line 2846 "src/parser_bison.y"
+#line 2847 "src/parser_bison.y"
                         {
 				(yyval.expr) = constant_expr_alloc(&(yyloc), &integer_type,
 							 BYTEORDER_HOST_ENDIAN,
 							 sizeof(int) *
 							 BITS_PER_BYTE, &(yyvsp[0].val32));
 			}
-#line 11324 "src/parser_bison.c"
+#line 11325 "src/parser_bison.c"
     break;
 
   case 428: /* chain_policy: "accept"  */
-#line 2854 "src/parser_bison.y"
+#line 2855 "src/parser_bison.y"
                                                 { (yyval.val32) = NF_ACCEPT; }
-#line 11330 "src/parser_bison.c"
+#line 11331 "src/parser_bison.c"
     break;
 
   case 429: /* chain_policy: "drop"  */
-#line 2855 "src/parser_bison.y"
+#line 2856 "src/parser_bison.y"
                                                 { (yyval.val32) = NF_DROP;   }
-#line 11336 "src/parser_bison.c"
+#line 11337 "src/parser_bison.c"
     break;
 
   case 431: /* identifier: "last"  */
-#line 2859 "src/parser_bison.y"
+#line 2860 "src/parser_bison.y"
                                                 { (yyval.string) = xstrdup("last"); }
-#line 11342 "src/parser_bison.c"
+#line 11343 "src/parser_bison.c"
     break;
 
   case 435: /* time_spec: "string"  */
-#line 2868 "src/parser_bison.y"
+#line 2869 "src/parser_bison.y"
                         {
 				struct error_record *erec;
 				uint64_t res;
@@ -11355,248 +11356,248 @@ yyreduce:
 				}
 				(yyval.val) = res;
 			}
-#line 11359 "src/parser_bison.c"
+#line 11360 "src/parser_bison.c"
     break;
 
   case 437: /* time_spec_or_num_s: time_spec  */
-#line 2884 "src/parser_bison.y"
+#line 2885 "src/parser_bison.y"
                                           { (yyval.val) = (yyvsp[0].val) / 1000u; }
-#line 11365 "src/parser_bison.c"
+#line 11366 "src/parser_bison.c"
     break;
 
   case 438: /* family_spec: %empty  */
-#line 2887 "src/parser_bison.y"
+#line 2888 "src/parser_bison.y"
                                                         { (yyval.val) = NFPROTO_IPV4; }
-#line 11371 "src/parser_bison.c"
+#line 11372 "src/parser_bison.c"
     break;
 
   case 440: /* family_spec_explicit: "ip" close_scope_ip  */
-#line 2891 "src/parser_bison.y"
+#line 2892 "src/parser_bison.y"
                                                         { (yyval.val) = NFPROTO_IPV4; }
-#line 11377 "src/parser_bison.c"
+#line 11378 "src/parser_bison.c"
     break;
 
   case 441: /* family_spec_explicit: "ip6" close_scope_ip6  */
-#line 2892 "src/parser_bison.y"
+#line 2893 "src/parser_bison.y"
                                                         { (yyval.val) = NFPROTO_IPV6; }
-#line 11383 "src/parser_bison.c"
+#line 11384 "src/parser_bison.c"
     break;
 
   case 442: /* family_spec_explicit: "inet"  */
-#line 2893 "src/parser_bison.y"
+#line 2894 "src/parser_bison.y"
                                                         { (yyval.val) = NFPROTO_INET; }
-#line 11389 "src/parser_bison.c"
+#line 11390 "src/parser_bison.c"
     break;
 
   case 443: /* family_spec_explicit: "arp" close_scope_arp  */
-#line 2894 "src/parser_bison.y"
+#line 2895 "src/parser_bison.y"
                                                         { (yyval.val) = NFPROTO_ARP; }
-#line 11395 "src/parser_bison.c"
+#line 11396 "src/parser_bison.c"
     break;
 
   case 444: /* family_spec_explicit: "bridge"  */
-#line 2895 "src/parser_bison.y"
+#line 2896 "src/parser_bison.y"
                                                         { (yyval.val) = NFPROTO_BRIDGE; }
-#line 11401 "src/parser_bison.c"
+#line 11402 "src/parser_bison.c"
     break;
 
   case 445: /* family_spec_explicit: "netdev"  */
-#line 2896 "src/parser_bison.y"
+#line 2897 "src/parser_bison.y"
                                                         { (yyval.val) = NFPROTO_NETDEV; }
-#line 11407 "src/parser_bison.c"
+#line 11408 "src/parser_bison.c"
     break;
 
   case 446: /* table_spec: family_spec identifier  */
-#line 2900 "src/parser_bison.y"
+#line 2901 "src/parser_bison.y"
                         {
 				memset(&(yyval.handle), 0, sizeof((yyval.handle)));
 				(yyval.handle).family	= (yyvsp[-1].val);
 				(yyval.handle).table.location = (yylsp[0]);
 				(yyval.handle).table.name	= (yyvsp[0].string);
 			}
-#line 11418 "src/parser_bison.c"
+#line 11419 "src/parser_bison.c"
     break;
 
   case 447: /* tableid_spec: family_spec "handle" "number"  */
-#line 2909 "src/parser_bison.y"
+#line 2910 "src/parser_bison.y"
                         {
 				memset(&(yyval.handle), 0, sizeof((yyval.handle)));
 				(yyval.handle).family 		= (yyvsp[-2].val);
 				(yyval.handle).handle.id 		= (yyvsp[0].val);
 				(yyval.handle).handle.location	= (yylsp[0]);
 			}
-#line 11429 "src/parser_bison.c"
+#line 11430 "src/parser_bison.c"
     break;
 
   case 448: /* chain_spec: table_spec identifier  */
-#line 2918 "src/parser_bison.y"
+#line 2919 "src/parser_bison.y"
                         {
 				(yyval.handle)		= (yyvsp[-1].handle);
 				(yyval.handle).chain.name	= (yyvsp[0].string);
 				(yyval.handle).chain.location = (yylsp[0]);
 			}
-#line 11439 "src/parser_bison.c"
+#line 11440 "src/parser_bison.c"
     break;
 
   case 449: /* chainid_spec: table_spec "handle" "number"  */
-#line 2926 "src/parser_bison.y"
+#line 2927 "src/parser_bison.y"
                         {
 				(yyval.handle) 			= (yyvsp[-2].handle);
 				(yyval.handle).handle.location 	= (yylsp[0]);
 				(yyval.handle).handle.id 		= (yyvsp[0].val);
 			}
-#line 11449 "src/parser_bison.c"
+#line 11450 "src/parser_bison.c"
     break;
 
   case 450: /* chain_identifier: identifier  */
-#line 2934 "src/parser_bison.y"
+#line 2935 "src/parser_bison.y"
                         {
 				memset(&(yyval.handle), 0, sizeof((yyval.handle)));
 				(yyval.handle).chain.name		= (yyvsp[0].string);
 				(yyval.handle).chain.location	= (yylsp[0]);
 			}
-#line 11459 "src/parser_bison.c"
+#line 11460 "src/parser_bison.c"
     break;
 
   case 451: /* set_spec: table_spec identifier  */
-#line 2942 "src/parser_bison.y"
+#line 2943 "src/parser_bison.y"
                         {
 				(yyval.handle)		= (yyvsp[-1].handle);
 				(yyval.handle).set.name	= (yyvsp[0].string);
 				(yyval.handle).set.location	= (yylsp[0]);
 			}
-#line 11469 "src/parser_bison.c"
+#line 11470 "src/parser_bison.c"
     break;
 
   case 452: /* setid_spec: table_spec "handle" "number"  */
-#line 2950 "src/parser_bison.y"
+#line 2951 "src/parser_bison.y"
                         {
 				(yyval.handle) 			= (yyvsp[-2].handle);
 				(yyval.handle).handle.location 	= (yylsp[0]);
 				(yyval.handle).handle.id 		= (yyvsp[0].val);
 			}
-#line 11479 "src/parser_bison.c"
+#line 11480 "src/parser_bison.c"
     break;
 
   case 453: /* set_identifier: identifier  */
-#line 2958 "src/parser_bison.y"
+#line 2959 "src/parser_bison.y"
                         {
 				memset(&(yyval.handle), 0, sizeof((yyval.handle)));
 				(yyval.handle).set.name	= (yyvsp[0].string);
 				(yyval.handle).set.location	= (yylsp[0]);
 			}
-#line 11489 "src/parser_bison.c"
+#line 11490 "src/parser_bison.c"
     break;
 
   case 454: /* flowtable_spec: table_spec identifier  */
-#line 2966 "src/parser_bison.y"
+#line 2967 "src/parser_bison.y"
                         {
 				(yyval.handle)			= (yyvsp[-1].handle);
 				(yyval.handle).flowtable.name	= (yyvsp[0].string);
 				(yyval.handle).flowtable.location	= (yylsp[0]);
 			}
-#line 11499 "src/parser_bison.c"
+#line 11500 "src/parser_bison.c"
     break;
 
   case 455: /* flowtableid_spec: table_spec "handle" "number"  */
-#line 2974 "src/parser_bison.y"
+#line 2975 "src/parser_bison.y"
                         {
 				(yyval.handle)			= (yyvsp[-2].handle);
 				(yyval.handle).handle.location	= (yylsp[0]);
 				(yyval.handle).handle.id		= (yyvsp[0].val);
 			}
-#line 11509 "src/parser_bison.c"
+#line 11510 "src/parser_bison.c"
     break;
 
   case 456: /* flowtable_identifier: identifier  */
-#line 2982 "src/parser_bison.y"
+#line 2983 "src/parser_bison.y"
                         {
 				memset(&(yyval.handle), 0, sizeof((yyval.handle)));
 				(yyval.handle).flowtable.name	= (yyvsp[0].string);
 				(yyval.handle).flowtable.location	= (yylsp[0]);
 			}
-#line 11519 "src/parser_bison.c"
+#line 11520 "src/parser_bison.c"
     break;
 
   case 457: /* obj_spec: table_spec identifier  */
-#line 2990 "src/parser_bison.y"
+#line 2991 "src/parser_bison.y"
                         {
 				(yyval.handle)		= (yyvsp[-1].handle);
 				(yyval.handle).obj.name	= (yyvsp[0].string);
 				(yyval.handle).obj.location	= (yylsp[0]);
 			}
-#line 11529 "src/parser_bison.c"
+#line 11530 "src/parser_bison.c"
     break;
 
   case 458: /* objid_spec: table_spec "handle" "number"  */
-#line 2998 "src/parser_bison.y"
+#line 2999 "src/parser_bison.y"
                         {
 				(yyval.handle) 			= (yyvsp[-2].handle);
 				(yyval.handle).handle.location	= (yylsp[0]);
 				(yyval.handle).handle.id		= (yyvsp[0].val);
 			}
-#line 11539 "src/parser_bison.c"
+#line 11540 "src/parser_bison.c"
     break;
 
   case 459: /* obj_identifier: identifier  */
-#line 3006 "src/parser_bison.y"
+#line 3007 "src/parser_bison.y"
                         {
 				memset(&(yyval.handle), 0, sizeof((yyval.handle)));
 				(yyval.handle).obj.name		= (yyvsp[0].string);
 				(yyval.handle).obj.location		= (yylsp[0]);
 			}
-#line 11549 "src/parser_bison.c"
+#line 11550 "src/parser_bison.c"
     break;
 
   case 460: /* handle_spec: "handle" "number"  */
-#line 3014 "src/parser_bison.y"
+#line 3015 "src/parser_bison.y"
                         {
 				memset(&(yyval.handle), 0, sizeof((yyval.handle)));
 				(yyval.handle).handle.location	= (yylsp[0]);
 				(yyval.handle).handle.id		= (yyvsp[0].val);
 			}
-#line 11559 "src/parser_bison.c"
+#line 11560 "src/parser_bison.c"
     break;
 
   case 461: /* position_spec: "position" "number"  */
-#line 3022 "src/parser_bison.y"
+#line 3023 "src/parser_bison.y"
                         {
 				memset(&(yyval.handle), 0, sizeof((yyval.handle)));
 				(yyval.handle).position.location	= (yyloc);
 				(yyval.handle).position.id		= (yyvsp[0].val);
 			}
-#line 11569 "src/parser_bison.c"
+#line 11570 "src/parser_bison.c"
     break;
 
   case 462: /* index_spec: "index" "number"  */
-#line 3030 "src/parser_bison.y"
+#line 3031 "src/parser_bison.y"
                         {
 				memset(&(yyval.handle), 0, sizeof((yyval.handle)));
 				(yyval.handle).index.location	= (yyloc);
 				(yyval.handle).index.id		= (yyvsp[0].val) + 1;
 			}
-#line 11579 "src/parser_bison.c"
+#line 11580 "src/parser_bison.c"
     break;
 
   case 463: /* rule_position: chain_spec  */
-#line 3038 "src/parser_bison.y"
+#line 3039 "src/parser_bison.y"
                         {
 				(yyval.handle) = (yyvsp[0].handle);
 			}
-#line 11587 "src/parser_bison.c"
+#line 11588 "src/parser_bison.c"
     break;
 
   case 464: /* rule_position: chain_spec position_spec  */
-#line 3042 "src/parser_bison.y"
+#line 3043 "src/parser_bison.y"
                         {
 				handle_merge(&(yyvsp[-1].handle), &(yyvsp[0].handle));
 				(yyval.handle) = (yyvsp[-1].handle);
 			}
-#line 11596 "src/parser_bison.c"
+#line 11597 "src/parser_bison.c"
     break;
 
   case 465: /* rule_position: chain_spec handle_spec  */
-#line 3047 "src/parser_bison.y"
+#line 3048 "src/parser_bison.y"
                         {
 				(yyvsp[0].handle).position.location = (yyvsp[0].handle).handle.location;
 				(yyvsp[0].handle).position.id = (yyvsp[0].handle).handle.id;
@@ -11604,29 +11605,29 @@ yyreduce:
 				handle_merge(&(yyvsp[-1].handle), &(yyvsp[0].handle));
 				(yyval.handle) = (yyvsp[-1].handle);
 			}
-#line 11608 "src/parser_bison.c"
+#line 11609 "src/parser_bison.c"
     break;
 
   case 466: /* rule_position: chain_spec index_spec  */
-#line 3055 "src/parser_bison.y"
+#line 3056 "src/parser_bison.y"
                         {
 				handle_merge(&(yyvsp[-1].handle), &(yyvsp[0].handle));
 				(yyval.handle) = (yyvsp[-1].handle);
 			}
-#line 11617 "src/parser_bison.c"
+#line 11618 "src/parser_bison.c"
     break;
 
   case 467: /* ruleid_spec: chain_spec handle_spec  */
-#line 3062 "src/parser_bison.y"
+#line 3063 "src/parser_bison.y"
                         {
 				handle_merge(&(yyvsp[-1].handle), &(yyvsp[0].handle));
 				(yyval.handle) = (yyvsp[-1].handle);
 			}
-#line 11626 "src/parser_bison.c"
+#line 11627 "src/parser_bison.c"
     break;
 
   case 468: /* comment_spec: "comment" string  */
-#line 3069 "src/parser_bison.y"
+#line 3070 "src/parser_bison.y"
                         {
 				if (strlen((yyvsp[0].string)) > NFTNL_UDATA_COMMENT_MAXLEN) {
 					erec_queue(error(&(yylsp[0]), "comment too long, %d characters maximum allowed",
@@ -11637,45 +11638,45 @@ yyreduce:
 				}
 				(yyval.string) = (yyvsp[0].string);
 			}
-#line 11641 "src/parser_bison.c"
+#line 11642 "src/parser_bison.c"
     break;
 
   case 469: /* ruleset_spec: %empty  */
-#line 3082 "src/parser_bison.y"
+#line 3083 "src/parser_bison.y"
                         {
 				memset(&(yyval.handle), 0, sizeof((yyval.handle)));
 				(yyval.handle).family	= NFPROTO_UNSPEC;
 			}
-#line 11650 "src/parser_bison.c"
+#line 11651 "src/parser_bison.c"
     break;
 
   case 470: /* ruleset_spec: family_spec_explicit  */
-#line 3087 "src/parser_bison.y"
+#line 3088 "src/parser_bison.y"
                         {
 				memset(&(yyval.handle), 0, sizeof((yyval.handle)));
 				(yyval.handle).family	= (yyvsp[0].val);
 			}
-#line 11659 "src/parser_bison.c"
+#line 11660 "src/parser_bison.c"
     break;
 
   case 471: /* rule: rule_alloc  */
-#line 3094 "src/parser_bison.y"
+#line 3095 "src/parser_bison.y"
                         {
 				(yyval.rule)->comment = NULL;
 			}
-#line 11667 "src/parser_bison.c"
+#line 11668 "src/parser_bison.c"
     break;
 
   case 472: /* rule: rule_alloc comment_spec  */
-#line 3098 "src/parser_bison.y"
+#line 3099 "src/parser_bison.y"
                         {
 				(yyval.rule)->comment = (yyvsp[0].string);
 			}
-#line 11675 "src/parser_bison.c"
+#line 11676 "src/parser_bison.c"
     break;
 
   case 473: /* rule_alloc: stmt_list  */
-#line 3104 "src/parser_bison.y"
+#line 3105 "src/parser_bison.y"
                         {
 				struct stmt *i;
 
@@ -11685,110 +11686,110 @@ yyreduce:
 				list_splice_tail((yyvsp[0].list), &(yyval.rule)->stmts);
 				free((yyvsp[0].list));
 			}
-#line 11689 "src/parser_bison.c"
+#line 11690 "src/parser_bison.c"
     break;
 
   case 474: /* stmt_list: stmt  */
-#line 3116 "src/parser_bison.y"
+#line 3117 "src/parser_bison.y"
                         {
 				(yyval.list) = xmalloc(sizeof(*(yyval.list)));
 				init_list_head((yyval.list));
 				list_add_tail(&(yyvsp[0].stmt)->list, (yyval.list));
 			}
-#line 11699 "src/parser_bison.c"
+#line 11700 "src/parser_bison.c"
     break;
 
   case 475: /* stmt_list: stmt_list stmt  */
-#line 3122 "src/parser_bison.y"
+#line 3123 "src/parser_bison.y"
                         {
 				(yyval.list) = (yyvsp[-1].list);
 				list_add_tail(&(yyvsp[0].stmt)->list, (yyvsp[-1].list));
 			}
-#line 11708 "src/parser_bison.c"
+#line 11709 "src/parser_bison.c"
     break;
 
   case 476: /* stateful_stmt_list: stateful_stmt  */
-#line 3129 "src/parser_bison.y"
+#line 3130 "src/parser_bison.y"
                         {
 				(yyval.list) = xmalloc(sizeof(*(yyval.list)));
 				init_list_head((yyval.list));
 				list_add_tail(&(yyvsp[0].stmt)->list, (yyval.list));
 			}
-#line 11718 "src/parser_bison.c"
+#line 11719 "src/parser_bison.c"
     break;
 
   case 477: /* stateful_stmt_list: stateful_stmt_list stateful_stmt  */
-#line 3135 "src/parser_bison.y"
+#line 3136 "src/parser_bison.y"
                         {
 				(yyval.list) = (yyvsp[-1].list);
 				list_add_tail(&(yyvsp[0].stmt)->list, (yyvsp[-1].list));
 			}
-#line 11727 "src/parser_bison.c"
+#line 11728 "src/parser_bison.c"
     break;
 
   case 478: /* objref_stmt_counter: "counter" "name" stmt_expr close_scope_counter  */
-#line 3142 "src/parser_bison.y"
+#line 3143 "src/parser_bison.y"
                         {
 				(yyval.stmt) = objref_stmt_alloc(&(yyloc));
 				(yyval.stmt)->objref.type = NFT_OBJECT_COUNTER;
 				(yyval.stmt)->objref.expr = (yyvsp[-1].expr);
 			}
-#line 11737 "src/parser_bison.c"
+#line 11738 "src/parser_bison.c"
     break;
 
   case 479: /* objref_stmt_limit: "limit" "name" stmt_expr close_scope_limit  */
-#line 3150 "src/parser_bison.y"
+#line 3151 "src/parser_bison.y"
                         {
 				(yyval.stmt) = objref_stmt_alloc(&(yyloc));
 				(yyval.stmt)->objref.type = NFT_OBJECT_LIMIT;
 				(yyval.stmt)->objref.expr = (yyvsp[-1].expr);
 			}
-#line 11747 "src/parser_bison.c"
+#line 11748 "src/parser_bison.c"
     break;
 
   case 480: /* objref_stmt_quota: "quota" "name" stmt_expr close_scope_quota  */
-#line 3158 "src/parser_bison.y"
+#line 3159 "src/parser_bison.y"
                         {
 				(yyval.stmt) = objref_stmt_alloc(&(yyloc));
 				(yyval.stmt)->objref.type = NFT_OBJECT_QUOTA;
 				(yyval.stmt)->objref.expr = (yyvsp[-1].expr);
 			}
-#line 11757 "src/parser_bison.c"
+#line 11758 "src/parser_bison.c"
     break;
 
   case 481: /* objref_stmt_synproxy: "synproxy" "name" stmt_expr close_scope_synproxy  */
-#line 3166 "src/parser_bison.y"
+#line 3167 "src/parser_bison.y"
                         {
 				(yyval.stmt) = objref_stmt_alloc(&(yyloc));
 				(yyval.stmt)->objref.type = NFT_OBJECT_SYNPROXY;
 				(yyval.stmt)->objref.expr = (yyvsp[-1].expr);
 			}
-#line 11767 "src/parser_bison.c"
+#line 11768 "src/parser_bison.c"
     break;
 
   case 482: /* objref_stmt_ct: "ct" "timeout" "set" stmt_expr close_scope_ct  */
-#line 3174 "src/parser_bison.y"
+#line 3175 "src/parser_bison.y"
                         {
 				(yyval.stmt) = objref_stmt_alloc(&(yyloc));
 				(yyval.stmt)->objref.type = NFT_OBJECT_CT_TIMEOUT;
 				(yyval.stmt)->objref.expr = (yyvsp[-1].expr);
 
 			}
-#line 11778 "src/parser_bison.c"
+#line 11779 "src/parser_bison.c"
     break;
 
   case 483: /* objref_stmt_ct: "ct" "expectation" "set" stmt_expr close_scope_ct  */
-#line 3181 "src/parser_bison.y"
+#line 3182 "src/parser_bison.y"
                         {
 				(yyval.stmt) = objref_stmt_alloc(&(yyloc));
 				(yyval.stmt)->objref.type = NFT_OBJECT_CT_EXPECT;
 				(yyval.stmt)->objref.expr = (yyvsp[-1].expr);
 			}
-#line 11788 "src/parser_bison.c"
+#line 11789 "src/parser_bison.c"
     break;
 
   case 517: /* xt_stmt: "xt" "string" string  */
-#line 3228 "src/parser_bison.y"
+#line 3229 "src/parser_bison.y"
                         {
 				(yyval.stmt) = NULL;
 				free_const((yyvsp[-1].string));
@@ -11797,164 +11798,164 @@ yyreduce:
 					   state->msgs);
 				YYERROR;
 			}
-#line 11801 "src/parser_bison.c"
+#line 11802 "src/parser_bison.c"
     break;
 
   case 518: /* chain_stmt_type: "jump"  */
-#line 3238 "src/parser_bison.y"
+#line 3239 "src/parser_bison.y"
                                         { (yyval.val) = NFT_JUMP; }
-#line 11807 "src/parser_bison.c"
+#line 11808 "src/parser_bison.c"
     break;
 
   case 519: /* chain_stmt_type: "goto"  */
-#line 3239 "src/parser_bison.y"
+#line 3240 "src/parser_bison.y"
                                         { (yyval.val) = NFT_GOTO; }
-#line 11813 "src/parser_bison.c"
+#line 11814 "src/parser_bison.c"
     break;
 
   case 520: /* chain_stmt: chain_stmt_type chain_block_alloc '{' subchain_block '}'  */
-#line 3243 "src/parser_bison.y"
+#line 3244 "src/parser_bison.y"
                         {
 				(yyvsp[-3].chain)->location = (yylsp[-3]);
 				close_scope(state);
 				(yyvsp[-1].chain)->location = (yylsp[-1]);
 				(yyval.stmt) = chain_stmt_alloc(&(yyloc), (yyvsp[-1].chain), (yyvsp[-4].val));
 			}
-#line 11824 "src/parser_bison.c"
+#line 11825 "src/parser_bison.c"
     break;
 
   case 521: /* verdict_stmt: verdict_expr  */
-#line 3252 "src/parser_bison.y"
+#line 3253 "src/parser_bison.y"
                         {
 				(yyval.stmt) = verdict_stmt_alloc(&(yyloc), (yyvsp[0].expr));
 			}
-#line 11832 "src/parser_bison.c"
+#line 11833 "src/parser_bison.c"
     break;
 
   case 522: /* verdict_stmt: verdict_map_stmt  */
-#line 3256 "src/parser_bison.y"
+#line 3257 "src/parser_bison.y"
                         {
 				(yyval.stmt) = verdict_stmt_alloc(&(yyloc), (yyvsp[0].expr));
 			}
-#line 11840 "src/parser_bison.c"
+#line 11841 "src/parser_bison.c"
     break;
 
   case 523: /* verdict_map_stmt: concat_expr "vmap" verdict_map_expr  */
-#line 3262 "src/parser_bison.y"
+#line 3263 "src/parser_bison.y"
                         {
 				(yyval.expr) = map_expr_alloc(&(yyloc), (yyvsp[-2].expr), (yyvsp[0].expr));
 			}
-#line 11848 "src/parser_bison.c"
+#line 11849 "src/parser_bison.c"
     break;
 
   case 524: /* verdict_map_expr: '{' verdict_map_list_expr '}'  */
-#line 3268 "src/parser_bison.y"
+#line 3269 "src/parser_bison.y"
                         {
 				(yyvsp[-1].expr)->location = (yyloc);
 				(yyval.expr) = (yyvsp[-1].expr);
 			}
-#line 11857 "src/parser_bison.c"
+#line 11858 "src/parser_bison.c"
     break;
 
   case 526: /* verdict_map_list_expr: verdict_map_list_member_expr  */
-#line 3276 "src/parser_bison.y"
+#line 3277 "src/parser_bison.y"
                         {
 				(yyval.expr) = set_expr_alloc(&(yyloc), NULL);
 				compound_expr_add((yyval.expr), (yyvsp[0].expr));
 			}
-#line 11866 "src/parser_bison.c"
+#line 11867 "src/parser_bison.c"
     break;
 
   case 527: /* verdict_map_list_expr: verdict_map_list_expr "comma" verdict_map_list_member_expr  */
-#line 3281 "src/parser_bison.y"
+#line 3282 "src/parser_bison.y"
                         {
 				compound_expr_add((yyvsp[-2].expr), (yyvsp[0].expr));
 				(yyval.expr) = (yyvsp[-2].expr);
 			}
-#line 11875 "src/parser_bison.c"
+#line 11876 "src/parser_bison.c"
     break;
 
   case 529: /* verdict_map_list_member_expr: opt_newline set_elem_expr "colon" verdict_expr opt_newline  */
-#line 3289 "src/parser_bison.y"
+#line 3290 "src/parser_bison.y"
                         {
 				(yyval.expr) = mapping_expr_alloc(&(yylsp[-3]), (yyvsp[-3].expr), (yyvsp[-1].expr));
 			}
-#line 11883 "src/parser_bison.c"
+#line 11884 "src/parser_bison.c"
     break;
 
   case 530: /* ct_limit_stmt_alloc: "ct" "count"  */
-#line 3295 "src/parser_bison.y"
+#line 3296 "src/parser_bison.y"
                         {
 				(yyval.stmt) = connlimit_stmt_alloc(&(yyloc));
 			}
-#line 11891 "src/parser_bison.c"
+#line 11892 "src/parser_bison.c"
     break;
 
   case 532: /* ct_limit_args: "number"  */
-#line 3304 "src/parser_bison.y"
+#line 3305 "src/parser_bison.y"
                         {
 				assert((yyvsp[-1].stmt)->type == STMT_CONNLIMIT);
 
 				(yyvsp[-1].stmt)->connlimit.count	= (yyvsp[0].val);
 			}
-#line 11901 "src/parser_bison.c"
+#line 11902 "src/parser_bison.c"
     break;
 
   case 533: /* ct_limit_args: "over" "number"  */
-#line 3310 "src/parser_bison.y"
+#line 3311 "src/parser_bison.y"
                         {
 				assert((yyvsp[-2].stmt)->type == STMT_CONNLIMIT);
 
 				(yyvsp[-2].stmt)->connlimit.count = (yyvsp[0].val);
 				(yyvsp[-2].stmt)->connlimit.flags = NFT_CONNLIMIT_F_INV;
 			}
-#line 11912 "src/parser_bison.c"
+#line 11913 "src/parser_bison.c"
     break;
 
   case 536: /* counter_stmt_alloc: "counter"  */
-#line 3322 "src/parser_bison.y"
+#line 3323 "src/parser_bison.y"
                         {
 				(yyval.stmt) = counter_stmt_alloc(&(yyloc));
 			}
-#line 11920 "src/parser_bison.c"
+#line 11921 "src/parser_bison.c"
     break;
 
   case 537: /* counter_args: counter_arg  */
-#line 3328 "src/parser_bison.y"
+#line 3329 "src/parser_bison.y"
                         {
 				(yyval.stmt)	= (yyvsp[-1].stmt);
 			}
-#line 11928 "src/parser_bison.c"
+#line 11929 "src/parser_bison.c"
     break;
 
   case 539: /* counter_arg: "packets" "number"  */
-#line 3335 "src/parser_bison.y"
+#line 3336 "src/parser_bison.y"
                         {
 				assert((yyvsp[-2].stmt)->type == STMT_COUNTER);
 				(yyvsp[-2].stmt)->counter.packets = (yyvsp[0].val);
 			}
-#line 11937 "src/parser_bison.c"
+#line 11938 "src/parser_bison.c"
     break;
 
   case 540: /* counter_arg: "bytes" "number"  */
-#line 3340 "src/parser_bison.y"
+#line 3341 "src/parser_bison.y"
                         {
 				assert((yyvsp[-2].stmt)->type == STMT_COUNTER);
 				(yyvsp[-2].stmt)->counter.bytes	 = (yyvsp[0].val);
 			}
-#line 11946 "src/parser_bison.c"
+#line 11947 "src/parser_bison.c"
     break;
 
   case 541: /* last_stmt_alloc: "last"  */
-#line 3347 "src/parser_bison.y"
+#line 3348 "src/parser_bison.y"
                         {
 				(yyval.stmt) = last_stmt_alloc(&(yyloc));
 			}
-#line 11954 "src/parser_bison.c"
+#line 11955 "src/parser_bison.c"
     break;
 
   case 545: /* last_args: "used" time_spec  */
-#line 3358 "src/parser_bison.y"
+#line 3359 "src/parser_bison.y"
                         {
 				struct last_stmt *last;
 
@@ -11963,27 +11964,27 @@ yyreduce:
 				last->used = (yyvsp[0].val);
 				last->set = true;
 			}
-#line 11967 "src/parser_bison.c"
+#line 11968 "src/parser_bison.c"
     break;
 
   case 548: /* log_stmt_alloc: "log"  */
-#line 3373 "src/parser_bison.y"
+#line 3374 "src/parser_bison.y"
                         {
 				(yyval.stmt) = log_stmt_alloc(&(yyloc));
 			}
-#line 11975 "src/parser_bison.c"
+#line 11976 "src/parser_bison.c"
     break;
 
   case 549: /* log_args: log_arg  */
-#line 3379 "src/parser_bison.y"
+#line 3380 "src/parser_bison.y"
                         {
 				(yyval.stmt)	= (yyvsp[-1].stmt);
 			}
-#line 11983 "src/parser_bison.c"
+#line 11984 "src/parser_bison.c"
     break;
 
   case 551: /* log_arg: "prefix" string  */
-#line 3386 "src/parser_bison.y"
+#line 3387 "src/parser_bison.y"
                         {
 				struct scope *scope = current_scope(state);
 				struct error_record *erec;
@@ -12000,55 +12001,55 @@ yyreduce:
 				(yyvsp[-2].stmt)->log.prefix = prefix;
 				(yyvsp[-2].stmt)->log.flags |= STMT_LOG_PREFIX;
 			}
-#line 12004 "src/parser_bison.c"
+#line 12005 "src/parser_bison.c"
     break;
 
   case 552: /* log_arg: "group" "number"  */
-#line 3403 "src/parser_bison.y"
+#line 3404 "src/parser_bison.y"
                         {
 				(yyvsp[-2].stmt)->log.group	 = (yyvsp[0].val);
 				(yyvsp[-2].stmt)->log.flags 	|= STMT_LOG_GROUP;
 			}
-#line 12013 "src/parser_bison.c"
+#line 12014 "src/parser_bison.c"
     break;
 
   case 553: /* log_arg: "snaplen" "number"  */
-#line 3408 "src/parser_bison.y"
+#line 3409 "src/parser_bison.y"
                         {
 				(yyvsp[-2].stmt)->log.snaplen	 = (yyvsp[0].val);
 				(yyvsp[-2].stmt)->log.flags 	|= STMT_LOG_SNAPLEN;
 			}
-#line 12022 "src/parser_bison.c"
+#line 12023 "src/parser_bison.c"
     break;
 
   case 554: /* log_arg: "queue-threshold" "number"  */
-#line 3413 "src/parser_bison.y"
+#line 3414 "src/parser_bison.y"
                         {
 				(yyvsp[-2].stmt)->log.qthreshold = (yyvsp[0].val);
 				(yyvsp[-2].stmt)->log.flags 	|= STMT_LOG_QTHRESHOLD;
 			}
-#line 12031 "src/parser_bison.c"
+#line 12032 "src/parser_bison.c"
     break;
 
   case 555: /* log_arg: "level" level_type  */
-#line 3418 "src/parser_bison.y"
+#line 3419 "src/parser_bison.y"
                         {
 				(yyvsp[-2].stmt)->log.level	= (yyvsp[0].val);
 				(yyvsp[-2].stmt)->log.flags 	|= STMT_LOG_LEVEL;
 			}
-#line 12040 "src/parser_bison.c"
+#line 12041 "src/parser_bison.c"
     break;
 
   case 556: /* log_arg: "flags" log_flags  */
-#line 3423 "src/parser_bison.y"
+#line 3424 "src/parser_bison.y"
                         {
 				(yyvsp[-2].stmt)->log.logflags	|= (yyvsp[0].val);
 			}
-#line 12048 "src/parser_bison.c"
+#line 12049 "src/parser_bison.c"
     break;
 
   case 557: /* level_type: string  */
-#line 3429 "src/parser_bison.y"
+#line 3430 "src/parser_bison.y"
                         {
 				if (!strcmp("emerg", (yyvsp[0].string)))
 					(yyval.val) = NFT_LOGLEVEL_EMERG;
@@ -12076,83 +12077,83 @@ yyreduce:
 				}
 				free_const((yyvsp[0].string));
 			}
-#line 12080 "src/parser_bison.c"
+#line 12081 "src/parser_bison.c"
     break;
 
   case 558: /* log_flags: "tcp" log_flags_tcp close_scope_tcp  */
-#line 3459 "src/parser_bison.y"
+#line 3460 "src/parser_bison.y"
                         {
 				(yyval.val) = (yyvsp[-1].val);
 			}
-#line 12088 "src/parser_bison.c"
+#line 12089 "src/parser_bison.c"
     break;
 
   case 559: /* log_flags: "ip" "options" close_scope_ip  */
-#line 3463 "src/parser_bison.y"
+#line 3464 "src/parser_bison.y"
                         {
 				(yyval.val) = NF_LOG_IPOPT;
 			}
-#line 12096 "src/parser_bison.c"
+#line 12097 "src/parser_bison.c"
     break;
 
   case 560: /* log_flags: "skuid"  */
-#line 3467 "src/parser_bison.y"
+#line 3468 "src/parser_bison.y"
                         {
 				(yyval.val) = NF_LOG_UID;
 			}
-#line 12104 "src/parser_bison.c"
+#line 12105 "src/parser_bison.c"
     break;
 
   case 561: /* log_flags: "ether" close_scope_eth  */
-#line 3471 "src/parser_bison.y"
+#line 3472 "src/parser_bison.y"
                         {
 				(yyval.val) = NF_LOG_MACDECODE;
 			}
-#line 12112 "src/parser_bison.c"
+#line 12113 "src/parser_bison.c"
     break;
 
   case 562: /* log_flags: "all"  */
-#line 3475 "src/parser_bison.y"
+#line 3476 "src/parser_bison.y"
                         {
 				(yyval.val) = NF_LOG_MASK;
 			}
-#line 12120 "src/parser_bison.c"
+#line 12121 "src/parser_bison.c"
     break;
 
   case 563: /* log_flags_tcp: log_flags_tcp "comma" log_flag_tcp  */
-#line 3481 "src/parser_bison.y"
+#line 3482 "src/parser_bison.y"
                         {
 				(yyval.val) = (yyvsp[-2].val) | (yyvsp[0].val);
 			}
-#line 12128 "src/parser_bison.c"
+#line 12129 "src/parser_bison.c"
     break;
 
   case 565: /* log_flag_tcp: "seq"  */
-#line 3488 "src/parser_bison.y"
+#line 3489 "src/parser_bison.y"
                         {
 				(yyval.val) = NF_LOG_TCPSEQ;
 			}
-#line 12136 "src/parser_bison.c"
+#line 12137 "src/parser_bison.c"
     break;
 
   case 566: /* log_flag_tcp: "options"  */
-#line 3492 "src/parser_bison.y"
+#line 3493 "src/parser_bison.y"
                         {
 				(yyval.val) = NF_LOG_TCPOPT;
 			}
-#line 12144 "src/parser_bison.c"
+#line 12145 "src/parser_bison.c"
     break;
 
   case 567: /* limit_stmt_alloc: "limit" "rate"  */
-#line 3498 "src/parser_bison.y"
+#line 3499 "src/parser_bison.y"
                         {
 				(yyval.stmt) = limit_stmt_alloc(&(yyloc));
 			}
-#line 12152 "src/parser_bison.c"
+#line 12153 "src/parser_bison.c"
     break;
 
   case 569: /* limit_args: limit_mode limit_rate_pkts limit_burst_pkts  */
-#line 3507 "src/parser_bison.y"
+#line 3508 "src/parser_bison.y"
                         {
 				struct limit_stmt *limit;
 
@@ -12170,11 +12171,11 @@ yyreduce:
 				limit->type = NFT_LIMIT_PKTS;
 				limit->flags = (yyvsp[-2].val);
 			}
-#line 12174 "src/parser_bison.c"
+#line 12175 "src/parser_bison.c"
     break;
 
   case 570: /* limit_args: limit_mode limit_rate_bytes limit_burst_bytes  */
-#line 3525 "src/parser_bison.y"
+#line 3526 "src/parser_bison.y"
                         {
 				struct limit_stmt *limit;
 
@@ -12187,47 +12188,47 @@ yyreduce:
 				limit->type = NFT_LIMIT_PKT_BYTES;
 				limit->flags = (yyvsp[-2].val);
 			}
-#line 12191 "src/parser_bison.c"
+#line 12192 "src/parser_bison.c"
     break;
 
   case 571: /* quota_mode: "over"  */
-#line 3539 "src/parser_bison.y"
+#line 3540 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_QUOTA_F_INV; }
-#line 12197 "src/parser_bison.c"
+#line 12198 "src/parser_bison.c"
     break;
 
   case 572: /* quota_mode: "until"  */
-#line 3540 "src/parser_bison.y"
+#line 3541 "src/parser_bison.y"
                                                 { (yyval.val) = 0; }
-#line 12203 "src/parser_bison.c"
+#line 12204 "src/parser_bison.c"
     break;
 
   case 573: /* quota_mode: %empty  */
-#line 3541 "src/parser_bison.y"
+#line 3542 "src/parser_bison.y"
                                                 { (yyval.val) = 0; }
-#line 12209 "src/parser_bison.c"
+#line 12210 "src/parser_bison.c"
     break;
 
   case 574: /* quota_unit: "bytes"  */
-#line 3544 "src/parser_bison.y"
+#line 3545 "src/parser_bison.y"
                                                 { (yyval.string) = xstrdup("bytes"); }
-#line 12215 "src/parser_bison.c"
+#line 12216 "src/parser_bison.c"
     break;
 
   case 575: /* quota_unit: "string"  */
-#line 3545 "src/parser_bison.y"
+#line 3546 "src/parser_bison.y"
                                                 { (yyval.string) = (yyvsp[0].string); }
-#line 12221 "src/parser_bison.c"
+#line 12222 "src/parser_bison.c"
     break;
 
   case 576: /* quota_used: %empty  */
-#line 3548 "src/parser_bison.y"
+#line 3549 "src/parser_bison.y"
                                                 { (yyval.val) = 0; }
-#line 12227 "src/parser_bison.c"
+#line 12228 "src/parser_bison.c"
     break;
 
   case 577: /* quota_used: "used" "number" quota_unit  */
-#line 3550 "src/parser_bison.y"
+#line 3551 "src/parser_bison.y"
                         {
 				struct error_record *erec;
 				uint64_t rate;
@@ -12240,19 +12241,19 @@ yyreduce:
 				}
 				(yyval.val) = (yyvsp[-1].val) * rate;
 			}
-#line 12244 "src/parser_bison.c"
+#line 12245 "src/parser_bison.c"
     break;
 
   case 578: /* quota_stmt_alloc: "quota"  */
-#line 3565 "src/parser_bison.y"
+#line 3566 "src/parser_bison.y"
                         {
 				(yyval.stmt) = quota_stmt_alloc(&(yyloc));
 			}
-#line 12252 "src/parser_bison.c"
+#line 12253 "src/parser_bison.c"
     break;
 
   case 580: /* quota_args: quota_mode "number" quota_unit quota_used  */
-#line 3574 "src/parser_bison.y"
+#line 3575 "src/parser_bison.y"
                         {
 				struct error_record *erec;
 				struct quota_stmt *quota;
@@ -12271,62 +12272,62 @@ yyreduce:
 				quota->used = (yyvsp[0].val);
 				quota->flags = (yyvsp[-3].val);
 			}
-#line 12275 "src/parser_bison.c"
+#line 12276 "src/parser_bison.c"
     break;
 
   case 581: /* limit_mode: "over"  */
-#line 3594 "src/parser_bison.y"
+#line 3595 "src/parser_bison.y"
                                                                 { (yyval.val) = NFT_LIMIT_F_INV; }
-#line 12281 "src/parser_bison.c"
+#line 12282 "src/parser_bison.c"
     break;
 
   case 582: /* limit_mode: "until"  */
-#line 3595 "src/parser_bison.y"
+#line 3596 "src/parser_bison.y"
                                                                 { (yyval.val) = 0; }
-#line 12287 "src/parser_bison.c"
+#line 12288 "src/parser_bison.c"
     break;
 
   case 583: /* limit_mode: %empty  */
-#line 3596 "src/parser_bison.y"
+#line 3597 "src/parser_bison.y"
                                                                 { (yyval.val) = 0; }
-#line 12293 "src/parser_bison.c"
+#line 12294 "src/parser_bison.c"
     break;
 
   case 584: /* limit_burst_pkts: %empty  */
-#line 3599 "src/parser_bison.y"
+#line 3600 "src/parser_bison.y"
                                                                 { (yyval.val) = 5; }
-#line 12299 "src/parser_bison.c"
+#line 12300 "src/parser_bison.c"
     break;
 
   case 585: /* limit_burst_pkts: "burst" "number" "packets"  */
-#line 3600 "src/parser_bison.y"
+#line 3601 "src/parser_bison.y"
                                                                 { (yyval.val) = (yyvsp[-1].val); }
-#line 12305 "src/parser_bison.c"
+#line 12306 "src/parser_bison.c"
     break;
 
   case 586: /* limit_rate_pkts: "number" "/" time_unit  */
-#line 3604 "src/parser_bison.y"
+#line 3605 "src/parser_bison.y"
                         {
 				(yyval.limit_rate).rate = (yyvsp[-2].val);
 				(yyval.limit_rate).unit = (yyvsp[0].val);
 			}
-#line 12314 "src/parser_bison.c"
+#line 12315 "src/parser_bison.c"
     break;
 
   case 587: /* limit_burst_bytes: %empty  */
-#line 3610 "src/parser_bison.y"
+#line 3611 "src/parser_bison.y"
                                                                 { (yyval.val) = 0; }
-#line 12320 "src/parser_bison.c"
+#line 12321 "src/parser_bison.c"
     break;
 
   case 588: /* limit_burst_bytes: "burst" limit_bytes  */
-#line 3611 "src/parser_bison.y"
+#line 3612 "src/parser_bison.y"
                                                                 { (yyval.val) = (yyvsp[0].val); }
-#line 12326 "src/parser_bison.c"
+#line 12327 "src/parser_bison.c"
     break;
 
   case 589: /* limit_rate_bytes: "number" "string"  */
-#line 3615 "src/parser_bison.y"
+#line 3616 "src/parser_bison.y"
                         {
 				struct error_record *erec;
 				uint64_t rate, unit;
@@ -12340,26 +12341,26 @@ yyreduce:
 				(yyval.limit_rate).rate = rate * (yyvsp[-1].val);
 				(yyval.limit_rate).unit = unit;
 			}
-#line 12344 "src/parser_bison.c"
+#line 12345 "src/parser_bison.c"
     break;
 
   case 590: /* limit_rate_bytes: limit_bytes "/" time_unit  */
-#line 3629 "src/parser_bison.y"
+#line 3630 "src/parser_bison.y"
                         {
 				(yyval.limit_rate).rate = (yyvsp[-2].val);
 				(yyval.limit_rate).unit = (yyvsp[0].val);
 			}
-#line 12353 "src/parser_bison.c"
+#line 12354 "src/parser_bison.c"
     break;
 
   case 591: /* limit_bytes: "number" "bytes"  */
-#line 3635 "src/parser_bison.y"
+#line 3636 "src/parser_bison.y"
                                                         { (yyval.val) = (yyvsp[-1].val); }
-#line 12359 "src/parser_bison.c"
+#line 12360 "src/parser_bison.c"
     break;
 
   case 592: /* limit_bytes: "number" "string"  */
-#line 3637 "src/parser_bison.y"
+#line 3638 "src/parser_bison.y"
                         {
 				struct error_record *erec;
 				uint64_t rate;
@@ -12372,270 +12373,270 @@ yyreduce:
 				}
 				(yyval.val) = (yyvsp[-1].val) * rate;
 			}
-#line 12376 "src/parser_bison.c"
+#line 12377 "src/parser_bison.c"
     break;
 
   case 593: /* time_unit: "second"  */
-#line 3651 "src/parser_bison.y"
+#line 3652 "src/parser_bison.y"
                                                 { (yyval.val) = 1ULL; }
-#line 12382 "src/parser_bison.c"
+#line 12383 "src/parser_bison.c"
     break;
 
   case 594: /* time_unit: "minute"  */
-#line 3652 "src/parser_bison.y"
+#line 3653 "src/parser_bison.y"
                                                 { (yyval.val) = 1ULL * 60; }
-#line 12388 "src/parser_bison.c"
+#line 12389 "src/parser_bison.c"
     break;
 
   case 595: /* time_unit: "hour"  */
-#line 3653 "src/parser_bison.y"
+#line 3654 "src/parser_bison.y"
                                                 { (yyval.val) = 1ULL * 60 * 60; }
-#line 12394 "src/parser_bison.c"
+#line 12395 "src/parser_bison.c"
     break;
 
   case 596: /* time_unit: "day"  */
-#line 3654 "src/parser_bison.y"
+#line 3655 "src/parser_bison.y"
                                                 { (yyval.val) = 1ULL * 60 * 60 * 24; }
-#line 12400 "src/parser_bison.c"
+#line 12401 "src/parser_bison.c"
     break;
 
   case 597: /* time_unit: "week"  */
-#line 3655 "src/parser_bison.y"
+#line 3656 "src/parser_bison.y"
                                                 { (yyval.val) = 1ULL * 60 * 60 * 24 * 7; }
-#line 12406 "src/parser_bison.c"
+#line 12407 "src/parser_bison.c"
     break;
 
   case 599: /* reject_stmt_alloc: "reject"  */
-#line 3662 "src/parser_bison.y"
+#line 3663 "src/parser_bison.y"
                         {
 				(yyval.stmt) = reject_stmt_alloc(&(yyloc));
 			}
-#line 12414 "src/parser_bison.c"
+#line 12415 "src/parser_bison.c"
     break;
 
   case 600: /* reject_with_expr: "string"  */
-#line 3668 "src/parser_bison.y"
+#line 3669 "src/parser_bison.y"
                         {
 				(yyval.expr) = symbol_expr_alloc(&(yyloc), SYMBOL_VALUE,
 						       current_scope(state), (yyvsp[0].string));
 				free_const((yyvsp[0].string));
 			}
-#line 12424 "src/parser_bison.c"
+#line 12425 "src/parser_bison.c"
     break;
 
   case 601: /* reject_with_expr: integer_expr  */
-#line 3673 "src/parser_bison.y"
+#line 3674 "src/parser_bison.y"
                                                 { (yyval.expr) = (yyvsp[0].expr); }
-#line 12430 "src/parser_bison.c"
+#line 12431 "src/parser_bison.c"
     break;
 
   case 602: /* reject_opts: %empty  */
-#line 3677 "src/parser_bison.y"
+#line 3678 "src/parser_bison.y"
                         {
 				(yyvsp[0].stmt)->reject.type = -1;
 				(yyvsp[0].stmt)->reject.icmp_code = -1;
 			}
-#line 12439 "src/parser_bison.c"
+#line 12440 "src/parser_bison.c"
     break;
 
   case 603: /* reject_opts: "with" "icmp" "type" reject_with_expr close_scope_type close_scope_icmp  */
-#line 3682 "src/parser_bison.y"
+#line 3683 "src/parser_bison.y"
                         {
 				(yyvsp[-6].stmt)->reject.family = NFPROTO_IPV4;
 				(yyvsp[-6].stmt)->reject.type = NFT_REJECT_ICMP_UNREACH;
 				(yyvsp[-6].stmt)->reject.expr = (yyvsp[-2].expr);
 				datatype_set((yyvsp[-6].stmt)->reject.expr, &reject_icmp_code_type);
 			}
-#line 12450 "src/parser_bison.c"
+#line 12451 "src/parser_bison.c"
     break;
 
   case 604: /* reject_opts: "with" "icmp" reject_with_expr  */
-#line 3689 "src/parser_bison.y"
+#line 3690 "src/parser_bison.y"
                         {
 				(yyvsp[-3].stmt)->reject.family = NFPROTO_IPV4;
 				(yyvsp[-3].stmt)->reject.type = NFT_REJECT_ICMP_UNREACH;
 				(yyvsp[-3].stmt)->reject.expr = (yyvsp[0].expr);
 				datatype_set((yyvsp[-3].stmt)->reject.expr, &reject_icmp_code_type);
 			}
-#line 12461 "src/parser_bison.c"
+#line 12462 "src/parser_bison.c"
     break;
 
   case 605: /* reject_opts: "with" "icmpv6" "type" reject_with_expr close_scope_type close_scope_icmp  */
-#line 3696 "src/parser_bison.y"
+#line 3697 "src/parser_bison.y"
                         {
 				(yyvsp[-6].stmt)->reject.family = NFPROTO_IPV6;
 				(yyvsp[-6].stmt)->reject.type = NFT_REJECT_ICMP_UNREACH;
 				(yyvsp[-6].stmt)->reject.expr = (yyvsp[-2].expr);
 				datatype_set((yyvsp[-6].stmt)->reject.expr, &reject_icmpv6_code_type);
 			}
-#line 12472 "src/parser_bison.c"
+#line 12473 "src/parser_bison.c"
     break;
 
   case 606: /* reject_opts: "with" "icmpv6" reject_with_expr  */
-#line 3703 "src/parser_bison.y"
+#line 3704 "src/parser_bison.y"
                         {
 				(yyvsp[-3].stmt)->reject.family = NFPROTO_IPV6;
 				(yyvsp[-3].stmt)->reject.type = NFT_REJECT_ICMP_UNREACH;
 				(yyvsp[-3].stmt)->reject.expr = (yyvsp[0].expr);
 				datatype_set((yyvsp[-3].stmt)->reject.expr, &reject_icmpv6_code_type);
 			}
-#line 12483 "src/parser_bison.c"
+#line 12484 "src/parser_bison.c"
     break;
 
   case 607: /* reject_opts: "with" "icmpx" "type" reject_with_expr close_scope_type  */
-#line 3710 "src/parser_bison.y"
+#line 3711 "src/parser_bison.y"
                         {
 				(yyvsp[-5].stmt)->reject.type = NFT_REJECT_ICMPX_UNREACH;
 				(yyvsp[-5].stmt)->reject.expr = (yyvsp[-1].expr);
 				datatype_set((yyvsp[-5].stmt)->reject.expr, &reject_icmpx_code_type);
 			}
-#line 12493 "src/parser_bison.c"
+#line 12494 "src/parser_bison.c"
     break;
 
   case 608: /* reject_opts: "with" "icmpx" reject_with_expr  */
-#line 3716 "src/parser_bison.y"
+#line 3717 "src/parser_bison.y"
                         {
 				(yyvsp[-3].stmt)->reject.type = NFT_REJECT_ICMPX_UNREACH;
 				(yyvsp[-3].stmt)->reject.expr = (yyvsp[0].expr);
 				datatype_set((yyvsp[-3].stmt)->reject.expr, &reject_icmpx_code_type);
 			}
-#line 12503 "src/parser_bison.c"
+#line 12504 "src/parser_bison.c"
     break;
 
   case 609: /* reject_opts: "with" "tcp" close_scope_tcp "reset" close_scope_reset  */
-#line 3722 "src/parser_bison.y"
+#line 3723 "src/parser_bison.y"
                         {
 				(yyvsp[-5].stmt)->reject.type = NFT_REJECT_TCP_RST;
 			}
-#line 12511 "src/parser_bison.c"
+#line 12512 "src/parser_bison.c"
     break;
 
   case 611: /* nat_stmt_alloc: "snat"  */
-#line 3730 "src/parser_bison.y"
+#line 3731 "src/parser_bison.y"
                                         { (yyval.stmt) = nat_stmt_alloc(&(yyloc), __NFT_NAT_SNAT); }
-#line 12517 "src/parser_bison.c"
+#line 12518 "src/parser_bison.c"
     break;
 
   case 612: /* nat_stmt_alloc: "dnat"  */
-#line 3731 "src/parser_bison.y"
+#line 3732 "src/parser_bison.y"
                                         { (yyval.stmt) = nat_stmt_alloc(&(yyloc), __NFT_NAT_DNAT); }
-#line 12523 "src/parser_bison.c"
+#line 12524 "src/parser_bison.c"
     break;
 
   case 613: /* tproxy_stmt: "tproxy" "to" stmt_expr  */
-#line 3735 "src/parser_bison.y"
+#line 3736 "src/parser_bison.y"
                         {
 				(yyval.stmt) = tproxy_stmt_alloc(&(yyloc));
 				(yyval.stmt)->tproxy.family = NFPROTO_UNSPEC;
 				(yyval.stmt)->tproxy.addr = (yyvsp[0].expr);
 			}
-#line 12533 "src/parser_bison.c"
+#line 12534 "src/parser_bison.c"
     break;
 
   case 614: /* tproxy_stmt: "tproxy" nf_key_proto "to" stmt_expr  */
-#line 3741 "src/parser_bison.y"
+#line 3742 "src/parser_bison.y"
                         {
 				(yyval.stmt) = tproxy_stmt_alloc(&(yyloc));
 				(yyval.stmt)->tproxy.family = (yyvsp[-2].val);
 				(yyval.stmt)->tproxy.addr = (yyvsp[0].expr);
 			}
-#line 12543 "src/parser_bison.c"
+#line 12544 "src/parser_bison.c"
     break;
 
   case 615: /* tproxy_stmt: "tproxy" "to" "colon" stmt_expr  */
-#line 3747 "src/parser_bison.y"
+#line 3748 "src/parser_bison.y"
                         {
 				(yyval.stmt) = tproxy_stmt_alloc(&(yyloc));
 				(yyval.stmt)->tproxy.family = NFPROTO_UNSPEC;
 				(yyval.stmt)->tproxy.port = (yyvsp[0].expr);
 			}
-#line 12553 "src/parser_bison.c"
+#line 12554 "src/parser_bison.c"
     break;
 
   case 616: /* tproxy_stmt: "tproxy" "to" stmt_expr "colon" stmt_expr  */
-#line 3753 "src/parser_bison.y"
+#line 3754 "src/parser_bison.y"
                         {
 				(yyval.stmt) = tproxy_stmt_alloc(&(yyloc));
 				(yyval.stmt)->tproxy.family = NFPROTO_UNSPEC;
 				(yyval.stmt)->tproxy.addr = (yyvsp[-2].expr);
 				(yyval.stmt)->tproxy.port = (yyvsp[0].expr);
 			}
-#line 12564 "src/parser_bison.c"
+#line 12565 "src/parser_bison.c"
     break;
 
   case 617: /* tproxy_stmt: "tproxy" nf_key_proto "to" stmt_expr "colon" stmt_expr  */
-#line 3760 "src/parser_bison.y"
+#line 3761 "src/parser_bison.y"
                         {
 				(yyval.stmt) = tproxy_stmt_alloc(&(yyloc));
 				(yyval.stmt)->tproxy.family = (yyvsp[-4].val);
 				(yyval.stmt)->tproxy.addr = (yyvsp[-2].expr);
 				(yyval.stmt)->tproxy.port = (yyvsp[0].expr);
 			}
-#line 12575 "src/parser_bison.c"
+#line 12576 "src/parser_bison.c"
     break;
 
   case 618: /* tproxy_stmt: "tproxy" nf_key_proto "to" "colon" stmt_expr  */
-#line 3767 "src/parser_bison.y"
+#line 3768 "src/parser_bison.y"
                         {
 				(yyval.stmt) = tproxy_stmt_alloc(&(yyloc));
 				(yyval.stmt)->tproxy.family = (yyvsp[-3].val);
 				(yyval.stmt)->tproxy.port = (yyvsp[0].expr);
 			}
-#line 12585 "src/parser_bison.c"
+#line 12586 "src/parser_bison.c"
     break;
 
   case 621: /* synproxy_stmt_alloc: "synproxy"  */
-#line 3779 "src/parser_bison.y"
+#line 3780 "src/parser_bison.y"
                         {
 				(yyval.stmt) = synproxy_stmt_alloc(&(yyloc));
 			}
-#line 12593 "src/parser_bison.c"
+#line 12594 "src/parser_bison.c"
     break;
 
   case 622: /* synproxy_args: synproxy_arg  */
-#line 3785 "src/parser_bison.y"
+#line 3786 "src/parser_bison.y"
                         {
 				(yyval.stmt)	= (yyvsp[-1].stmt);
 			}
-#line 12601 "src/parser_bison.c"
+#line 12602 "src/parser_bison.c"
     break;
 
   case 624: /* synproxy_arg: "mss" "number"  */
-#line 3792 "src/parser_bison.y"
+#line 3793 "src/parser_bison.y"
                         {
 				(yyvsp[-2].stmt)->synproxy.mss = (yyvsp[0].val);
 				(yyvsp[-2].stmt)->synproxy.flags |= NF_SYNPROXY_OPT_MSS;
 			}
-#line 12610 "src/parser_bison.c"
+#line 12611 "src/parser_bison.c"
     break;
 
   case 625: /* synproxy_arg: "wscale" "number"  */
-#line 3797 "src/parser_bison.y"
+#line 3798 "src/parser_bison.y"
                         {
 				(yyvsp[-2].stmt)->synproxy.wscale = (yyvsp[0].val);
 				(yyvsp[-2].stmt)->synproxy.flags |= NF_SYNPROXY_OPT_WSCALE;
 			}
-#line 12619 "src/parser_bison.c"
+#line 12620 "src/parser_bison.c"
     break;
 
   case 626: /* synproxy_arg: "timestamp"  */
-#line 3802 "src/parser_bison.y"
+#line 3803 "src/parser_bison.y"
                         {
 				(yyvsp[-1].stmt)->synproxy.flags |= NF_SYNPROXY_OPT_TIMESTAMP;
 			}
-#line 12627 "src/parser_bison.c"
+#line 12628 "src/parser_bison.c"
     break;
 
   case 627: /* synproxy_arg: "sack-permitted"  */
-#line 3806 "src/parser_bison.y"
+#line 3807 "src/parser_bison.y"
                         {
 				(yyvsp[-1].stmt)->synproxy.flags |= NF_SYNPROXY_OPT_SACK_PERM;
 			}
-#line 12635 "src/parser_bison.c"
+#line 12636 "src/parser_bison.c"
     break;
 
   case 628: /* synproxy_config: "mss" "number" "wscale" "number" synproxy_ts synproxy_sack  */
-#line 3812 "src/parser_bison.y"
+#line 3813 "src/parser_bison.y"
                         {
 				struct synproxy *synproxy;
 				uint32_t flags = 0;
@@ -12651,11 +12652,11 @@ yyreduce:
 					flags |= (yyvsp[0].val);
 				synproxy->flags = flags;
 			}
-#line 12655 "src/parser_bison.c"
+#line 12656 "src/parser_bison.c"
     break;
 
   case 629: /* synproxy_config: "mss" "number" stmt_separator "wscale" "number" stmt_separator synproxy_ts synproxy_sack  */
-#line 3828 "src/parser_bison.y"
+#line 3829 "src/parser_bison.y"
                         {
 				struct synproxy *synproxy;
 				uint32_t flags = 0;
@@ -12671,172 +12672,172 @@ yyreduce:
 					flags |= (yyvsp[0].val);
 				synproxy->flags = flags;
 			}
-#line 12675 "src/parser_bison.c"
+#line 12676 "src/parser_bison.c"
     break;
 
   case 630: /* synproxy_obj: %empty  */
-#line 3846 "src/parser_bison.y"
+#line 3847 "src/parser_bison.y"
                         {
 				(yyval.obj) = obj_alloc(&(yyloc));
 				(yyval.obj)->type = NFT_OBJECT_SYNPROXY;
 			}
-#line 12684 "src/parser_bison.c"
+#line 12685 "src/parser_bison.c"
     break;
 
   case 631: /* synproxy_ts: %empty  */
-#line 3852 "src/parser_bison.y"
+#line 3853 "src/parser_bison.y"
                                                 { (yyval.val) = 0; }
-#line 12690 "src/parser_bison.c"
+#line 12691 "src/parser_bison.c"
     break;
 
   case 632: /* synproxy_ts: "timestamp"  */
-#line 3854 "src/parser_bison.y"
+#line 3855 "src/parser_bison.y"
                         {
 				(yyval.val) = NF_SYNPROXY_OPT_TIMESTAMP;
 			}
-#line 12698 "src/parser_bison.c"
+#line 12699 "src/parser_bison.c"
     break;
 
   case 633: /* synproxy_sack: %empty  */
-#line 3859 "src/parser_bison.y"
+#line 3860 "src/parser_bison.y"
                                                 { (yyval.val) = 0; }
-#line 12704 "src/parser_bison.c"
+#line 12705 "src/parser_bison.c"
     break;
 
   case 634: /* synproxy_sack: "sack-permitted"  */
-#line 3861 "src/parser_bison.y"
+#line 3862 "src/parser_bison.y"
                         {
 				(yyval.val) = NF_SYNPROXY_OPT_SACK_PERM;
 			}
-#line 12712 "src/parser_bison.c"
+#line 12713 "src/parser_bison.c"
     break;
 
   case 635: /* primary_stmt_expr: symbol_expr  */
-#line 3866 "src/parser_bison.y"
+#line 3867 "src/parser_bison.y"
                                                                 { (yyval.expr) = (yyvsp[0].expr); }
-#line 12718 "src/parser_bison.c"
+#line 12719 "src/parser_bison.c"
     break;
 
   case 636: /* primary_stmt_expr: integer_expr  */
-#line 3867 "src/parser_bison.y"
+#line 3868 "src/parser_bison.y"
                                                                 { (yyval.expr) = (yyvsp[0].expr); }
-#line 12724 "src/parser_bison.c"
+#line 12725 "src/parser_bison.c"
     break;
 
   case 637: /* primary_stmt_expr: boolean_expr  */
-#line 3868 "src/parser_bison.y"
+#line 3869 "src/parser_bison.y"
                                                                 { (yyval.expr) = (yyvsp[0].expr); }
-#line 12730 "src/parser_bison.c"
+#line 12731 "src/parser_bison.c"
     break;
 
   case 638: /* primary_stmt_expr: meta_expr  */
-#line 3869 "src/parser_bison.y"
+#line 3870 "src/parser_bison.y"
                                                                 { (yyval.expr) = (yyvsp[0].expr); }
-#line 12736 "src/parser_bison.c"
+#line 12737 "src/parser_bison.c"
     break;
 
   case 639: /* primary_stmt_expr: rt_expr  */
-#line 3870 "src/parser_bison.y"
+#line 3871 "src/parser_bison.y"
                                                                 { (yyval.expr) = (yyvsp[0].expr); }
-#line 12742 "src/parser_bison.c"
+#line 12743 "src/parser_bison.c"
     break;
 
   case 640: /* primary_stmt_expr: ct_expr  */
-#line 3871 "src/parser_bison.y"
+#line 3872 "src/parser_bison.y"
                                                                 { (yyval.expr) = (yyvsp[0].expr); }
-#line 12748 "src/parser_bison.c"
+#line 12749 "src/parser_bison.c"
     break;
 
   case 641: /* primary_stmt_expr: numgen_expr  */
-#line 3872 "src/parser_bison.y"
+#line 3873 "src/parser_bison.y"
                                                                 { (yyval.expr) = (yyvsp[0].expr); }
-#line 12754 "src/parser_bison.c"
+#line 12755 "src/parser_bison.c"
     break;
 
   case 642: /* primary_stmt_expr: hash_expr  */
-#line 3873 "src/parser_bison.y"
+#line 3874 "src/parser_bison.y"
                                                                 { (yyval.expr) = (yyvsp[0].expr); }
-#line 12760 "src/parser_bison.c"
+#line 12761 "src/parser_bison.c"
     break;
 
   case 643: /* primary_stmt_expr: payload_expr  */
-#line 3874 "src/parser_bison.y"
+#line 3875 "src/parser_bison.y"
                                                                 { (yyval.expr) = (yyvsp[0].expr); }
-#line 12766 "src/parser_bison.c"
+#line 12767 "src/parser_bison.c"
     break;
 
   case 644: /* primary_stmt_expr: keyword_expr  */
-#line 3875 "src/parser_bison.y"
+#line 3876 "src/parser_bison.y"
                                                                 { (yyval.expr) = (yyvsp[0].expr); }
-#line 12772 "src/parser_bison.c"
+#line 12773 "src/parser_bison.c"
     break;
 
   case 645: /* primary_stmt_expr: socket_expr  */
-#line 3876 "src/parser_bison.y"
+#line 3877 "src/parser_bison.y"
                                                                 { (yyval.expr) = (yyvsp[0].expr); }
-#line 12778 "src/parser_bison.c"
+#line 12779 "src/parser_bison.c"
     break;
 
   case 646: /* primary_stmt_expr: fib_expr  */
-#line 3877 "src/parser_bison.y"
+#line 3878 "src/parser_bison.y"
                                                                 { (yyval.expr) = (yyvsp[0].expr); }
-#line 12784 "src/parser_bison.c"
+#line 12785 "src/parser_bison.c"
     break;
 
   case 647: /* primary_stmt_expr: osf_expr  */
-#line 3878 "src/parser_bison.y"
+#line 3879 "src/parser_bison.y"
                                                                 { (yyval.expr) = (yyvsp[0].expr); }
-#line 12790 "src/parser_bison.c"
+#line 12791 "src/parser_bison.c"
     break;
 
   case 648: /* primary_stmt_expr: '(' basic_stmt_expr ')'  */
-#line 3879 "src/parser_bison.y"
+#line 3880 "src/parser_bison.y"
                                                                 { (yyval.expr) = (yyvsp[-1].expr); }
-#line 12796 "src/parser_bison.c"
+#line 12797 "src/parser_bison.c"
     break;
 
   case 650: /* shift_stmt_expr: shift_stmt_expr "<<" primary_stmt_expr  */
-#line 3884 "src/parser_bison.y"
+#line 3885 "src/parser_bison.y"
                         {
 				(yyval.expr) = binop_expr_alloc(&(yyloc), OP_LSHIFT, (yyvsp[-2].expr), (yyvsp[0].expr));
 			}
-#line 12804 "src/parser_bison.c"
+#line 12805 "src/parser_bison.c"
     break;
 
   case 651: /* shift_stmt_expr: shift_stmt_expr ">>" primary_stmt_expr  */
-#line 3888 "src/parser_bison.y"
+#line 3889 "src/parser_bison.y"
                         {
 				(yyval.expr) = binop_expr_alloc(&(yyloc), OP_RSHIFT, (yyvsp[-2].expr), (yyvsp[0].expr));
 			}
-#line 12812 "src/parser_bison.c"
+#line 12813 "src/parser_bison.c"
     break;
 
   case 653: /* and_stmt_expr: and_stmt_expr "&" shift_stmt_expr  */
-#line 3895 "src/parser_bison.y"
+#line 3896 "src/parser_bison.y"
                         {
 				(yyval.expr) = binop_expr_alloc(&(yyloc), OP_AND, (yyvsp[-2].expr), (yyvsp[0].expr));
 			}
-#line 12820 "src/parser_bison.c"
+#line 12821 "src/parser_bison.c"
     break;
 
   case 655: /* exclusive_or_stmt_expr: exclusive_or_stmt_expr "^" and_stmt_expr  */
-#line 3902 "src/parser_bison.y"
+#line 3903 "src/parser_bison.y"
                         {
 				(yyval.expr) = binop_expr_alloc(&(yyloc), OP_XOR, (yyvsp[-2].expr), (yyvsp[0].expr));
 			}
-#line 12828 "src/parser_bison.c"
+#line 12829 "src/parser_bison.c"
     break;
 
   case 657: /* inclusive_or_stmt_expr: inclusive_or_stmt_expr '|' exclusive_or_stmt_expr  */
-#line 3909 "src/parser_bison.y"
+#line 3910 "src/parser_bison.y"
                         {
 				(yyval.expr) = binop_expr_alloc(&(yyloc), OP_OR, (yyvsp[-2].expr), (yyvsp[0].expr));
 			}
-#line 12836 "src/parser_bison.c"
+#line 12837 "src/parser_bison.c"
     break;
 
   case 660: /* concat_stmt_expr: concat_stmt_expr "." primary_stmt_expr  */
-#line 3919 "src/parser_bison.y"
+#line 3920 "src/parser_bison.y"
                         {
 				struct location rhs[] = {
 					[1]	= (yylsp[-1]),
@@ -12845,145 +12846,145 @@ yyreduce:
 
 				(yyval.expr) = handle_concat_expr(&(yyloc), (yyval.expr), (yyvsp[-2].expr), (yyvsp[0].expr), rhs);
 			}
-#line 12849 "src/parser_bison.c"
+#line 12850 "src/parser_bison.c"
     break;
 
   case 663: /* map_stmt_expr: concat_stmt_expr "map" map_stmt_expr_set  */
-#line 3934 "src/parser_bison.y"
+#line 3935 "src/parser_bison.y"
                         {
 				(yyval.expr) = map_expr_alloc(&(yyloc), (yyvsp[-2].expr), (yyvsp[0].expr));
 			}
-#line 12857 "src/parser_bison.c"
+#line 12858 "src/parser_bison.c"
     break;
 
   case 664: /* map_stmt_expr: concat_stmt_expr  */
-#line 3937 "src/parser_bison.y"
+#line 3938 "src/parser_bison.y"
                                                         { (yyval.expr) = (yyvsp[0].expr); }
-#line 12863 "src/parser_bison.c"
+#line 12864 "src/parser_bison.c"
     break;
 
   case 665: /* prefix_stmt_expr: basic_stmt_expr "/" "number"  */
-#line 3941 "src/parser_bison.y"
+#line 3942 "src/parser_bison.y"
                         {
 				(yyval.expr) = prefix_expr_alloc(&(yyloc), (yyvsp[-2].expr), (yyvsp[0].val));
 			}
-#line 12871 "src/parser_bison.c"
+#line 12872 "src/parser_bison.c"
     break;
 
   case 666: /* range_stmt_expr: basic_stmt_expr "-" basic_stmt_expr  */
-#line 3947 "src/parser_bison.y"
+#line 3948 "src/parser_bison.y"
                         {
 				(yyval.expr) = range_expr_alloc(&(yyloc), (yyvsp[-2].expr), (yyvsp[0].expr));
 			}
-#line 12879 "src/parser_bison.c"
+#line 12880 "src/parser_bison.c"
     break;
 
   case 672: /* nat_stmt_args: stmt_expr  */
-#line 3962 "src/parser_bison.y"
+#line 3963 "src/parser_bison.y"
                         {
 				(yyvsp[-1].stmt)->nat.addr = (yyvsp[0].expr);
 			}
-#line 12887 "src/parser_bison.c"
+#line 12888 "src/parser_bison.c"
     break;
 
   case 673: /* nat_stmt_args: "to" stmt_expr  */
-#line 3966 "src/parser_bison.y"
+#line 3967 "src/parser_bison.y"
                         {
 				(yyvsp[-2].stmt)->nat.addr = (yyvsp[0].expr);
 			}
-#line 12895 "src/parser_bison.c"
+#line 12896 "src/parser_bison.c"
     break;
 
   case 674: /* nat_stmt_args: nf_key_proto "to" stmt_expr  */
-#line 3970 "src/parser_bison.y"
+#line 3971 "src/parser_bison.y"
                         {
 				(yyvsp[-3].stmt)->nat.family = (yyvsp[-2].val);
 				(yyvsp[-3].stmt)->nat.addr = (yyvsp[0].expr);
 			}
-#line 12904 "src/parser_bison.c"
+#line 12905 "src/parser_bison.c"
     break;
 
   case 675: /* nat_stmt_args: stmt_expr "colon" stmt_expr  */
-#line 3975 "src/parser_bison.y"
+#line 3976 "src/parser_bison.y"
                         {
 				(yyvsp[-3].stmt)->nat.addr = (yyvsp[-2].expr);
 				(yyvsp[-3].stmt)->nat.proto = (yyvsp[0].expr);
 			}
-#line 12913 "src/parser_bison.c"
+#line 12914 "src/parser_bison.c"
     break;
 
   case 676: /* nat_stmt_args: "to" stmt_expr "colon" stmt_expr  */
-#line 3980 "src/parser_bison.y"
+#line 3981 "src/parser_bison.y"
                         {
 				(yyvsp[-4].stmt)->nat.addr = (yyvsp[-2].expr);
 				(yyvsp[-4].stmt)->nat.proto = (yyvsp[0].expr);
 			}
-#line 12922 "src/parser_bison.c"
+#line 12923 "src/parser_bison.c"
     break;
 
   case 677: /* nat_stmt_args: nf_key_proto "to" stmt_expr "colon" stmt_expr  */
-#line 3985 "src/parser_bison.y"
+#line 3986 "src/parser_bison.y"
                         {
 				(yyvsp[-5].stmt)->nat.family = (yyvsp[-4].val);
 				(yyvsp[-5].stmt)->nat.addr = (yyvsp[-2].expr);
 				(yyvsp[-5].stmt)->nat.proto = (yyvsp[0].expr);
 			}
-#line 12932 "src/parser_bison.c"
+#line 12933 "src/parser_bison.c"
     break;
 
   case 678: /* nat_stmt_args: "colon" stmt_expr  */
-#line 3991 "src/parser_bison.y"
+#line 3992 "src/parser_bison.y"
                         {
 				(yyvsp[-2].stmt)->nat.proto = (yyvsp[0].expr);
 			}
-#line 12940 "src/parser_bison.c"
+#line 12941 "src/parser_bison.c"
     break;
 
   case 679: /* nat_stmt_args: "to" "colon" stmt_expr  */
-#line 3995 "src/parser_bison.y"
+#line 3996 "src/parser_bison.y"
                         {
 				(yyvsp[-3].stmt)->nat.proto = (yyvsp[0].expr);
 			}
-#line 12948 "src/parser_bison.c"
+#line 12949 "src/parser_bison.c"
     break;
 
   case 680: /* nat_stmt_args: nat_stmt_args nf_nat_flags  */
-#line 3999 "src/parser_bison.y"
+#line 4000 "src/parser_bison.y"
                         {
 				(yyvsp[-2].stmt)->nat.flags = (yyvsp[0].val);
 			}
-#line 12956 "src/parser_bison.c"
+#line 12957 "src/parser_bison.c"
     break;
 
   case 681: /* nat_stmt_args: nf_key_proto "addr" "." "port" "to" stmt_expr  */
-#line 4003 "src/parser_bison.y"
+#line 4004 "src/parser_bison.y"
                         {
 				(yyvsp[-6].stmt)->nat.family = (yyvsp[-5].val);
 				(yyvsp[-6].stmt)->nat.addr = (yyvsp[0].expr);
 				(yyvsp[-6].stmt)->nat.type_flags = STMT_NAT_F_CONCAT;
 			}
-#line 12966 "src/parser_bison.c"
+#line 12967 "src/parser_bison.c"
     break;
 
   case 682: /* nat_stmt_args: nf_key_proto "interval" "to" stmt_expr  */
-#line 4009 "src/parser_bison.y"
+#line 4010 "src/parser_bison.y"
                         {
 				(yyvsp[-4].stmt)->nat.family = (yyvsp[-3].val);
 				(yyvsp[-4].stmt)->nat.addr = (yyvsp[0].expr);
 			}
-#line 12975 "src/parser_bison.c"
+#line 12976 "src/parser_bison.c"
     break;
 
   case 683: /* nat_stmt_args: "interval" "to" stmt_expr  */
-#line 4014 "src/parser_bison.y"
+#line 4015 "src/parser_bison.y"
                         {
 				(yyvsp[-3].stmt)->nat.addr = (yyvsp[0].expr);
 			}
-#line 12983 "src/parser_bison.c"
+#line 12984 "src/parser_bison.c"
     break;
 
   case 684: /* nat_stmt_args: nf_key_proto "prefix" "to" stmt_expr  */
-#line 4018 "src/parser_bison.y"
+#line 4019 "src/parser_bison.y"
                         {
 				(yyvsp[-4].stmt)->nat.family = (yyvsp[-3].val);
 				(yyvsp[-4].stmt)->nat.addr = (yyvsp[0].expr);
@@ -12991,281 +12992,281 @@ yyreduce:
 						STMT_NAT_F_PREFIX;
 				(yyvsp[-4].stmt)->nat.flags |= NF_NAT_RANGE_NETMAP;
 			}
-#line 12995 "src/parser_bison.c"
+#line 12996 "src/parser_bison.c"
     break;
 
   case 685: /* nat_stmt_args: "prefix" "to" stmt_expr  */
-#line 4026 "src/parser_bison.y"
+#line 4027 "src/parser_bison.y"
                         {
 				(yyvsp[-3].stmt)->nat.addr = (yyvsp[0].expr);
 				(yyvsp[-3].stmt)->nat.type_flags =
 						STMT_NAT_F_PREFIX;
 				(yyvsp[-3].stmt)->nat.flags |= NF_NAT_RANGE_NETMAP;
 			}
-#line 13006 "src/parser_bison.c"
+#line 13007 "src/parser_bison.c"
     break;
 
   case 688: /* masq_stmt_alloc: "masquerade"  */
-#line 4038 "src/parser_bison.y"
+#line 4039 "src/parser_bison.y"
                                                 { (yyval.stmt) = nat_stmt_alloc(&(yyloc), NFT_NAT_MASQ); }
-#line 13012 "src/parser_bison.c"
+#line 13013 "src/parser_bison.c"
     break;
 
   case 689: /* masq_stmt_args: "to" "colon" stmt_expr  */
-#line 4042 "src/parser_bison.y"
+#line 4043 "src/parser_bison.y"
                         {
 				(yyvsp[-3].stmt)->nat.proto = (yyvsp[0].expr);
 			}
-#line 13020 "src/parser_bison.c"
+#line 13021 "src/parser_bison.c"
     break;
 
   case 690: /* masq_stmt_args: "to" "colon" stmt_expr nf_nat_flags  */
-#line 4046 "src/parser_bison.y"
+#line 4047 "src/parser_bison.y"
                         {
 				(yyvsp[-4].stmt)->nat.proto = (yyvsp[-1].expr);
 				(yyvsp[-4].stmt)->nat.flags = (yyvsp[0].val);
 			}
-#line 13029 "src/parser_bison.c"
+#line 13030 "src/parser_bison.c"
     break;
 
   case 691: /* masq_stmt_args: nf_nat_flags  */
-#line 4051 "src/parser_bison.y"
+#line 4052 "src/parser_bison.y"
                         {
 				(yyvsp[-1].stmt)->nat.flags = (yyvsp[0].val);
 			}
-#line 13037 "src/parser_bison.c"
+#line 13038 "src/parser_bison.c"
     break;
 
   case 694: /* redir_stmt_alloc: "redirect"  */
-#line 4060 "src/parser_bison.y"
+#line 4061 "src/parser_bison.y"
                                                 { (yyval.stmt) = nat_stmt_alloc(&(yyloc), NFT_NAT_REDIR); }
-#line 13043 "src/parser_bison.c"
+#line 13044 "src/parser_bison.c"
     break;
 
   case 695: /* redir_stmt_arg: "to" stmt_expr  */
-#line 4064 "src/parser_bison.y"
+#line 4065 "src/parser_bison.y"
                         {
 				(yyvsp[-2].stmt)->nat.proto = (yyvsp[0].expr);
 			}
-#line 13051 "src/parser_bison.c"
+#line 13052 "src/parser_bison.c"
     break;
 
   case 696: /* redir_stmt_arg: "to" "colon" stmt_expr  */
-#line 4068 "src/parser_bison.y"
+#line 4069 "src/parser_bison.y"
                         {
 				(yyvsp[-3].stmt)->nat.proto = (yyvsp[0].expr);
 			}
-#line 13059 "src/parser_bison.c"
+#line 13060 "src/parser_bison.c"
     break;
 
   case 697: /* redir_stmt_arg: nf_nat_flags  */
-#line 4072 "src/parser_bison.y"
+#line 4073 "src/parser_bison.y"
                         {
 				(yyvsp[-1].stmt)->nat.flags = (yyvsp[0].val);
 			}
-#line 13067 "src/parser_bison.c"
+#line 13068 "src/parser_bison.c"
     break;
 
   case 698: /* redir_stmt_arg: "to" stmt_expr nf_nat_flags  */
-#line 4076 "src/parser_bison.y"
+#line 4077 "src/parser_bison.y"
                         {
 				(yyvsp[-3].stmt)->nat.proto = (yyvsp[-1].expr);
 				(yyvsp[-3].stmt)->nat.flags = (yyvsp[0].val);
 			}
-#line 13076 "src/parser_bison.c"
+#line 13077 "src/parser_bison.c"
     break;
 
   case 699: /* redir_stmt_arg: "to" "colon" stmt_expr nf_nat_flags  */
-#line 4081 "src/parser_bison.y"
+#line 4082 "src/parser_bison.y"
                         {
 				(yyvsp[-4].stmt)->nat.proto = (yyvsp[-1].expr);
 				(yyvsp[-4].stmt)->nat.flags = (yyvsp[0].val);
 			}
-#line 13085 "src/parser_bison.c"
+#line 13086 "src/parser_bison.c"
     break;
 
   case 700: /* dup_stmt: "dup" "to" stmt_expr  */
-#line 4088 "src/parser_bison.y"
+#line 4089 "src/parser_bison.y"
                         {
 				(yyval.stmt) = dup_stmt_alloc(&(yyloc));
 				(yyval.stmt)->dup.to = (yyvsp[0].expr);
 			}
-#line 13094 "src/parser_bison.c"
+#line 13095 "src/parser_bison.c"
     break;
 
   case 701: /* dup_stmt: "dup" "to" stmt_expr "device" stmt_expr  */
-#line 4093 "src/parser_bison.y"
+#line 4094 "src/parser_bison.y"
                         {
 				(yyval.stmt) = dup_stmt_alloc(&(yyloc));
 				(yyval.stmt)->dup.to = (yyvsp[-2].expr);
 				(yyval.stmt)->dup.dev = (yyvsp[0].expr);
 			}
-#line 13104 "src/parser_bison.c"
+#line 13105 "src/parser_bison.c"
     break;
 
   case 702: /* fwd_stmt: "fwd" "to" stmt_expr  */
-#line 4101 "src/parser_bison.y"
+#line 4102 "src/parser_bison.y"
                         {
 				(yyval.stmt) = fwd_stmt_alloc(&(yyloc));
 				(yyval.stmt)->fwd.dev = (yyvsp[0].expr);
 			}
-#line 13113 "src/parser_bison.c"
+#line 13114 "src/parser_bison.c"
     break;
 
   case 703: /* fwd_stmt: "fwd" nf_key_proto "to" stmt_expr "device" stmt_expr  */
-#line 4106 "src/parser_bison.y"
+#line 4107 "src/parser_bison.y"
                         {
 				(yyval.stmt) = fwd_stmt_alloc(&(yyloc));
 				(yyval.stmt)->fwd.family = (yyvsp[-4].val);
 				(yyval.stmt)->fwd.addr = (yyvsp[-2].expr);
 				(yyval.stmt)->fwd.dev = (yyvsp[0].expr);
 			}
-#line 13124 "src/parser_bison.c"
+#line 13125 "src/parser_bison.c"
     break;
 
   case 705: /* nf_nat_flags: nf_nat_flags "comma" nf_nat_flag  */
-#line 4116 "src/parser_bison.y"
+#line 4117 "src/parser_bison.y"
                         {
 				(yyval.val) = (yyvsp[-2].val) | (yyvsp[0].val);
 			}
-#line 13132 "src/parser_bison.c"
+#line 13133 "src/parser_bison.c"
     break;
 
   case 706: /* nf_nat_flag: "random"  */
-#line 4121 "src/parser_bison.y"
+#line 4122 "src/parser_bison.y"
                                                 { (yyval.val) = NF_NAT_RANGE_PROTO_RANDOM; }
-#line 13138 "src/parser_bison.c"
+#line 13139 "src/parser_bison.c"
     break;
 
   case 707: /* nf_nat_flag: "fully-random"  */
-#line 4122 "src/parser_bison.y"
+#line 4123 "src/parser_bison.y"
                                                 { (yyval.val) = NF_NAT_RANGE_PROTO_RANDOM_FULLY; }
-#line 13144 "src/parser_bison.c"
+#line 13145 "src/parser_bison.c"
     break;
 
   case 708: /* nf_nat_flag: "persistent"  */
-#line 4123 "src/parser_bison.y"
+#line 4124 "src/parser_bison.y"
                                                 { (yyval.val) = NF_NAT_RANGE_PERSISTENT; }
-#line 13150 "src/parser_bison.c"
+#line 13151 "src/parser_bison.c"
     break;
 
   case 710: /* queue_stmt: "queue" "to" queue_stmt_expr close_scope_queue  */
-#line 4128 "src/parser_bison.y"
+#line 4129 "src/parser_bison.y"
                         {
 				(yyval.stmt) = queue_stmt_alloc(&(yyloc), (yyvsp[-1].expr), 0);
 			}
-#line 13158 "src/parser_bison.c"
+#line 13159 "src/parser_bison.c"
     break;
 
   case 711: /* queue_stmt: "queue" "flags" queue_stmt_flags "to" queue_stmt_expr close_scope_queue  */
-#line 4132 "src/parser_bison.y"
+#line 4133 "src/parser_bison.y"
                         {
 				(yyval.stmt) = queue_stmt_alloc(&(yyloc), (yyvsp[-1].expr), (yyvsp[-3].val));
 			}
-#line 13166 "src/parser_bison.c"
+#line 13167 "src/parser_bison.c"
     break;
 
   case 712: /* queue_stmt: "queue" "flags" queue_stmt_flags "num" queue_stmt_expr_simple close_scope_queue  */
-#line 4136 "src/parser_bison.y"
+#line 4137 "src/parser_bison.y"
                         {
 				(yyval.stmt) = queue_stmt_alloc(&(yyloc), (yyvsp[-1].expr), (yyvsp[-3].val));
 			}
-#line 13174 "src/parser_bison.c"
+#line 13175 "src/parser_bison.c"
     break;
 
   case 715: /* queue_stmt_alloc: "queue"  */
-#line 4146 "src/parser_bison.y"
+#line 4147 "src/parser_bison.y"
                         {
 				(yyval.stmt) = queue_stmt_alloc(&(yyloc), NULL, 0);
 			}
-#line 13182 "src/parser_bison.c"
+#line 13183 "src/parser_bison.c"
     break;
 
   case 716: /* queue_stmt_args: queue_stmt_arg  */
-#line 4152 "src/parser_bison.y"
+#line 4153 "src/parser_bison.y"
                         {
 				(yyval.stmt)	= (yyvsp[-1].stmt);
 			}
-#line 13190 "src/parser_bison.c"
+#line 13191 "src/parser_bison.c"
     break;
 
   case 718: /* queue_stmt_arg: "num" queue_stmt_expr_simple  */
-#line 4159 "src/parser_bison.y"
+#line 4160 "src/parser_bison.y"
                         {
 				(yyvsp[-2].stmt)->queue.queue = (yyvsp[0].expr);
 				(yyvsp[-2].stmt)->queue.queue->location = (yyloc);
 			}
-#line 13199 "src/parser_bison.c"
+#line 13200 "src/parser_bison.c"
     break;
 
   case 719: /* queue_stmt_arg: queue_stmt_flags  */
-#line 4164 "src/parser_bison.y"
+#line 4165 "src/parser_bison.y"
                         {
 				(yyvsp[-1].stmt)->queue.flags |= (yyvsp[0].val);
 			}
-#line 13207 "src/parser_bison.c"
+#line 13208 "src/parser_bison.c"
     break;
 
   case 724: /* queue_stmt_expr_simple: queue_expr "-" queue_expr  */
-#line 4176 "src/parser_bison.y"
+#line 4177 "src/parser_bison.y"
                         {
 				(yyval.expr) = range_expr_alloc(&(yyloc), (yyvsp[-2].expr), (yyvsp[0].expr));
 			}
-#line 13215 "src/parser_bison.c"
+#line 13216 "src/parser_bison.c"
     break;
 
   case 730: /* queue_stmt_flags: queue_stmt_flags "comma" queue_stmt_flag  */
-#line 4189 "src/parser_bison.y"
+#line 4190 "src/parser_bison.y"
                         {
 				(yyval.val) = (yyvsp[-2].val) | (yyvsp[0].val);
 			}
-#line 13223 "src/parser_bison.c"
+#line 13224 "src/parser_bison.c"
     break;
 
   case 731: /* queue_stmt_flag: "bypass"  */
-#line 4194 "src/parser_bison.y"
+#line 4195 "src/parser_bison.y"
                                         { (yyval.val) = NFT_QUEUE_FLAG_BYPASS; }
-#line 13229 "src/parser_bison.c"
+#line 13230 "src/parser_bison.c"
     break;
 
   case 732: /* queue_stmt_flag: "fanout"  */
-#line 4195 "src/parser_bison.y"
+#line 4196 "src/parser_bison.y"
                                         { (yyval.val) = NFT_QUEUE_FLAG_CPU_FANOUT; }
-#line 13235 "src/parser_bison.c"
+#line 13236 "src/parser_bison.c"
     break;
 
   case 735: /* set_elem_expr_stmt_alloc: concat_expr  */
-#line 4203 "src/parser_bison.y"
+#line 4204 "src/parser_bison.y"
                         {
 				(yyval.expr) = set_elem_expr_alloc(&(yylsp[0]), (yyvsp[0].expr));
 			}
-#line 13243 "src/parser_bison.c"
+#line 13244 "src/parser_bison.c"
     break;
 
   case 736: /* set_stmt: "set" set_stmt_op set_elem_expr_stmt set_ref_expr  */
-#line 4209 "src/parser_bison.y"
+#line 4210 "src/parser_bison.y"
                         {
 				(yyval.stmt) = set_stmt_alloc(&(yyloc));
 				(yyval.stmt)->set.op  = (yyvsp[-2].val);
 				(yyval.stmt)->set.key = (yyvsp[-1].expr);
 				(yyval.stmt)->set.set = (yyvsp[0].expr);
 			}
-#line 13254 "src/parser_bison.c"
+#line 13255 "src/parser_bison.c"
     break;
 
   case 737: /* set_stmt: set_stmt_op set_ref_expr '{' set_elem_expr_stmt '}'  */
-#line 4216 "src/parser_bison.y"
+#line 4217 "src/parser_bison.y"
                         {
 				(yyval.stmt) = set_stmt_alloc(&(yyloc));
 				(yyval.stmt)->set.op  = (yyvsp[-4].val);
 				(yyval.stmt)->set.key = (yyvsp[-1].expr);
 				(yyval.stmt)->set.set = (yyvsp[-3].expr);
 			}
-#line 13265 "src/parser_bison.c"
+#line 13266 "src/parser_bison.c"
     break;
 
   case 738: /* set_stmt: set_stmt_op set_ref_expr '{' set_elem_expr_stmt stateful_stmt_list '}'  */
-#line 4223 "src/parser_bison.y"
+#line 4224 "src/parser_bison.y"
                         {
 				(yyval.stmt) = set_stmt_alloc(&(yyloc));
 				(yyval.stmt)->set.op  = (yyvsp[-5].val);
@@ -13274,29 +13275,29 @@ yyreduce:
 				list_splice_tail((yyvsp[-1].list), &(yyval.stmt)->set.stmt_list);
 				free((yyvsp[-1].list));
 			}
-#line 13278 "src/parser_bison.c"
+#line 13279 "src/parser_bison.c"
     break;
 
   case 739: /* set_stmt_op: "add"  */
-#line 4233 "src/parser_bison.y"
+#line 4234 "src/parser_bison.y"
                                         { (yyval.val) = NFT_DYNSET_OP_ADD; }
-#line 13284 "src/parser_bison.c"
+#line 13285 "src/parser_bison.c"
     break;
 
   case 740: /* set_stmt_op: "update"  */
-#line 4234 "src/parser_bison.y"
+#line 4235 "src/parser_bison.y"
                                         { (yyval.val) = NFT_DYNSET_OP_UPDATE; }
-#line 13290 "src/parser_bison.c"
+#line 13291 "src/parser_bison.c"
     break;
 
   case 741: /* set_stmt_op: "delete"  */
-#line 4235 "src/parser_bison.y"
+#line 4236 "src/parser_bison.y"
                                         { (yyval.val) = NFT_DYNSET_OP_DELETE; }
-#line 13296 "src/parser_bison.c"
+#line 13297 "src/parser_bison.c"
     break;
 
   case 742: /* map_stmt: set_stmt_op set_ref_expr '{' set_elem_expr_stmt "colon" set_elem_expr_stmt '}'  */
-#line 4239 "src/parser_bison.y"
+#line 4240 "src/parser_bison.y"
                         {
 				(yyval.stmt) = map_stmt_alloc(&(yyloc));
 				(yyval.stmt)->map.op  = (yyvsp[-6].val);
@@ -13304,11 +13305,11 @@ yyreduce:
 				(yyval.stmt)->map.data = (yyvsp[-1].expr);
 				(yyval.stmt)->map.set = (yyvsp[-5].expr);
 			}
-#line 13308 "src/parser_bison.c"
+#line 13309 "src/parser_bison.c"
     break;
 
   case 743: /* map_stmt: set_stmt_op set_ref_expr '{' set_elem_expr_stmt stateful_stmt_list "colon" set_elem_expr_stmt '}'  */
-#line 4247 "src/parser_bison.y"
+#line 4248 "src/parser_bison.y"
                         {
 				(yyval.stmt) = map_stmt_alloc(&(yyloc));
 				(yyval.stmt)->map.op  = (yyvsp[-7].val);
@@ -13318,11 +13319,11 @@ yyreduce:
 				list_splice_tail((yyvsp[-3].list), &(yyval.stmt)->map.stmt_list);
 				free((yyvsp[-3].list));
 			}
-#line 13322 "src/parser_bison.c"
+#line 13323 "src/parser_bison.c"
     break;
 
   case 744: /* meter_stmt: "meter" identifier '{' meter_key_expr stmt '}'  */
-#line 4259 "src/parser_bison.y"
+#line 4260 "src/parser_bison.y"
                         {
 				(yyval.stmt) = meter_stmt_alloc(&(yyloc));
 				(yyval.stmt)->meter.name = (yyvsp[-4].string);
@@ -13331,11 +13332,11 @@ yyreduce:
 				(yyval.stmt)->meter.stmt = (yyvsp[-1].stmt);
 				(yyval.stmt)->location  = (yyloc);
 			}
-#line 13335 "src/parser_bison.c"
+#line 13336 "src/parser_bison.c"
     break;
 
   case 745: /* meter_stmt: "meter" identifier "size" "number" '{' meter_key_expr stmt '}'  */
-#line 4268 "src/parser_bison.y"
+#line 4269 "src/parser_bison.y"
                         {
 				(yyval.stmt) = meter_stmt_alloc(&(yyloc));
 				(yyval.stmt)->meter.name = (yyvsp[-6].string);
@@ -13344,19 +13345,19 @@ yyreduce:
 				(yyval.stmt)->meter.stmt = (yyvsp[-1].stmt);
 				(yyval.stmt)->location  = (yyloc);
 			}
-#line 13348 "src/parser_bison.c"
+#line 13349 "src/parser_bison.c"
     break;
 
   case 746: /* match_stmt: relational_expr  */
-#line 4279 "src/parser_bison.y"
+#line 4280 "src/parser_bison.y"
                         {
 				(yyval.stmt) = expr_stmt_alloc(&(yyloc), (yyvsp[0].expr));
 			}
-#line 13356 "src/parser_bison.c"
+#line 13357 "src/parser_bison.c"
     break;
 
   case 747: /* variable_expr: '$' identifier  */
-#line 4285 "src/parser_bison.y"
+#line 4286 "src/parser_bison.y"
                         {
 				struct scope *scope = current_scope(state);
 				struct symbol *sym;
@@ -13380,33 +13381,33 @@ yyreduce:
 				(yyval.expr) = variable_expr_alloc(&(yyloc), scope, sym);
 				free_const((yyvsp[0].string));
 			}
-#line 13384 "src/parser_bison.c"
+#line 13385 "src/parser_bison.c"
     break;
 
   case 749: /* symbol_expr: string  */
-#line 4312 "src/parser_bison.y"
+#line 4313 "src/parser_bison.y"
                         {
 				(yyval.expr) = symbol_expr_alloc(&(yyloc), SYMBOL_VALUE,
 						       current_scope(state),
 						       (yyvsp[0].string));
 				free_const((yyvsp[0].string));
 			}
-#line 13395 "src/parser_bison.c"
+#line 13396 "src/parser_bison.c"
     break;
 
   case 752: /* set_ref_symbol_expr: "@" identifier close_scope_at  */
-#line 4325 "src/parser_bison.y"
+#line 4326 "src/parser_bison.y"
                         {
 				(yyval.expr) = symbol_expr_alloc(&(yyloc), SYMBOL_SET,
 						       current_scope(state),
 						       (yyvsp[-1].string));
 				free_const((yyvsp[-1].string));
 			}
-#line 13406 "src/parser_bison.c"
+#line 13407 "src/parser_bison.c"
     break;
 
   case 753: /* integer_expr: "number"  */
-#line 4334 "src/parser_bison.y"
+#line 4335 "src/parser_bison.y"
                         {
 				char str[64];
 
@@ -13415,107 +13416,107 @@ yyreduce:
 						       current_scope(state),
 						       str);
 			}
-#line 13419 "src/parser_bison.c"
+#line 13420 "src/parser_bison.c"
     break;
 
   case 754: /* selector_expr: payload_expr  */
-#line 4344 "src/parser_bison.y"
+#line 4345 "src/parser_bison.y"
                                                                 { (yyval.expr) = (yyvsp[0].expr); }
-#line 13425 "src/parser_bison.c"
+#line 13426 "src/parser_bison.c"
     break;
 
   case 755: /* selector_expr: exthdr_expr  */
-#line 4345 "src/parser_bison.y"
+#line 4346 "src/parser_bison.y"
                                                                 { (yyval.expr) = (yyvsp[0].expr); }
-#line 13431 "src/parser_bison.c"
+#line 13432 "src/parser_bison.c"
     break;
 
   case 756: /* selector_expr: exthdr_exists_expr  */
-#line 4346 "src/parser_bison.y"
+#line 4347 "src/parser_bison.y"
                                                                 { (yyval.expr) = (yyvsp[0].expr); }
-#line 13437 "src/parser_bison.c"
+#line 13438 "src/parser_bison.c"
     break;
 
   case 757: /* selector_expr: meta_expr  */
-#line 4347 "src/parser_bison.y"
+#line 4348 "src/parser_bison.y"
                                                                 { (yyval.expr) = (yyvsp[0].expr); }
-#line 13443 "src/parser_bison.c"
+#line 13444 "src/parser_bison.c"
     break;
 
   case 758: /* selector_expr: socket_expr  */
-#line 4348 "src/parser_bison.y"
+#line 4349 "src/parser_bison.y"
                                                                 { (yyval.expr) = (yyvsp[0].expr); }
-#line 13449 "src/parser_bison.c"
+#line 13450 "src/parser_bison.c"
     break;
 
   case 759: /* selector_expr: rt_expr  */
-#line 4349 "src/parser_bison.y"
+#line 4350 "src/parser_bison.y"
                                                                 { (yyval.expr) = (yyvsp[0].expr); }
-#line 13455 "src/parser_bison.c"
+#line 13456 "src/parser_bison.c"
     break;
 
   case 760: /* selector_expr: ct_expr  */
-#line 4350 "src/parser_bison.y"
+#line 4351 "src/parser_bison.y"
                                                                 { (yyval.expr) = (yyvsp[0].expr); }
-#line 13461 "src/parser_bison.c"
+#line 13462 "src/parser_bison.c"
     break;
 
   case 761: /* selector_expr: numgen_expr  */
-#line 4351 "src/parser_bison.y"
+#line 4352 "src/parser_bison.y"
                                                                 { (yyval.expr) = (yyvsp[0].expr); }
-#line 13467 "src/parser_bison.c"
+#line 13468 "src/parser_bison.c"
     break;
 
   case 762: /* selector_expr: hash_expr  */
-#line 4352 "src/parser_bison.y"
+#line 4353 "src/parser_bison.y"
                                                                 { (yyval.expr) = (yyvsp[0].expr); }
-#line 13473 "src/parser_bison.c"
+#line 13474 "src/parser_bison.c"
     break;
 
   case 763: /* selector_expr: fib_expr  */
-#line 4353 "src/parser_bison.y"
+#line 4354 "src/parser_bison.y"
                                                                 { (yyval.expr) = (yyvsp[0].expr); }
-#line 13479 "src/parser_bison.c"
+#line 13480 "src/parser_bison.c"
     break;
 
   case 764: /* selector_expr: osf_expr  */
-#line 4354 "src/parser_bison.y"
+#line 4355 "src/parser_bison.y"
                                                                 { (yyval.expr) = (yyvsp[0].expr); }
-#line 13485 "src/parser_bison.c"
+#line 13486 "src/parser_bison.c"
     break;
 
   case 765: /* selector_expr: xfrm_expr  */
-#line 4355 "src/parser_bison.y"
+#line 4356 "src/parser_bison.y"
                                                                 { (yyval.expr) = (yyvsp[0].expr); }
-#line 13491 "src/parser_bison.c"
+#line 13492 "src/parser_bison.c"
     break;
 
   case 766: /* primary_expr: symbol_expr  */
-#line 4358 "src/parser_bison.y"
+#line 4359 "src/parser_bison.y"
                                                                 { (yyval.expr) = (yyvsp[0].expr); }
-#line 13497 "src/parser_bison.c"
+#line 13498 "src/parser_bison.c"
     break;
 
   case 767: /* primary_expr: integer_expr  */
-#line 4359 "src/parser_bison.y"
+#line 4360 "src/parser_bison.y"
                                                                 { (yyval.expr) = (yyvsp[0].expr); }
-#line 13503 "src/parser_bison.c"
+#line 13504 "src/parser_bison.c"
     break;
 
   case 768: /* primary_expr: selector_expr  */
-#line 4360 "src/parser_bison.y"
+#line 4361 "src/parser_bison.y"
                                                                 { (yyval.expr) = (yyvsp[0].expr); }
-#line 13509 "src/parser_bison.c"
+#line 13510 "src/parser_bison.c"
     break;
 
   case 769: /* primary_expr: '(' basic_expr ')'  */
-#line 4361 "src/parser_bison.y"
+#line 4362 "src/parser_bison.y"
                                                                 { (yyval.expr) = (yyvsp[-1].expr); }
-#line 13515 "src/parser_bison.c"
+#line 13516 "src/parser_bison.c"
     break;
 
   case 770: /* fib_expr: "fib" fib_tuple fib_result close_scope_fib  */
-#line 4365 "src/parser_bison.y"
+#line 4366 "src/parser_bison.y"
                         {
 				uint32_t flags = (yyvsp[-2].val), result = (yyvsp[-1].val);
 
@@ -13543,97 +13544,97 @@ yyreduce:
 
 				(yyval.expr) = fib_expr_alloc(&(yyloc), flags, result);
 			}
-#line 13547 "src/parser_bison.c"
+#line 13548 "src/parser_bison.c"
     break;
 
   case 771: /* fib_result: "oif"  */
-#line 4394 "src/parser_bison.y"
+#line 4395 "src/parser_bison.y"
                                         { (yyval.val) =NFT_FIB_RESULT_OIF; }
-#line 13553 "src/parser_bison.c"
+#line 13554 "src/parser_bison.c"
     break;
 
   case 772: /* fib_result: "oifname"  */
-#line 4395 "src/parser_bison.y"
+#line 4396 "src/parser_bison.y"
                                         { (yyval.val) =NFT_FIB_RESULT_OIFNAME; }
-#line 13559 "src/parser_bison.c"
+#line 13560 "src/parser_bison.c"
     break;
 
   case 773: /* fib_result: "type" close_scope_type  */
-#line 4396 "src/parser_bison.y"
+#line 4397 "src/parser_bison.y"
                                                                 { (yyval.val) =NFT_FIB_RESULT_ADDRTYPE; }
-#line 13565 "src/parser_bison.c"
+#line 13566 "src/parser_bison.c"
     break;
 
   case 774: /* fib_result: "check"  */
-#line 4397 "src/parser_bison.y"
+#line 4398 "src/parser_bison.y"
                                         { (yyval.val) = __NFT_FIB_RESULT_MAX; }
-#line 13571 "src/parser_bison.c"
+#line 13572 "src/parser_bison.c"
     break;
 
   case 775: /* fib_flag: "saddr"  */
-#line 4400 "src/parser_bison.y"
+#line 4401 "src/parser_bison.y"
                                         { (yyval.val) = NFTA_FIB_F_SADDR; }
-#line 13577 "src/parser_bison.c"
+#line 13578 "src/parser_bison.c"
     break;
 
   case 776: /* fib_flag: "daddr"  */
-#line 4401 "src/parser_bison.y"
+#line 4402 "src/parser_bison.y"
                                         { (yyval.val) = NFTA_FIB_F_DADDR; }
-#line 13583 "src/parser_bison.c"
+#line 13584 "src/parser_bison.c"
     break;
 
   case 777: /* fib_flag: "mark"  */
-#line 4402 "src/parser_bison.y"
+#line 4403 "src/parser_bison.y"
                                         { (yyval.val) = NFTA_FIB_F_MARK; }
-#line 13589 "src/parser_bison.c"
+#line 13590 "src/parser_bison.c"
     break;
 
   case 778: /* fib_flag: "iif"  */
-#line 4403 "src/parser_bison.y"
+#line 4404 "src/parser_bison.y"
                                         { (yyval.val) = NFTA_FIB_F_IIF; }
-#line 13595 "src/parser_bison.c"
+#line 13596 "src/parser_bison.c"
     break;
 
   case 779: /* fib_flag: "oif"  */
-#line 4404 "src/parser_bison.y"
+#line 4405 "src/parser_bison.y"
                                         { (yyval.val) = NFTA_FIB_F_OIF; }
-#line 13601 "src/parser_bison.c"
+#line 13602 "src/parser_bison.c"
     break;
 
   case 780: /* fib_tuple: fib_flag "." fib_tuple  */
-#line 4408 "src/parser_bison.y"
+#line 4409 "src/parser_bison.y"
                         {
 				(yyval.val) = (yyvsp[-2].val) | (yyvsp[0].val);
 			}
-#line 13609 "src/parser_bison.c"
+#line 13610 "src/parser_bison.c"
     break;
 
   case 782: /* osf_expr: "osf" osf_ttl "version" close_scope_osf  */
-#line 4415 "src/parser_bison.y"
+#line 4416 "src/parser_bison.y"
                         {
 				(yyval.expr) = osf_expr_alloc(&(yyloc), (yyvsp[-2].val), NFT_OSF_F_VERSION);
 			}
-#line 13617 "src/parser_bison.c"
+#line 13618 "src/parser_bison.c"
     break;
 
   case 783: /* osf_expr: "osf" osf_ttl "name" close_scope_osf  */
-#line 4419 "src/parser_bison.y"
+#line 4420 "src/parser_bison.y"
                         {
 				(yyval.expr) = osf_expr_alloc(&(yyloc), (yyvsp[-2].val), 0);
 			}
-#line 13625 "src/parser_bison.c"
+#line 13626 "src/parser_bison.c"
     break;
 
   case 784: /* osf_ttl: %empty  */
-#line 4425 "src/parser_bison.y"
+#line 4426 "src/parser_bison.y"
                         {
 				(yyval.val) = NF_OSF_TTL_TRUE;
 			}
-#line 13633 "src/parser_bison.c"
+#line 13634 "src/parser_bison.c"
     break;
 
   case 785: /* osf_ttl: "ttl" "string"  */
-#line 4429 "src/parser_bison.y"
+#line 4430 "src/parser_bison.y"
                         {
 				if (!strcmp((yyvsp[0].string), "loose"))
 					(yyval.val) = NF_OSF_TTL_LESS;
@@ -13647,51 +13648,51 @@ yyreduce:
 				}
 				free_const((yyvsp[0].string));
 			}
-#line 13651 "src/parser_bison.c"
+#line 13652 "src/parser_bison.c"
     break;
 
   case 787: /* shift_expr: shift_expr "<<" primary_rhs_expr  */
-#line 4446 "src/parser_bison.y"
+#line 4447 "src/parser_bison.y"
                         {
 				(yyval.expr) = binop_expr_alloc(&(yyloc), OP_LSHIFT, (yyvsp[-2].expr), (yyvsp[0].expr));
 			}
-#line 13659 "src/parser_bison.c"
+#line 13660 "src/parser_bison.c"
     break;
 
   case 788: /* shift_expr: shift_expr ">>" primary_rhs_expr  */
-#line 4450 "src/parser_bison.y"
+#line 4451 "src/parser_bison.y"
                         {
 				(yyval.expr) = binop_expr_alloc(&(yyloc), OP_RSHIFT, (yyvsp[-2].expr), (yyvsp[0].expr));
 			}
-#line 13667 "src/parser_bison.c"
+#line 13668 "src/parser_bison.c"
     break;
 
   case 790: /* and_expr: and_expr "&" shift_rhs_expr  */
-#line 4457 "src/parser_bison.y"
+#line 4458 "src/parser_bison.y"
                         {
 				(yyval.expr) = binop_expr_alloc(&(yyloc), OP_AND, (yyvsp[-2].expr), (yyvsp[0].expr));
 			}
-#line 13675 "src/parser_bison.c"
+#line 13676 "src/parser_bison.c"
     break;
 
   case 792: /* exclusive_or_expr: exclusive_or_expr "^" and_rhs_expr  */
-#line 4464 "src/parser_bison.y"
+#line 4465 "src/parser_bison.y"
                         {
 				(yyval.expr) = binop_expr_alloc(&(yyloc), OP_XOR, (yyvsp[-2].expr), (yyvsp[0].expr));
 			}
-#line 13683 "src/parser_bison.c"
+#line 13684 "src/parser_bison.c"
     break;
 
   case 794: /* inclusive_or_expr: inclusive_or_expr '|' exclusive_or_rhs_expr  */
-#line 4471 "src/parser_bison.y"
+#line 4472 "src/parser_bison.y"
                         {
 				(yyval.expr) = binop_expr_alloc(&(yyloc), OP_OR, (yyvsp[-2].expr), (yyvsp[0].expr));
 			}
-#line 13691 "src/parser_bison.c"
+#line 13692 "src/parser_bison.c"
     break;
 
   case 797: /* concat_expr: concat_expr "." basic_expr  */
-#line 4481 "src/parser_bison.y"
+#line 4482 "src/parser_bison.y"
                         {
 				struct location rhs[] = {
 					[1]	= (yylsp[-1]),
@@ -13700,19 +13701,19 @@ yyreduce:
 
 				(yyval.expr) = handle_concat_expr(&(yyloc), (yyval.expr), (yyvsp[-2].expr), (yyvsp[0].expr), rhs);
 			}
-#line 13704 "src/parser_bison.c"
+#line 13705 "src/parser_bison.c"
     break;
 
   case 798: /* prefix_rhs_expr: basic_rhs_expr "/" "number"  */
-#line 4492 "src/parser_bison.y"
+#line 4493 "src/parser_bison.y"
                         {
 				(yyval.expr) = prefix_expr_alloc(&(yyloc), (yyvsp[-2].expr), (yyvsp[0].val));
 			}
-#line 13712 "src/parser_bison.c"
+#line 13713 "src/parser_bison.c"
     break;
 
   case 799: /* range_rhs_expr: basic_rhs_expr "-" basic_rhs_expr  */
-#line 4498 "src/parser_bison.y"
+#line 4499 "src/parser_bison.y"
                         {
 				if (is_symbol_value_expr((yyvsp[-2].expr)) &&
 				    is_symbol_value_expr((yyvsp[0].expr))) {
@@ -13723,135 +13724,135 @@ yyreduce:
 					(yyval.expr) = range_expr_alloc(&(yyloc), (yyvsp[-2].expr), (yyvsp[0].expr));
 				}
 			}
-#line 13727 "src/parser_bison.c"
+#line 13728 "src/parser_bison.c"
     break;
 
   case 802: /* map_expr: concat_expr "map" rhs_expr  */
-#line 4515 "src/parser_bison.y"
+#line 4516 "src/parser_bison.y"
                         {
 				(yyval.expr) = map_expr_alloc(&(yyloc), (yyvsp[-2].expr), (yyvsp[0].expr));
 			}
-#line 13735 "src/parser_bison.c"
+#line 13736 "src/parser_bison.c"
     break;
 
   case 806: /* set_expr: '{' set_list_expr '}'  */
-#line 4526 "src/parser_bison.y"
+#line 4527 "src/parser_bison.y"
                         {
 				(yyvsp[-1].expr)->location = (yyloc);
 				(yyval.expr) = (yyvsp[-1].expr);
 			}
-#line 13744 "src/parser_bison.c"
+#line 13745 "src/parser_bison.c"
     break;
 
   case 807: /* set_list_expr: set_list_member_expr  */
-#line 4533 "src/parser_bison.y"
+#line 4534 "src/parser_bison.y"
                         {
 				(yyval.expr) = set_expr_alloc(&(yyloc), NULL);
 				compound_expr_add((yyval.expr), (yyvsp[0].expr));
 			}
-#line 13753 "src/parser_bison.c"
+#line 13754 "src/parser_bison.c"
     break;
 
   case 808: /* set_list_expr: set_list_expr "comma" set_list_member_expr  */
-#line 4538 "src/parser_bison.y"
+#line 4539 "src/parser_bison.y"
                         {
 				compound_expr_add((yyvsp[-2].expr), (yyvsp[0].expr));
 				(yyval.expr) = (yyvsp[-2].expr);
 			}
-#line 13762 "src/parser_bison.c"
+#line 13763 "src/parser_bison.c"
     break;
 
   case 810: /* set_list_member_expr: opt_newline set_expr opt_newline  */
-#line 4546 "src/parser_bison.y"
+#line 4547 "src/parser_bison.y"
                         {
 				(yyval.expr) = (yyvsp[-1].expr);
 			}
-#line 13770 "src/parser_bison.c"
+#line 13771 "src/parser_bison.c"
     break;
 
   case 811: /* set_list_member_expr: opt_newline set_elem_expr opt_newline  */
-#line 4550 "src/parser_bison.y"
+#line 4551 "src/parser_bison.y"
                         {
 				(yyval.expr) = (yyvsp[-1].expr);
 			}
-#line 13778 "src/parser_bison.c"
+#line 13779 "src/parser_bison.c"
     break;
 
   case 812: /* set_list_member_expr: opt_newline set_elem_expr "colon" set_rhs_expr opt_newline  */
-#line 4554 "src/parser_bison.y"
+#line 4555 "src/parser_bison.y"
                         {
 				(yyval.expr) = mapping_expr_alloc(&(yylsp[-3]), (yyvsp[-3].expr), (yyvsp[-1].expr));
 			}
-#line 13786 "src/parser_bison.c"
+#line 13787 "src/parser_bison.c"
     break;
 
   case 814: /* meter_key_expr: meter_key_expr_alloc set_elem_options  */
-#line 4561 "src/parser_bison.y"
+#line 4562 "src/parser_bison.y"
                         {
 				(yyval.expr)->location = (yyloc);
 				(yyval.expr) = (yyvsp[-1].expr);
 			}
-#line 13795 "src/parser_bison.c"
+#line 13796 "src/parser_bison.c"
     break;
 
   case 815: /* meter_key_expr_alloc: concat_expr  */
-#line 4568 "src/parser_bison.y"
+#line 4569 "src/parser_bison.y"
                         {
 				(yyval.expr) = set_elem_expr_alloc(&(yylsp[0]), (yyvsp[0].expr));
 			}
-#line 13803 "src/parser_bison.c"
+#line 13804 "src/parser_bison.c"
     break;
 
   case 818: /* set_elem_expr: set_elem_expr_alloc set_elem_expr_options set_elem_stmt_list  */
-#line 4576 "src/parser_bison.y"
+#line 4577 "src/parser_bison.y"
                         {
 				(yyval.expr) = (yyvsp[-2].expr);
 				list_splice_tail((yyvsp[0].list), &(yyval.expr)->stmt_list);
 				free((yyvsp[0].list));
 			}
-#line 13813 "src/parser_bison.c"
+#line 13814 "src/parser_bison.c"
     break;
 
   case 819: /* set_elem_key_expr: set_lhs_expr  */
-#line 4583 "src/parser_bison.y"
+#line 4584 "src/parser_bison.y"
                                                         { (yyval.expr) = (yyvsp[0].expr); }
-#line 13819 "src/parser_bison.c"
+#line 13820 "src/parser_bison.c"
     break;
 
   case 820: /* set_elem_key_expr: "*"  */
-#line 4584 "src/parser_bison.y"
+#line 4585 "src/parser_bison.y"
                                                         { (yyval.expr) = set_elem_catchall_expr_alloc(&(yylsp[0])); }
-#line 13825 "src/parser_bison.c"
+#line 13826 "src/parser_bison.c"
     break;
 
   case 821: /* set_elem_expr_alloc: set_elem_key_expr set_elem_stmt_list  */
-#line 4588 "src/parser_bison.y"
+#line 4589 "src/parser_bison.y"
                         {
 				(yyval.expr) = set_elem_expr_alloc(&(yylsp[-1]), (yyvsp[-1].expr));
 				list_splice_tail((yyvsp[0].list), &(yyval.expr)->stmt_list);
 				free((yyvsp[0].list));
 			}
-#line 13835 "src/parser_bison.c"
+#line 13836 "src/parser_bison.c"
     break;
 
   case 822: /* set_elem_expr_alloc: set_elem_key_expr  */
-#line 4594 "src/parser_bison.y"
+#line 4595 "src/parser_bison.y"
                         {
 				(yyval.expr) = set_elem_expr_alloc(&(yylsp[0]), (yyvsp[0].expr));
 			}
-#line 13843 "src/parser_bison.c"
+#line 13844 "src/parser_bison.c"
     break;
 
   case 823: /* set_elem_options: set_elem_option  */
-#line 4600 "src/parser_bison.y"
+#line 4601 "src/parser_bison.y"
                         {
 				(yyval.expr)	= (yyvsp[-1].expr);
 			}
-#line 13851 "src/parser_bison.c"
+#line 13852 "src/parser_bison.c"
     break;
 
   case 825: /* set_elem_time_spec: "string"  */
-#line 4607 "src/parser_bison.y"
+#line 4608 "src/parser_bison.y"
                         {
 				struct error_record *erec;
 				uint64_t res;
@@ -13870,27 +13871,27 @@ yyreduce:
 				}
 				(yyval.val) = res;
 			}
-#line 13874 "src/parser_bison.c"
+#line 13875 "src/parser_bison.c"
     break;
 
   case 826: /* set_elem_option: "timeout" time_spec  */
-#line 4628 "src/parser_bison.y"
+#line 4629 "src/parser_bison.y"
                         {
 				(yyvsp[-2].expr)->timeout = (yyvsp[0].val);
 			}
-#line 13882 "src/parser_bison.c"
+#line 13883 "src/parser_bison.c"
     break;
 
   case 827: /* set_elem_option: "expires" time_spec  */
-#line 4632 "src/parser_bison.y"
+#line 4633 "src/parser_bison.y"
                         {
 				(yyvsp[-2].expr)->expiration = (yyvsp[0].val);
 			}
-#line 13890 "src/parser_bison.c"
+#line 13891 "src/parser_bison.c"
     break;
 
   case 828: /* set_elem_option: comment_spec  */
-#line 4636 "src/parser_bison.y"
+#line 4637 "src/parser_bison.y"
                         {
 				if (already_set((yyvsp[-1].expr)->comment, &(yylsp[0]), state)) {
 					free_const((yyvsp[0].string));
@@ -13898,54 +13899,54 @@ yyreduce:
 				}
 				(yyvsp[-1].expr)->comment = (yyvsp[0].string);
 			}
-#line 13902 "src/parser_bison.c"
+#line 13903 "src/parser_bison.c"
     break;
 
   case 829: /* set_elem_expr_options: set_elem_expr_option  */
-#line 4646 "src/parser_bison.y"
+#line 4647 "src/parser_bison.y"
                         {
 				(yyval.expr)	= (yyvsp[-1].expr);
 			}
-#line 13910 "src/parser_bison.c"
+#line 13911 "src/parser_bison.c"
     break;
 
   case 831: /* set_elem_stmt_list: set_elem_stmt  */
-#line 4653 "src/parser_bison.y"
+#line 4654 "src/parser_bison.y"
                         {
 				(yyval.list) = xmalloc(sizeof(*(yyval.list)));
 				init_list_head((yyval.list));
 				list_add_tail(&(yyvsp[0].stmt)->list, (yyval.list));
 			}
-#line 13920 "src/parser_bison.c"
+#line 13921 "src/parser_bison.c"
     break;
 
   case 832: /* set_elem_stmt_list: set_elem_stmt_list set_elem_stmt  */
-#line 4659 "src/parser_bison.y"
+#line 4660 "src/parser_bison.y"
                         {
 				(yyval.list) = (yyvsp[-1].list);
 				list_add_tail(&(yyvsp[0].stmt)->list, (yyvsp[-1].list));
 			}
-#line 13929 "src/parser_bison.c"
+#line 13930 "src/parser_bison.c"
     break;
 
   case 838: /* set_elem_expr_option: "timeout" set_elem_time_spec  */
-#line 4673 "src/parser_bison.y"
+#line 4674 "src/parser_bison.y"
                         {
 				(yyvsp[-2].expr)->timeout = (yyvsp[0].val);
 			}
-#line 13937 "src/parser_bison.c"
+#line 13938 "src/parser_bison.c"
     break;
 
   case 839: /* set_elem_expr_option: "expires" time_spec  */
-#line 4677 "src/parser_bison.y"
+#line 4678 "src/parser_bison.y"
                         {
 				(yyvsp[-2].expr)->expiration = (yyvsp[0].val);
 			}
-#line 13945 "src/parser_bison.c"
+#line 13946 "src/parser_bison.c"
     break;
 
   case 840: /* set_elem_expr_option: comment_spec  */
-#line 4681 "src/parser_bison.y"
+#line 4682 "src/parser_bison.y"
                         {
 				if (already_set((yyvsp[-1].expr)->comment, &(yylsp[0]), state)) {
 					free_const((yyvsp[0].string));
@@ -13953,17 +13954,17 @@ yyreduce:
 				}
 				(yyvsp[-1].expr)->comment = (yyvsp[0].string);
 			}
-#line 13957 "src/parser_bison.c"
+#line 13958 "src/parser_bison.c"
     break;
 
   case 846: /* initializer_expr: '{' '}'  */
-#line 4699 "src/parser_bison.y"
+#line 4700 "src/parser_bison.y"
                                                 { (yyval.expr) = compound_expr_alloc(&(yyloc), EXPR_SET); }
-#line 13963 "src/parser_bison.c"
+#line 13964 "src/parser_bison.c"
     break;
 
   case 847: /* initializer_expr: "-" "number"  */
-#line 4701 "src/parser_bison.y"
+#line 4702 "src/parser_bison.y"
                         {
 				int32_t num = -(yyvsp[0].val);
 
@@ -13972,11 +13973,11 @@ yyreduce:
 							 sizeof(num) * BITS_PER_BYTE,
 							 &num);
 			}
-#line 13976 "src/parser_bison.c"
+#line 13977 "src/parser_bison.c"
     break;
 
   case 848: /* counter_config: "packets" "number" "bytes" "number"  */
-#line 4712 "src/parser_bison.y"
+#line 4713 "src/parser_bison.y"
                         {
 				struct counter *counter;
 
@@ -13984,20 +13985,20 @@ yyreduce:
 				counter->packets = (yyvsp[-2].val);
 				counter->bytes = (yyvsp[0].val);
 			}
-#line 13988 "src/parser_bison.c"
+#line 13989 "src/parser_bison.c"
     break;
 
   case 849: /* counter_obj: %empty  */
-#line 4722 "src/parser_bison.y"
+#line 4723 "src/parser_bison.y"
                         {
 				(yyval.obj) = obj_alloc(&(yyloc));
 				(yyval.obj)->type = NFT_OBJECT_COUNTER;
 			}
-#line 13997 "src/parser_bison.c"
+#line 13998 "src/parser_bison.c"
     break;
 
   case 850: /* quota_config: quota_mode "number" quota_unit quota_used  */
-#line 4729 "src/parser_bison.y"
+#line 4730 "src/parser_bison.y"
                         {
 				struct error_record *erec;
 				struct quota *quota;
@@ -14015,20 +14016,20 @@ yyreduce:
 				quota->used	= (yyvsp[0].val);
 				quota->flags	= (yyvsp[-3].val);
 			}
-#line 14019 "src/parser_bison.c"
+#line 14020 "src/parser_bison.c"
     break;
 
   case 851: /* quota_obj: %empty  */
-#line 4749 "src/parser_bison.y"
+#line 4750 "src/parser_bison.y"
                         {
 				(yyval.obj) = obj_alloc(&(yyloc));
 				(yyval.obj)->type = NFT_OBJECT_QUOTA;
 			}
-#line 14028 "src/parser_bison.c"
+#line 14029 "src/parser_bison.c"
     break;
 
   case 852: /* secmark_config: string  */
-#line 4756 "src/parser_bison.y"
+#line 4757 "src/parser_bison.y"
                         {
 				int ret;
 				struct secmark *secmark;
@@ -14042,68 +14043,68 @@ yyreduce:
 				}
 				free_const((yyvsp[0].string));
 			}
-#line 14046 "src/parser_bison.c"
+#line 14047 "src/parser_bison.c"
     break;
 
   case 853: /* secmark_obj: %empty  */
-#line 4772 "src/parser_bison.y"
+#line 4773 "src/parser_bison.y"
                         {
 				(yyval.obj) = obj_alloc(&(yyloc));
 				(yyval.obj)->type = NFT_OBJECT_SECMARK;
 			}
-#line 14055 "src/parser_bison.c"
+#line 14056 "src/parser_bison.c"
     break;
 
   case 854: /* ct_obj_type: "helper"  */
-#line 4778 "src/parser_bison.y"
+#line 4779 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_OBJECT_CT_HELPER; }
-#line 14061 "src/parser_bison.c"
+#line 14062 "src/parser_bison.c"
     break;
 
   case 855: /* ct_obj_type: "timeout"  */
-#line 4779 "src/parser_bison.y"
+#line 4780 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_OBJECT_CT_TIMEOUT; }
-#line 14067 "src/parser_bison.c"
+#line 14068 "src/parser_bison.c"
     break;
 
   case 856: /* ct_obj_type: "expectation"  */
-#line 4780 "src/parser_bison.y"
+#line 4781 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_OBJECT_CT_EXPECT; }
-#line 14073 "src/parser_bison.c"
+#line 14074 "src/parser_bison.c"
     break;
 
   case 857: /* ct_cmd_type: "helpers"  */
-#line 4783 "src/parser_bison.y"
+#line 4784 "src/parser_bison.y"
                                                 { (yyval.val) = CMD_OBJ_CT_HELPERS; }
-#line 14079 "src/parser_bison.c"
+#line 14080 "src/parser_bison.c"
     break;
 
   case 858: /* ct_cmd_type: "timeout"  */
-#line 4784 "src/parser_bison.y"
+#line 4785 "src/parser_bison.y"
                                                 { (yyval.val) = CMD_OBJ_CT_TIMEOUTS; }
-#line 14085 "src/parser_bison.c"
+#line 14086 "src/parser_bison.c"
     break;
 
   case 859: /* ct_cmd_type: "expectation"  */
-#line 4785 "src/parser_bison.y"
+#line 4786 "src/parser_bison.y"
                                                 { (yyval.val) = CMD_OBJ_CT_EXPECTATIONS; }
-#line 14091 "src/parser_bison.c"
+#line 14092 "src/parser_bison.c"
     break;
 
   case 860: /* ct_l4protoname: "tcp" close_scope_tcp  */
-#line 4788 "src/parser_bison.y"
+#line 4789 "src/parser_bison.y"
                                                         { (yyval.val) = IPPROTO_TCP; }
-#line 14097 "src/parser_bison.c"
+#line 14098 "src/parser_bison.c"
     break;
 
   case 861: /* ct_l4protoname: "udp" close_scope_udp  */
-#line 4789 "src/parser_bison.y"
+#line 4790 "src/parser_bison.y"
                                                         { (yyval.val) = IPPROTO_UDP; }
-#line 14103 "src/parser_bison.c"
+#line 14104 "src/parser_bison.c"
     break;
 
   case 862: /* ct_helper_config: "type" "quoted string" "protocol" ct_l4protoname stmt_separator close_scope_type  */
-#line 4793 "src/parser_bison.y"
+#line 4794 "src/parser_bison.y"
                         {
 				struct ct_helper *ct;
 				int ret;
@@ -14126,38 +14127,38 @@ yyreduce:
 
 				ct->l4proto = (yyvsp[-2].val);
 			}
-#line 14130 "src/parser_bison.c"
+#line 14131 "src/parser_bison.c"
     break;
 
   case 863: /* ct_helper_config: "l3proto" family_spec_explicit stmt_separator  */
-#line 4816 "src/parser_bison.y"
+#line 4817 "src/parser_bison.y"
                         {
 				(yyvsp[-3].obj)->ct_helper.l3proto = (yyvsp[-1].val);
 			}
-#line 14138 "src/parser_bison.c"
+#line 14139 "src/parser_bison.c"
     break;
 
   case 864: /* timeout_states: timeout_state  */
-#line 4822 "src/parser_bison.y"
+#line 4823 "src/parser_bison.y"
                         {
 				(yyval.list) = xmalloc(sizeof(*(yyval.list)));
 				init_list_head((yyval.list));
 				list_add_tail(&(yyvsp[0].timeout_state)->head, (yyval.list));
 			}
-#line 14148 "src/parser_bison.c"
+#line 14149 "src/parser_bison.c"
     break;
 
   case 865: /* timeout_states: timeout_states "comma" timeout_state  */
-#line 4828 "src/parser_bison.y"
+#line 4829 "src/parser_bison.y"
                         {
 				list_add_tail(&(yyvsp[0].timeout_state)->head, (yyvsp[-2].list));
 				(yyval.list) = (yyvsp[-2].list);
 			}
-#line 14157 "src/parser_bison.c"
+#line 14158 "src/parser_bison.c"
     break;
 
   case 866: /* timeout_state: "string" "colon" time_spec_or_num_s  */
-#line 4835 "src/parser_bison.y"
+#line 4836 "src/parser_bison.y"
                         {
 				struct timeout_state *ts;
 
@@ -14168,11 +14169,11 @@ yyreduce:
 				init_list_head(&ts->head);
 				(yyval.timeout_state) = ts;
 			}
-#line 14172 "src/parser_bison.c"
+#line 14173 "src/parser_bison.c"
     break;
 
   case 867: /* ct_timeout_config: "protocol" ct_l4protoname stmt_separator  */
-#line 4848 "src/parser_bison.y"
+#line 4849 "src/parser_bison.y"
                         {
 				struct ct_timeout *ct;
 				int l4proto = (yyvsp[-1].val);
@@ -14180,11 +14181,11 @@ yyreduce:
 				ct = &(yyvsp[-3].obj)->ct_timeout;
 				ct->l4proto = l4proto;
 			}
-#line 14184 "src/parser_bison.c"
+#line 14185 "src/parser_bison.c"
     break;
 
   case 868: /* ct_timeout_config: "policy" '=' '{' timeout_states '}' stmt_separator close_scope_policy  */
-#line 4856 "src/parser_bison.y"
+#line 4857 "src/parser_bison.y"
                         {
 				struct ct_timeout *ct;
 
@@ -14192,67 +14193,67 @@ yyreduce:
 				list_splice_tail((yyvsp[-3].list), &ct->timeout_list);
 				free((yyvsp[-3].list));
 			}
-#line 14196 "src/parser_bison.c"
+#line 14197 "src/parser_bison.c"
     break;
 
   case 869: /* ct_timeout_config: "l3proto" family_spec_explicit stmt_separator  */
-#line 4864 "src/parser_bison.y"
+#line 4865 "src/parser_bison.y"
                         {
 				(yyvsp[-3].obj)->ct_timeout.l3proto = (yyvsp[-1].val);
 			}
-#line 14204 "src/parser_bison.c"
+#line 14205 "src/parser_bison.c"
     break;
 
   case 870: /* ct_expect_config: "protocol" ct_l4protoname stmt_separator  */
-#line 4870 "src/parser_bison.y"
+#line 4871 "src/parser_bison.y"
                         {
 				(yyvsp[-3].obj)->ct_expect.l4proto = (yyvsp[-1].val);
 			}
-#line 14212 "src/parser_bison.c"
+#line 14213 "src/parser_bison.c"
     break;
 
   case 871: /* ct_expect_config: "dport" "number" stmt_separator  */
-#line 4874 "src/parser_bison.y"
+#line 4875 "src/parser_bison.y"
                         {
 				(yyvsp[-3].obj)->ct_expect.dport = (yyvsp[-1].val);
 			}
-#line 14220 "src/parser_bison.c"
+#line 14221 "src/parser_bison.c"
     break;
 
   case 872: /* ct_expect_config: "timeout" time_spec stmt_separator  */
-#line 4878 "src/parser_bison.y"
+#line 4879 "src/parser_bison.y"
                         {
 				(yyvsp[-3].obj)->ct_expect.timeout = (yyvsp[-1].val);
 			}
-#line 14228 "src/parser_bison.c"
+#line 14229 "src/parser_bison.c"
     break;
 
   case 873: /* ct_expect_config: "size" "number" stmt_separator  */
-#line 4882 "src/parser_bison.y"
+#line 4883 "src/parser_bison.y"
                         {
 				(yyvsp[-3].obj)->ct_expect.size = (yyvsp[-1].val);
 			}
-#line 14236 "src/parser_bison.c"
+#line 14237 "src/parser_bison.c"
     break;
 
   case 874: /* ct_expect_config: "l3proto" family_spec_explicit stmt_separator  */
-#line 4886 "src/parser_bison.y"
+#line 4887 "src/parser_bison.y"
                         {
 				(yyvsp[-3].obj)->ct_expect.l3proto = (yyvsp[-1].val);
 			}
-#line 14244 "src/parser_bison.c"
+#line 14245 "src/parser_bison.c"
     break;
 
   case 875: /* ct_obj_alloc: %empty  */
-#line 4892 "src/parser_bison.y"
+#line 4893 "src/parser_bison.y"
                         {
 				(yyval.obj) = obj_alloc(&(yyloc));
 			}
-#line 14252 "src/parser_bison.c"
+#line 14253 "src/parser_bison.c"
     break;
 
   case 876: /* limit_config: "rate" limit_mode limit_rate_pkts limit_burst_pkts  */
-#line 4898 "src/parser_bison.y"
+#line 4899 "src/parser_bison.y"
                         {
 				struct limit *limit;
 
@@ -14263,11 +14264,11 @@ yyreduce:
 				limit->type	= NFT_LIMIT_PKTS;
 				limit->flags	= (yyvsp[-2].val);
 			}
-#line 14267 "src/parser_bison.c"
+#line 14268 "src/parser_bison.c"
     break;
 
   case 877: /* limit_config: "rate" limit_mode limit_rate_bytes limit_burst_bytes  */
-#line 4909 "src/parser_bison.y"
+#line 4910 "src/parser_bison.y"
                         {
 				struct limit *limit;
 
@@ -14278,47 +14279,47 @@ yyreduce:
 				limit->type	= NFT_LIMIT_PKT_BYTES;
 				limit->flags	= (yyvsp[-2].val);
 			}
-#line 14282 "src/parser_bison.c"
+#line 14283 "src/parser_bison.c"
     break;
 
   case 878: /* limit_obj: %empty  */
-#line 4922 "src/parser_bison.y"
+#line 4923 "src/parser_bison.y"
                         {
 				(yyval.obj) = obj_alloc(&(yyloc));
 				(yyval.obj)->type = NFT_OBJECT_LIMIT;
 			}
-#line 14291 "src/parser_bison.c"
+#line 14292 "src/parser_bison.c"
     break;
 
   case 879: /* relational_expr: expr rhs_expr  */
-#line 4929 "src/parser_bison.y"
+#line 4930 "src/parser_bison.y"
                         {
 				(yyval.expr) = relational_expr_alloc(&(yyloc), OP_IMPLICIT, (yyvsp[-1].expr), (yyvsp[0].expr));
 			}
-#line 14299 "src/parser_bison.c"
+#line 14300 "src/parser_bison.c"
     break;
 
   case 880: /* relational_expr: expr list_rhs_expr  */
-#line 4933 "src/parser_bison.y"
+#line 4934 "src/parser_bison.y"
                         {
 				(yyval.expr) = relational_expr_alloc(&(yyloc), OP_IMPLICIT, (yyvsp[-1].expr), (yyvsp[0].expr));
 			}
-#line 14307 "src/parser_bison.c"
+#line 14308 "src/parser_bison.c"
     break;
 
   case 881: /* relational_expr: expr basic_rhs_expr "/" list_rhs_expr  */
-#line 4937 "src/parser_bison.y"
+#line 4938 "src/parser_bison.y"
                         {
 				struct expr *mask = list_expr_to_binop((yyvsp[0].expr));
 				struct expr *binop = binop_expr_alloc(&(yyloc), OP_AND, (yyvsp[-3].expr), mask);
 
 				(yyval.expr) = relational_expr_alloc(&(yyloc), OP_IMPLICIT, binop, (yyvsp[-2].expr));
 			}
-#line 14318 "src/parser_bison.c"
+#line 14319 "src/parser_bison.c"
     break;
 
   case 882: /* relational_expr: expr list_rhs_expr "/" list_rhs_expr  */
-#line 4944 "src/parser_bison.y"
+#line 4945 "src/parser_bison.y"
                         {
 				struct expr *value = list_expr_to_binop((yyvsp[-2].expr));
 				struct expr *mask = list_expr_to_binop((yyvsp[0].expr));
@@ -14326,22 +14327,22 @@ yyreduce:
 
 				(yyval.expr) = relational_expr_alloc(&(yyloc), OP_IMPLICIT, binop, value);
 			}
-#line 14330 "src/parser_bison.c"
+#line 14331 "src/parser_bison.c"
     break;
 
   case 883: /* relational_expr: expr relational_op basic_rhs_expr "/" list_rhs_expr  */
-#line 4952 "src/parser_bison.y"
+#line 4953 "src/parser_bison.y"
                         {
 				struct expr *mask = list_expr_to_binop((yyvsp[0].expr));
 				struct expr *binop = binop_expr_alloc(&(yyloc), OP_AND, (yyvsp[-4].expr), mask);
 
 				(yyval.expr) = relational_expr_alloc(&(yyloc), (yyvsp[-3].val), binop, (yyvsp[-2].expr));
 			}
-#line 14341 "src/parser_bison.c"
+#line 14342 "src/parser_bison.c"
     break;
 
   case 884: /* relational_expr: expr relational_op list_rhs_expr "/" list_rhs_expr  */
-#line 4959 "src/parser_bison.y"
+#line 4960 "src/parser_bison.y"
                         {
 				struct expr *value = list_expr_to_binop((yyvsp[-2].expr));
 				struct expr *mask = list_expr_to_binop((yyvsp[0].expr));
@@ -14349,105 +14350,105 @@ yyreduce:
 
 				(yyval.expr) = relational_expr_alloc(&(yyloc), (yyvsp[-3].val), binop, value);
 			}
-#line 14353 "src/parser_bison.c"
+#line 14354 "src/parser_bison.c"
     break;
 
   case 885: /* relational_expr: expr relational_op rhs_expr  */
-#line 4967 "src/parser_bison.y"
+#line 4968 "src/parser_bison.y"
                         {
 				(yyval.expr) = relational_expr_alloc(&(yylsp[-1]), (yyvsp[-1].val), (yyvsp[-2].expr), (yyvsp[0].expr));
 			}
-#line 14361 "src/parser_bison.c"
+#line 14362 "src/parser_bison.c"
     break;
 
   case 886: /* relational_expr: expr relational_op list_rhs_expr  */
-#line 4971 "src/parser_bison.y"
+#line 4972 "src/parser_bison.y"
                         {
 				(yyval.expr) = relational_expr_alloc(&(yylsp[-1]), (yyvsp[-1].val), (yyvsp[-2].expr), (yyvsp[0].expr));
 			}
-#line 14369 "src/parser_bison.c"
+#line 14370 "src/parser_bison.c"
     break;
 
   case 887: /* list_rhs_expr: basic_rhs_expr "comma" basic_rhs_expr  */
-#line 4977 "src/parser_bison.y"
+#line 4978 "src/parser_bison.y"
                         {
 				(yyval.expr) = list_expr_alloc(&(yyloc));
 				compound_expr_add((yyval.expr), (yyvsp[-2].expr));
 				compound_expr_add((yyval.expr), (yyvsp[0].expr));
 			}
-#line 14379 "src/parser_bison.c"
+#line 14380 "src/parser_bison.c"
     break;
 
   case 888: /* list_rhs_expr: list_rhs_expr "comma" basic_rhs_expr  */
-#line 4983 "src/parser_bison.y"
+#line 4984 "src/parser_bison.y"
                         {
 				(yyvsp[-2].expr)->location = (yyloc);
 				compound_expr_add((yyvsp[-2].expr), (yyvsp[0].expr));
 				(yyval.expr) = (yyvsp[-2].expr);
 			}
-#line 14389 "src/parser_bison.c"
+#line 14390 "src/parser_bison.c"
     break;
 
   case 889: /* rhs_expr: concat_rhs_expr  */
-#line 4990 "src/parser_bison.y"
+#line 4991 "src/parser_bison.y"
                                                         { (yyval.expr) = (yyvsp[0].expr); }
-#line 14395 "src/parser_bison.c"
+#line 14396 "src/parser_bison.c"
     break;
 
   case 890: /* rhs_expr: set_expr  */
-#line 4991 "src/parser_bison.y"
+#line 4992 "src/parser_bison.y"
                                                         { (yyval.expr) = (yyvsp[0].expr); }
-#line 14401 "src/parser_bison.c"
+#line 14402 "src/parser_bison.c"
     break;
 
   case 891: /* rhs_expr: set_ref_symbol_expr  */
-#line 4992 "src/parser_bison.y"
+#line 4993 "src/parser_bison.y"
                                                         { (yyval.expr) = (yyvsp[0].expr); }
-#line 14407 "src/parser_bison.c"
+#line 14408 "src/parser_bison.c"
     break;
 
   case 893: /* shift_rhs_expr: shift_rhs_expr "<<" primary_rhs_expr  */
-#line 4997 "src/parser_bison.y"
+#line 4998 "src/parser_bison.y"
                         {
 				(yyval.expr) = binop_expr_alloc(&(yyloc), OP_LSHIFT, (yyvsp[-2].expr), (yyvsp[0].expr));
 			}
-#line 14415 "src/parser_bison.c"
+#line 14416 "src/parser_bison.c"
     break;
 
   case 894: /* shift_rhs_expr: shift_rhs_expr ">>" primary_rhs_expr  */
-#line 5001 "src/parser_bison.y"
+#line 5002 "src/parser_bison.y"
                         {
 				(yyval.expr) = binop_expr_alloc(&(yyloc), OP_RSHIFT, (yyvsp[-2].expr), (yyvsp[0].expr));
 			}
-#line 14423 "src/parser_bison.c"
+#line 14424 "src/parser_bison.c"
     break;
 
   case 896: /* and_rhs_expr: and_rhs_expr "&" shift_rhs_expr  */
-#line 5008 "src/parser_bison.y"
+#line 5009 "src/parser_bison.y"
                         {
 				(yyval.expr) = binop_expr_alloc(&(yyloc), OP_AND, (yyvsp[-2].expr), (yyvsp[0].expr));
 			}
-#line 14431 "src/parser_bison.c"
+#line 14432 "src/parser_bison.c"
     break;
 
   case 898: /* exclusive_or_rhs_expr: exclusive_or_rhs_expr "^" and_rhs_expr  */
-#line 5015 "src/parser_bison.y"
+#line 5016 "src/parser_bison.y"
                         {
 				(yyval.expr) = binop_expr_alloc(&(yyloc), OP_XOR, (yyvsp[-2].expr), (yyvsp[0].expr));
 			}
-#line 14439 "src/parser_bison.c"
+#line 14440 "src/parser_bison.c"
     break;
 
   case 900: /* inclusive_or_rhs_expr: inclusive_or_rhs_expr '|' exclusive_or_rhs_expr  */
-#line 5022 "src/parser_bison.y"
+#line 5023 "src/parser_bison.y"
                         {
 				(yyval.expr) = binop_expr_alloc(&(yyloc), OP_OR, (yyvsp[-2].expr), (yyvsp[0].expr));
 			}
-#line 14447 "src/parser_bison.c"
+#line 14448 "src/parser_bison.c"
     break;
 
   case 904: /* concat_rhs_expr: concat_rhs_expr "." multiton_rhs_expr  */
-#line 5033 "src/parser_bison.y"
+#line 5034 "src/parser_bison.y"
                         {
 				struct location rhs[] = {
 					[1]	= (yylsp[-1]),
@@ -14456,11 +14457,11 @@ yyreduce:
 
 				(yyval.expr) = handle_concat_expr(&(yyloc), (yyval.expr), (yyvsp[-2].expr), (yyvsp[0].expr), rhs);
 			}
-#line 14460 "src/parser_bison.c"
+#line 14461 "src/parser_bison.c"
     break;
 
   case 905: /* concat_rhs_expr: concat_rhs_expr "." basic_rhs_expr  */
-#line 5042 "src/parser_bison.y"
+#line 5043 "src/parser_bison.y"
                         {
 				struct location rhs[] = {
 					[1]	= (yylsp[-1]),
@@ -14469,380 +14470,380 @@ yyreduce:
 
 				(yyval.expr) = handle_concat_expr(&(yyloc), (yyval.expr), (yyvsp[-2].expr), (yyvsp[0].expr), rhs);
 			}
-#line 14473 "src/parser_bison.c"
+#line 14474 "src/parser_bison.c"
     break;
 
   case 906: /* boolean_keys: "exists"  */
-#line 5052 "src/parser_bison.y"
+#line 5053 "src/parser_bison.y"
                                                 { (yyval.val8) = true; }
-#line 14479 "src/parser_bison.c"
+#line 14480 "src/parser_bison.c"
     break;
 
   case 907: /* boolean_keys: "missing"  */
-#line 5053 "src/parser_bison.y"
+#line 5054 "src/parser_bison.y"
                                                 { (yyval.val8) = false; }
-#line 14485 "src/parser_bison.c"
+#line 14486 "src/parser_bison.c"
     break;
 
   case 908: /* boolean_expr: boolean_keys  */
-#line 5057 "src/parser_bison.y"
+#line 5058 "src/parser_bison.y"
                         {
 				(yyval.expr) = constant_expr_alloc(&(yyloc), &boolean_type,
 							 BYTEORDER_HOST_ENDIAN,
 							 sizeof((yyvsp[0].val8)) * BITS_PER_BYTE, &(yyvsp[0].val8));
 			}
-#line 14495 "src/parser_bison.c"
+#line 14496 "src/parser_bison.c"
     break;
 
   case 909: /* keyword_expr: "ether" close_scope_eth  */
-#line 5064 "src/parser_bison.y"
+#line 5065 "src/parser_bison.y"
                                                         { (yyval.expr) = symbol_value(&(yyloc), "ether"); }
-#line 14501 "src/parser_bison.c"
+#line 14502 "src/parser_bison.c"
     break;
 
   case 910: /* keyword_expr: "ip" close_scope_ip  */
-#line 5065 "src/parser_bison.y"
+#line 5066 "src/parser_bison.y"
                                                         { (yyval.expr) = symbol_value(&(yyloc), "ip"); }
-#line 14507 "src/parser_bison.c"
+#line 14508 "src/parser_bison.c"
     break;
 
   case 911: /* keyword_expr: "ip6" close_scope_ip6  */
-#line 5066 "src/parser_bison.y"
+#line 5067 "src/parser_bison.y"
                                                         { (yyval.expr) = symbol_value(&(yyloc), "ip6"); }
-#line 14513 "src/parser_bison.c"
+#line 14514 "src/parser_bison.c"
     break;
 
   case 912: /* keyword_expr: "vlan" close_scope_vlan  */
-#line 5067 "src/parser_bison.y"
+#line 5068 "src/parser_bison.y"
                                                          { (yyval.expr) = symbol_value(&(yyloc), "vlan"); }
-#line 14519 "src/parser_bison.c"
+#line 14520 "src/parser_bison.c"
     break;
 
   case 913: /* keyword_expr: "arp" close_scope_arp  */
-#line 5068 "src/parser_bison.y"
+#line 5069 "src/parser_bison.y"
                                                         { (yyval.expr) = symbol_value(&(yyloc), "arp"); }
-#line 14525 "src/parser_bison.c"
+#line 14526 "src/parser_bison.c"
     break;
 
   case 914: /* keyword_expr: "dnat" close_scope_nat  */
-#line 5069 "src/parser_bison.y"
+#line 5070 "src/parser_bison.y"
                                                         { (yyval.expr) = symbol_value(&(yyloc), "dnat"); }
-#line 14531 "src/parser_bison.c"
+#line 14532 "src/parser_bison.c"
     break;
 
   case 915: /* keyword_expr: "snat" close_scope_nat  */
-#line 5070 "src/parser_bison.y"
+#line 5071 "src/parser_bison.y"
                                                         { (yyval.expr) = symbol_value(&(yyloc), "snat"); }
-#line 14537 "src/parser_bison.c"
+#line 14538 "src/parser_bison.c"
     break;
 
   case 916: /* keyword_expr: "ecn"  */
-#line 5071 "src/parser_bison.y"
+#line 5072 "src/parser_bison.y"
                                                         { (yyval.expr) = symbol_value(&(yyloc), "ecn"); }
-#line 14543 "src/parser_bison.c"
+#line 14544 "src/parser_bison.c"
     break;
 
   case 917: /* keyword_expr: "reset" close_scope_reset  */
-#line 5072 "src/parser_bison.y"
+#line 5073 "src/parser_bison.y"
                                                                 { (yyval.expr) = symbol_value(&(yyloc), "reset"); }
-#line 14549 "src/parser_bison.c"
+#line 14550 "src/parser_bison.c"
     break;
 
   case 918: /* keyword_expr: "destroy" close_scope_destroy  */
-#line 5073 "src/parser_bison.y"
+#line 5074 "src/parser_bison.y"
                                                                 { (yyval.expr) = symbol_value(&(yyloc), "destroy"); }
-#line 14555 "src/parser_bison.c"
+#line 14556 "src/parser_bison.c"
     break;
 
   case 919: /* keyword_expr: "original"  */
-#line 5074 "src/parser_bison.y"
+#line 5075 "src/parser_bison.y"
                                                         { (yyval.expr) = symbol_value(&(yyloc), "original"); }
-#line 14561 "src/parser_bison.c"
+#line 14562 "src/parser_bison.c"
     break;
 
   case 920: /* keyword_expr: "reply"  */
-#line 5075 "src/parser_bison.y"
+#line 5076 "src/parser_bison.y"
                                                         { (yyval.expr) = symbol_value(&(yyloc), "reply"); }
-#line 14567 "src/parser_bison.c"
+#line 14568 "src/parser_bison.c"
     break;
 
   case 921: /* keyword_expr: "label"  */
-#line 5076 "src/parser_bison.y"
+#line 5077 "src/parser_bison.y"
                                                         { (yyval.expr) = symbol_value(&(yyloc), "label"); }
-#line 14573 "src/parser_bison.c"
+#line 14574 "src/parser_bison.c"
     break;
 
   case 922: /* keyword_expr: "last" close_scope_last  */
-#line 5077 "src/parser_bison.y"
+#line 5078 "src/parser_bison.y"
                                                                 { (yyval.expr) = symbol_value(&(yyloc), "last"); }
-#line 14579 "src/parser_bison.c"
+#line 14580 "src/parser_bison.c"
     break;
 
   case 923: /* primary_rhs_expr: symbol_expr  */
-#line 5080 "src/parser_bison.y"
+#line 5081 "src/parser_bison.y"
                                                         { (yyval.expr) = (yyvsp[0].expr); }
-#line 14585 "src/parser_bison.c"
+#line 14586 "src/parser_bison.c"
     break;
 
   case 924: /* primary_rhs_expr: integer_expr  */
-#line 5081 "src/parser_bison.y"
+#line 5082 "src/parser_bison.y"
                                                         { (yyval.expr) = (yyvsp[0].expr); }
-#line 14591 "src/parser_bison.c"
+#line 14592 "src/parser_bison.c"
     break;
 
   case 925: /* primary_rhs_expr: boolean_expr  */
-#line 5082 "src/parser_bison.y"
+#line 5083 "src/parser_bison.y"
                                                         { (yyval.expr) = (yyvsp[0].expr); }
-#line 14597 "src/parser_bison.c"
+#line 14598 "src/parser_bison.c"
     break;
 
   case 926: /* primary_rhs_expr: keyword_expr  */
-#line 5083 "src/parser_bison.y"
+#line 5084 "src/parser_bison.y"
                                                         { (yyval.expr) = (yyvsp[0].expr); }
-#line 14603 "src/parser_bison.c"
+#line 14604 "src/parser_bison.c"
     break;
 
   case 927: /* primary_rhs_expr: "tcp" close_scope_tcp  */
-#line 5085 "src/parser_bison.y"
+#line 5086 "src/parser_bison.y"
                         {
 				uint8_t data = IPPROTO_TCP;
 				(yyval.expr) = constant_expr_alloc(&(yyloc), &inet_protocol_type,
 							 BYTEORDER_HOST_ENDIAN,
 							 sizeof(data) * BITS_PER_BYTE, &data);
 			}
-#line 14614 "src/parser_bison.c"
+#line 14615 "src/parser_bison.c"
     break;
 
   case 928: /* primary_rhs_expr: "udp" close_scope_udp  */
-#line 5092 "src/parser_bison.y"
+#line 5093 "src/parser_bison.y"
                         {
 				uint8_t data = IPPROTO_UDP;
 				(yyval.expr) = constant_expr_alloc(&(yyloc), &inet_protocol_type,
 							 BYTEORDER_HOST_ENDIAN,
 							 sizeof(data) * BITS_PER_BYTE, &data);
 			}
-#line 14625 "src/parser_bison.c"
+#line 14626 "src/parser_bison.c"
     break;
 
   case 929: /* primary_rhs_expr: "udplite" close_scope_udplite  */
-#line 5099 "src/parser_bison.y"
+#line 5100 "src/parser_bison.y"
                         {
 				uint8_t data = IPPROTO_UDPLITE;
 				(yyval.expr) = constant_expr_alloc(&(yyloc), &inet_protocol_type,
 							 BYTEORDER_HOST_ENDIAN,
 							 sizeof(data) * BITS_PER_BYTE, &data);
 			}
-#line 14636 "src/parser_bison.c"
+#line 14637 "src/parser_bison.c"
     break;
 
   case 930: /* primary_rhs_expr: "esp" close_scope_esp  */
-#line 5106 "src/parser_bison.y"
+#line 5107 "src/parser_bison.y"
                         {
 				uint8_t data = IPPROTO_ESP;
 				(yyval.expr) = constant_expr_alloc(&(yyloc), &inet_protocol_type,
 							 BYTEORDER_HOST_ENDIAN,
 							 sizeof(data) * BITS_PER_BYTE, &data);
 			}
-#line 14647 "src/parser_bison.c"
+#line 14648 "src/parser_bison.c"
     break;
 
   case 931: /* primary_rhs_expr: "ah" close_scope_ah  */
-#line 5113 "src/parser_bison.y"
+#line 5114 "src/parser_bison.y"
                         {
 				uint8_t data = IPPROTO_AH;
 				(yyval.expr) = constant_expr_alloc(&(yyloc), &inet_protocol_type,
 							 BYTEORDER_HOST_ENDIAN,
 							 sizeof(data) * BITS_PER_BYTE, &data);
 			}
-#line 14658 "src/parser_bison.c"
+#line 14659 "src/parser_bison.c"
     break;
 
   case 932: /* primary_rhs_expr: "icmp" close_scope_icmp  */
-#line 5120 "src/parser_bison.y"
+#line 5121 "src/parser_bison.y"
                         {
 				uint8_t data = IPPROTO_ICMP;
 				(yyval.expr) = constant_expr_alloc(&(yyloc), &inet_protocol_type,
 							 BYTEORDER_HOST_ENDIAN,
 							 sizeof(data) * BITS_PER_BYTE, &data);
 			}
-#line 14669 "src/parser_bison.c"
+#line 14670 "src/parser_bison.c"
     break;
 
   case 933: /* primary_rhs_expr: "igmp"  */
-#line 5127 "src/parser_bison.y"
+#line 5128 "src/parser_bison.y"
                         {
 				uint8_t data = IPPROTO_IGMP;
 				(yyval.expr) = constant_expr_alloc(&(yyloc), &inet_protocol_type,
 							 BYTEORDER_HOST_ENDIAN,
 							 sizeof(data) * BITS_PER_BYTE, &data);
 			}
-#line 14680 "src/parser_bison.c"
+#line 14681 "src/parser_bison.c"
     break;
 
   case 934: /* primary_rhs_expr: "icmpv6" close_scope_icmp  */
-#line 5134 "src/parser_bison.y"
+#line 5135 "src/parser_bison.y"
                         {
 				uint8_t data = IPPROTO_ICMPV6;
 				(yyval.expr) = constant_expr_alloc(&(yyloc), &inet_protocol_type,
 							 BYTEORDER_HOST_ENDIAN,
 							 sizeof(data) * BITS_PER_BYTE, &data);
 			}
-#line 14691 "src/parser_bison.c"
+#line 14692 "src/parser_bison.c"
     break;
 
   case 935: /* primary_rhs_expr: "gre" close_scope_gre  */
-#line 5141 "src/parser_bison.y"
+#line 5142 "src/parser_bison.y"
                         {
 				uint8_t data = IPPROTO_GRE;
 				(yyval.expr) = constant_expr_alloc(&(yyloc), &inet_protocol_type,
 							 BYTEORDER_HOST_ENDIAN,
 							 sizeof(data) * BITS_PER_BYTE, &data);
 			}
-#line 14702 "src/parser_bison.c"
+#line 14703 "src/parser_bison.c"
     break;
 
   case 936: /* primary_rhs_expr: "comp" close_scope_comp  */
-#line 5148 "src/parser_bison.y"
+#line 5149 "src/parser_bison.y"
                         {
 				uint8_t data = IPPROTO_COMP;
 				(yyval.expr) = constant_expr_alloc(&(yyloc), &inet_protocol_type,
 							 BYTEORDER_HOST_ENDIAN,
 							 sizeof(data) * BITS_PER_BYTE, &data);
 			}
-#line 14713 "src/parser_bison.c"
+#line 14714 "src/parser_bison.c"
     break;
 
   case 937: /* primary_rhs_expr: "dccp" close_scope_dccp  */
-#line 5155 "src/parser_bison.y"
+#line 5156 "src/parser_bison.y"
                         {
 				uint8_t data = IPPROTO_DCCP;
 				(yyval.expr) = constant_expr_alloc(&(yyloc), &inet_protocol_type,
 							 BYTEORDER_HOST_ENDIAN,
 							 sizeof(data) * BITS_PER_BYTE, &data);
 			}
-#line 14724 "src/parser_bison.c"
+#line 14725 "src/parser_bison.c"
     break;
 
   case 938: /* primary_rhs_expr: "sctp" close_scope_sctp  */
-#line 5162 "src/parser_bison.y"
+#line 5163 "src/parser_bison.y"
                         {
 				uint8_t data = IPPROTO_SCTP;
 				(yyval.expr) = constant_expr_alloc(&(yyloc), &inet_protocol_type,
 							 BYTEORDER_HOST_ENDIAN,
 							 sizeof(data) * BITS_PER_BYTE, &data);
 			}
-#line 14735 "src/parser_bison.c"
+#line 14736 "src/parser_bison.c"
     break;
 
   case 939: /* primary_rhs_expr: "redirect" close_scope_nat  */
-#line 5169 "src/parser_bison.y"
+#line 5170 "src/parser_bison.y"
                         {
 				uint8_t data = ICMP_REDIRECT;
 				(yyval.expr) = constant_expr_alloc(&(yyloc), &icmp_type_type,
 							 BYTEORDER_HOST_ENDIAN,
 							 sizeof(data) * BITS_PER_BYTE, &data);
 			}
-#line 14746 "src/parser_bison.c"
+#line 14747 "src/parser_bison.c"
     break;
 
   case 940: /* primary_rhs_expr: '(' basic_rhs_expr ')'  */
-#line 5175 "src/parser_bison.y"
+#line 5176 "src/parser_bison.y"
                                                                 { (yyval.expr) = (yyvsp[-1].expr); }
-#line 14752 "src/parser_bison.c"
+#line 14753 "src/parser_bison.c"
     break;
 
   case 941: /* relational_op: "=="  */
-#line 5178 "src/parser_bison.y"
+#line 5179 "src/parser_bison.y"
                                                 { (yyval.val) = OP_EQ; }
-#line 14758 "src/parser_bison.c"
+#line 14759 "src/parser_bison.c"
     break;
 
   case 942: /* relational_op: "!="  */
-#line 5179 "src/parser_bison.y"
+#line 5180 "src/parser_bison.y"
                                                 { (yyval.val) = OP_NEQ; }
-#line 14764 "src/parser_bison.c"
+#line 14765 "src/parser_bison.c"
     break;
 
   case 943: /* relational_op: "<"  */
-#line 5180 "src/parser_bison.y"
+#line 5181 "src/parser_bison.y"
                                                 { (yyval.val) = OP_LT; }
-#line 14770 "src/parser_bison.c"
+#line 14771 "src/parser_bison.c"
     break;
 
   case 944: /* relational_op: ">"  */
-#line 5181 "src/parser_bison.y"
+#line 5182 "src/parser_bison.y"
                                                 { (yyval.val) = OP_GT; }
-#line 14776 "src/parser_bison.c"
+#line 14777 "src/parser_bison.c"
     break;
 
   case 945: /* relational_op: ">="  */
-#line 5182 "src/parser_bison.y"
+#line 5183 "src/parser_bison.y"
                                                 { (yyval.val) = OP_GTE; }
-#line 14782 "src/parser_bison.c"
+#line 14783 "src/parser_bison.c"
     break;
 
   case 946: /* relational_op: "<="  */
-#line 5183 "src/parser_bison.y"
+#line 5184 "src/parser_bison.y"
                                                 { (yyval.val) = OP_LTE; }
-#line 14788 "src/parser_bison.c"
+#line 14789 "src/parser_bison.c"
     break;
 
   case 947: /* relational_op: "!"  */
-#line 5184 "src/parser_bison.y"
+#line 5185 "src/parser_bison.y"
                                                 { (yyval.val) = OP_NEG; }
-#line 14794 "src/parser_bison.c"
+#line 14795 "src/parser_bison.c"
     break;
 
   case 948: /* verdict_expr: "accept"  */
-#line 5188 "src/parser_bison.y"
+#line 5189 "src/parser_bison.y"
                         {
 				(yyval.expr) = verdict_expr_alloc(&(yyloc), NF_ACCEPT, NULL);
 			}
-#line 14802 "src/parser_bison.c"
+#line 14803 "src/parser_bison.c"
     break;
 
   case 949: /* verdict_expr: "drop"  */
-#line 5192 "src/parser_bison.y"
+#line 5193 "src/parser_bison.y"
                         {
 				(yyval.expr) = verdict_expr_alloc(&(yyloc), NF_DROP, NULL);
 			}
-#line 14810 "src/parser_bison.c"
+#line 14811 "src/parser_bison.c"
     break;
 
   case 950: /* verdict_expr: "continue"  */
-#line 5196 "src/parser_bison.y"
+#line 5197 "src/parser_bison.y"
                         {
 				(yyval.expr) = verdict_expr_alloc(&(yyloc), NFT_CONTINUE, NULL);
 			}
-#line 14818 "src/parser_bison.c"
+#line 14819 "src/parser_bison.c"
     break;
 
   case 951: /* verdict_expr: "jump" chain_expr  */
-#line 5200 "src/parser_bison.y"
+#line 5201 "src/parser_bison.y"
                         {
 				(yyval.expr) = verdict_expr_alloc(&(yyloc), NFT_JUMP, (yyvsp[0].expr));
 			}
-#line 14826 "src/parser_bison.c"
+#line 14827 "src/parser_bison.c"
     break;
 
   case 952: /* verdict_expr: "goto" chain_expr  */
-#line 5204 "src/parser_bison.y"
+#line 5205 "src/parser_bison.y"
                         {
 				(yyval.expr) = verdict_expr_alloc(&(yyloc), NFT_GOTO, (yyvsp[0].expr));
 			}
-#line 14834 "src/parser_bison.c"
+#line 14835 "src/parser_bison.c"
     break;
 
   case 953: /* verdict_expr: "return"  */
-#line 5208 "src/parser_bison.y"
+#line 5209 "src/parser_bison.y"
                         {
 				(yyval.expr) = verdict_expr_alloc(&(yyloc), NFT_RETURN, NULL);
 			}
-#line 14842 "src/parser_bison.c"
+#line 14843 "src/parser_bison.c"
     break;
 
   case 955: /* chain_expr: identifier  */
-#line 5215 "src/parser_bison.y"
+#line 5216 "src/parser_bison.y"
                         {
 				(yyval.expr) = constant_expr_alloc(&(yyloc), &string_type,
 							 BYTEORDER_HOST_ENDIAN,
@@ -14850,27 +14851,27 @@ yyreduce:
 							 (yyvsp[0].string));
 				free_const((yyvsp[0].string));
 			}
-#line 14854 "src/parser_bison.c"
+#line 14855 "src/parser_bison.c"
     break;
 
   case 956: /* meta_expr: "meta" meta_key close_scope_meta  */
-#line 5225 "src/parser_bison.y"
+#line 5226 "src/parser_bison.y"
                         {
 				(yyval.expr) = meta_expr_alloc(&(yyloc), (yyvsp[-1].val));
 			}
-#line 14862 "src/parser_bison.c"
+#line 14863 "src/parser_bison.c"
     break;
 
   case 957: /* meta_expr: meta_key_unqualified  */
-#line 5229 "src/parser_bison.y"
+#line 5230 "src/parser_bison.y"
                         {
 				(yyval.expr) = meta_expr_alloc(&(yyloc), (yyvsp[0].val));
 			}
-#line 14870 "src/parser_bison.c"
+#line 14871 "src/parser_bison.c"
     break;
 
   case 958: /* meta_expr: "meta" "string" close_scope_meta  */
-#line 5233 "src/parser_bison.y"
+#line 5234 "src/parser_bison.y"
                         {
 				struct error_record *erec;
 				unsigned int key;
@@ -14884,185 +14885,185 @@ yyreduce:
 
 				(yyval.expr) = meta_expr_alloc(&(yyloc), key);
 			}
-#line 14888 "src/parser_bison.c"
+#line 14889 "src/parser_bison.c"
     break;
 
   case 961: /* meta_key_qualified: "length"  */
-#line 5252 "src/parser_bison.y"
+#line 5253 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_META_LEN; }
-#line 14894 "src/parser_bison.c"
+#line 14895 "src/parser_bison.c"
     break;
 
   case 962: /* meta_key_qualified: "protocol"  */
-#line 5253 "src/parser_bison.y"
+#line 5254 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_META_PROTOCOL; }
-#line 14900 "src/parser_bison.c"
+#line 14901 "src/parser_bison.c"
     break;
 
   case 963: /* meta_key_qualified: "priority"  */
-#line 5254 "src/parser_bison.y"
+#line 5255 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_META_PRIORITY; }
-#line 14906 "src/parser_bison.c"
+#line 14907 "src/parser_bison.c"
     break;
 
   case 964: /* meta_key_qualified: "random"  */
-#line 5255 "src/parser_bison.y"
+#line 5256 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_META_PRANDOM; }
-#line 14912 "src/parser_bison.c"
+#line 14913 "src/parser_bison.c"
     break;
 
   case 965: /* meta_key_qualified: "secmark" close_scope_secmark  */
-#line 5256 "src/parser_bison.y"
+#line 5257 "src/parser_bison.y"
                                                             { (yyval.val) = NFT_META_SECMARK; }
-#line 14918 "src/parser_bison.c"
+#line 14919 "src/parser_bison.c"
     break;
 
   case 966: /* meta_key_unqualified: "mark"  */
-#line 5259 "src/parser_bison.y"
+#line 5260 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_META_MARK; }
-#line 14924 "src/parser_bison.c"
+#line 14925 "src/parser_bison.c"
     break;
 
   case 967: /* meta_key_unqualified: "iif"  */
-#line 5260 "src/parser_bison.y"
+#line 5261 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_META_IIF; }
-#line 14930 "src/parser_bison.c"
+#line 14931 "src/parser_bison.c"
     break;
 
   case 968: /* meta_key_unqualified: "iifname"  */
-#line 5261 "src/parser_bison.y"
+#line 5262 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_META_IIFNAME; }
-#line 14936 "src/parser_bison.c"
+#line 14937 "src/parser_bison.c"
     break;
 
   case 969: /* meta_key_unqualified: "iiftype"  */
-#line 5262 "src/parser_bison.y"
+#line 5263 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_META_IIFTYPE; }
-#line 14942 "src/parser_bison.c"
+#line 14943 "src/parser_bison.c"
     break;
 
   case 970: /* meta_key_unqualified: "oif"  */
-#line 5263 "src/parser_bison.y"
+#line 5264 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_META_OIF; }
-#line 14948 "src/parser_bison.c"
+#line 14949 "src/parser_bison.c"
     break;
 
   case 971: /* meta_key_unqualified: "oifname"  */
-#line 5264 "src/parser_bison.y"
+#line 5265 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_META_OIFNAME; }
-#line 14954 "src/parser_bison.c"
+#line 14955 "src/parser_bison.c"
     break;
 
   case 972: /* meta_key_unqualified: "oiftype"  */
-#line 5265 "src/parser_bison.y"
+#line 5266 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_META_OIFTYPE; }
-#line 14960 "src/parser_bison.c"
+#line 14961 "src/parser_bison.c"
     break;
 
   case 973: /* meta_key_unqualified: "skuid"  */
-#line 5266 "src/parser_bison.y"
+#line 5267 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_META_SKUID; }
-#line 14966 "src/parser_bison.c"
+#line 14967 "src/parser_bison.c"
     break;
 
   case 974: /* meta_key_unqualified: "skgid"  */
-#line 5267 "src/parser_bison.y"
+#line 5268 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_META_SKGID; }
-#line 14972 "src/parser_bison.c"
+#line 14973 "src/parser_bison.c"
     break;
 
   case 975: /* meta_key_unqualified: "nftrace"  */
-#line 5268 "src/parser_bison.y"
+#line 5269 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_META_NFTRACE; }
-#line 14978 "src/parser_bison.c"
+#line 14979 "src/parser_bison.c"
     break;
 
   case 976: /* meta_key_unqualified: "rtclassid"  */
-#line 5269 "src/parser_bison.y"
+#line 5270 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_META_RTCLASSID; }
-#line 14984 "src/parser_bison.c"
+#line 14985 "src/parser_bison.c"
     break;
 
   case 977: /* meta_key_unqualified: "ibriport"  */
-#line 5270 "src/parser_bison.y"
+#line 5271 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_META_BRI_IIFNAME; }
-#line 14990 "src/parser_bison.c"
+#line 14991 "src/parser_bison.c"
     break;
 
   case 978: /* meta_key_unqualified: "obriport"  */
-#line 5271 "src/parser_bison.y"
+#line 5272 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_META_BRI_OIFNAME; }
-#line 14996 "src/parser_bison.c"
+#line 14997 "src/parser_bison.c"
     break;
 
   case 979: /* meta_key_unqualified: "ibrname"  */
-#line 5272 "src/parser_bison.y"
+#line 5273 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_META_BRI_IIFNAME; }
-#line 15002 "src/parser_bison.c"
+#line 15003 "src/parser_bison.c"
     break;
 
   case 980: /* meta_key_unqualified: "obrname"  */
-#line 5273 "src/parser_bison.y"
+#line 5274 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_META_BRI_OIFNAME; }
-#line 15008 "src/parser_bison.c"
+#line 15009 "src/parser_bison.c"
     break;
 
   case 981: /* meta_key_unqualified: "pkttype"  */
-#line 5274 "src/parser_bison.y"
+#line 5275 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_META_PKTTYPE; }
-#line 15014 "src/parser_bison.c"
+#line 15015 "src/parser_bison.c"
     break;
 
   case 982: /* meta_key_unqualified: "cpu"  */
-#line 5275 "src/parser_bison.y"
+#line 5276 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_META_CPU; }
-#line 15020 "src/parser_bison.c"
+#line 15021 "src/parser_bison.c"
     break;
 
   case 983: /* meta_key_unqualified: "iifgroup"  */
-#line 5276 "src/parser_bison.y"
+#line 5277 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_META_IIFGROUP; }
-#line 15026 "src/parser_bison.c"
+#line 15027 "src/parser_bison.c"
     break;
 
   case 984: /* meta_key_unqualified: "oifgroup"  */
-#line 5277 "src/parser_bison.y"
+#line 5278 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_META_OIFGROUP; }
-#line 15032 "src/parser_bison.c"
+#line 15033 "src/parser_bison.c"
     break;
 
   case 985: /* meta_key_unqualified: "cgroup"  */
-#line 5278 "src/parser_bison.y"
+#line 5279 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_META_CGROUP; }
-#line 15038 "src/parser_bison.c"
+#line 15039 "src/parser_bison.c"
     break;
 
   case 986: /* meta_key_unqualified: "ipsec" close_scope_ipsec  */
-#line 5279 "src/parser_bison.y"
+#line 5280 "src/parser_bison.y"
                                                           { (yyval.val) = NFT_META_SECPATH; }
-#line 15044 "src/parser_bison.c"
+#line 15045 "src/parser_bison.c"
     break;
 
   case 987: /* meta_key_unqualified: "time"  */
-#line 5280 "src/parser_bison.y"
+#line 5281 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_META_TIME_NS; }
-#line 15050 "src/parser_bison.c"
+#line 15051 "src/parser_bison.c"
     break;
 
   case 988: /* meta_key_unqualified: "day"  */
-#line 5281 "src/parser_bison.y"
+#line 5282 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_META_TIME_DAY; }
-#line 15056 "src/parser_bison.c"
+#line 15057 "src/parser_bison.c"
     break;
 
   case 989: /* meta_key_unqualified: "hour"  */
-#line 5282 "src/parser_bison.y"
+#line 5283 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_META_TIME_HOUR; }
-#line 15062 "src/parser_bison.c"
+#line 15063 "src/parser_bison.c"
     break;
 
   case 990: /* meta_stmt: "meta" meta_key "set" stmt_expr close_scope_meta  */
-#line 5286 "src/parser_bison.y"
+#line 5287 "src/parser_bison.y"
                         {
 				switch ((yyvsp[-3].val)) {
 				case NFT_META_SECMARK:
@@ -15082,19 +15083,19 @@ yyreduce:
 					break;
 				}
 			}
-#line 15086 "src/parser_bison.c"
+#line 15087 "src/parser_bison.c"
     break;
 
   case 991: /* meta_stmt: meta_key_unqualified "set" stmt_expr  */
-#line 5306 "src/parser_bison.y"
+#line 5307 "src/parser_bison.y"
                         {
 				(yyval.stmt) = meta_stmt_alloc(&(yyloc), (yyvsp[-2].val), (yyvsp[0].expr));
 			}
-#line 15094 "src/parser_bison.c"
+#line 15095 "src/parser_bison.c"
     break;
 
   case 992: /* meta_stmt: "meta" "string" "set" stmt_expr close_scope_meta  */
-#line 5310 "src/parser_bison.y"
+#line 5311 "src/parser_bison.y"
                         {
 				struct error_record *erec;
 				unsigned int key;
@@ -15109,149 +15110,149 @@ yyreduce:
 
 				(yyval.stmt) = meta_stmt_alloc(&(yyloc), key, (yyvsp[-1].expr));
 			}
-#line 15113 "src/parser_bison.c"
+#line 15114 "src/parser_bison.c"
     break;
 
   case 993: /* meta_stmt: "notrack"  */
-#line 5325 "src/parser_bison.y"
+#line 5326 "src/parser_bison.y"
                         {
 				(yyval.stmt) = notrack_stmt_alloc(&(yyloc));
 			}
-#line 15121 "src/parser_bison.c"
+#line 15122 "src/parser_bison.c"
     break;
 
   case 994: /* meta_stmt: "flow" "offload" "@" string close_scope_at  */
-#line 5329 "src/parser_bison.y"
+#line 5330 "src/parser_bison.y"
                         {
 				(yyval.stmt) = flow_offload_stmt_alloc(&(yyloc), (yyvsp[-1].string));
 			}
-#line 15129 "src/parser_bison.c"
+#line 15130 "src/parser_bison.c"
     break;
 
   case 995: /* meta_stmt: "flow" "add" "@" string close_scope_at  */
-#line 5333 "src/parser_bison.y"
+#line 5334 "src/parser_bison.y"
                         {
 				(yyval.stmt) = flow_offload_stmt_alloc(&(yyloc), (yyvsp[-1].string));
 			}
-#line 15137 "src/parser_bison.c"
+#line 15138 "src/parser_bison.c"
     break;
 
   case 996: /* socket_expr: "socket" socket_key close_scope_socket  */
-#line 5339 "src/parser_bison.y"
+#line 5340 "src/parser_bison.y"
                         {
 				(yyval.expr) = socket_expr_alloc(&(yyloc), (yyvsp[-1].val), 0);
 			}
-#line 15145 "src/parser_bison.c"
+#line 15146 "src/parser_bison.c"
     break;
 
   case 997: /* socket_expr: "socket" "cgroupv2" "level" "number" close_scope_socket  */
-#line 5343 "src/parser_bison.y"
+#line 5344 "src/parser_bison.y"
                         {
 				(yyval.expr) = socket_expr_alloc(&(yyloc), NFT_SOCKET_CGROUPV2, (yyvsp[-1].val));
 			}
-#line 15153 "src/parser_bison.c"
+#line 15154 "src/parser_bison.c"
     break;
 
   case 998: /* socket_key: "transparent"  */
-#line 5348 "src/parser_bison.y"
+#line 5349 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_SOCKET_TRANSPARENT; }
-#line 15159 "src/parser_bison.c"
+#line 15160 "src/parser_bison.c"
     break;
 
   case 999: /* socket_key: "mark"  */
-#line 5349 "src/parser_bison.y"
+#line 5350 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_SOCKET_MARK; }
-#line 15165 "src/parser_bison.c"
+#line 15166 "src/parser_bison.c"
     break;
 
   case 1000: /* socket_key: "wildcard"  */
-#line 5350 "src/parser_bison.y"
+#line 5351 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_SOCKET_WILDCARD; }
-#line 15171 "src/parser_bison.c"
+#line 15172 "src/parser_bison.c"
     break;
 
   case 1001: /* offset_opt: %empty  */
-#line 5353 "src/parser_bison.y"
+#line 5354 "src/parser_bison.y"
                                                 { (yyval.val) = 0; }
-#line 15177 "src/parser_bison.c"
+#line 15178 "src/parser_bison.c"
     break;
 
   case 1002: /* offset_opt: "offset" "number"  */
-#line 5354 "src/parser_bison.y"
+#line 5355 "src/parser_bison.y"
                                                 { (yyval.val) = (yyvsp[0].val); }
-#line 15183 "src/parser_bison.c"
+#line 15184 "src/parser_bison.c"
     break;
 
   case 1003: /* numgen_type: "inc"  */
-#line 5357 "src/parser_bison.y"
+#line 5358 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_NG_INCREMENTAL; }
-#line 15189 "src/parser_bison.c"
+#line 15190 "src/parser_bison.c"
     break;
 
   case 1004: /* numgen_type: "random"  */
-#line 5358 "src/parser_bison.y"
+#line 5359 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_NG_RANDOM; }
-#line 15195 "src/parser_bison.c"
+#line 15196 "src/parser_bison.c"
     break;
 
   case 1005: /* numgen_expr: "numgen" numgen_type "mod" "number" offset_opt close_scope_numgen  */
-#line 5362 "src/parser_bison.y"
+#line 5363 "src/parser_bison.y"
                         {
 				(yyval.expr) = numgen_expr_alloc(&(yyloc), (yyvsp[-4].val), (yyvsp[-2].val), (yyvsp[-1].val));
 			}
-#line 15203 "src/parser_bison.c"
+#line 15204 "src/parser_bison.c"
     break;
 
   case 1006: /* xfrm_spnum: "spnum" "number"  */
-#line 5367 "src/parser_bison.y"
+#line 5368 "src/parser_bison.y"
                                             { (yyval.val) = (yyvsp[0].val); }
-#line 15209 "src/parser_bison.c"
+#line 15210 "src/parser_bison.c"
     break;
 
   case 1007: /* xfrm_spnum: %empty  */
-#line 5368 "src/parser_bison.y"
+#line 5369 "src/parser_bison.y"
                                             { (yyval.val) = 0; }
-#line 15215 "src/parser_bison.c"
+#line 15216 "src/parser_bison.c"
     break;
 
   case 1008: /* xfrm_dir: "in"  */
-#line 5371 "src/parser_bison.y"
+#line 5372 "src/parser_bison.y"
                                         { (yyval.val) = XFRM_POLICY_IN; }
-#line 15221 "src/parser_bison.c"
+#line 15222 "src/parser_bison.c"
     break;
 
   case 1009: /* xfrm_dir: "out"  */
-#line 5372 "src/parser_bison.y"
+#line 5373 "src/parser_bison.y"
                                         { (yyval.val) = XFRM_POLICY_OUT; }
-#line 15227 "src/parser_bison.c"
+#line 15228 "src/parser_bison.c"
     break;
 
   case 1010: /* xfrm_state_key: "spi"  */
-#line 5375 "src/parser_bison.y"
+#line 5376 "src/parser_bison.y"
                                     { (yyval.val) = NFT_XFRM_KEY_SPI; }
-#line 15233 "src/parser_bison.c"
+#line 15234 "src/parser_bison.c"
     break;
 
   case 1011: /* xfrm_state_key: "reqid"  */
-#line 5376 "src/parser_bison.y"
+#line 5377 "src/parser_bison.y"
                                       { (yyval.val) = NFT_XFRM_KEY_REQID; }
-#line 15239 "src/parser_bison.c"
+#line 15240 "src/parser_bison.c"
     break;
 
   case 1012: /* xfrm_state_proto_key: "daddr"  */
-#line 5379 "src/parser_bison.y"
+#line 5380 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_XFRM_KEY_DADDR_IP4; }
-#line 15245 "src/parser_bison.c"
+#line 15246 "src/parser_bison.c"
     break;
 
   case 1013: /* xfrm_state_proto_key: "saddr"  */
-#line 5380 "src/parser_bison.y"
+#line 5381 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_XFRM_KEY_SADDR_IP4; }
-#line 15251 "src/parser_bison.c"
+#line 15252 "src/parser_bison.c"
     break;
 
   case 1014: /* xfrm_expr: "ipsec" xfrm_dir xfrm_spnum xfrm_state_key close_scope_ipsec  */
-#line 5384 "src/parser_bison.y"
+#line 5385 "src/parser_bison.y"
                         {
 				if ((yyvsp[-2].val) > 255) {
 					erec_queue(error(&(yylsp[-2]), "value too large"), state->msgs);
@@ -15259,11 +15260,11 @@ yyreduce:
 				}
 				(yyval.expr) = xfrm_expr_alloc(&(yyloc), (yyvsp[-3].val), (yyvsp[-2].val), (yyvsp[-1].val));
 			}
-#line 15263 "src/parser_bison.c"
+#line 15264 "src/parser_bison.c"
     break;
 
   case 1015: /* xfrm_expr: "ipsec" xfrm_dir xfrm_spnum nf_key_proto xfrm_state_proto_key close_scope_ipsec  */
-#line 5392 "src/parser_bison.y"
+#line 5393 "src/parser_bison.y"
                         {
 				enum nft_xfrm_keys xfrmk = (yyvsp[-1].val);
 
@@ -15288,57 +15289,57 @@ yyreduce:
 
 				(yyval.expr) = xfrm_expr_alloc(&(yyloc), (yyvsp[-4].val), (yyvsp[-3].val), xfrmk);
 			}
-#line 15292 "src/parser_bison.c"
+#line 15293 "src/parser_bison.c"
     break;
 
   case 1016: /* hash_expr: "jhash" expr "mod" "number" "seed" "number" offset_opt close_scope_hash  */
-#line 5419 "src/parser_bison.y"
+#line 5420 "src/parser_bison.y"
                         {
 				(yyval.expr) = hash_expr_alloc(&(yyloc), (yyvsp[-4].val), true, (yyvsp[-2].val), (yyvsp[-1].val), NFT_HASH_JENKINS);
 				(yyval.expr)->hash.expr = (yyvsp[-6].expr);
 			}
-#line 15301 "src/parser_bison.c"
+#line 15302 "src/parser_bison.c"
     break;
 
   case 1017: /* hash_expr: "jhash" expr "mod" "number" offset_opt close_scope_hash  */
-#line 5424 "src/parser_bison.y"
+#line 5425 "src/parser_bison.y"
                         {
 				(yyval.expr) = hash_expr_alloc(&(yyloc), (yyvsp[-2].val), false, 0, (yyvsp[-1].val), NFT_HASH_JENKINS);
 				(yyval.expr)->hash.expr = (yyvsp[-4].expr);
 			}
-#line 15310 "src/parser_bison.c"
+#line 15311 "src/parser_bison.c"
     break;
 
   case 1018: /* hash_expr: "symhash" "mod" "number" offset_opt close_scope_hash  */
-#line 5429 "src/parser_bison.y"
+#line 5430 "src/parser_bison.y"
                         {
 				(yyval.expr) = hash_expr_alloc(&(yyloc), (yyvsp[-2].val), false, 0, (yyvsp[-1].val), NFT_HASH_SYM);
 			}
-#line 15318 "src/parser_bison.c"
+#line 15319 "src/parser_bison.c"
     break;
 
   case 1019: /* nf_key_proto: "ip" close_scope_ip  */
-#line 5434 "src/parser_bison.y"
+#line 5435 "src/parser_bison.y"
                                                        { (yyval.val) = NFPROTO_IPV4; }
-#line 15324 "src/parser_bison.c"
+#line 15325 "src/parser_bison.c"
     break;
 
   case 1020: /* nf_key_proto: "ip6" close_scope_ip6  */
-#line 5435 "src/parser_bison.y"
+#line 5436 "src/parser_bison.y"
                                                         { (yyval.val) = NFPROTO_IPV6; }
-#line 15330 "src/parser_bison.c"
+#line 15331 "src/parser_bison.c"
     break;
 
   case 1021: /* rt_expr: "rt" rt_key close_scope_rt  */
-#line 5439 "src/parser_bison.y"
+#line 5440 "src/parser_bison.y"
                         {
 				(yyval.expr) = rt_expr_alloc(&(yyloc), (yyvsp[-1].val), true);
 			}
-#line 15338 "src/parser_bison.c"
+#line 15339 "src/parser_bison.c"
     break;
 
   case 1022: /* rt_expr: "rt" nf_key_proto rt_key close_scope_rt  */
-#line 5443 "src/parser_bison.y"
+#line 5444 "src/parser_bison.y"
                         {
 				enum nft_rt_keys rtk = (yyvsp[-1].val);
 
@@ -15356,271 +15357,271 @@ yyreduce:
 
 				(yyval.expr) = rt_expr_alloc(&(yyloc), rtk, false);
 			}
-#line 15360 "src/parser_bison.c"
+#line 15361 "src/parser_bison.c"
     break;
 
   case 1023: /* rt_key: "classid"  */
-#line 5462 "src/parser_bison.y"
+#line 5463 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_RT_CLASSID; }
-#line 15366 "src/parser_bison.c"
+#line 15367 "src/parser_bison.c"
     break;
 
   case 1024: /* rt_key: "nexthop"  */
-#line 5463 "src/parser_bison.y"
+#line 5464 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_RT_NEXTHOP4; }
-#line 15372 "src/parser_bison.c"
+#line 15373 "src/parser_bison.c"
     break;
 
   case 1025: /* rt_key: "mtu"  */
-#line 5464 "src/parser_bison.y"
+#line 5465 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_RT_TCPMSS; }
-#line 15378 "src/parser_bison.c"
+#line 15379 "src/parser_bison.c"
     break;
 
   case 1026: /* rt_key: "ipsec" close_scope_ipsec  */
-#line 5465 "src/parser_bison.y"
+#line 5466 "src/parser_bison.y"
                                                           { (yyval.val) = NFT_RT_XFRM; }
-#line 15384 "src/parser_bison.c"
+#line 15385 "src/parser_bison.c"
     break;
 
   case 1027: /* ct_expr: "ct" ct_key close_scope_ct  */
-#line 5469 "src/parser_bison.y"
+#line 5470 "src/parser_bison.y"
                         {
 				(yyval.expr) = ct_expr_alloc(&(yyloc), (yyvsp[-1].val), -1);
 			}
-#line 15392 "src/parser_bison.c"
+#line 15393 "src/parser_bison.c"
     break;
 
   case 1028: /* ct_expr: "ct" ct_dir ct_key_dir close_scope_ct  */
-#line 5473 "src/parser_bison.y"
+#line 5474 "src/parser_bison.y"
                         {
 				(yyval.expr) = ct_expr_alloc(&(yyloc), (yyvsp[-1].val), (yyvsp[-2].val));
 			}
-#line 15400 "src/parser_bison.c"
+#line 15401 "src/parser_bison.c"
     break;
 
   case 1029: /* ct_expr: "ct" ct_dir ct_key_proto_field close_scope_ct  */
-#line 5477 "src/parser_bison.y"
+#line 5478 "src/parser_bison.y"
                         {
 				(yyval.expr) = ct_expr_alloc(&(yyloc), (yyvsp[-1].val), (yyvsp[-2].val));
 			}
-#line 15408 "src/parser_bison.c"
+#line 15409 "src/parser_bison.c"
     break;
 
   case 1030: /* ct_dir: "original"  */
-#line 5482 "src/parser_bison.y"
+#line 5483 "src/parser_bison.y"
                                                 { (yyval.val) = IP_CT_DIR_ORIGINAL; }
-#line 15414 "src/parser_bison.c"
+#line 15415 "src/parser_bison.c"
     break;
 
   case 1031: /* ct_dir: "reply"  */
-#line 5483 "src/parser_bison.y"
+#line 5484 "src/parser_bison.y"
                                                 { (yyval.val) = IP_CT_DIR_REPLY; }
-#line 15420 "src/parser_bison.c"
+#line 15421 "src/parser_bison.c"
     break;
 
   case 1032: /* ct_key: "l3proto"  */
-#line 5486 "src/parser_bison.y"
+#line 5487 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_CT_L3PROTOCOL; }
-#line 15426 "src/parser_bison.c"
+#line 15427 "src/parser_bison.c"
     break;
 
   case 1033: /* ct_key: "protocol"  */
-#line 5487 "src/parser_bison.y"
+#line 5488 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_CT_PROTOCOL; }
-#line 15432 "src/parser_bison.c"
+#line 15433 "src/parser_bison.c"
     break;
 
   case 1034: /* ct_key: "mark"  */
-#line 5488 "src/parser_bison.y"
+#line 5489 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_CT_MARK; }
-#line 15438 "src/parser_bison.c"
+#line 15439 "src/parser_bison.c"
     break;
 
   case 1035: /* ct_key: "state"  */
-#line 5489 "src/parser_bison.y"
+#line 5490 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_CT_STATE; }
-#line 15444 "src/parser_bison.c"
+#line 15445 "src/parser_bison.c"
     break;
 
   case 1036: /* ct_key: "direction"  */
-#line 5490 "src/parser_bison.y"
+#line 5491 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_CT_DIRECTION; }
-#line 15450 "src/parser_bison.c"
+#line 15451 "src/parser_bison.c"
     break;
 
   case 1037: /* ct_key: "status"  */
-#line 5491 "src/parser_bison.y"
+#line 5492 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_CT_STATUS; }
-#line 15456 "src/parser_bison.c"
+#line 15457 "src/parser_bison.c"
     break;
 
   case 1038: /* ct_key: "expiration"  */
-#line 5492 "src/parser_bison.y"
+#line 5493 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_CT_EXPIRATION; }
-#line 15462 "src/parser_bison.c"
+#line 15463 "src/parser_bison.c"
     break;
 
   case 1039: /* ct_key: "helper"  */
-#line 5493 "src/parser_bison.y"
+#line 5494 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_CT_HELPER; }
-#line 15468 "src/parser_bison.c"
+#line 15469 "src/parser_bison.c"
     break;
 
   case 1040: /* ct_key: "saddr"  */
-#line 5494 "src/parser_bison.y"
+#line 5495 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_CT_SRC; }
-#line 15474 "src/parser_bison.c"
+#line 15475 "src/parser_bison.c"
     break;
 
   case 1041: /* ct_key: "daddr"  */
-#line 5495 "src/parser_bison.y"
+#line 5496 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_CT_DST; }
-#line 15480 "src/parser_bison.c"
+#line 15481 "src/parser_bison.c"
     break;
 
   case 1042: /* ct_key: "proto-src"  */
-#line 5496 "src/parser_bison.y"
+#line 5497 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_CT_PROTO_SRC; }
-#line 15486 "src/parser_bison.c"
+#line 15487 "src/parser_bison.c"
     break;
 
   case 1043: /* ct_key: "proto-dst"  */
-#line 5497 "src/parser_bison.y"
+#line 5498 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_CT_PROTO_DST; }
-#line 15492 "src/parser_bison.c"
+#line 15493 "src/parser_bison.c"
     break;
 
   case 1044: /* ct_key: "label"  */
-#line 5498 "src/parser_bison.y"
+#line 5499 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_CT_LABELS; }
-#line 15498 "src/parser_bison.c"
+#line 15499 "src/parser_bison.c"
     break;
 
   case 1045: /* ct_key: "event"  */
-#line 5499 "src/parser_bison.y"
+#line 5500 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_CT_EVENTMASK; }
-#line 15504 "src/parser_bison.c"
+#line 15505 "src/parser_bison.c"
     break;
 
   case 1046: /* ct_key: "secmark" close_scope_secmark  */
-#line 5500 "src/parser_bison.y"
+#line 5501 "src/parser_bison.y"
                                                             { (yyval.val) = NFT_CT_SECMARK; }
-#line 15510 "src/parser_bison.c"
+#line 15511 "src/parser_bison.c"
     break;
 
   case 1047: /* ct_key: "id"  */
-#line 5501 "src/parser_bison.y"
+#line 5502 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_CT_ID; }
-#line 15516 "src/parser_bison.c"
+#line 15517 "src/parser_bison.c"
     break;
 
   case 1049: /* ct_key_dir: "saddr"  */
-#line 5505 "src/parser_bison.y"
+#line 5506 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_CT_SRC; }
-#line 15522 "src/parser_bison.c"
+#line 15523 "src/parser_bison.c"
     break;
 
   case 1050: /* ct_key_dir: "daddr"  */
-#line 5506 "src/parser_bison.y"
+#line 5507 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_CT_DST; }
-#line 15528 "src/parser_bison.c"
+#line 15529 "src/parser_bison.c"
     break;
 
   case 1051: /* ct_key_dir: "l3proto"  */
-#line 5507 "src/parser_bison.y"
+#line 5508 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_CT_L3PROTOCOL; }
-#line 15534 "src/parser_bison.c"
+#line 15535 "src/parser_bison.c"
     break;
 
   case 1052: /* ct_key_dir: "protocol"  */
-#line 5508 "src/parser_bison.y"
+#line 5509 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_CT_PROTOCOL; }
-#line 15540 "src/parser_bison.c"
+#line 15541 "src/parser_bison.c"
     break;
 
   case 1053: /* ct_key_dir: "proto-src"  */
-#line 5509 "src/parser_bison.y"
+#line 5510 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_CT_PROTO_SRC; }
-#line 15546 "src/parser_bison.c"
+#line 15547 "src/parser_bison.c"
     break;
 
   case 1054: /* ct_key_dir: "proto-dst"  */
-#line 5510 "src/parser_bison.y"
+#line 5511 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_CT_PROTO_DST; }
-#line 15552 "src/parser_bison.c"
+#line 15553 "src/parser_bison.c"
     break;
 
   case 1056: /* ct_key_proto_field: "ip" "saddr" close_scope_ip  */
-#line 5514 "src/parser_bison.y"
+#line 5515 "src/parser_bison.y"
                                                                { (yyval.val) = NFT_CT_SRC_IP; }
-#line 15558 "src/parser_bison.c"
+#line 15559 "src/parser_bison.c"
     break;
 
   case 1057: /* ct_key_proto_field: "ip" "daddr" close_scope_ip  */
-#line 5515 "src/parser_bison.y"
+#line 5516 "src/parser_bison.y"
                                                                { (yyval.val) = NFT_CT_DST_IP; }
-#line 15564 "src/parser_bison.c"
+#line 15565 "src/parser_bison.c"
     break;
 
   case 1058: /* ct_key_proto_field: "ip6" "saddr" close_scope_ip6  */
-#line 5516 "src/parser_bison.y"
+#line 5517 "src/parser_bison.y"
                                                                 { (yyval.val) = NFT_CT_SRC_IP6; }
-#line 15570 "src/parser_bison.c"
+#line 15571 "src/parser_bison.c"
     break;
 
   case 1059: /* ct_key_proto_field: "ip6" "daddr" close_scope_ip6  */
-#line 5517 "src/parser_bison.y"
+#line 5518 "src/parser_bison.y"
                                                                 { (yyval.val) = NFT_CT_DST_IP6; }
-#line 15576 "src/parser_bison.c"
+#line 15577 "src/parser_bison.c"
     break;
 
   case 1060: /* ct_key_dir_optional: "bytes"  */
-#line 5520 "src/parser_bison.y"
+#line 5521 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_CT_BYTES; }
-#line 15582 "src/parser_bison.c"
+#line 15583 "src/parser_bison.c"
     break;
 
   case 1061: /* ct_key_dir_optional: "packets"  */
-#line 5521 "src/parser_bison.y"
+#line 5522 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_CT_PKTS; }
-#line 15588 "src/parser_bison.c"
+#line 15589 "src/parser_bison.c"
     break;
 
   case 1062: /* ct_key_dir_optional: "avgpkt"  */
-#line 5522 "src/parser_bison.y"
+#line 5523 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_CT_AVGPKT; }
-#line 15594 "src/parser_bison.c"
+#line 15595 "src/parser_bison.c"
     break;
 
   case 1063: /* ct_key_dir_optional: "zone"  */
-#line 5523 "src/parser_bison.y"
+#line 5524 "src/parser_bison.y"
                                                 { (yyval.val) = NFT_CT_ZONE; }
-#line 15600 "src/parser_bison.c"
+#line 15601 "src/parser_bison.c"
     break;
 
   case 1066: /* list_stmt_expr: symbol_stmt_expr "comma" symbol_stmt_expr  */
-#line 5531 "src/parser_bison.y"
+#line 5532 "src/parser_bison.y"
                         {
 				(yyval.expr) = list_expr_alloc(&(yyloc));
 				compound_expr_add((yyval.expr), (yyvsp[-2].expr));
 				compound_expr_add((yyval.expr), (yyvsp[0].expr));
 			}
-#line 15610 "src/parser_bison.c"
+#line 15611 "src/parser_bison.c"
     break;
 
   case 1067: /* list_stmt_expr: list_stmt_expr "comma" symbol_stmt_expr  */
-#line 5537 "src/parser_bison.y"
+#line 5538 "src/parser_bison.y"
                         {
 				(yyvsp[-2].expr)->location = (yyloc);
 				compound_expr_add((yyvsp[-2].expr), (yyvsp[0].expr));
 				(yyval.expr) = (yyvsp[-2].expr);
 			}
-#line 15620 "src/parser_bison.c"
+#line 15621 "src/parser_bison.c"
     break;
 
   case 1068: /* ct_stmt: "ct" ct_key "set" stmt_expr close_scope_ct  */
-#line 5545 "src/parser_bison.y"
+#line 5546 "src/parser_bison.y"
                         {
 				switch ((yyvsp[-3].val)) {
 				case NFT_CT_HELPER:
@@ -15633,30 +15634,30 @@ yyreduce:
 					break;
 				}
 			}
-#line 15637 "src/parser_bison.c"
+#line 15638 "src/parser_bison.c"
     break;
 
   case 1069: /* ct_stmt: "ct" ct_dir ct_key_dir_optional "set" stmt_expr close_scope_ct  */
-#line 5558 "src/parser_bison.y"
+#line 5559 "src/parser_bison.y"
                         {
 				(yyval.stmt) = ct_stmt_alloc(&(yyloc), (yyvsp[-3].val), (yyvsp[-4].val), (yyvsp[-1].expr));
 			}
-#line 15645 "src/parser_bison.c"
+#line 15646 "src/parser_bison.c"
     break;
 
   case 1070: /* payload_stmt: payload_expr "set" stmt_expr  */
-#line 5564 "src/parser_bison.y"
+#line 5565 "src/parser_bison.y"
                         {
 				if ((yyvsp[-2].expr)->etype == EXPR_EXTHDR)
 					(yyval.stmt) = exthdr_stmt_alloc(&(yyloc), (yyvsp[-2].expr), (yyvsp[0].expr));
 				else
 					(yyval.stmt) = payload_stmt_alloc(&(yyloc), (yyvsp[-2].expr), (yyvsp[0].expr));
 			}
-#line 15656 "src/parser_bison.c"
+#line 15657 "src/parser_bison.c"
     break;
 
   case 1093: /* payload_raw_len: "number"  */
-#line 5597 "src/parser_bison.y"
+#line 5598 "src/parser_bison.y"
                         {
 				if ((yyvsp[0].val) > NFT_MAX_EXPR_LEN_BITS) {
 					erec_queue(error(&(yylsp[0]), "raw payload length %u exceeds upper limit of %u",
@@ -15672,40 +15673,40 @@ yyreduce:
 
 				(yyval.val) = (yyvsp[0].val);
 			}
-#line 15676 "src/parser_bison.c"
+#line 15677 "src/parser_bison.c"
     break;
 
   case 1094: /* payload_raw_expr: "@" payload_base_spec "comma" "number" "comma" payload_raw_len close_scope_at  */
-#line 5615 "src/parser_bison.y"
+#line 5616 "src/parser_bison.y"
                         {
 				(yyval.expr) = payload_expr_alloc(&(yyloc), NULL, 0);
 				payload_init_raw((yyval.expr), (yyvsp[-5].val), (yyvsp[-3].val), (yyvsp[-1].val));
 				(yyval.expr)->byteorder		= BYTEORDER_BIG_ENDIAN;
 				(yyval.expr)->payload.is_raw	= true;
 			}
-#line 15687 "src/parser_bison.c"
+#line 15688 "src/parser_bison.c"
     break;
 
   case 1095: /* payload_base_spec: "ll"  */
-#line 5623 "src/parser_bison.y"
+#line 5624 "src/parser_bison.y"
                                                 { (yyval.val) = PROTO_BASE_LL_HDR; }
-#line 15693 "src/parser_bison.c"
+#line 15694 "src/parser_bison.c"
     break;
 
   case 1096: /* payload_base_spec: "nh"  */
-#line 5624 "src/parser_bison.y"
+#line 5625 "src/parser_bison.y"
                                                 { (yyval.val) = PROTO_BASE_NETWORK_HDR; }
-#line 15699 "src/parser_bison.c"
+#line 15700 "src/parser_bison.c"
     break;
 
   case 1097: /* payload_base_spec: "th" close_scope_th  */
-#line 5625 "src/parser_bison.y"
+#line 5626 "src/parser_bison.y"
                                                                 { (yyval.val) = PROTO_BASE_TRANSPORT_HDR; }
-#line 15705 "src/parser_bison.c"
+#line 15706 "src/parser_bison.c"
     break;
 
   case 1098: /* payload_base_spec: "string"  */
-#line 5627 "src/parser_bison.y"
+#line 5628 "src/parser_bison.y"
                         {
 				if (!strcmp((yyvsp[0].string), "ih")) {
 					(yyval.val) = PROTO_BASE_INNER_HDR;
@@ -15716,145 +15717,145 @@ yyreduce:
 				}
 				free_const((yyvsp[0].string));
 			}
-#line 15720 "src/parser_bison.c"
+#line 15721 "src/parser_bison.c"
     break;
 
   case 1099: /* eth_hdr_expr: "ether" eth_hdr_field close_scope_eth  */
-#line 5640 "src/parser_bison.y"
+#line 5641 "src/parser_bison.y"
                         {
 				(yyval.expr) = payload_expr_alloc(&(yyloc), &proto_eth, (yyvsp[-1].val));
 			}
-#line 15728 "src/parser_bison.c"
+#line 15729 "src/parser_bison.c"
     break;
 
   case 1100: /* eth_hdr_field: "saddr"  */
-#line 5645 "src/parser_bison.y"
+#line 5646 "src/parser_bison.y"
                                                 { (yyval.val) = ETHHDR_SADDR; }
-#line 15734 "src/parser_bison.c"
+#line 15735 "src/parser_bison.c"
     break;
 
   case 1101: /* eth_hdr_field: "daddr"  */
-#line 5646 "src/parser_bison.y"
+#line 5647 "src/parser_bison.y"
                                                 { (yyval.val) = ETHHDR_DADDR; }
-#line 15740 "src/parser_bison.c"
+#line 15741 "src/parser_bison.c"
     break;
 
   case 1102: /* eth_hdr_field: "type" close_scope_type  */
-#line 5647 "src/parser_bison.y"
+#line 5648 "src/parser_bison.y"
                                                                         { (yyval.val) = ETHHDR_TYPE; }
-#line 15746 "src/parser_bison.c"
+#line 15747 "src/parser_bison.c"
     break;
 
   case 1103: /* vlan_hdr_expr: "vlan" vlan_hdr_field close_scope_vlan  */
-#line 5651 "src/parser_bison.y"
+#line 5652 "src/parser_bison.y"
                         {
 				(yyval.expr) = payload_expr_alloc(&(yyloc), &proto_vlan, (yyvsp[-1].val));
 			}
-#line 15754 "src/parser_bison.c"
+#line 15755 "src/parser_bison.c"
     break;
 
   case 1104: /* vlan_hdr_field: "id"  */
-#line 5656 "src/parser_bison.y"
+#line 5657 "src/parser_bison.y"
                                                 { (yyval.val) = VLANHDR_VID; }
-#line 15760 "src/parser_bison.c"
+#line 15761 "src/parser_bison.c"
     break;
 
   case 1105: /* vlan_hdr_field: "cfi"  */
-#line 5657 "src/parser_bison.y"
+#line 5658 "src/parser_bison.y"
                                                 { (yyval.val) = VLANHDR_CFI; }
-#line 15766 "src/parser_bison.c"
+#line 15767 "src/parser_bison.c"
     break;
 
   case 1106: /* vlan_hdr_field: "dei"  */
-#line 5658 "src/parser_bison.y"
+#line 5659 "src/parser_bison.y"
                                                 { (yyval.val) = VLANHDR_DEI; }
-#line 15772 "src/parser_bison.c"
+#line 15773 "src/parser_bison.c"
     break;
 
   case 1107: /* vlan_hdr_field: "pcp"  */
-#line 5659 "src/parser_bison.y"
+#line 5660 "src/parser_bison.y"
                                                 { (yyval.val) = VLANHDR_PCP; }
-#line 15778 "src/parser_bison.c"
+#line 15779 "src/parser_bison.c"
     break;
 
   case 1108: /* vlan_hdr_field: "type" close_scope_type  */
-#line 5660 "src/parser_bison.y"
+#line 5661 "src/parser_bison.y"
                                                                         { (yyval.val) = VLANHDR_TYPE; }
-#line 15784 "src/parser_bison.c"
+#line 15785 "src/parser_bison.c"
     break;
 
   case 1109: /* arp_hdr_expr: "arp" arp_hdr_field close_scope_arp  */
-#line 5664 "src/parser_bison.y"
+#line 5665 "src/parser_bison.y"
                         {
 				(yyval.expr) = payload_expr_alloc(&(yyloc), &proto_arp, (yyvsp[-1].val));
 			}
-#line 15792 "src/parser_bison.c"
+#line 15793 "src/parser_bison.c"
     break;
 
   case 1110: /* arp_hdr_field: "htype"  */
-#line 5669 "src/parser_bison.y"
+#line 5670 "src/parser_bison.y"
                                                 { (yyval.val) = ARPHDR_HRD; }
-#line 15798 "src/parser_bison.c"
+#line 15799 "src/parser_bison.c"
     break;
 
   case 1111: /* arp_hdr_field: "ptype"  */
-#line 5670 "src/parser_bison.y"
+#line 5671 "src/parser_bison.y"
                                                 { (yyval.val) = ARPHDR_PRO; }
-#line 15804 "src/parser_bison.c"
+#line 15805 "src/parser_bison.c"
     break;
 
   case 1112: /* arp_hdr_field: "hlen"  */
-#line 5671 "src/parser_bison.y"
+#line 5672 "src/parser_bison.y"
                                                 { (yyval.val) = ARPHDR_HLN; }
-#line 15810 "src/parser_bison.c"
+#line 15811 "src/parser_bison.c"
     break;
 
   case 1113: /* arp_hdr_field: "plen"  */
-#line 5672 "src/parser_bison.y"
+#line 5673 "src/parser_bison.y"
                                                 { (yyval.val) = ARPHDR_PLN; }
-#line 15816 "src/parser_bison.c"
+#line 15817 "src/parser_bison.c"
     break;
 
   case 1114: /* arp_hdr_field: "operation"  */
-#line 5673 "src/parser_bison.y"
+#line 5674 "src/parser_bison.y"
                                                 { (yyval.val) = ARPHDR_OP; }
-#line 15822 "src/parser_bison.c"
+#line 15823 "src/parser_bison.c"
     break;
 
   case 1115: /* arp_hdr_field: "saddr" "ether" close_scope_eth  */
-#line 5674 "src/parser_bison.y"
+#line 5675 "src/parser_bison.y"
                                                                 { (yyval.val) = ARPHDR_SADDR_ETHER; }
-#line 15828 "src/parser_bison.c"
+#line 15829 "src/parser_bison.c"
     break;
 
   case 1116: /* arp_hdr_field: "daddr" "ether" close_scope_eth  */
-#line 5675 "src/parser_bison.y"
+#line 5676 "src/parser_bison.y"
                                                                 { (yyval.val) = ARPHDR_DADDR_ETHER; }
-#line 15834 "src/parser_bison.c"
+#line 15835 "src/parser_bison.c"
     break;
 
   case 1117: /* arp_hdr_field: "saddr" "ip" close_scope_ip  */
-#line 5676 "src/parser_bison.y"
+#line 5677 "src/parser_bison.y"
                                                                 { (yyval.val) = ARPHDR_SADDR_IP; }
-#line 15840 "src/parser_bison.c"
+#line 15841 "src/parser_bison.c"
     break;
 
   case 1118: /* arp_hdr_field: "daddr" "ip" close_scope_ip  */
-#line 5677 "src/parser_bison.y"
+#line 5678 "src/parser_bison.y"
                                                                 { (yyval.val) = ARPHDR_DADDR_IP; }
-#line 15846 "src/parser_bison.c"
+#line 15847 "src/parser_bison.c"
     break;
 
   case 1119: /* ip_hdr_expr: "ip" ip_hdr_field close_scope_ip  */
-#line 5681 "src/parser_bison.y"
+#line 5682 "src/parser_bison.y"
                         {
 				(yyval.expr) = payload_expr_alloc(&(yyloc), &proto_ip, (yyvsp[-1].val));
 			}
-#line 15854 "src/parser_bison.c"
+#line 15855 "src/parser_bison.c"
     break;
 
   case 1120: /* ip_hdr_expr: "ip" "option" ip_option_type ip_option_field close_scope_ip  */
-#line 5685 "src/parser_bison.y"
+#line 5686 "src/parser_bison.y"
                         {
 				(yyval.expr) = ipopt_expr_alloc(&(yyloc), (yyvsp[-2].val), (yyvsp[-1].val));
 				if (!(yyval.expr)) {
@@ -15865,523 +15866,523 @@ yyreduce:
 				if ((yyvsp[-1].val) == IPOPT_FIELD_TYPE)
 					(yyval.expr)->exthdr.flags = NFT_EXTHDR_F_PRESENT;
 			}
-#line 15869 "src/parser_bison.c"
+#line 15870 "src/parser_bison.c"
     break;
 
   case 1121: /* ip_hdr_expr: "ip" "option" ip_option_type close_scope_ip  */
-#line 5696 "src/parser_bison.y"
+#line 5697 "src/parser_bison.y"
                         {
 				(yyval.expr) = ipopt_expr_alloc(&(yyloc), (yyvsp[-1].val), IPOPT_FIELD_TYPE);
 				(yyval.expr)->exthdr.flags = NFT_EXTHDR_F_PRESENT;
 			}
-#line 15878 "src/parser_bison.c"
+#line 15879 "src/parser_bison.c"
     break;
 
   case 1122: /* ip_hdr_field: "version"  */
-#line 5702 "src/parser_bison.y"
+#line 5703 "src/parser_bison.y"
                                                 { (yyval.val) = IPHDR_VERSION; }
-#line 15884 "src/parser_bison.c"
+#line 15885 "src/parser_bison.c"
     break;
 
   case 1123: /* ip_hdr_field: "hdrlength"  */
-#line 5703 "src/parser_bison.y"
+#line 5704 "src/parser_bison.y"
                                                 { (yyval.val) = IPHDR_HDRLENGTH; }
-#line 15890 "src/parser_bison.c"
+#line 15891 "src/parser_bison.c"
     break;
 
   case 1124: /* ip_hdr_field: "dscp"  */
-#line 5704 "src/parser_bison.y"
+#line 5705 "src/parser_bison.y"
                                                 { (yyval.val) = IPHDR_DSCP; }
-#line 15896 "src/parser_bison.c"
+#line 15897 "src/parser_bison.c"
     break;
 
   case 1125: /* ip_hdr_field: "ecn"  */
-#line 5705 "src/parser_bison.y"
+#line 5706 "src/parser_bison.y"
                                                 { (yyval.val) = IPHDR_ECN; }
-#line 15902 "src/parser_bison.c"
+#line 15903 "src/parser_bison.c"
     break;
 
   case 1126: /* ip_hdr_field: "length"  */
-#line 5706 "src/parser_bison.y"
+#line 5707 "src/parser_bison.y"
                                                 { (yyval.val) = IPHDR_LENGTH; }
-#line 15908 "src/parser_bison.c"
+#line 15909 "src/parser_bison.c"
     break;
 
   case 1127: /* ip_hdr_field: "id"  */
-#line 5707 "src/parser_bison.y"
+#line 5708 "src/parser_bison.y"
                                                 { (yyval.val) = IPHDR_ID; }
-#line 15914 "src/parser_bison.c"
+#line 15915 "src/parser_bison.c"
     break;
 
   case 1128: /* ip_hdr_field: "frag-off"  */
-#line 5708 "src/parser_bison.y"
+#line 5709 "src/parser_bison.y"
                                                 { (yyval.val) = IPHDR_FRAG_OFF; }
-#line 15920 "src/parser_bison.c"
+#line 15921 "src/parser_bison.c"
     break;
 
   case 1129: /* ip_hdr_field: "ttl"  */
-#line 5709 "src/parser_bison.y"
+#line 5710 "src/parser_bison.y"
                                                 { (yyval.val) = IPHDR_TTL; }
-#line 15926 "src/parser_bison.c"
+#line 15927 "src/parser_bison.c"
     break;
 
   case 1130: /* ip_hdr_field: "protocol"  */
-#line 5710 "src/parser_bison.y"
+#line 5711 "src/parser_bison.y"
                                                 { (yyval.val) = IPHDR_PROTOCOL; }
-#line 15932 "src/parser_bison.c"
+#line 15933 "src/parser_bison.c"
     break;
 
   case 1131: /* ip_hdr_field: "checksum"  */
-#line 5711 "src/parser_bison.y"
+#line 5712 "src/parser_bison.y"
                                                 { (yyval.val) = IPHDR_CHECKSUM; }
-#line 15938 "src/parser_bison.c"
+#line 15939 "src/parser_bison.c"
     break;
 
   case 1132: /* ip_hdr_field: "saddr"  */
-#line 5712 "src/parser_bison.y"
+#line 5713 "src/parser_bison.y"
                                                 { (yyval.val) = IPHDR_SADDR; }
-#line 15944 "src/parser_bison.c"
+#line 15945 "src/parser_bison.c"
     break;
 
   case 1133: /* ip_hdr_field: "daddr"  */
-#line 5713 "src/parser_bison.y"
+#line 5714 "src/parser_bison.y"
                                                 { (yyval.val) = IPHDR_DADDR; }
-#line 15950 "src/parser_bison.c"
+#line 15951 "src/parser_bison.c"
     break;
 
   case 1134: /* ip_option_type: "lsrr"  */
-#line 5716 "src/parser_bison.y"
+#line 5717 "src/parser_bison.y"
                                                 { (yyval.val) = IPOPT_LSRR; }
-#line 15956 "src/parser_bison.c"
+#line 15957 "src/parser_bison.c"
     break;
 
   case 1135: /* ip_option_type: "rr"  */
-#line 5717 "src/parser_bison.y"
+#line 5718 "src/parser_bison.y"
                                                 { (yyval.val) = IPOPT_RR; }
-#line 15962 "src/parser_bison.c"
+#line 15963 "src/parser_bison.c"
     break;
 
   case 1136: /* ip_option_type: "ssrr"  */
-#line 5718 "src/parser_bison.y"
+#line 5719 "src/parser_bison.y"
                                                 { (yyval.val) = IPOPT_SSRR; }
-#line 15968 "src/parser_bison.c"
+#line 15969 "src/parser_bison.c"
     break;
 
   case 1137: /* ip_option_type: "ra"  */
-#line 5719 "src/parser_bison.y"
+#line 5720 "src/parser_bison.y"
                                                 { (yyval.val) = IPOPT_RA; }
-#line 15974 "src/parser_bison.c"
+#line 15975 "src/parser_bison.c"
     break;
 
   case 1138: /* ip_option_field: "type" close_scope_type  */
-#line 5722 "src/parser_bison.y"
+#line 5723 "src/parser_bison.y"
                                                                         { (yyval.val) = IPOPT_FIELD_TYPE; }
-#line 15980 "src/parser_bison.c"
+#line 15981 "src/parser_bison.c"
     break;
 
   case 1139: /* ip_option_field: "length"  */
-#line 5723 "src/parser_bison.y"
+#line 5724 "src/parser_bison.y"
                                                 { (yyval.val) = IPOPT_FIELD_LENGTH; }
-#line 15986 "src/parser_bison.c"
+#line 15987 "src/parser_bison.c"
     break;
 
   case 1140: /* ip_option_field: "value"  */
-#line 5724 "src/parser_bison.y"
+#line 5725 "src/parser_bison.y"
                                                 { (yyval.val) = IPOPT_FIELD_VALUE; }
-#line 15992 "src/parser_bison.c"
+#line 15993 "src/parser_bison.c"
     break;
 
   case 1141: /* ip_option_field: "ptr"  */
-#line 5725 "src/parser_bison.y"
+#line 5726 "src/parser_bison.y"
                                                 { (yyval.val) = IPOPT_FIELD_PTR; }
-#line 15998 "src/parser_bison.c"
+#line 15999 "src/parser_bison.c"
     break;
 
   case 1142: /* ip_option_field: "addr"  */
-#line 5726 "src/parser_bison.y"
+#line 5727 "src/parser_bison.y"
                                                 { (yyval.val) = IPOPT_FIELD_ADDR_0; }
-#line 16004 "src/parser_bison.c"
+#line 16005 "src/parser_bison.c"
     break;
 
   case 1143: /* icmp_hdr_expr: "icmp" icmp_hdr_field close_scope_icmp  */
-#line 5730 "src/parser_bison.y"
+#line 5731 "src/parser_bison.y"
                         {
 				(yyval.expr) = payload_expr_alloc(&(yyloc), &proto_icmp, (yyvsp[-1].val));
 			}
-#line 16012 "src/parser_bison.c"
+#line 16013 "src/parser_bison.c"
     break;
 
   case 1144: /* icmp_hdr_field: "type" close_scope_type  */
-#line 5735 "src/parser_bison.y"
+#line 5736 "src/parser_bison.y"
                                                                         { (yyval.val) = ICMPHDR_TYPE; }
-#line 16018 "src/parser_bison.c"
+#line 16019 "src/parser_bison.c"
     break;
 
   case 1145: /* icmp_hdr_field: "code"  */
-#line 5736 "src/parser_bison.y"
+#line 5737 "src/parser_bison.y"
                                                 { (yyval.val) = ICMPHDR_CODE; }
-#line 16024 "src/parser_bison.c"
+#line 16025 "src/parser_bison.c"
     break;
 
   case 1146: /* icmp_hdr_field: "checksum"  */
-#line 5737 "src/parser_bison.y"
+#line 5738 "src/parser_bison.y"
                                                 { (yyval.val) = ICMPHDR_CHECKSUM; }
-#line 16030 "src/parser_bison.c"
+#line 16031 "src/parser_bison.c"
     break;
 
   case 1147: /* icmp_hdr_field: "id"  */
-#line 5738 "src/parser_bison.y"
+#line 5739 "src/parser_bison.y"
                                                 { (yyval.val) = ICMPHDR_ID; }
-#line 16036 "src/parser_bison.c"
+#line 16037 "src/parser_bison.c"
     break;
 
   case 1148: /* icmp_hdr_field: "seq"  */
-#line 5739 "src/parser_bison.y"
+#line 5740 "src/parser_bison.y"
                                                 { (yyval.val) = ICMPHDR_SEQ; }
-#line 16042 "src/parser_bison.c"
+#line 16043 "src/parser_bison.c"
     break;
 
   case 1149: /* icmp_hdr_field: "gateway"  */
-#line 5740 "src/parser_bison.y"
+#line 5741 "src/parser_bison.y"
                                                 { (yyval.val) = ICMPHDR_GATEWAY; }
-#line 16048 "src/parser_bison.c"
+#line 16049 "src/parser_bison.c"
     break;
 
   case 1150: /* icmp_hdr_field: "mtu"  */
-#line 5741 "src/parser_bison.y"
+#line 5742 "src/parser_bison.y"
                                                 { (yyval.val) = ICMPHDR_MTU; }
-#line 16054 "src/parser_bison.c"
+#line 16055 "src/parser_bison.c"
     break;
 
   case 1151: /* igmp_hdr_expr: "igmp" igmp_hdr_field close_scope_igmp  */
-#line 5745 "src/parser_bison.y"
+#line 5746 "src/parser_bison.y"
                         {
 				(yyval.expr) = payload_expr_alloc(&(yyloc), &proto_igmp, (yyvsp[-1].val));
 			}
-#line 16062 "src/parser_bison.c"
+#line 16063 "src/parser_bison.c"
     break;
 
   case 1152: /* igmp_hdr_field: "type" close_scope_type  */
-#line 5750 "src/parser_bison.y"
+#line 5751 "src/parser_bison.y"
                                                                         { (yyval.val) = IGMPHDR_TYPE; }
-#line 16068 "src/parser_bison.c"
+#line 16069 "src/parser_bison.c"
     break;
 
   case 1153: /* igmp_hdr_field: "checksum"  */
-#line 5751 "src/parser_bison.y"
+#line 5752 "src/parser_bison.y"
                                                 { (yyval.val) = IGMPHDR_CHECKSUM; }
-#line 16074 "src/parser_bison.c"
+#line 16075 "src/parser_bison.c"
     break;
 
   case 1154: /* igmp_hdr_field: "mrt"  */
-#line 5752 "src/parser_bison.y"
+#line 5753 "src/parser_bison.y"
                                                 { (yyval.val) = IGMPHDR_MRT; }
-#line 16080 "src/parser_bison.c"
+#line 16081 "src/parser_bison.c"
     break;
 
   case 1155: /* igmp_hdr_field: "group"  */
-#line 5753 "src/parser_bison.y"
+#line 5754 "src/parser_bison.y"
                                                 { (yyval.val) = IGMPHDR_GROUP; }
-#line 16086 "src/parser_bison.c"
+#line 16087 "src/parser_bison.c"
     break;
 
   case 1156: /* ip6_hdr_expr: "ip6" ip6_hdr_field close_scope_ip6  */
-#line 5757 "src/parser_bison.y"
+#line 5758 "src/parser_bison.y"
                         {
 				(yyval.expr) = payload_expr_alloc(&(yyloc), &proto_ip6, (yyvsp[-1].val));
 			}
-#line 16094 "src/parser_bison.c"
+#line 16095 "src/parser_bison.c"
     break;
 
   case 1157: /* ip6_hdr_field: "version"  */
-#line 5762 "src/parser_bison.y"
+#line 5763 "src/parser_bison.y"
                                                 { (yyval.val) = IP6HDR_VERSION; }
-#line 16100 "src/parser_bison.c"
+#line 16101 "src/parser_bison.c"
     break;
 
   case 1158: /* ip6_hdr_field: "dscp"  */
-#line 5763 "src/parser_bison.y"
+#line 5764 "src/parser_bison.y"
                                                 { (yyval.val) = IP6HDR_DSCP; }
-#line 16106 "src/parser_bison.c"
+#line 16107 "src/parser_bison.c"
     break;
 
   case 1159: /* ip6_hdr_field: "ecn"  */
-#line 5764 "src/parser_bison.y"
+#line 5765 "src/parser_bison.y"
                                                 { (yyval.val) = IP6HDR_ECN; }
-#line 16112 "src/parser_bison.c"
+#line 16113 "src/parser_bison.c"
     break;
 
   case 1160: /* ip6_hdr_field: "flowlabel"  */
-#line 5765 "src/parser_bison.y"
+#line 5766 "src/parser_bison.y"
                                                 { (yyval.val) = IP6HDR_FLOWLABEL; }
-#line 16118 "src/parser_bison.c"
+#line 16119 "src/parser_bison.c"
     break;
 
   case 1161: /* ip6_hdr_field: "length"  */
-#line 5766 "src/parser_bison.y"
+#line 5767 "src/parser_bison.y"
                                                 { (yyval.val) = IP6HDR_LENGTH; }
-#line 16124 "src/parser_bison.c"
+#line 16125 "src/parser_bison.c"
     break;
 
   case 1162: /* ip6_hdr_field: "nexthdr"  */
-#line 5767 "src/parser_bison.y"
+#line 5768 "src/parser_bison.y"
                                                 { (yyval.val) = IP6HDR_NEXTHDR; }
-#line 16130 "src/parser_bison.c"
+#line 16131 "src/parser_bison.c"
     break;
 
   case 1163: /* ip6_hdr_field: "hoplimit"  */
-#line 5768 "src/parser_bison.y"
+#line 5769 "src/parser_bison.y"
                                                 { (yyval.val) = IP6HDR_HOPLIMIT; }
-#line 16136 "src/parser_bison.c"
+#line 16137 "src/parser_bison.c"
     break;
 
   case 1164: /* ip6_hdr_field: "saddr"  */
-#line 5769 "src/parser_bison.y"
+#line 5770 "src/parser_bison.y"
                                                 { (yyval.val) = IP6HDR_SADDR; }
-#line 16142 "src/parser_bison.c"
+#line 16143 "src/parser_bison.c"
     break;
 
   case 1165: /* ip6_hdr_field: "daddr"  */
-#line 5770 "src/parser_bison.y"
+#line 5771 "src/parser_bison.y"
                                                 { (yyval.val) = IP6HDR_DADDR; }
-#line 16148 "src/parser_bison.c"
+#line 16149 "src/parser_bison.c"
     break;
 
   case 1166: /* icmp6_hdr_expr: "icmpv6" icmp6_hdr_field close_scope_icmp  */
-#line 5773 "src/parser_bison.y"
+#line 5774 "src/parser_bison.y"
                         {
 				(yyval.expr) = payload_expr_alloc(&(yyloc), &proto_icmp6, (yyvsp[-1].val));
 			}
-#line 16156 "src/parser_bison.c"
+#line 16157 "src/parser_bison.c"
     break;
 
   case 1167: /* icmp6_hdr_field: "type" close_scope_type  */
-#line 5778 "src/parser_bison.y"
+#line 5779 "src/parser_bison.y"
                                                                         { (yyval.val) = ICMP6HDR_TYPE; }
-#line 16162 "src/parser_bison.c"
+#line 16163 "src/parser_bison.c"
     break;
 
   case 1168: /* icmp6_hdr_field: "code"  */
-#line 5779 "src/parser_bison.y"
+#line 5780 "src/parser_bison.y"
                                                 { (yyval.val) = ICMP6HDR_CODE; }
-#line 16168 "src/parser_bison.c"
+#line 16169 "src/parser_bison.c"
     break;
 
   case 1169: /* icmp6_hdr_field: "checksum"  */
-#line 5780 "src/parser_bison.y"
+#line 5781 "src/parser_bison.y"
                                                 { (yyval.val) = ICMP6HDR_CHECKSUM; }
-#line 16174 "src/parser_bison.c"
+#line 16175 "src/parser_bison.c"
     break;
 
   case 1170: /* icmp6_hdr_field: "param-problem"  */
-#line 5781 "src/parser_bison.y"
+#line 5782 "src/parser_bison.y"
                                                 { (yyval.val) = ICMP6HDR_PPTR; }
-#line 16180 "src/parser_bison.c"
+#line 16181 "src/parser_bison.c"
     break;
 
   case 1171: /* icmp6_hdr_field: "mtu"  */
-#line 5782 "src/parser_bison.y"
+#line 5783 "src/parser_bison.y"
                                                 { (yyval.val) = ICMP6HDR_MTU; }
-#line 16186 "src/parser_bison.c"
+#line 16187 "src/parser_bison.c"
     break;
 
   case 1172: /* icmp6_hdr_field: "id"  */
-#line 5783 "src/parser_bison.y"
+#line 5784 "src/parser_bison.y"
                                                 { (yyval.val) = ICMP6HDR_ID; }
-#line 16192 "src/parser_bison.c"
+#line 16193 "src/parser_bison.c"
     break;
 
   case 1173: /* icmp6_hdr_field: "seq"  */
-#line 5784 "src/parser_bison.y"
+#line 5785 "src/parser_bison.y"
                                                 { (yyval.val) = ICMP6HDR_SEQ; }
-#line 16198 "src/parser_bison.c"
+#line 16199 "src/parser_bison.c"
     break;
 
   case 1174: /* icmp6_hdr_field: "max-delay"  */
-#line 5785 "src/parser_bison.y"
+#line 5786 "src/parser_bison.y"
                                                 { (yyval.val) = ICMP6HDR_MAXDELAY; }
-#line 16204 "src/parser_bison.c"
+#line 16205 "src/parser_bison.c"
     break;
 
   case 1175: /* icmp6_hdr_field: "taddr"  */
-#line 5786 "src/parser_bison.y"
+#line 5787 "src/parser_bison.y"
                                                 { (yyval.val) = ICMP6HDR_TADDR; }
-#line 16210 "src/parser_bison.c"
+#line 16211 "src/parser_bison.c"
     break;
 
   case 1176: /* icmp6_hdr_field: "daddr"  */
-#line 5787 "src/parser_bison.y"
+#line 5788 "src/parser_bison.y"
                                                 { (yyval.val) = ICMP6HDR_DADDR; }
-#line 16216 "src/parser_bison.c"
+#line 16217 "src/parser_bison.c"
     break;
 
   case 1177: /* auth_hdr_expr: "ah" auth_hdr_field close_scope_ah  */
-#line 5791 "src/parser_bison.y"
+#line 5792 "src/parser_bison.y"
                         {
 				(yyval.expr) = payload_expr_alloc(&(yyloc), &proto_ah, (yyvsp[-1].val));
 			}
-#line 16224 "src/parser_bison.c"
+#line 16225 "src/parser_bison.c"
     break;
 
   case 1178: /* auth_hdr_field: "nexthdr"  */
-#line 5796 "src/parser_bison.y"
+#line 5797 "src/parser_bison.y"
                                                 { (yyval.val) = AHHDR_NEXTHDR; }
-#line 16230 "src/parser_bison.c"
+#line 16231 "src/parser_bison.c"
     break;
 
   case 1179: /* auth_hdr_field: "hdrlength"  */
-#line 5797 "src/parser_bison.y"
+#line 5798 "src/parser_bison.y"
                                                 { (yyval.val) = AHHDR_HDRLENGTH; }
-#line 16236 "src/parser_bison.c"
+#line 16237 "src/parser_bison.c"
     break;
 
   case 1180: /* auth_hdr_field: "reserved"  */
-#line 5798 "src/parser_bison.y"
+#line 5799 "src/parser_bison.y"
                                                 { (yyval.val) = AHHDR_RESERVED; }
-#line 16242 "src/parser_bison.c"
+#line 16243 "src/parser_bison.c"
     break;
 
   case 1181: /* auth_hdr_field: "spi"  */
-#line 5799 "src/parser_bison.y"
+#line 5800 "src/parser_bison.y"
                                                 { (yyval.val) = AHHDR_SPI; }
-#line 16248 "src/parser_bison.c"
+#line 16249 "src/parser_bison.c"
     break;
 
   case 1182: /* auth_hdr_field: "seq"  */
-#line 5800 "src/parser_bison.y"
+#line 5801 "src/parser_bison.y"
                                                 { (yyval.val) = AHHDR_SEQUENCE; }
-#line 16254 "src/parser_bison.c"
+#line 16255 "src/parser_bison.c"
     break;
 
   case 1183: /* esp_hdr_expr: "esp" esp_hdr_field close_scope_esp  */
-#line 5804 "src/parser_bison.y"
+#line 5805 "src/parser_bison.y"
                         {
 				(yyval.expr) = payload_expr_alloc(&(yyloc), &proto_esp, (yyvsp[-1].val));
 			}
-#line 16262 "src/parser_bison.c"
+#line 16263 "src/parser_bison.c"
     break;
 
   case 1184: /* esp_hdr_field: "spi"  */
-#line 5809 "src/parser_bison.y"
+#line 5810 "src/parser_bison.y"
                                                 { (yyval.val) = ESPHDR_SPI; }
-#line 16268 "src/parser_bison.c"
+#line 16269 "src/parser_bison.c"
     break;
 
   case 1185: /* esp_hdr_field: "seq"  */
-#line 5810 "src/parser_bison.y"
+#line 5811 "src/parser_bison.y"
                                                 { (yyval.val) = ESPHDR_SEQUENCE; }
-#line 16274 "src/parser_bison.c"
+#line 16275 "src/parser_bison.c"
     break;
 
   case 1186: /* comp_hdr_expr: "comp" comp_hdr_field close_scope_comp  */
-#line 5814 "src/parser_bison.y"
+#line 5815 "src/parser_bison.y"
                         {
 				(yyval.expr) = payload_expr_alloc(&(yyloc), &proto_comp, (yyvsp[-1].val));
 			}
-#line 16282 "src/parser_bison.c"
+#line 16283 "src/parser_bison.c"
     break;
 
   case 1187: /* comp_hdr_field: "nexthdr"  */
-#line 5819 "src/parser_bison.y"
+#line 5820 "src/parser_bison.y"
                                                 { (yyval.val) = COMPHDR_NEXTHDR; }
-#line 16288 "src/parser_bison.c"
+#line 16289 "src/parser_bison.c"
     break;
 
   case 1188: /* comp_hdr_field: "flags"  */
-#line 5820 "src/parser_bison.y"
+#line 5821 "src/parser_bison.y"
                                                 { (yyval.val) = COMPHDR_FLAGS; }
-#line 16294 "src/parser_bison.c"
+#line 16295 "src/parser_bison.c"
     break;
 
   case 1189: /* comp_hdr_field: "cpi"  */
-#line 5821 "src/parser_bison.y"
+#line 5822 "src/parser_bison.y"
                                                 { (yyval.val) = COMPHDR_CPI; }
-#line 16300 "src/parser_bison.c"
+#line 16301 "src/parser_bison.c"
     break;
 
   case 1190: /* udp_hdr_expr: "udp" udp_hdr_field close_scope_udp  */
-#line 5825 "src/parser_bison.y"
+#line 5826 "src/parser_bison.y"
                         {
 				(yyval.expr) = payload_expr_alloc(&(yyloc), &proto_udp, (yyvsp[-1].val));
 			}
-#line 16308 "src/parser_bison.c"
+#line 16309 "src/parser_bison.c"
     break;
 
   case 1191: /* udp_hdr_field: "sport"  */
-#line 5830 "src/parser_bison.y"
+#line 5831 "src/parser_bison.y"
                                                 { (yyval.val) = UDPHDR_SPORT; }
-#line 16314 "src/parser_bison.c"
+#line 16315 "src/parser_bison.c"
     break;
 
   case 1192: /* udp_hdr_field: "dport"  */
-#line 5831 "src/parser_bison.y"
+#line 5832 "src/parser_bison.y"
                                                 { (yyval.val) = UDPHDR_DPORT; }
-#line 16320 "src/parser_bison.c"
+#line 16321 "src/parser_bison.c"
     break;
 
   case 1193: /* udp_hdr_field: "length"  */
-#line 5832 "src/parser_bison.y"
+#line 5833 "src/parser_bison.y"
                                                 { (yyval.val) = UDPHDR_LENGTH; }
-#line 16326 "src/parser_bison.c"
+#line 16327 "src/parser_bison.c"
     break;
 
   case 1194: /* udp_hdr_field: "checksum"  */
-#line 5833 "src/parser_bison.y"
+#line 5834 "src/parser_bison.y"
                                                 { (yyval.val) = UDPHDR_CHECKSUM; }
-#line 16332 "src/parser_bison.c"
+#line 16333 "src/parser_bison.c"
     break;
 
   case 1195: /* udplite_hdr_expr: "udplite" udplite_hdr_field close_scope_udplite  */
-#line 5837 "src/parser_bison.y"
+#line 5838 "src/parser_bison.y"
                         {
 				(yyval.expr) = payload_expr_alloc(&(yyloc), &proto_udplite, (yyvsp[-1].val));
 			}
-#line 16340 "src/parser_bison.c"
+#line 16341 "src/parser_bison.c"
     break;
 
   case 1196: /* udplite_hdr_field: "sport"  */
-#line 5842 "src/parser_bison.y"
+#line 5843 "src/parser_bison.y"
                                                 { (yyval.val) = UDPHDR_SPORT; }
-#line 16346 "src/parser_bison.c"
+#line 16347 "src/parser_bison.c"
     break;
 
   case 1197: /* udplite_hdr_field: "dport"  */
-#line 5843 "src/parser_bison.y"
+#line 5844 "src/parser_bison.y"
                                                 { (yyval.val) = UDPHDR_DPORT; }
-#line 16352 "src/parser_bison.c"
+#line 16353 "src/parser_bison.c"
     break;
 
   case 1198: /* udplite_hdr_field: "csumcov"  */
-#line 5844 "src/parser_bison.y"
+#line 5845 "src/parser_bison.y"
                                                 { (yyval.val) = UDPHDR_LENGTH; }
-#line 16358 "src/parser_bison.c"
+#line 16359 "src/parser_bison.c"
     break;
 
   case 1199: /* udplite_hdr_field: "checksum"  */
-#line 5845 "src/parser_bison.y"
+#line 5846 "src/parser_bison.y"
                                                 { (yyval.val) = UDPHDR_CHECKSUM; }
-#line 16364 "src/parser_bison.c"
+#line 16365 "src/parser_bison.c"
     break;
 
   case 1200: /* tcp_hdr_expr: "tcp" tcp_hdr_field  */
-#line 5849 "src/parser_bison.y"
+#line 5850 "src/parser_bison.y"
                         {
 				(yyval.expr) = payload_expr_alloc(&(yyloc), &proto_tcp, (yyvsp[0].val));
 			}
-#line 16372 "src/parser_bison.c"
+#line 16373 "src/parser_bison.c"
     break;
 
   case 1201: /* tcp_hdr_expr: "tcp" "option" tcp_hdr_option_type  */
-#line 5853 "src/parser_bison.y"
+#line 5854 "src/parser_bison.y"
                         {
 				(yyval.expr) = tcpopt_expr_alloc(&(yyloc), (yyvsp[0].val), TCPOPT_COMMON_KIND);
 				(yyval.expr)->exthdr.flags = NFT_EXTHDR_F_PRESENT;
 			}
-#line 16381 "src/parser_bison.c"
+#line 16382 "src/parser_bison.c"
     break;
 
   case 1202: /* tcp_hdr_expr: "tcp" "option" tcp_hdr_option_kind_and_field  */
-#line 5858 "src/parser_bison.y"
+#line 5859 "src/parser_bison.y"
                         {
 				(yyval.expr) = tcpopt_expr_alloc(&(yyloc), (yyvsp[0].tcp_kind_field).kind, (yyvsp[0].tcp_kind_field).field);
 				if ((yyval.expr) == NULL) {
@@ -16389,20 +16390,20 @@ yyreduce:
 					YYERROR;
 				}
 			}
-#line 16393 "src/parser_bison.c"
+#line 16394 "src/parser_bison.c"
     break;
 
   case 1203: /* tcp_hdr_expr: "tcp" "option" "@" close_scope_at tcp_hdr_option_type "comma" "number" "comma" payload_raw_len  */
-#line 5866 "src/parser_bison.y"
+#line 5867 "src/parser_bison.y"
                         {
 				(yyval.expr) = tcpopt_expr_alloc(&(yyloc), (yyvsp[-4].val), 0);
 				tcpopt_init_raw((yyval.expr), (yyvsp[-4].val), (yyvsp[-2].val), (yyvsp[0].val), 0);
 			}
-#line 16402 "src/parser_bison.c"
+#line 16403 "src/parser_bison.c"
     break;
 
   case 1223: /* vxlan_hdr_expr: "vxlan" vxlan_hdr_field  */
-#line 5898 "src/parser_bison.y"
+#line 5899 "src/parser_bison.y"
                         {
 				struct expr *expr;
 
@@ -16410,33 +16411,33 @@ yyreduce:
 				expr->payload.inner_desc = &proto_vxlan;
 				(yyval.expr) = expr;
 			}
-#line 16414 "src/parser_bison.c"
+#line 16415 "src/parser_bison.c"
     break;
 
   case 1224: /* vxlan_hdr_expr: "vxlan" inner_expr  */
-#line 5906 "src/parser_bison.y"
+#line 5907 "src/parser_bison.y"
                         {
 				(yyval.expr) = (yyvsp[0].expr);
 				(yyval.expr)->location = (yyloc);
 				(yyval.expr)->payload.inner_desc = &proto_vxlan;
 			}
-#line 16424 "src/parser_bison.c"
+#line 16425 "src/parser_bison.c"
     break;
 
   case 1225: /* vxlan_hdr_field: "vni"  */
-#line 5913 "src/parser_bison.y"
+#line 5914 "src/parser_bison.y"
                                                         { (yyval.val) = VXLANHDR_VNI; }
-#line 16430 "src/parser_bison.c"
+#line 16431 "src/parser_bison.c"
     break;
 
   case 1226: /* vxlan_hdr_field: "flags"  */
-#line 5914 "src/parser_bison.y"
+#line 5915 "src/parser_bison.y"
                                                         { (yyval.val) = VXLANHDR_FLAGS; }
-#line 16436 "src/parser_bison.c"
+#line 16437 "src/parser_bison.c"
     break;
 
   case 1227: /* geneve_hdr_expr: "geneve" geneve_hdr_field  */
-#line 5918 "src/parser_bison.y"
+#line 5919 "src/parser_bison.y"
                         {
 				struct expr *expr;
 
@@ -16444,296 +16445,296 @@ yyreduce:
 				expr->payload.inner_desc = &proto_geneve;
 				(yyval.expr) = expr;
 			}
-#line 16448 "src/parser_bison.c"
+#line 16449 "src/parser_bison.c"
     break;
 
   case 1228: /* geneve_hdr_expr: "geneve" inner_expr  */
-#line 5926 "src/parser_bison.y"
+#line 5927 "src/parser_bison.y"
                         {
 				(yyval.expr) = (yyvsp[0].expr);
 				(yyval.expr)->location = (yyloc);
 				(yyval.expr)->payload.inner_desc = &proto_geneve;
 			}
-#line 16458 "src/parser_bison.c"
+#line 16459 "src/parser_bison.c"
     break;
 
   case 1229: /* geneve_hdr_field: "vni"  */
-#line 5933 "src/parser_bison.y"
+#line 5934 "src/parser_bison.y"
                                                         { (yyval.val) = GNVHDR_VNI; }
-#line 16464 "src/parser_bison.c"
+#line 16465 "src/parser_bison.c"
     break;
 
   case 1230: /* geneve_hdr_field: "type"  */
-#line 5934 "src/parser_bison.y"
+#line 5935 "src/parser_bison.y"
                                                         { (yyval.val) = GNVHDR_TYPE; }
-#line 16470 "src/parser_bison.c"
+#line 16471 "src/parser_bison.c"
     break;
 
   case 1231: /* gre_hdr_expr: "gre" gre_hdr_field close_scope_gre  */
-#line 5938 "src/parser_bison.y"
+#line 5939 "src/parser_bison.y"
                         {
 				(yyval.expr) = payload_expr_alloc(&(yyloc), &proto_gre, (yyvsp[-1].val));
 			}
-#line 16478 "src/parser_bison.c"
+#line 16479 "src/parser_bison.c"
     break;
 
   case 1232: /* gre_hdr_expr: "gre" close_scope_gre inner_inet_expr  */
-#line 5942 "src/parser_bison.y"
+#line 5943 "src/parser_bison.y"
                         {
 				(yyval.expr) = (yyvsp[0].expr);
 				(yyval.expr)->payload.inner_desc = &proto_gre;
 			}
-#line 16487 "src/parser_bison.c"
+#line 16488 "src/parser_bison.c"
     break;
 
   case 1233: /* gre_hdr_field: "version"  */
-#line 5948 "src/parser_bison.y"
+#line 5949 "src/parser_bison.y"
                                                         { (yyval.val) = GREHDR_VERSION;	}
-#line 16493 "src/parser_bison.c"
+#line 16494 "src/parser_bison.c"
     break;
 
   case 1234: /* gre_hdr_field: "flags"  */
-#line 5949 "src/parser_bison.y"
+#line 5950 "src/parser_bison.y"
                                                         { (yyval.val) = GREHDR_FLAGS; }
-#line 16499 "src/parser_bison.c"
+#line 16500 "src/parser_bison.c"
     break;
 
   case 1235: /* gre_hdr_field: "protocol"  */
-#line 5950 "src/parser_bison.y"
+#line 5951 "src/parser_bison.y"
                                                         { (yyval.val) = GREHDR_PROTOCOL; }
-#line 16505 "src/parser_bison.c"
+#line 16506 "src/parser_bison.c"
     break;
 
   case 1236: /* gretap_hdr_expr: "gretap" close_scope_gre inner_expr  */
-#line 5954 "src/parser_bison.y"
+#line 5955 "src/parser_bison.y"
                         {
 				(yyval.expr) = (yyvsp[0].expr);
 				(yyval.expr)->payload.inner_desc = &proto_gretap;
 			}
-#line 16514 "src/parser_bison.c"
+#line 16515 "src/parser_bison.c"
     break;
 
   case 1237: /* optstrip_stmt: "reset" "tcp" "option" tcp_hdr_option_type close_scope_tcp  */
-#line 5961 "src/parser_bison.y"
+#line 5962 "src/parser_bison.y"
                         {
 				(yyval.stmt) = optstrip_stmt_alloc(&(yyloc), tcpopt_expr_alloc(&(yyloc),
 										(yyvsp[-1].val), TCPOPT_COMMON_KIND));
 			}
-#line 16523 "src/parser_bison.c"
+#line 16524 "src/parser_bison.c"
     break;
 
   case 1238: /* tcp_hdr_field: "sport"  */
-#line 5967 "src/parser_bison.y"
+#line 5968 "src/parser_bison.y"
                                                 { (yyval.val) = TCPHDR_SPORT; }
-#line 16529 "src/parser_bison.c"
+#line 16530 "src/parser_bison.c"
     break;
 
   case 1239: /* tcp_hdr_field: "dport"  */
-#line 5968 "src/parser_bison.y"
+#line 5969 "src/parser_bison.y"
                                                 { (yyval.val) = TCPHDR_DPORT; }
-#line 16535 "src/parser_bison.c"
+#line 16536 "src/parser_bison.c"
     break;
 
   case 1240: /* tcp_hdr_field: "seq"  */
-#line 5969 "src/parser_bison.y"
+#line 5970 "src/parser_bison.y"
                                                 { (yyval.val) = TCPHDR_SEQ; }
-#line 16541 "src/parser_bison.c"
+#line 16542 "src/parser_bison.c"
     break;
 
   case 1241: /* tcp_hdr_field: "ackseq"  */
-#line 5970 "src/parser_bison.y"
+#line 5971 "src/parser_bison.y"
                                                 { (yyval.val) = TCPHDR_ACKSEQ; }
-#line 16547 "src/parser_bison.c"
+#line 16548 "src/parser_bison.c"
     break;
 
   case 1242: /* tcp_hdr_field: "doff"  */
-#line 5971 "src/parser_bison.y"
+#line 5972 "src/parser_bison.y"
                                                 { (yyval.val) = TCPHDR_DOFF; }
-#line 16553 "src/parser_bison.c"
+#line 16554 "src/parser_bison.c"
     break;
 
   case 1243: /* tcp_hdr_field: "reserved"  */
-#line 5972 "src/parser_bison.y"
+#line 5973 "src/parser_bison.y"
                                                 { (yyval.val) = TCPHDR_RESERVED; }
-#line 16559 "src/parser_bison.c"
+#line 16560 "src/parser_bison.c"
     break;
 
   case 1244: /* tcp_hdr_field: "flags"  */
-#line 5973 "src/parser_bison.y"
+#line 5974 "src/parser_bison.y"
                                                 { (yyval.val) = TCPHDR_FLAGS; }
-#line 16565 "src/parser_bison.c"
+#line 16566 "src/parser_bison.c"
     break;
 
   case 1245: /* tcp_hdr_field: "window"  */
-#line 5974 "src/parser_bison.y"
+#line 5975 "src/parser_bison.y"
                                                 { (yyval.val) = TCPHDR_WINDOW; }
-#line 16571 "src/parser_bison.c"
+#line 16572 "src/parser_bison.c"
     break;
 
   case 1246: /* tcp_hdr_field: "checksum"  */
-#line 5975 "src/parser_bison.y"
+#line 5976 "src/parser_bison.y"
                                                 { (yyval.val) = TCPHDR_CHECKSUM; }
-#line 16577 "src/parser_bison.c"
+#line 16578 "src/parser_bison.c"
     break;
 
   case 1247: /* tcp_hdr_field: "urgptr"  */
-#line 5976 "src/parser_bison.y"
+#line 5977 "src/parser_bison.y"
                                                 { (yyval.val) = TCPHDR_URGPTR; }
-#line 16583 "src/parser_bison.c"
+#line 16584 "src/parser_bison.c"
     break;
 
   case 1248: /* tcp_hdr_option_kind_and_field: "mss" tcpopt_field_maxseg  */
-#line 5980 "src/parser_bison.y"
+#line 5981 "src/parser_bison.y"
                                 {
 					struct tcp_kind_field kind_field = { .kind = TCPOPT_KIND_MAXSEG, .field = (yyvsp[0].val) };
 					(yyval.tcp_kind_field) = kind_field;
 				}
-#line 16592 "src/parser_bison.c"
+#line 16593 "src/parser_bison.c"
     break;
 
   case 1249: /* tcp_hdr_option_kind_and_field: tcp_hdr_option_sack tcpopt_field_sack  */
-#line 5985 "src/parser_bison.y"
+#line 5986 "src/parser_bison.y"
                                 {
 					struct tcp_kind_field kind_field = { .kind = (yyvsp[-1].val), .field = (yyvsp[0].val) };
 					(yyval.tcp_kind_field) = kind_field;
 				}
-#line 16601 "src/parser_bison.c"
+#line 16602 "src/parser_bison.c"
     break;
 
   case 1250: /* tcp_hdr_option_kind_and_field: "window" tcpopt_field_window  */
-#line 5990 "src/parser_bison.y"
+#line 5991 "src/parser_bison.y"
                                 {
 					struct tcp_kind_field kind_field = { .kind = TCPOPT_KIND_WINDOW, .field = (yyvsp[0].val) };
 					(yyval.tcp_kind_field) = kind_field;
 				}
-#line 16610 "src/parser_bison.c"
+#line 16611 "src/parser_bison.c"
     break;
 
   case 1251: /* tcp_hdr_option_kind_and_field: "timestamp" tcpopt_field_tsopt  */
-#line 5995 "src/parser_bison.y"
+#line 5996 "src/parser_bison.y"
                                 {
 					struct tcp_kind_field kind_field = { .kind = TCPOPT_KIND_TIMESTAMP, .field = (yyvsp[0].val) };
 					(yyval.tcp_kind_field) = kind_field;
 				}
-#line 16619 "src/parser_bison.c"
+#line 16620 "src/parser_bison.c"
     break;
 
   case 1252: /* tcp_hdr_option_kind_and_field: tcp_hdr_option_type "length"  */
-#line 6000 "src/parser_bison.y"
+#line 6001 "src/parser_bison.y"
                                 {
 					struct tcp_kind_field kind_field = { .kind = (yyvsp[-1].val), .field = TCPOPT_COMMON_LENGTH };
 					(yyval.tcp_kind_field) = kind_field;
 				}
-#line 16628 "src/parser_bison.c"
+#line 16629 "src/parser_bison.c"
     break;
 
   case 1253: /* tcp_hdr_option_kind_and_field: "mptcp" tcpopt_field_mptcp  */
-#line 6005 "src/parser_bison.y"
+#line 6006 "src/parser_bison.y"
                                 {
 					struct tcp_kind_field kind_field = { .kind = TCPOPT_KIND_MPTCP, .field = (yyvsp[0].val) };
 					(yyval.tcp_kind_field) = kind_field;
 				}
-#line 16637 "src/parser_bison.c"
+#line 16638 "src/parser_bison.c"
     break;
 
   case 1254: /* tcp_hdr_option_sack: "sack"  */
-#line 6011 "src/parser_bison.y"
+#line 6012 "src/parser_bison.y"
                                                 { (yyval.val) = TCPOPT_KIND_SACK; }
-#line 16643 "src/parser_bison.c"
+#line 16644 "src/parser_bison.c"
     break;
 
   case 1255: /* tcp_hdr_option_sack: "sack0"  */
-#line 6012 "src/parser_bison.y"
+#line 6013 "src/parser_bison.y"
                                                 { (yyval.val) = TCPOPT_KIND_SACK; }
-#line 16649 "src/parser_bison.c"
+#line 16650 "src/parser_bison.c"
     break;
 
   case 1256: /* tcp_hdr_option_sack: "sack1"  */
-#line 6013 "src/parser_bison.y"
+#line 6014 "src/parser_bison.y"
                                                 { (yyval.val) = TCPOPT_KIND_SACK1; }
-#line 16655 "src/parser_bison.c"
+#line 16656 "src/parser_bison.c"
     break;
 
   case 1257: /* tcp_hdr_option_sack: "sack2"  */
-#line 6014 "src/parser_bison.y"
+#line 6015 "src/parser_bison.y"
                                                 { (yyval.val) = TCPOPT_KIND_SACK2; }
-#line 16661 "src/parser_bison.c"
+#line 16662 "src/parser_bison.c"
     break;
 
   case 1258: /* tcp_hdr_option_sack: "sack3"  */
-#line 6015 "src/parser_bison.y"
+#line 6016 "src/parser_bison.y"
                                                 { (yyval.val) = TCPOPT_KIND_SACK3; }
-#line 16667 "src/parser_bison.c"
+#line 16668 "src/parser_bison.c"
     break;
 
   case 1259: /* tcp_hdr_option_type: "echo"  */
-#line 6018 "src/parser_bison.y"
+#line 6019 "src/parser_bison.y"
                                                         { (yyval.val) = TCPOPT_KIND_ECHO; }
-#line 16673 "src/parser_bison.c"
+#line 16674 "src/parser_bison.c"
     break;
 
   case 1260: /* tcp_hdr_option_type: "eol"  */
-#line 6019 "src/parser_bison.y"
+#line 6020 "src/parser_bison.y"
                                                         { (yyval.val) = TCPOPT_KIND_EOL; }
-#line 16679 "src/parser_bison.c"
+#line 16680 "src/parser_bison.c"
     break;
 
   case 1261: /* tcp_hdr_option_type: "fastopen"  */
-#line 6020 "src/parser_bison.y"
+#line 6021 "src/parser_bison.y"
                                                         { (yyval.val) = TCPOPT_KIND_FASTOPEN; }
-#line 16685 "src/parser_bison.c"
+#line 16686 "src/parser_bison.c"
     break;
 
   case 1262: /* tcp_hdr_option_type: "md5sig"  */
-#line 6021 "src/parser_bison.y"
+#line 6022 "src/parser_bison.y"
                                                         { (yyval.val) = TCPOPT_KIND_MD5SIG; }
-#line 16691 "src/parser_bison.c"
+#line 16692 "src/parser_bison.c"
     break;
 
   case 1263: /* tcp_hdr_option_type: "mptcp"  */
-#line 6022 "src/parser_bison.y"
+#line 6023 "src/parser_bison.y"
                                                         { (yyval.val) = TCPOPT_KIND_MPTCP; }
-#line 16697 "src/parser_bison.c"
+#line 16698 "src/parser_bison.c"
     break;
 
   case 1264: /* tcp_hdr_option_type: "mss"  */
-#line 6023 "src/parser_bison.y"
+#line 6024 "src/parser_bison.y"
                                                         { (yyval.val) = TCPOPT_KIND_MAXSEG; }
-#line 16703 "src/parser_bison.c"
+#line 16704 "src/parser_bison.c"
     break;
 
   case 1265: /* tcp_hdr_option_type: "nop"  */
-#line 6024 "src/parser_bison.y"
+#line 6025 "src/parser_bison.y"
                                                         { (yyval.val) = TCPOPT_KIND_NOP; }
-#line 16709 "src/parser_bison.c"
+#line 16710 "src/parser_bison.c"
     break;
 
   case 1266: /* tcp_hdr_option_type: "sack-permitted"  */
-#line 6025 "src/parser_bison.y"
+#line 6026 "src/parser_bison.y"
                                                         { (yyval.val) = TCPOPT_KIND_SACK_PERMITTED; }
-#line 16715 "src/parser_bison.c"
+#line 16716 "src/parser_bison.c"
     break;
 
   case 1267: /* tcp_hdr_option_type: "timestamp"  */
-#line 6026 "src/parser_bison.y"
+#line 6027 "src/parser_bison.y"
                                                         { (yyval.val) = TCPOPT_KIND_TIMESTAMP; }
-#line 16721 "src/parser_bison.c"
+#line 16722 "src/parser_bison.c"
     break;
 
   case 1268: /* tcp_hdr_option_type: "window"  */
-#line 6027 "src/parser_bison.y"
+#line 6028 "src/parser_bison.y"
                                                         { (yyval.val) = TCPOPT_KIND_WINDOW; }
-#line 16727 "src/parser_bison.c"
+#line 16728 "src/parser_bison.c"
     break;
 
   case 1269: /* tcp_hdr_option_type: tcp_hdr_option_sack  */
-#line 6028 "src/parser_bison.y"
+#line 6029 "src/parser_bison.y"
                                                         { (yyval.val) = (yyvsp[0].val); }
-#line 16733 "src/parser_bison.c"
+#line 16734 "src/parser_bison.c"
     break;
 
   case 1270: /* tcp_hdr_option_type: "number"  */
-#line 6029 "src/parser_bison.y"
+#line 6030 "src/parser_bison.y"
                                                         {
 				if ((yyvsp[0].val) > 255) {
 					erec_queue(error(&(yylsp[0]), "value too large"), state->msgs);
@@ -16741,61 +16742,61 @@ yyreduce:
 				}
 				(yyval.val) = (yyvsp[0].val);
 			}
-#line 16745 "src/parser_bison.c"
+#line 16746 "src/parser_bison.c"
     break;
 
   case 1271: /* tcpopt_field_sack: "left"  */
-#line 6038 "src/parser_bison.y"
+#line 6039 "src/parser_bison.y"
                                                 { (yyval.val) = TCPOPT_SACK_LEFT; }
-#line 16751 "src/parser_bison.c"
+#line 16752 "src/parser_bison.c"
     break;
 
   case 1272: /* tcpopt_field_sack: "right"  */
-#line 6039 "src/parser_bison.y"
+#line 6040 "src/parser_bison.y"
                                                 { (yyval.val) = TCPOPT_SACK_RIGHT; }
-#line 16757 "src/parser_bison.c"
+#line 16758 "src/parser_bison.c"
     break;
 
   case 1273: /* tcpopt_field_window: "count"  */
-#line 6042 "src/parser_bison.y"
+#line 6043 "src/parser_bison.y"
                                                 { (yyval.val) = TCPOPT_WINDOW_COUNT; }
-#line 16763 "src/parser_bison.c"
+#line 16764 "src/parser_bison.c"
     break;
 
   case 1274: /* tcpopt_field_tsopt: "tsval"  */
-#line 6045 "src/parser_bison.y"
+#line 6046 "src/parser_bison.y"
                                                 { (yyval.val) = TCPOPT_TS_TSVAL; }
-#line 16769 "src/parser_bison.c"
+#line 16770 "src/parser_bison.c"
     break;
 
   case 1275: /* tcpopt_field_tsopt: "tsecr"  */
-#line 6046 "src/parser_bison.y"
+#line 6047 "src/parser_bison.y"
                                                 { (yyval.val) = TCPOPT_TS_TSECR; }
-#line 16775 "src/parser_bison.c"
+#line 16776 "src/parser_bison.c"
     break;
 
   case 1276: /* tcpopt_field_maxseg: "size"  */
-#line 6049 "src/parser_bison.y"
+#line 6050 "src/parser_bison.y"
                                                 { (yyval.val) = TCPOPT_MAXSEG_SIZE; }
-#line 16781 "src/parser_bison.c"
+#line 16782 "src/parser_bison.c"
     break;
 
   case 1277: /* tcpopt_field_mptcp: "subtype"  */
-#line 6052 "src/parser_bison.y"
+#line 6053 "src/parser_bison.y"
                                                 { (yyval.val) = TCPOPT_MPTCP_SUBTYPE; }
-#line 16787 "src/parser_bison.c"
+#line 16788 "src/parser_bison.c"
     break;
 
   case 1278: /* dccp_hdr_expr: "dccp" dccp_hdr_field close_scope_dccp  */
-#line 6056 "src/parser_bison.y"
+#line 6057 "src/parser_bison.y"
                         {
 				(yyval.expr) = payload_expr_alloc(&(yyloc), &proto_dccp, (yyvsp[-1].val));
 			}
-#line 16795 "src/parser_bison.c"
+#line 16796 "src/parser_bison.c"
     break;
 
   case 1279: /* dccp_hdr_expr: "dccp" "option" "number" close_scope_dccp  */
-#line 6060 "src/parser_bison.y"
+#line 6061 "src/parser_bison.y"
                         {
 				if ((yyvsp[-1].val) > DCCPOPT_TYPE_MAX) {
 					erec_queue(error(&(yylsp[-3]), "value too large"),
@@ -16804,616 +16805,616 @@ yyreduce:
 				}
 				(yyval.expr) = dccpopt_expr_alloc(&(yyloc), (yyvsp[-1].val));
 			}
-#line 16808 "src/parser_bison.c"
+#line 16809 "src/parser_bison.c"
     break;
 
   case 1280: /* dccp_hdr_field: "sport"  */
-#line 6070 "src/parser_bison.y"
+#line 6071 "src/parser_bison.y"
                                                 { (yyval.val) = DCCPHDR_SPORT; }
-#line 16814 "src/parser_bison.c"
+#line 16815 "src/parser_bison.c"
     break;
 
   case 1281: /* dccp_hdr_field: "dport"  */
-#line 6071 "src/parser_bison.y"
+#line 6072 "src/parser_bison.y"
                                                 { (yyval.val) = DCCPHDR_DPORT; }
-#line 16820 "src/parser_bison.c"
+#line 16821 "src/parser_bison.c"
     break;
 
   case 1282: /* dccp_hdr_field: "type" close_scope_type  */
-#line 6072 "src/parser_bison.y"
+#line 6073 "src/parser_bison.y"
                                                                         { (yyval.val) = DCCPHDR_TYPE; }
-#line 16826 "src/parser_bison.c"
+#line 16827 "src/parser_bison.c"
     break;
 
   case 1283: /* sctp_chunk_type: "data"  */
-#line 6075 "src/parser_bison.y"
+#line 6076 "src/parser_bison.y"
                                                 { (yyval.val) = SCTP_CHUNK_TYPE_DATA; }
-#line 16832 "src/parser_bison.c"
+#line 16833 "src/parser_bison.c"
     break;
 
   case 1284: /* sctp_chunk_type: "init"  */
-#line 6076 "src/parser_bison.y"
+#line 6077 "src/parser_bison.y"
                                                 { (yyval.val) = SCTP_CHUNK_TYPE_INIT; }
-#line 16838 "src/parser_bison.c"
+#line 16839 "src/parser_bison.c"
     break;
 
   case 1285: /* sctp_chunk_type: "init-ack"  */
-#line 6077 "src/parser_bison.y"
+#line 6078 "src/parser_bison.y"
                                                 { (yyval.val) = SCTP_CHUNK_TYPE_INIT_ACK; }
-#line 16844 "src/parser_bison.c"
+#line 16845 "src/parser_bison.c"
     break;
 
   case 1286: /* sctp_chunk_type: "sack"  */
-#line 6078 "src/parser_bison.y"
+#line 6079 "src/parser_bison.y"
                                                 { (yyval.val) = SCTP_CHUNK_TYPE_SACK; }
-#line 16850 "src/parser_bison.c"
+#line 16851 "src/parser_bison.c"
     break;
 
   case 1287: /* sctp_chunk_type: "heartbeat"  */
-#line 6079 "src/parser_bison.y"
+#line 6080 "src/parser_bison.y"
                                                 { (yyval.val) = SCTP_CHUNK_TYPE_HEARTBEAT; }
-#line 16856 "src/parser_bison.c"
+#line 16857 "src/parser_bison.c"
     break;
 
   case 1288: /* sctp_chunk_type: "heartbeat-ack"  */
-#line 6080 "src/parser_bison.y"
+#line 6081 "src/parser_bison.y"
                                                 { (yyval.val) = SCTP_CHUNK_TYPE_HEARTBEAT_ACK; }
-#line 16862 "src/parser_bison.c"
+#line 16863 "src/parser_bison.c"
     break;
 
   case 1289: /* sctp_chunk_type: "abort"  */
-#line 6081 "src/parser_bison.y"
+#line 6082 "src/parser_bison.y"
                                                 { (yyval.val) = SCTP_CHUNK_TYPE_ABORT; }
-#line 16868 "src/parser_bison.c"
+#line 16869 "src/parser_bison.c"
     break;
 
   case 1290: /* sctp_chunk_type: "shutdown"  */
-#line 6082 "src/parser_bison.y"
+#line 6083 "src/parser_bison.y"
                                                 { (yyval.val) = SCTP_CHUNK_TYPE_SHUTDOWN; }
-#line 16874 "src/parser_bison.c"
+#line 16875 "src/parser_bison.c"
     break;
 
   case 1291: /* sctp_chunk_type: "shutdown-ack"  */
-#line 6083 "src/parser_bison.y"
+#line 6084 "src/parser_bison.y"
                                                 { (yyval.val) = SCTP_CHUNK_TYPE_SHUTDOWN_ACK; }
-#line 16880 "src/parser_bison.c"
+#line 16881 "src/parser_bison.c"
     break;
 
   case 1292: /* sctp_chunk_type: "error"  */
-#line 6084 "src/parser_bison.y"
+#line 6085 "src/parser_bison.y"
                                                 { (yyval.val) = SCTP_CHUNK_TYPE_ERROR; }
-#line 16886 "src/parser_bison.c"
+#line 16887 "src/parser_bison.c"
     break;
 
   case 1293: /* sctp_chunk_type: "cookie-echo"  */
-#line 6085 "src/parser_bison.y"
+#line 6086 "src/parser_bison.y"
                                                 { (yyval.val) = SCTP_CHUNK_TYPE_COOKIE_ECHO; }
-#line 16892 "src/parser_bison.c"
+#line 16893 "src/parser_bison.c"
     break;
 
   case 1294: /* sctp_chunk_type: "cookie-ack"  */
-#line 6086 "src/parser_bison.y"
+#line 6087 "src/parser_bison.y"
                                                 { (yyval.val) = SCTP_CHUNK_TYPE_COOKIE_ACK; }
-#line 16898 "src/parser_bison.c"
+#line 16899 "src/parser_bison.c"
     break;
 
   case 1295: /* sctp_chunk_type: "ecne"  */
-#line 6087 "src/parser_bison.y"
+#line 6088 "src/parser_bison.y"
                                                 { (yyval.val) = SCTP_CHUNK_TYPE_ECNE; }
-#line 16904 "src/parser_bison.c"
+#line 16905 "src/parser_bison.c"
     break;
 
   case 1296: /* sctp_chunk_type: "cwr"  */
-#line 6088 "src/parser_bison.y"
+#line 6089 "src/parser_bison.y"
                                                 { (yyval.val) = SCTP_CHUNK_TYPE_CWR; }
-#line 16910 "src/parser_bison.c"
+#line 16911 "src/parser_bison.c"
     break;
 
   case 1297: /* sctp_chunk_type: "shutdown-complete"  */
-#line 6089 "src/parser_bison.y"
+#line 6090 "src/parser_bison.y"
                                                   { (yyval.val) = SCTP_CHUNK_TYPE_SHUTDOWN_COMPLETE; }
-#line 16916 "src/parser_bison.c"
+#line 16917 "src/parser_bison.c"
     break;
 
   case 1298: /* sctp_chunk_type: "asconf-ack"  */
-#line 6090 "src/parser_bison.y"
+#line 6091 "src/parser_bison.y"
                                                 { (yyval.val) = SCTP_CHUNK_TYPE_ASCONF_ACK; }
-#line 16922 "src/parser_bison.c"
+#line 16923 "src/parser_bison.c"
     break;
 
   case 1299: /* sctp_chunk_type: "forward-tsn"  */
-#line 6091 "src/parser_bison.y"
+#line 6092 "src/parser_bison.y"
                                                 { (yyval.val) = SCTP_CHUNK_TYPE_FORWARD_TSN; }
-#line 16928 "src/parser_bison.c"
+#line 16929 "src/parser_bison.c"
     break;
 
   case 1300: /* sctp_chunk_type: "asconf"  */
-#line 6092 "src/parser_bison.y"
+#line 6093 "src/parser_bison.y"
                                                 { (yyval.val) = SCTP_CHUNK_TYPE_ASCONF; }
-#line 16934 "src/parser_bison.c"
+#line 16935 "src/parser_bison.c"
     break;
 
   case 1301: /* sctp_chunk_common_field: "type" close_scope_type  */
-#line 6095 "src/parser_bison.y"
+#line 6096 "src/parser_bison.y"
                                                                 { (yyval.val) = SCTP_CHUNK_COMMON_TYPE; }
-#line 16940 "src/parser_bison.c"
+#line 16941 "src/parser_bison.c"
     break;
 
   case 1302: /* sctp_chunk_common_field: "flags"  */
-#line 6096 "src/parser_bison.y"
+#line 6097 "src/parser_bison.y"
                                         { (yyval.val) = SCTP_CHUNK_COMMON_FLAGS; }
-#line 16946 "src/parser_bison.c"
+#line 16947 "src/parser_bison.c"
     break;
 
   case 1303: /* sctp_chunk_common_field: "length"  */
-#line 6097 "src/parser_bison.y"
+#line 6098 "src/parser_bison.y"
                                         { (yyval.val) = SCTP_CHUNK_COMMON_LENGTH; }
-#line 16952 "src/parser_bison.c"
+#line 16953 "src/parser_bison.c"
     break;
 
   case 1304: /* sctp_chunk_data_field: "tsn"  */
-#line 6100 "src/parser_bison.y"
+#line 6101 "src/parser_bison.y"
                                         { (yyval.val) = SCTP_CHUNK_DATA_TSN; }
-#line 16958 "src/parser_bison.c"
+#line 16959 "src/parser_bison.c"
     break;
 
   case 1305: /* sctp_chunk_data_field: "stream"  */
-#line 6101 "src/parser_bison.y"
+#line 6102 "src/parser_bison.y"
                                         { (yyval.val) = SCTP_CHUNK_DATA_STREAM; }
-#line 16964 "src/parser_bison.c"
+#line 16965 "src/parser_bison.c"
     break;
 
   case 1306: /* sctp_chunk_data_field: "ssn"  */
-#line 6102 "src/parser_bison.y"
+#line 6103 "src/parser_bison.y"
                                         { (yyval.val) = SCTP_CHUNK_DATA_SSN; }
-#line 16970 "src/parser_bison.c"
+#line 16971 "src/parser_bison.c"
     break;
 
   case 1307: /* sctp_chunk_data_field: "ppid"  */
-#line 6103 "src/parser_bison.y"
+#line 6104 "src/parser_bison.y"
                                         { (yyval.val) = SCTP_CHUNK_DATA_PPID; }
-#line 16976 "src/parser_bison.c"
+#line 16977 "src/parser_bison.c"
     break;
 
   case 1308: /* sctp_chunk_init_field: "init-tag"  */
-#line 6106 "src/parser_bison.y"
+#line 6107 "src/parser_bison.y"
                                                 { (yyval.val) = SCTP_CHUNK_INIT_TAG; }
-#line 16982 "src/parser_bison.c"
+#line 16983 "src/parser_bison.c"
     break;
 
   case 1309: /* sctp_chunk_init_field: "a-rwnd"  */
-#line 6107 "src/parser_bison.y"
+#line 6108 "src/parser_bison.y"
                                                 { (yyval.val) = SCTP_CHUNK_INIT_RWND; }
-#line 16988 "src/parser_bison.c"
+#line 16989 "src/parser_bison.c"
     break;
 
   case 1310: /* sctp_chunk_init_field: "num-outbound-streams"  */
-#line 6108 "src/parser_bison.y"
+#line 6109 "src/parser_bison.y"
                                                 { (yyval.val) = SCTP_CHUNK_INIT_OSTREAMS; }
-#line 16994 "src/parser_bison.c"
+#line 16995 "src/parser_bison.c"
     break;
 
   case 1311: /* sctp_chunk_init_field: "num-inbound-streams"  */
-#line 6109 "src/parser_bison.y"
+#line 6110 "src/parser_bison.y"
                                                 { (yyval.val) = SCTP_CHUNK_INIT_ISTREAMS; }
-#line 17000 "src/parser_bison.c"
+#line 17001 "src/parser_bison.c"
     break;
 
   case 1312: /* sctp_chunk_init_field: "initial-tsn"  */
-#line 6110 "src/parser_bison.y"
+#line 6111 "src/parser_bison.y"
                                                 { (yyval.val) = SCTP_CHUNK_INIT_TSN; }
-#line 17006 "src/parser_bison.c"
+#line 17007 "src/parser_bison.c"
     break;
 
   case 1313: /* sctp_chunk_sack_field: "cum-tsn-ack"  */
-#line 6113 "src/parser_bison.y"
+#line 6114 "src/parser_bison.y"
                                                 { (yyval.val) = SCTP_CHUNK_SACK_CTSN_ACK; }
-#line 17012 "src/parser_bison.c"
+#line 17013 "src/parser_bison.c"
     break;
 
   case 1314: /* sctp_chunk_sack_field: "a-rwnd"  */
-#line 6114 "src/parser_bison.y"
+#line 6115 "src/parser_bison.y"
                                                 { (yyval.val) = SCTP_CHUNK_SACK_RWND; }
-#line 17018 "src/parser_bison.c"
+#line 17019 "src/parser_bison.c"
     break;
 
   case 1315: /* sctp_chunk_sack_field: "num-gap-ack-blocks"  */
-#line 6115 "src/parser_bison.y"
+#line 6116 "src/parser_bison.y"
                                                 { (yyval.val) = SCTP_CHUNK_SACK_GACK_BLOCKS; }
-#line 17024 "src/parser_bison.c"
+#line 17025 "src/parser_bison.c"
     break;
 
   case 1316: /* sctp_chunk_sack_field: "num-dup-tsns"  */
-#line 6116 "src/parser_bison.y"
+#line 6117 "src/parser_bison.y"
                                                 { (yyval.val) = SCTP_CHUNK_SACK_DUP_TSNS; }
-#line 17030 "src/parser_bison.c"
+#line 17031 "src/parser_bison.c"
     break;
 
   case 1317: /* sctp_chunk_alloc: sctp_chunk_type  */
-#line 6120 "src/parser_bison.y"
+#line 6121 "src/parser_bison.y"
                         {
 				(yyval.expr) = sctp_chunk_expr_alloc(&(yyloc), (yyvsp[0].val), SCTP_CHUNK_COMMON_TYPE);
 				(yyval.expr)->exthdr.flags = NFT_EXTHDR_F_PRESENT;
 			}
-#line 17039 "src/parser_bison.c"
+#line 17040 "src/parser_bison.c"
     break;
 
   case 1318: /* sctp_chunk_alloc: sctp_chunk_type sctp_chunk_common_field  */
-#line 6125 "src/parser_bison.y"
+#line 6126 "src/parser_bison.y"
                         {
 				(yyval.expr) = sctp_chunk_expr_alloc(&(yyloc), (yyvsp[-1].val), (yyvsp[0].val));
 			}
-#line 17047 "src/parser_bison.c"
+#line 17048 "src/parser_bison.c"
     break;
 
   case 1319: /* sctp_chunk_alloc: "data" sctp_chunk_data_field  */
-#line 6129 "src/parser_bison.y"
+#line 6130 "src/parser_bison.y"
                         {
 				(yyval.expr) = sctp_chunk_expr_alloc(&(yyloc), SCTP_CHUNK_TYPE_DATA, (yyvsp[0].val));
 			}
-#line 17055 "src/parser_bison.c"
+#line 17056 "src/parser_bison.c"
     break;
 
   case 1320: /* sctp_chunk_alloc: "init" sctp_chunk_init_field  */
-#line 6133 "src/parser_bison.y"
+#line 6134 "src/parser_bison.y"
                         {
 				(yyval.expr) = sctp_chunk_expr_alloc(&(yyloc), SCTP_CHUNK_TYPE_INIT, (yyvsp[0].val));
 			}
-#line 17063 "src/parser_bison.c"
+#line 17064 "src/parser_bison.c"
     break;
 
   case 1321: /* sctp_chunk_alloc: "init-ack" sctp_chunk_init_field  */
-#line 6137 "src/parser_bison.y"
+#line 6138 "src/parser_bison.y"
                         {
 				(yyval.expr) = sctp_chunk_expr_alloc(&(yyloc), SCTP_CHUNK_TYPE_INIT_ACK, (yyvsp[0].val));
 			}
-#line 17071 "src/parser_bison.c"
+#line 17072 "src/parser_bison.c"
     break;
 
   case 1322: /* sctp_chunk_alloc: "sack" sctp_chunk_sack_field  */
-#line 6141 "src/parser_bison.y"
+#line 6142 "src/parser_bison.y"
                         {
 				(yyval.expr) = sctp_chunk_expr_alloc(&(yyloc), SCTP_CHUNK_TYPE_SACK, (yyvsp[0].val));
 			}
-#line 17079 "src/parser_bison.c"
+#line 17080 "src/parser_bison.c"
     break;
 
   case 1323: /* sctp_chunk_alloc: "shutdown" "cum-tsn-ack"  */
-#line 6145 "src/parser_bison.y"
+#line 6146 "src/parser_bison.y"
                         {
 				(yyval.expr) = sctp_chunk_expr_alloc(&(yyloc), SCTP_CHUNK_TYPE_SHUTDOWN,
 							   SCTP_CHUNK_SHUTDOWN_CTSN_ACK);
 			}
-#line 17088 "src/parser_bison.c"
+#line 17089 "src/parser_bison.c"
     break;
 
   case 1324: /* sctp_chunk_alloc: "ecne" "lowest-tsn"  */
-#line 6150 "src/parser_bison.y"
+#line 6151 "src/parser_bison.y"
                         {
 				(yyval.expr) = sctp_chunk_expr_alloc(&(yyloc), SCTP_CHUNK_TYPE_ECNE,
 							   SCTP_CHUNK_ECNE_CWR_MIN_TSN);
 			}
-#line 17097 "src/parser_bison.c"
+#line 17098 "src/parser_bison.c"
     break;
 
   case 1325: /* sctp_chunk_alloc: "cwr" "lowest-tsn"  */
-#line 6155 "src/parser_bison.y"
+#line 6156 "src/parser_bison.y"
                         {
 				(yyval.expr) = sctp_chunk_expr_alloc(&(yyloc), SCTP_CHUNK_TYPE_CWR,
 							   SCTP_CHUNK_ECNE_CWR_MIN_TSN);
 			}
-#line 17106 "src/parser_bison.c"
+#line 17107 "src/parser_bison.c"
     break;
 
   case 1326: /* sctp_chunk_alloc: "asconf-ack" "seqno"  */
-#line 6160 "src/parser_bison.y"
+#line 6161 "src/parser_bison.y"
                         {
 				(yyval.expr) = sctp_chunk_expr_alloc(&(yyloc), SCTP_CHUNK_TYPE_ASCONF_ACK,
 							   SCTP_CHUNK_ASCONF_SEQNO);
 			}
-#line 17115 "src/parser_bison.c"
+#line 17116 "src/parser_bison.c"
     break;
 
   case 1327: /* sctp_chunk_alloc: "forward-tsn" "new-cum-tsn"  */
-#line 6165 "src/parser_bison.y"
+#line 6166 "src/parser_bison.y"
                         {
 				(yyval.expr) = sctp_chunk_expr_alloc(&(yyloc), SCTP_CHUNK_TYPE_FORWARD_TSN,
 							   SCTP_CHUNK_FORWARD_TSN_NCTSN);
 			}
-#line 17124 "src/parser_bison.c"
+#line 17125 "src/parser_bison.c"
     break;
 
   case 1328: /* sctp_chunk_alloc: "asconf" "seqno"  */
-#line 6170 "src/parser_bison.y"
+#line 6171 "src/parser_bison.y"
                         {
 				(yyval.expr) = sctp_chunk_expr_alloc(&(yyloc), SCTP_CHUNK_TYPE_ASCONF,
 							   SCTP_CHUNK_ASCONF_SEQNO);
 			}
-#line 17133 "src/parser_bison.c"
+#line 17134 "src/parser_bison.c"
     break;
 
   case 1329: /* sctp_hdr_expr: "sctp" sctp_hdr_field close_scope_sctp  */
-#line 6177 "src/parser_bison.y"
+#line 6178 "src/parser_bison.y"
                         {
 				(yyval.expr) = payload_expr_alloc(&(yyloc), &proto_sctp, (yyvsp[-1].val));
 			}
-#line 17141 "src/parser_bison.c"
+#line 17142 "src/parser_bison.c"
     break;
 
   case 1330: /* sctp_hdr_expr: "sctp" "chunk" sctp_chunk_alloc close_scope_sctp_chunk close_scope_sctp  */
-#line 6181 "src/parser_bison.y"
+#line 6182 "src/parser_bison.y"
                         {
 				(yyval.expr) = (yyvsp[-2].expr);
 			}
-#line 17149 "src/parser_bison.c"
+#line 17150 "src/parser_bison.c"
     break;
 
   case 1331: /* sctp_hdr_field: "sport"  */
-#line 6186 "src/parser_bison.y"
+#line 6187 "src/parser_bison.y"
                                                 { (yyval.val) = SCTPHDR_SPORT; }
-#line 17155 "src/parser_bison.c"
+#line 17156 "src/parser_bison.c"
     break;
 
   case 1332: /* sctp_hdr_field: "dport"  */
-#line 6187 "src/parser_bison.y"
+#line 6188 "src/parser_bison.y"
                                                 { (yyval.val) = SCTPHDR_DPORT; }
-#line 17161 "src/parser_bison.c"
+#line 17162 "src/parser_bison.c"
     break;
 
   case 1333: /* sctp_hdr_field: "vtag"  */
-#line 6188 "src/parser_bison.y"
+#line 6189 "src/parser_bison.y"
                                                 { (yyval.val) = SCTPHDR_VTAG; }
-#line 17167 "src/parser_bison.c"
+#line 17168 "src/parser_bison.c"
     break;
 
   case 1334: /* sctp_hdr_field: "checksum"  */
-#line 6189 "src/parser_bison.y"
+#line 6190 "src/parser_bison.y"
                                                 { (yyval.val) = SCTPHDR_CHECKSUM; }
-#line 17173 "src/parser_bison.c"
+#line 17174 "src/parser_bison.c"
     break;
 
   case 1335: /* th_hdr_expr: "th" th_hdr_field close_scope_th  */
-#line 6193 "src/parser_bison.y"
+#line 6194 "src/parser_bison.y"
                         {
 				(yyval.expr) = payload_expr_alloc(&(yyloc), &proto_th, (yyvsp[-1].val));
 				if ((yyval.expr))
 					(yyval.expr)->payload.is_raw = true;
 			}
-#line 17183 "src/parser_bison.c"
+#line 17184 "src/parser_bison.c"
     break;
 
   case 1336: /* th_hdr_field: "sport"  */
-#line 6200 "src/parser_bison.y"
+#line 6201 "src/parser_bison.y"
                                                 { (yyval.val) = THDR_SPORT; }
-#line 17189 "src/parser_bison.c"
+#line 17190 "src/parser_bison.c"
     break;
 
   case 1337: /* th_hdr_field: "dport"  */
-#line 6201 "src/parser_bison.y"
+#line 6202 "src/parser_bison.y"
                                                 { (yyval.val) = THDR_DPORT; }
-#line 17195 "src/parser_bison.c"
+#line 17196 "src/parser_bison.c"
     break;
 
   case 1346: /* hbh_hdr_expr: "hbh" hbh_hdr_field close_scope_hbh  */
-#line 6215 "src/parser_bison.y"
+#line 6216 "src/parser_bison.y"
                         {
 				(yyval.expr) = exthdr_expr_alloc(&(yyloc), &exthdr_hbh, (yyvsp[-1].val));
 			}
-#line 17203 "src/parser_bison.c"
+#line 17204 "src/parser_bison.c"
     break;
 
   case 1347: /* hbh_hdr_field: "nexthdr"  */
-#line 6220 "src/parser_bison.y"
+#line 6221 "src/parser_bison.y"
                                                 { (yyval.val) = HBHHDR_NEXTHDR; }
-#line 17209 "src/parser_bison.c"
+#line 17210 "src/parser_bison.c"
     break;
 
   case 1348: /* hbh_hdr_field: "hdrlength"  */
-#line 6221 "src/parser_bison.y"
+#line 6222 "src/parser_bison.y"
                                                 { (yyval.val) = HBHHDR_HDRLENGTH; }
-#line 17215 "src/parser_bison.c"
+#line 17216 "src/parser_bison.c"
     break;
 
   case 1349: /* rt_hdr_expr: "rt" rt_hdr_field close_scope_rt  */
-#line 6225 "src/parser_bison.y"
+#line 6226 "src/parser_bison.y"
                         {
 				(yyval.expr) = exthdr_expr_alloc(&(yyloc), &exthdr_rt, (yyvsp[-1].val));
 			}
-#line 17223 "src/parser_bison.c"
+#line 17224 "src/parser_bison.c"
     break;
 
   case 1350: /* rt_hdr_field: "nexthdr"  */
-#line 6230 "src/parser_bison.y"
+#line 6231 "src/parser_bison.y"
                                                 { (yyval.val) = RTHDR_NEXTHDR; }
-#line 17229 "src/parser_bison.c"
+#line 17230 "src/parser_bison.c"
     break;
 
   case 1351: /* rt_hdr_field: "hdrlength"  */
-#line 6231 "src/parser_bison.y"
+#line 6232 "src/parser_bison.y"
                                                 { (yyval.val) = RTHDR_HDRLENGTH; }
-#line 17235 "src/parser_bison.c"
+#line 17236 "src/parser_bison.c"
     break;
 
   case 1352: /* rt_hdr_field: "type" close_scope_type  */
-#line 6232 "src/parser_bison.y"
+#line 6233 "src/parser_bison.y"
                                                                         { (yyval.val) = RTHDR_TYPE; }
-#line 17241 "src/parser_bison.c"
+#line 17242 "src/parser_bison.c"
     break;
 
   case 1353: /* rt_hdr_field: "seg-left"  */
-#line 6233 "src/parser_bison.y"
+#line 6234 "src/parser_bison.y"
                                                 { (yyval.val) = RTHDR_SEG_LEFT; }
-#line 17247 "src/parser_bison.c"
+#line 17248 "src/parser_bison.c"
     break;
 
   case 1354: /* rt0_hdr_expr: "rt0" rt0_hdr_field close_scope_rt  */
-#line 6237 "src/parser_bison.y"
+#line 6238 "src/parser_bison.y"
                         {
 				(yyval.expr) = exthdr_expr_alloc(&(yyloc), &exthdr_rt0, (yyvsp[-1].val));
 			}
-#line 17255 "src/parser_bison.c"
+#line 17256 "src/parser_bison.c"
     break;
 
   case 1355: /* rt0_hdr_field: "addr" '[' "number" ']'  */
-#line 6243 "src/parser_bison.y"
+#line 6244 "src/parser_bison.y"
                         {
 				(yyval.val) = RT0HDR_ADDR_1 + (yyvsp[-1].val) - 1;
 			}
-#line 17263 "src/parser_bison.c"
+#line 17264 "src/parser_bison.c"
     break;
 
   case 1356: /* rt2_hdr_expr: "rt2" rt2_hdr_field close_scope_rt  */
-#line 6249 "src/parser_bison.y"
+#line 6250 "src/parser_bison.y"
                         {
 				(yyval.expr) = exthdr_expr_alloc(&(yyloc), &exthdr_rt2, (yyvsp[-1].val));
 			}
-#line 17271 "src/parser_bison.c"
+#line 17272 "src/parser_bison.c"
     break;
 
   case 1357: /* rt2_hdr_field: "addr"  */
-#line 6254 "src/parser_bison.y"
+#line 6255 "src/parser_bison.y"
                                                 { (yyval.val) = RT2HDR_ADDR; }
-#line 17277 "src/parser_bison.c"
+#line 17278 "src/parser_bison.c"
     break;
 
   case 1358: /* rt4_hdr_expr: "srh" rt4_hdr_field close_scope_rt  */
-#line 6258 "src/parser_bison.y"
+#line 6259 "src/parser_bison.y"
                         {
 				(yyval.expr) = exthdr_expr_alloc(&(yyloc), &exthdr_rt4, (yyvsp[-1].val));
 			}
-#line 17285 "src/parser_bison.c"
+#line 17286 "src/parser_bison.c"
     break;
 
   case 1359: /* rt4_hdr_field: "last-entry"  */
-#line 6263 "src/parser_bison.y"
+#line 6264 "src/parser_bison.y"
                                                 { (yyval.val) = RT4HDR_LASTENT; }
-#line 17291 "src/parser_bison.c"
+#line 17292 "src/parser_bison.c"
     break;
 
   case 1360: /* rt4_hdr_field: "flags"  */
-#line 6264 "src/parser_bison.y"
+#line 6265 "src/parser_bison.y"
                                                 { (yyval.val) = RT4HDR_FLAGS; }
-#line 17297 "src/parser_bison.c"
+#line 17298 "src/parser_bison.c"
     break;
 
   case 1361: /* rt4_hdr_field: "tag"  */
-#line 6265 "src/parser_bison.y"
+#line 6266 "src/parser_bison.y"
                                                 { (yyval.val) = RT4HDR_TAG; }
-#line 17303 "src/parser_bison.c"
+#line 17304 "src/parser_bison.c"
     break;
 
   case 1362: /* rt4_hdr_field: "sid" '[' "number" ']'  */
-#line 6267 "src/parser_bison.y"
+#line 6268 "src/parser_bison.y"
                         {
 				(yyval.val) = RT4HDR_SID_1 + (yyvsp[-1].val) - 1;
 			}
-#line 17311 "src/parser_bison.c"
+#line 17312 "src/parser_bison.c"
     break;
 
   case 1363: /* frag_hdr_expr: "frag" frag_hdr_field close_scope_frag  */
-#line 6273 "src/parser_bison.y"
+#line 6274 "src/parser_bison.y"
                         {
 				(yyval.expr) = exthdr_expr_alloc(&(yyloc), &exthdr_frag, (yyvsp[-1].val));
 			}
-#line 17319 "src/parser_bison.c"
+#line 17320 "src/parser_bison.c"
     break;
 
   case 1364: /* frag_hdr_field: "nexthdr"  */
-#line 6278 "src/parser_bison.y"
+#line 6279 "src/parser_bison.y"
                                                 { (yyval.val) = FRAGHDR_NEXTHDR; }
-#line 17325 "src/parser_bison.c"
+#line 17326 "src/parser_bison.c"
     break;
 
   case 1365: /* frag_hdr_field: "reserved"  */
-#line 6279 "src/parser_bison.y"
+#line 6280 "src/parser_bison.y"
                                                 { (yyval.val) = FRAGHDR_RESERVED; }
-#line 17331 "src/parser_bison.c"
+#line 17332 "src/parser_bison.c"
     break;
 
   case 1366: /* frag_hdr_field: "frag-off"  */
-#line 6280 "src/parser_bison.y"
+#line 6281 "src/parser_bison.y"
                                                 { (yyval.val) = FRAGHDR_FRAG_OFF; }
-#line 17337 "src/parser_bison.c"
+#line 17338 "src/parser_bison.c"
     break;
 
   case 1367: /* frag_hdr_field: "reserved2"  */
-#line 6281 "src/parser_bison.y"
+#line 6282 "src/parser_bison.y"
                                                 { (yyval.val) = FRAGHDR_RESERVED2; }
-#line 17343 "src/parser_bison.c"
+#line 17344 "src/parser_bison.c"
     break;
 
   case 1368: /* frag_hdr_field: "more-fragments"  */
-#line 6282 "src/parser_bison.y"
+#line 6283 "src/parser_bison.y"
                                                 { (yyval.val) = FRAGHDR_MFRAGS; }
-#line 17349 "src/parser_bison.c"
+#line 17350 "src/parser_bison.c"
     break;
 
   case 1369: /* frag_hdr_field: "id"  */
-#line 6283 "src/parser_bison.y"
+#line 6284 "src/parser_bison.y"
                                                 { (yyval.val) = FRAGHDR_ID; }
-#line 17355 "src/parser_bison.c"
+#line 17356 "src/parser_bison.c"
     break;
 
   case 1370: /* dst_hdr_expr: "dst" dst_hdr_field close_scope_dst  */
-#line 6287 "src/parser_bison.y"
+#line 6288 "src/parser_bison.y"
                         {
 				(yyval.expr) = exthdr_expr_alloc(&(yyloc), &exthdr_dst, (yyvsp[-1].val));
 			}
-#line 17363 "src/parser_bison.c"
+#line 17364 "src/parser_bison.c"
     break;
 
   case 1371: /* dst_hdr_field: "nexthdr"  */
-#line 6292 "src/parser_bison.y"
+#line 6293 "src/parser_bison.y"
                                                 { (yyval.val) = DSTHDR_NEXTHDR; }
-#line 17369 "src/parser_bison.c"
+#line 17370 "src/parser_bison.c"
     break;
 
   case 1372: /* dst_hdr_field: "hdrlength"  */
-#line 6293 "src/parser_bison.y"
+#line 6294 "src/parser_bison.y"
                                                 { (yyval.val) = DSTHDR_HDRLENGTH; }
-#line 17375 "src/parser_bison.c"
+#line 17376 "src/parser_bison.c"
     break;
 
   case 1373: /* mh_hdr_expr: "mh" mh_hdr_field close_scope_mh  */
-#line 6297 "src/parser_bison.y"
+#line 6298 "src/parser_bison.y"
                         {
 				(yyval.expr) = exthdr_expr_alloc(&(yyloc), &exthdr_mh, (yyvsp[-1].val));
 			}
-#line 17383 "src/parser_bison.c"
+#line 17384 "src/parser_bison.c"
     break;
 
   case 1374: /* mh_hdr_field: "nexthdr"  */
-#line 6302 "src/parser_bison.y"
+#line 6303 "src/parser_bison.y"
                                                 { (yyval.val) = MHHDR_NEXTHDR; }
-#line 17389 "src/parser_bison.c"
+#line 17390 "src/parser_bison.c"
     break;
 
   case 1375: /* mh_hdr_field: "hdrlength"  */
-#line 6303 "src/parser_bison.y"
+#line 6304 "src/parser_bison.y"
                                                 { (yyval.val) = MHHDR_HDRLENGTH; }
-#line 17395 "src/parser_bison.c"
+#line 17396 "src/parser_bison.c"
     break;
 
   case 1376: /* mh_hdr_field: "type" close_scope_type  */
-#line 6304 "src/parser_bison.y"
+#line 6305 "src/parser_bison.y"
                                                                         { (yyval.val) = MHHDR_TYPE; }
-#line 17401 "src/parser_bison.c"
+#line 17402 "src/parser_bison.c"
     break;
 
   case 1377: /* mh_hdr_field: "reserved"  */
-#line 6305 "src/parser_bison.y"
+#line 6306 "src/parser_bison.y"
                                                 { (yyval.val) = MHHDR_RESERVED; }
-#line 17407 "src/parser_bison.c"
+#line 17408 "src/parser_bison.c"
     break;
 
   case 1378: /* mh_hdr_field: "checksum"  */
-#line 6306 "src/parser_bison.y"
+#line 6307 "src/parser_bison.y"
                                                 { (yyval.val) = MHHDR_CHECKSUM; }
-#line 17413 "src/parser_bison.c"
+#line 17414 "src/parser_bison.c"
     break;
 
   case 1379: /* exthdr_exists_expr: "exthdr" exthdr_key  */
-#line 6310 "src/parser_bison.y"
+#line 6311 "src/parser_bison.y"
                         {
 				const struct exthdr_desc *desc;
 
@@ -17425,41 +17426,41 @@ yyreduce:
 				(yyval.expr) = exthdr_expr_alloc(&(yyloc), desc, 1);
 				(yyval.expr)->exthdr.flags = NFT_EXTHDR_F_PRESENT;
 			}
-#line 17429 "src/parser_bison.c"
+#line 17430 "src/parser_bison.c"
     break;
 
   case 1380: /* exthdr_key: "hbh" close_scope_hbh  */
-#line 6323 "src/parser_bison.y"
+#line 6324 "src/parser_bison.y"
                                                         { (yyval.val) = IPPROTO_HOPOPTS; }
-#line 17435 "src/parser_bison.c"
+#line 17436 "src/parser_bison.c"
     break;
 
   case 1381: /* exthdr_key: "rt" close_scope_rt  */
-#line 6324 "src/parser_bison.y"
+#line 6325 "src/parser_bison.y"
                                                         { (yyval.val) = IPPROTO_ROUTING; }
-#line 17441 "src/parser_bison.c"
+#line 17442 "src/parser_bison.c"
     break;
 
   case 1382: /* exthdr_key: "frag" close_scope_frag  */
-#line 6325 "src/parser_bison.y"
+#line 6326 "src/parser_bison.y"
                                                                 { (yyval.val) = IPPROTO_FRAGMENT; }
-#line 17447 "src/parser_bison.c"
+#line 17448 "src/parser_bison.c"
     break;
 
   case 1383: /* exthdr_key: "dst" close_scope_dst  */
-#line 6326 "src/parser_bison.y"
+#line 6327 "src/parser_bison.y"
                                                         { (yyval.val) = IPPROTO_DSTOPTS; }
-#line 17453 "src/parser_bison.c"
+#line 17454 "src/parser_bison.c"
     break;
 
   case 1384: /* exthdr_key: "mh" close_scope_mh  */
-#line 6327 "src/parser_bison.y"
+#line 6328 "src/parser_bison.y"
                                                         { (yyval.val) = IPPROTO_MH; }
-#line 17459 "src/parser_bison.c"
+#line 17460 "src/parser_bison.c"
     break;
 
 
-#line 17463 "src/parser_bison.c"
+#line 17464 "src/parser_bison.c"
 
       default: break;
     }
@@ -17688,5 +17689,5 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 6330 "src/parser_bison.y"
+#line 6331 "src/parser_bison.y"
 

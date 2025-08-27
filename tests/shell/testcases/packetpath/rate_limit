@@ -55,7 +55,7 @@ table ip filter {
 		ip protocol tcp  counter jump in_tcp
 	}
 	chain in_tcp {
-		iifname "s_c" tcp dport 80 ct state new add @http1 { tcp dport . ip saddr limit rate over 1/minute burst 5 packets } counter reject
+		iifname "s_c" tcp dport 80 ct state new add @http1 { tcp dport . ip saddr limit rate over 1/minute burst 5 packets } counter reject with tcp reset
 		iifname "s_c" tcp dport 80 counter accept
 	}
 
@@ -120,7 +120,7 @@ assert_pass result "flush chain"
 ip netns exec $S $NFT flush set filter http1
 assert_pass result "flush set"
 
-ip netns exec $S $NFT add rule filter in_tcp iifname s_c tcp dport 80 ct state new add @http1 { tcp dport . ip saddr limit rate over 1/second burst 1 packets} counter reject
+ip netns exec $S $NFT add rule filter in_tcp iifname s_c tcp dport 80 ct state new add @http1 { tcp dport . ip saddr limit rate over 1/second burst 1 packets} counter reject with tcp reset
 assert_pass result "add rule limit rate over 1/second burst 1"
 ip netns exec $S $NFT add rule filter in_tcp iifname s_c tcp dport 80 counter accept
 
