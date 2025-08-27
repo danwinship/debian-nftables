@@ -1,5 +1,5 @@
-AC_INIT([nftables], [1.1.4], [netfilter-devel@vger.kernel.org])
-AC_DEFINE([RELEASE_NAME], ["Commodore Bullmoose #5"], [Release name])
+AC_INIT([nftables], [1.1.5], [netfilter-devel@vger.kernel.org])
+AC_DEFINE([RELEASE_NAME], ["Commodore Bullmoose #6"], [Release name])
 
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIR([m4])
@@ -114,6 +114,23 @@ AC_CHECK_DECLS([getprotobyname_r, getprotobynumber_r, getservbyport_r], [], [], 
 #include <netdb.h>
 ]])
 
+AC_ARG_WITH([unitdir],
+	[AS_HELP_STRING([--with-unitdir[=PATH]],
+	[Path to systemd service unit directory, or omit PATH to auto-detect])],
+	[
+		if test "x$withval" = "xyes"; then
+			unitdir=$($PKG_CONFIG --variable=systemdsystemunitdir systemd 2>/dev/null)
+			AS_IF([test -z "$unitdir"], [unitdir='${prefix}/lib/systemd/system'])
+		elif test "x$withval" = "xno"; then
+			unitdir=""
+		else
+			unitdir="$withval"
+		fi
+	],
+	[unitdir=""]
+)
+AC_SUBST([unitdir])
+
 AC_CONFIG_FILES([					\
 		Makefile				\
 		libnftables.pc				\
@@ -128,3 +145,10 @@ nft configuration:
   enable man page:              ${enable_man_doc}
   libxtables support:		${with_xtables}
   json output support:          ${with_json}"
+
+if test "x$unitdir" != "x"; then
+AC_SUBST([unitdir])
+echo "  systemd unit:                 ${unitdir}"
+else
+echo "  systemd unit:                 no"
+fi

@@ -449,8 +449,13 @@ int mnl_batch_talk(struct netlink_ctx *ctx, struct list_head *err_list,
 			break;
 
 		ret = mnl_socket_recvfrom(nl, rcv_buf, sizeof(rcv_buf));
-		if (ret == -1)
+		if (ret == -1) {
+			/* Too many errors, not all errors are displayed. */
+			if (errno == ENOBUFS)
+				continue;
+
 			return -1;
+		}
 
 		/* Continue on error, make sure we get all acknowledgments */
 		ret = mnl_cb_run2(rcv_buf, ret, 0, portid,
@@ -890,14 +895,16 @@ int mnl_nft_chain_add(struct netlink_ctx *ctx, struct cmd *cmd,
 	nftnl_chain_nlmsg_build_payload(nlh, nlc);
 
 	if (cmd->chain && cmd->chain->flags & CHAIN_F_BASECHAIN) {
-		struct nlattr *nest;
+		struct nlattr *nest = NULL;
 
 		if (cmd->chain->type.str) {
 			cmd_add_loc(cmd, nlh, &cmd->chain->type.loc);
 			mnl_attr_put_strz(nlh, NFTA_CHAIN_TYPE, cmd->chain->type.str);
 		}
 
-		nest = mnl_attr_nest_start(nlh, NFTA_CHAIN_HOOK);
+		if (cmd->chain->type.str ||
+		    (cmd->chain && cmd->chain->dev_expr))
+			nest = mnl_attr_nest_start(nlh, NFTA_CHAIN_HOOK);
 
 		if (cmd->chain->type.str) {
 			mnl_attr_put_u32(nlh, NFTA_HOOK_HOOKNUM, htonl(cmd->chain->hook.num));
@@ -909,7 +916,8 @@ int mnl_nft_chain_add(struct netlink_ctx *ctx, struct cmd *cmd,
 		if (cmd->chain && cmd->chain->dev_expr)
 			mnl_nft_chain_devs_build(nlh, cmd);
 
-		mnl_attr_nest_end(nlh, nest);
+		if (nest)
+			mnl_attr_nest_end(nlh, nest);
 	}
 
 	nftnl_chain_free(nlc);
