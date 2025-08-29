@@ -1,1 +1,10 @@
 usr/lib/${DEB_TARGET_MULTIARCH}/libnftables.la
+#
+# Since 1.1.5, upstream has included a systemd service file, related man-page
+# and example rule-set, By default the service file is not installed, but the
+# man-page and rule-set are.  Since the Debian package provides its own service
+# file, the upstream one is not required, so we don't package the man-page or
+# rule-set, either.
+#
+usr/share/doc/nftables/main.nft
+usr/share/man/man8/nftables.service.8
