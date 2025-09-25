@@ -1,0 +1,22 @@
+Author: Pablo Neira Ayuso <pablo@netfilter.org>
+Last-Update: 2025-09-25
+Bug-Debian: https://bugs.debian.org/1112512
+Forwarded: not-needed
+Description: libnftables: do not re-add default include directory in include
+ search
+ .
+ Otherwise globbing might duplicate included files because
+ include_path_glob() is called twice.
+
+--- a/src/libnftables.c
++++ b/src/libnftables.c
+@@ -176,6 +176,9 @@
+ 			return true;
+ 	}
+ 
++	if (!strcmp(path, DEFAULT_INCLUDE_PATH))
++		return true;
++
+ 	return false;
+ }
+ 

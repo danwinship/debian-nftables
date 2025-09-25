@@ -1,1 +1,2 @@
 do-not-install-service-files.patch
+fix-included-file-duplication.patch
