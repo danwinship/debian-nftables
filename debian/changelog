@@ -1,3 +1,14 @@
+nftables (1.1.5-2) unstable; urgency=medium
+
+  * [383ae04] d/not-installed: remove nftables.service.8 and main.nft
+  * [5a831c6] d/patches: add upstreamed patch to fix systemd service
+    installation
+  * [8b66a7c] d/patches: add upstream patch to fix duplication of included
+    rules files (Closes: #1112512)
+  * [12b99b3] d/watch: update to version 5
+
+ -- Jeremy Sowden <azazel@debian.org>  Thu, 25 Sep 2025 22:31:49 +0100
+
 nftables (1.1.5-1) unstable; urgency=medium
 
   * [05b2c30] New upstream version 1.1.5 (Closes: #1112210)
