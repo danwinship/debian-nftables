@@ -36,7 +36,7 @@ override_dh_auto_configure:
 	dh_auto_configure -p$(pybuild_pkg) $(pybuild_opts)
 
 override_dh_auto_build:
-	dh_auto_build -N$(pybuild_pkg)
+	dh_auto_build -N$(pybuild_pkg) -- MAKE_STAMP=$(SOURCE_DATE_EPOCH)
 	dh_auto_build -p$(pybuild_pkg) $(pybuild_opts)
 
 override_dh_auto_test:
