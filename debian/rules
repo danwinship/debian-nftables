@@ -3,11 +3,12 @@
 ifeq (,$(filter terse,$(DEB_BUILD_OPTIONS)))
 export DH_VERBOSE=1
 endif
-export PYBUILD_NAME = nftables
 export DEB_BUILD_MAINT_OPTIONS = hardening=+all
 
 include /usr/share/dpkg/architecture.mk
 include /usr/share/dpkg/pkg-info.mk
+
+export PYBUILD_NAME = $(DEB_SOURCE)
 
 configure_opts := --with-xtables \
                   --with-json    \
