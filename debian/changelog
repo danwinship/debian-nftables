@@ -1,3 +1,19 @@
+nftables (1.1.6-1) unstable; urgency=medium
+
+  * [76930dd] d/watch: add `Matching-Pattern`, use `@PACKAGE@` in `Source:`
+  * [2ffdc3a] New upstream version 1.1.6 (Closes: #1121439)
+    - Complete lightweight tunnel template support, including vxlan,
+      geneve and erspan
+    - Support for wildcard in netdev hooks
+    - Support to pass up bridge frame to the bridge device for local
+      processing
+    - fib expression correct bytecode for Big Endian and other Big Endian
+      fixes
+    - man nft(8) documentation updates
+  * [5e550d0] d/patches: drop upstreamed patches
+
+ -- Jeremy Sowden <azazel@debian.org>  Sat, 06 Dec 2025 11:56:01 +0000
+
 nftables (1.1.5-2) unstable; urgency=medium
 
   * [383ae04] d/not-installed: remove nftables.service.8 and main.nft
