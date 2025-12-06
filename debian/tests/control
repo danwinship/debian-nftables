@@ -14,6 +14,10 @@ Tests: internaltest-py.sh
 Depends: @, python3
 Restrictions: needs-root, allow-stderr, isolation-container, flaky
 
+Tests: internaltest-json-echo.sh
+Depends: @, python3
+Restrictions: needs-root, allow-stderr, isolation-container, flaky
+
 Tests: systemd-service-test.sh
 Depends: systemd, @
 Restrictions: needs-root, allow-stderr, isolation-container
