@@ -9,10 +9,9 @@ export DEB_BUILD_MAINT_OPTIONS = hardening=+all
 include /usr/share/dpkg/architecture.mk
 include /usr/share/dpkg/pkg-info.mk
 
-configure_opts := --with-xtables                     \
-		  --with-json                        \
-		  --with-python-bin=/usr/bin/python3 \
-		  --with-cli=editline
+configure_opts := --with-xtables \
+                  --with-json    \
+                  --with-cli=editline
 pybuild_opts   := --buildsystem=pybuild -- --dir $(CURDIR)/py
 pybuild_pkg    := python3-$(PYBUILD_NAME)
 
