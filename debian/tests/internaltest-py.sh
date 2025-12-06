@@ -4,4 +4,4 @@
 
 set -e
 cd tests/py
-NFT=$(which nft) python3 ./nft-test.py
+python3 ./nft-test.py -H
