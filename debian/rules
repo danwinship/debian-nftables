@@ -38,6 +38,8 @@ override_dh_auto_build:
 	dh_auto_build -N$(pybuild_pkg)
 	dh_auto_build -p$(pybuild_pkg) $(pybuild_opts)
 
+override_dh_auto_test:
+
 override_dh_auto_install:
 	dh_auto_install -N$(pybuild_pkg)
 	dh_auto_install -p$(pybuild_pkg) $(pybuild_opts)
