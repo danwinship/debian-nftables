@@ -11,8 +11,23 @@ nftables (1.1.6-1) unstable; urgency=medium
       fixes
     - man nft(8) documentation updates
   * [5e550d0] d/patches: drop upstreamed patches
+  * [8db0897] d/control: bump min. version for libnftnl-dev build-dep to
+    1.3.1
+  * [0a941cd] d/rules: drop obsolete configure option
+  * [7a1086c] d/rules: suppress running of test-suites
+  * [33bbeba] d/tests: drop obsolete minimum kernel-version checks from
+    test-runners
+  * [baaeb07] d/t/internaltest-monitor.sh: use `-H` option to test with
+    installed nft
+  * [705fbab] d/t/internaltest-py.sh: use `-H` option to test with
+    installed nft
+  * [64c9797] d/t/internaltest-json-echo.sh: run new test-suite
+  * [4d2ee27] d/t/control: add gawk dependency for shell test-suite
+  * [201eb5a] d/rules: use `$(DEB_SOURCE)` for source package name
+  * [d12f0ee] d/rules: use `$(SOURCE_DATE_EPOCH)` for build time-stamp
+  * [c380eb1] d/p/fix-man-page-typo.patch: new patch to fix typo
 
- -- Jeremy Sowden <azazel@debian.org>  Sat, 06 Dec 2025 11:56:01 +0000
+ -- Jeremy Sowden <azazel@debian.org>  Sun, 07 Dec 2025 09:07:32 +0000
 
 nftables (1.1.5-2) unstable; urgency=medium
 
