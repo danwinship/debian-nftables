@@ -1,3 +1,11 @@
+nftables (1.0.6-2.1+k8s1) UNRELEASED; urgency=medium
+
+  * Non-maintainer upload
+  * d/patches: add fix-list-crash.patch, fixing
+    https://github.com/kubernetes/kubernetes/issues/136786
+
+ -- Dan Winship <danwinship@redhat.com>  Sun, 24 May 2026 08:21:13 -0400
+
 nftables (1.0.6-2+deb12u2) bookworm; urgency=medium
 
   * [136245a] Fix incorrect bytecode generation hit with new kernel check that
