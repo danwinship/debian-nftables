@@ -4,11 +4,9 @@ Priority: important
 Maintainer: Debian Netfilter Packaging Team <pkg-netfilter-team@lists.alioth.debian.org>
 Uploaders: Arturo Borrero Gonzalez <arturo@debian.org>,
            Jeremy Sowden <jeremy@azazel.net>
-Build-Depends: asciidoc-base,
-               automake,
+Build-Depends: automake,
                bison,
                debhelper-compat (= 13),
-               docbook-xsl,
                flex,
                libeditreadline-dev,
                libgmp-dev,
