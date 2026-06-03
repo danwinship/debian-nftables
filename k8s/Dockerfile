@@ -29,3 +29,4 @@ RUN debuild -us -uc
 
 FROM scratch
 COPY --from=build /build/nftables_*.deb .
+COPY --from=build /build/libnftables1_*.deb .
